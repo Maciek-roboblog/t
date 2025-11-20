@@ -1,0 +1,55 @@
+@startuml
+title C4 – Fine-tuning + Inference LLaMA-Factory (wersja B)
+
+/'
+Komponenty wrażliwe z punktu widzenia AI Act:
+ - ModelRegistry, ModelCardRepo, ArtifactStore, Logging, Monitoring
+'/
+
+
+actor "Data Scientist" as DS
+actor "Klient API\n(Aplikacja, użytkownik końcowy)" as Client
+
+node "GCP Project" {
+  node "GKE Cluster – Training" {
+    frame "Namespace: team-x" {
+      component "Argo Workflows" as Argo
+      component "Pods: LLaMA-Factory\nFine-tuning / Eval" as TrainPods
+    }
+  }
+
+  node "GKE Cluster – Inference\n(lub osobny namespace)" {
+    frame "Namespace: team-x-api" {
+      component "API Gateway / Ingress\n(autoryzacja, routing)" as GW
+      component "Service: Model API\n(LLaMA-Factory + vLLM)" as ModelSvc
+    }
+  }
+
+  database "Artifact Store\n(modele + checkpointy)\n(GCS / Artifactory)" as ArtifactStore <<AIAct>>
+  database "Model Registry\n(metadane, kategorie ryzyka)" as ModelRegistry <<AIAct>>
+  database "Model Card Repo\n(dokumentacja modeli)" as ModelCardRepo <<AIAct>>
+
+  collections "Monitoring\n(Prometheus + Grafana)" as Monitoring <<AIAct>>
+  collections "Logging / Audyt\n(Loki / GCP Logging)" as Logging <<AIAct>>
+}
+
+' --- Fine-tuning ---
+DS --> Argo : konfiguruje\npipeline
+Argo --> TrainPods : uruchamia\ntrening + ewaluację
+TrainPods --> ArtifactStore : zapis wytrenowanego\nmodelu i logów
+TrainPods --> ModelCardRepo : zapis\nmodel card
+TrainPods --> ModelRegistry : rejestracja\nnowej wersji modelu
+
+' --- Inference ---
+Client --> GW : zapytania\nHTTP/gRPC
+GW --> ModelSvc : przekazuje\nprompt
+ModelSvc --> ArtifactStore : ładuje model\nprzy starcie (on boot)
+ModelSvc --> GW : odpowiedź\n(model output)
+GW --> Client : wynik
+
+' --- AI Act – logowanie i monitoring ---
+GW --> Logging : log żądania\n(kto, kiedy, który model)
+ModelSvc --> Logging : log szczegółowy\n(prompt/odpowiedź – zgodnie\nz polityką prywatności)
+GW --> Monitoring : metryki API\n(latencja, błędy)
+ModelSvc --> Monitoring : metryki modelu\n(GPU, throughput)
+@enduml

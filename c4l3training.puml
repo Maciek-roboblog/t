@@ -1,0 +1,42 @@
+@startuml
+title C4 L3 – Training namespace (fine-tuning)
+
+actor "Data Scientist" as DS
+
+node "GKE Cluster" {
+  frame "Namespace: team-x (training)" {
+    package "Argo Workflows" as Argo {
+      component "Argo Server\n(UI + API)" as ArgoSrv
+      component "Argo Controller\n(Workflow CRD)" as ArgoCtrl
+      component "Argo Executor\n(w Podach)" as ArgoExec
+    }
+
+    package "LLaMA-Factory Pod" as TrainPod {
+      component "Trainer\n(llamafactory-cli train)" as Trainer
+      component "Data Loader\n(wejście: GCS/Artifactory)" as DataLoader
+      component "Model Loader\n(HF / lokalny cache)" as ModelLoader
+      component "Metrics Logger\n(W&B / MLflow / TB)" as Metrics
+    }
+  }
+
+  database "Config repo (Git)\nYAML eksperymentów" as Git
+  database "Artifact Store\n(checkpointy, modele)" as Store
+  database "Model Card Repo\n(MD/JSON)" as MCRepo
+  database "Model Registry\n(metadane)" as Registry
+}
+
+DS --> ArgoSrv : uruchamia\nworkflow z configem
+ArgoSrv --> ArgoCtrl : zapis Workflow\n(CRD)
+ArgoCtrl --> ArgoExec : tworzy Pod\nz LLaMA-Factory
+ArgoExec --> TrainPod : start kontenera
+
+TrainPod --> Git : (read-only)\nconfig.yaml
+Trainer --> DataLoader : wczytaj dane
+Trainer --> ModelLoader : wczytaj model bazowy
+Trainer --> Store : zapis checkpointów\n+ final model
+Trainer --> Metrics : log metryk
+
+Trainer --> MCRepo : wygeneruj\nmodel card
+Trainer --> Registry : zarejestruj\nmodel + metadane
+
+@enduml

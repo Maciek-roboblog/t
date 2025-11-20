@@ -1,0 +1,43 @@
+@startuml
+title C4 L3 – Inference namespace (model jako API)
+
+actor "Klient API" as Client
+
+node "GKE Cluster" {
+  frame "Namespace: team-x-api" {
+    package "Warstwa sieci" as Net {
+      component "Ingress / API Gateway\n(autoryzacja, routing)" as GW
+      component "Service (K8s)\nLLM API" as K8sSvc
+    }
+
+    package "Deployment: llama-factory-api" as Dep {
+      component "Pod: LLaMA-Factory API\n(llamafactory-cli api)" as APIPod
+      component "Request Handler\n(REST/OpenAI style)" as Handler
+      component "Inference Engine\n(vLLM / HF pipeline)" as Engine
+    }
+  }
+
+  database "Artifact Store\n(GCS/Artifactory – model)" as Store
+  database "Model Registry\n(id wersji, ścieżka)" as Registry
+  collections "Monitoring\n(Prometheus/Grafana)" as Mon
+  collections "Logging / Audyt\n(Loki / GCP Logging)" as Log
+}
+
+Client --> GW : HTTP(s) request\n(prompt, parametry)
+GW --> K8sSvc : przekazanie\npo service name
+K8sSvc --> APIPod : load balancing
+APIPod --> Registry : sprawdź\naktualny id modelu
+APIPod --> Store : wczytaj wagi\n(przy starcie / reload)
+
+APIPod --> Handler : obsługa żądania
+Handler --> Engine : generate()
+Engine --> Handler : odpowiedź modelu
+Handler --> GW : wynik JSON
+GW --> Client : odpowiedź
+
+GW --> Mon : metryki API
+APIPod --> Mon : metryki modelu
+GW --> Log : log requestu
+APIPod --> Log : log prompt/odpowiedzi\n(pseudonimizowane)
+
+@enduml

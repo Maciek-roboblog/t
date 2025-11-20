@@ -1,0 +1,47 @@
+@startuml
+title Lifecycle: od configu do użycia modelu
+
+actor DS as "Data Scientist"
+actor APP as "Klient API"
+
+participant Git as "Git repo\n(config YAML)"
+participant Argo as "Argo UI"
+participant ArgoCtrl as "Argo Controller"
+participant Train as "Train Pod\n(LLaMA-Factory)"
+participant Store as "Artifact Store"
+participant Registry as "Model Registry"
+participant ArgoCD as "Argo CD"
+participant K8s as "K8s API\n(Deployment modelu)"
+participant GW as "API Gateway"
+participant APIPod as "llama-factory-api Pod"
+
+== Przygotowanie konfiguracji ==
+DS -> Git : commit config.yaml\n(i ewentualnie workflow.yaml)
+
+== Uruchomienie treningu ==
+DS -> Argo : start workflow\n(z referencją do config.yaml)
+Argo -> ArgoCtrl : utwórz Workflow CRD
+ArgoCtrl -> Train : utwórz Pod\nz LLaMA-Factory
+
+Train -> Git : pobierz config.yaml
+Train -> Store : pobierz dane / model bazowy\n(jeśli trzymasz w Store)
+Train -> Train : trening (SFT/LoRA/QLoRA)
+
+Train -> Store : zapis checkpointów\n+ final model
+Train -> Registry : rejestruj model\n(id, ścieżka, metadata)
+Train -> Store : zapis model card\n(plik MD/JSON)
+
+== Deployment modelu ==
+DS -> ArgoCD : commit manifestu\nDeployment + Service\nz id modelu
+ArgoCD -> K8s : apply Deployment/Service
+K8s -> APIPod : stworzenie podu
+APIPod -> Store : load model\nz podanej ścieżki
+
+== Użycie modelu ==
+APP -> GW : POST /v1/chat/completions\nz tokenem
+GW -> APIPod : przekazanie requestu
+APIPod -> APIPod : inferencja\n(vLLM / HF)
+APIPod -> GW : odpowiedź JSON
+GW -> APP : zwróć wynik
+
+@enduml

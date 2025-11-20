@@ -1,0 +1,41 @@
+@startuml
+title C4 – Fine-tuning LLaMA-Factory (wersja A)
+
+/'
+Legenda:
+ - <<AIAct>>  – komponenty wrażliwe z perspektywy AI Act
+ - <<Tenant>> – granice tenantów (multi-tenant)
+'/
+
+
+actor "Data Scientist" as DS
+
+node "GCP Project" {
+  node "GKE Cluster" {
+    frame "Namespace: team-a" <<Tenant>> {
+      component "Argo Workflows\n(Controller + UI)" as Argo
+      component "Workflow: Fine-tuning\n(Argo Workflow CRD)" as WF
+      component "Pod: LLaMA-Factory\nFine-tuning" as Train
+      component "Pod: LLaMA-Factory\nEval / Model Card" as Eval
+    }
+
+    frame "Namespace: team-b" <<Tenant>> {
+      component "Workflows / Pody\n(analogicznie)" as OtherTeam
+    }
+  }
+
+  database "Repo konfiguracji\n(Git: YAML/Helm)" as Git
+  database "Storage artefaktów\n(GCS / NFS)" as Artifacts <<AIAct>>
+}
+
+DS --> Argo : UI / CLI\nuruchom workflow
+Argo --> WF : tworzy obiekt\nWorkflow
+WF --> Train : krok: trening
+Train --> Artifacts : zapis:\ncheckpointy, model
+WF --> Eval : krok: ewaluacja\n+ generacja model card
+Eval --> Artifacts : zapis:\nmetryki, karta modelu
+WF --> Argo : status, logi
+
+DS --> Git : push configów\n(YAML eksperymentów)
+Train --> Git : (opcjonalnie)\nlog użytego commita
+@enduml
