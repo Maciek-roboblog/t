@@ -68,60 +68,44 @@
 
 ### Podczas treningu
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      CHECKLIST: PODCZAS TRENINGU                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   LOGOWANIE                                                                  │
-│   □ MLflow tracking włączony                                                │
-│   □ Parametry logowane automatycznie                                        │
-│   □ Metryki co N kroków (logging_steps)                                     │
-│   □ Validation metrics co M kroków (eval_steps)                             │
-│                                                                              │
-│   CHECKPOINTING                                                              │
-│   □ Checkpointy zapisywane regularnie (save_steps)                          │
-│   □ Limit checkpointów ustawiony (save_total_limit)                         │
-│   □ Najlepszy checkpoint oznaczony                                          │
-│                                                                              │
-│   ARTEFAKTY                                                                  │
-│   □ Konfiguracja treningu zapisana (training_args.json)                     │
-│   □ Logi treningu zachowane                                                 │
-│   □ GPU memory/utilization monitorowane                                      │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**LOGOWANIE:**
+- [ ] MLflow tracking włączony
+- [ ] Parametry logowane automatycznie
+- [ ] Metryki co N kroków (logging_steps)
+- [ ] Validation metrics co M kroków (eval_steps)
+
+**CHECKPOINTING:**
+- [ ] Checkpointy zapisywane regularnie (save_steps)
+- [ ] Limit checkpointów ustawiony (save_total_limit)
+- [ ] Najlepszy checkpoint oznaczony
+
+**ARTEFAKTY:**
+- [ ] Konfiguracja treningu zapisana (training_args.json)
+- [ ] Logi treningu zachowane
+- [ ] GPU memory/utilization monitorowane
 
 ### Po treningu
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      CHECKLIST: PO TRENINGU                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   MODEL                                                                      │
-│   □ Adapter/model zapisany                                                  │
-│   □ Hash wag modelu obliczony                                               │
-│   □ Model zarejestrowany w MLflow Model Registry                            │
-│   □ Metadata (data treningu, czas, metryki) dołączone                       │
-│                                                                              │
-│   EWALUACJA                                                                  │
-│   □ Ewaluacja na test set wykonana                                          │
-│   □ Wyniki zapisane w MLflow                                                │
-│   □ Porównanie z baseline                                                   │
-│                                                                              │
-│   DOKUMENTACJA                                                               │
-│   □ Experiment notes zapisane                                               │
-│   □ Znane problemy/obserwacje udokumentowane                                │
-│   □ Rekomendacje dla następnych eksperymentów                               │
-│                                                                              │
-│   ARCHIWIZACJA                                                               │
-│   □ Wszystkie artefakty w jednym miejscu                                    │
-│   □ Backup na zewnętrzny storage (opcjonalnie)                              │
-│   □ Retention policy określona                                              │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**MODEL:**
+- [ ] Adapter/model zapisany
+- [ ] Hash wag modelu obliczony
+- [ ] Model zarejestrowany w MLflow Model Registry
+- [ ] Metadata (data treningu, czas, metryki) dołączone
+
+**EWALUACJA:**
+- [ ] Ewaluacja na test set wykonana
+- [ ] Wyniki zapisane w MLflow
+- [ ] Porównanie z baseline
+
+**DOKUMENTACJA:**
+- [ ] Experiment notes zapisane
+- [ ] Znane problemy/obserwacje udokumentowane
+- [ ] Rekomendacje dla następnych eksperymentów
+
+**ARCHIWIZACJA:**
+- [ ] Wszystkie artefakty w jednym miejscu
+- [ ] Backup na zewnętrzny storage (opcjonalnie)
+- [ ] Retention policy określona
 
 ---
 
@@ -146,34 +130,25 @@ data_seed: 42               # Seed dla shufflingu danych
 
 ### Szczegóły działania seedów
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         ANATOMIA SEEDÓW                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   seed: 42                                                                   │
-│   │                                                                          │
-│   ├── torch.manual_seed(42)        # PyTorch CPU                            │
-│   ├── torch.cuda.manual_seed_all(42)  # PyTorch GPU (wszystkie)            │
-│   ├── numpy.random.seed(42)        # NumPy                                  │
-│   ├── random.seed(42)              # Python random                          │
-│   └── transformers.set_seed(42)    # HuggingFace                           │
-│                                                                              │
-│   data_seed: 42                                                              │
-│   │                                                                          │
-│   └── DataLoader shuffle seed      # Kolejność batchów                      │
-│                                                                              │
-│   UWAGA: Nawet z seedem, wyniki mogą się różnić z powodu:                   │
-│   • Różnych wersji CUDA                                                      │
-│   • Różnych GPU (non-deterministic operations)                              │
-│   • Różnej kolejności operacji na multi-GPU                                 │
-│                                                                              │
-│   Dla PEŁNEJ reprodukowalności (wolniejsze):                                │
-│   torch.backends.cudnn.deterministic = True                                 │
-│   torch.backends.cudnn.benchmark = False                                    │
-│   torch.use_deterministic_algorithms(True)                                  │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+> **Diagram:** Zobacz [seed-anatomy.puml](diagrams/seed-anatomy.puml) - anatomia konfiguracji seedów.
+
+**`seed: 42` wpływa na:**
+- `torch.manual_seed(42)` - PyTorch CPU
+- `torch.cuda.manual_seed_all(42)` - PyTorch GPU
+- `numpy.random.seed(42)` - NumPy
+- `random.seed(42)` - Python random
+- `transformers.set_seed(42)` - HuggingFace
+
+**`data_seed: 42` wpływa na:**
+- DataLoader shuffle seed - kolejność batchów
+
+**UWAGA:** Nawet z seedem wyniki mogą się różnić z powodu różnych wersji CUDA, GPU i non-deterministic operations.
+
+**Dla PEŁNEJ reprodukowalności (wolniejsze):**
+```python
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+torch.use_deterministic_algorithms(True)
 ```
 
 ### Konfiguracja w ConfigMap
@@ -425,31 +400,19 @@ def log_environment():
 
 ### Audit trail w MLflow
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        AUDIT TRAIL                                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Co MLflow zapisuje automatycznie:                                         │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • Timestamp rozpoczęcia/zakończenia                            │       │
-│   │  • User ID (jeśli skonfigurowany)                               │       │
-│   │  • Git commit (jeśli w repo)                                    │       │
-│   │  • Wszystkie parametry                                          │       │
-│   │  • Wszystkie metryki z timestampami                             │       │
-│   │  • Artefakty (model, config)                                    │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Dodaj dla compliance:                                                      │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • Dataset hash/version                                         │       │
-│   │  • Data governance tags                                         │       │
-│   │  • Model approval status                                        │       │
-│   │  • Human reviewer (jeśli wymagany)                              │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Co MLflow zapisuje automatycznie:**
+- Timestamp rozpoczęcia/zakończenia
+- User ID (jeśli skonfigurowany)
+- Git commit (jeśli w repo)
+- Wszystkie parametry
+- Wszystkie metryki z timestampami
+- Artefakty (model, config)
+
+**Dodaj dla compliance:**
+- Dataset hash/version
+- Data governance tags
+- Model approval status
+- Human reviewer (jeśli wymagany)
 
 ### Tagi dla compliance
 
@@ -481,37 +444,29 @@ def add_compliance_tags(run_id: str,
 
 ### Checklist compliance (GDPR / AI Act)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      COMPLIANCE CHECKLIST                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   DATA GOVERNANCE                                                            │
-│   □ Dane treningowe zweryfikowane pod kątem PII                             │
-│   □ Zgoda na użycie danych (jeśli wymagana)                                 │
-│   □ Data retention policy określona                                         │
-│   □ Prawo do bycia zapomnianym - procedura                                  │
-│                                                                              │
-│   MODEL TRANSPARENCY                                                         │
-│   □ Dokumentacja procesu treningu                                           │
-│   □ Znane ograniczenia modelu                                               │
-│   □ Intended use cases                                                       │
-│   □ Known biases (jeśli zbadane)                                            │
-│                                                                              │
-│   TRACEABILITY                                                               │
-│   □ Pełny audit trail w MLflow                                              │
-│   □ Możliwość odtworzenia treningu                                          │
-│   □ Wersjonowanie modeli                                                    │
-│   □ Rollback capability                                                      │
-│                                                                              │
-│   RISK ASSESSMENT (AI Act High-Risk)                                        │
-│   □ Risk category określona                                                  │
-│   □ Human oversight mechanisms                                               │
-│   □ Accuracy/robustness testing                                             │
-│   □ Bias testing                                                             │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**DATA GOVERNANCE:**
+- [ ] Dane treningowe zweryfikowane pod kątem PII
+- [ ] Zgoda na użycie danych (jeśli wymagana)
+- [ ] Data retention policy określona
+- [ ] Prawo do bycia zapomnianym - procedura
+
+**MODEL TRANSPARENCY:**
+- [ ] Dokumentacja procesu treningu
+- [ ] Znane ograniczenia modelu
+- [ ] Intended use cases
+- [ ] Known biases (jeśli zbadane)
+
+**TRACEABILITY:**
+- [ ] Pełny audit trail w MLflow
+- [ ] Możliwość odtworzenia treningu
+- [ ] Wersjonowanie modeli
+- [ ] Rollback capability
+
+**RISK ASSESSMENT (AI Act High-Risk):**
+- [ ] Risk category określona
+- [ ] Human oversight mechanisms
+- [ ] Accuracy/robustness testing
+- [ ] Bias testing
 
 ---
 
