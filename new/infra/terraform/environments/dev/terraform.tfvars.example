@@ -1,0 +1,14 @@
+# Development Environment Configuration
+# Skopiuj do terraform.tfvars i uzupełnij wartości
+
+project_id = "your-gcp-project-id"
+region     = "europe-west4"
+
+# MLFlow database password (użyj silnego hasła!)
+sql_password = "CHANGE_ME_STRONG_PASSWORD"
+
+# Workspaces do utworzenia
+workspace_names = [
+  "team-alpha",
+  "team-beta",
+]

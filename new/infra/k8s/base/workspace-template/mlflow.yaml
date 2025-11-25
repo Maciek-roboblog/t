@@ -1,0 +1,86 @@
+# MLFlow Workspace - Experiment tracking + Model registry
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  labels:
+    app: mlflow
+    component: experiment-tracking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+        component: experiment-tracking
+    spec:
+      serviceAccountName: llm-workload-sa
+      containers:
+      - name: mlflow
+        image: ghcr.io/mlflow/mlflow:v2.10.0
+        ports:
+          - name: http
+            containerPort: 5000
+        command: ["mlflow", "server"]
+        args:
+          - "--host=0.0.0.0"
+          - "--port=5000"
+          - "--backend-store-uri=$(MLFLOW_BACKEND_URI)"
+          - "--default-artifact-root=$(MLFLOW_ARTIFACT_ROOT)"
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-db-secret
+              key: POSTGRES_PASSWORD
+        - name: WORKSPACE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: workspace-config
+              key: WORKSPACE_NAME
+        - name: MLFLOW_BACKEND_URI
+          value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(MLFLOW_DB_HOST):5432/mlflow_$(WORKSPACE_NAME)"
+        - name: MLFLOW_ARTIFACT_ROOT
+          value: "gs://PROJECT_ID-mlflow-$(WORKSPACE_NAME)/artifacts"
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow
+  labels:
+    app: mlflow
+spec:
+  type: ClusterIP
+  selector:
+    app: mlflow
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000

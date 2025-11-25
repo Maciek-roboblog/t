@@ -1,0 +1,96 @@
+# Network Policies dla workspace'u
+---
+# Domyślna polityka - deny all ingress
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# vLLM - tylko Gateway może się łączyć
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vllm-from-gateway
+spec:
+  podSelector:
+    matchLabels:
+      app: llama-infer
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: llm-shared
+      podSelector:
+        matchLabels:
+          app: llm-gateway
+    ports:
+    - protocol: TCP
+      port: 8000
+---
+# MLFlow - dostęp z podów w tym namespace + llm-shared
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-mlflow-access
+spec:
+  podSelector:
+    matchLabels:
+      app: mlflow
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector: {}  # Z tego samego namespace'u
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: llm-shared
+    ports:
+    - protocol: TCP
+      port: 5000
+---
+# WebUI - dostęp wewnętrzny (port-forward)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-webui-access
+spec:
+  podSelector:
+    matchLabels:
+      app: llama-factory-webui
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector: {}  # Z tego samego namespace'u
+    ports:
+    - protocol: TCP
+      port: 7860
+---
+# Egress - pozwól na wyjście do llm-shared (MLFlow Common)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-shared
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: llm-shared
+  - to:
+    - namespaceSelector: {}
+      podSelector: {}
+    ports:
+    - protocol: TCP
+      port: 443  # HTTPS (GCS, etc.)
+    - protocol: TCP
+      port: 5432 # PostgreSQL

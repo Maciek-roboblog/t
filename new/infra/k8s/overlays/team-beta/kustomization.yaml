@@ -1,0 +1,87 @@
+# Kustomization - team-beta workspace
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: llm-workspace-team-beta
+
+resources:
+  - ../../base/workspace-template
+
+# Namespace patch
+patches:
+  - target:
+      kind: Namespace
+      name: llm-workspace-template
+    patch: |
+      - op: replace
+        path: /metadata/name
+        value: llm-workspace-team-beta
+      - op: replace
+        path: /metadata/labels/workspace
+        value: team-beta
+
+# Secret patches
+  - target:
+      kind: Secret
+      name: mlflow-secret
+    patch: |
+      - op: replace
+        path: /stringData/MLFLOW_TRACKING_URI
+        value: "http://mlflow.llm-workspace-team-beta.svc.cluster.local:5000"
+
+# Zmniejszone zasoby dla team-beta (mniejszy zespół)
+  - target:
+      kind: Deployment
+      name: llama-factory-inference
+    patch: |
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/memory
+        value: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: "16Gi"
+
+  - target:
+      kind: PersistentVolumeClaim
+      name: model-storage-pvc
+    patch: |
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: "100Gi"
+
+# Image overrides
+images:
+  - name: llama-factory-train
+    newName: eu.gcr.io/PROJECT_ID/llama-factory-train
+    newTag: v1.0.0
+  - name: llama-factory-api
+    newName: eu.gcr.io/PROJECT_ID/llama-factory-api
+    newTag: v1.0.0
+  - name: prompt-console
+    newName: eu.gcr.io/PROJECT_ID/prompt-console
+    newTag: v1.0.0
+
+# ConfigMap patches
+configMapGenerator:
+  - name: workspace-config
+    behavior: merge
+    literals:
+      - WORKSPACE_NAME=team-beta
+      - MLFLOW_DB_HOST=10.0.0.5
+
+# Secret patches
+secretGenerator:
+  - name: mlflow-db-secret
+    behavior: replace
+    literals:
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=TEAM_BETA_DB_PASSWORD_CHANGE_ME
+    type: Opaque
+
+# Labels
+commonLabels:
+  workspace: team-beta
+  environment: dev
+
+commonAnnotations:
+  owner: team-beta@company.com

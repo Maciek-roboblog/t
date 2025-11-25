@@ -1,0 +1,8 @@
+# Namespace dla LLaMA-Factory
+# Zmień nazwę jeśli potrzebujesz innego workspace'u
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: llm-training
+  labels:
+    app: llama-factory

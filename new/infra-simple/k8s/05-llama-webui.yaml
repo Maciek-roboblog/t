@@ -1,0 +1,70 @@
+# LLaMA-Factory WebUI - interfejs do fine-tuningu
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-webui
+  namespace: llm-training
+  labels:
+    app: llama-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama-webui
+  template:
+    metadata:
+      labels:
+        app: llama-webui
+    spec:
+      containers:
+      - name: webui
+        # ZMIEŃ na swój registry
+        image: eu.gcr.io/PROJECT_ID/llama-factory-train:latest
+        command: ["llamafactory-cli"]
+        args: ["webui", "--host", "0.0.0.0", "--port", "7860"]
+        ports:
+        - containerPort: 7860
+          name: http
+        env:
+        - name: MLFLOW_TRACKING_URI
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-config
+              key: MLFLOW_TRACKING_URI
+        volumeMounts:
+        - name: storage
+          mountPath: /models
+          subPath: models
+        - name: storage
+          mountPath: /output
+          subPath: output
+        - name: storage
+          mountPath: /data
+          subPath: data
+        resources:
+          requests:
+            cpu: "2"
+            memory: "8Gi"
+          limits:
+            cpu: "4"
+            memory: "16Gi"
+            # Opcjonalnie GPU dla WebUI (przyspiesza ładowanie modeli)
+            # nvidia.com/gpu: "1"
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llama-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llama-webui
+  namespace: llm-training
+spec:
+  type: ClusterIP
+  selector:
+    app: llama-webui
+  ports:
+  - port: 7860
+    targetPort: 7860
+    name: http

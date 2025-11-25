@@ -1,0 +1,87 @@
+# LLaMA-Factory WebUI - Fine-tuning UI
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-factory-webui
+  labels:
+    app: llama-factory-webui
+    component: training-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama-factory-webui
+  template:
+    metadata:
+      labels:
+        app: llama-factory-webui
+        component: training-ui
+    spec:
+      serviceAccountName: llm-workload-sa
+      containers:
+      - name: webui
+        image: llama-factory-train:latest  # Nadpisane w overlay
+        command: ["bash", "-lc"]
+        args:
+          - |
+            mkdir -p /workspace/configs /workspace/logs /workspace/outputs &&
+            llamafactory-cli webui --host 0.0.0.0 --port 7860
+        ports:
+          - name: http
+            containerPort: 7860
+        env:
+          - name: MLFLOW_TRACKING_URI
+            valueFrom:
+              secretKeyRef:
+                name: mlflow-secret
+                key: MLFLOW_TRACKING_URI
+          - name: MLFLOW_COMMON_URI
+            valueFrom:
+              secretKeyRef:
+                name: mlflow-secret
+                key: MLFLOW_COMMON_URI
+        volumeMounts:
+          - name: workspace
+            mountPath: /workspace
+          - name: models
+            mountPath: /models
+        resources:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "4"
+            memory: "16Gi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 7860
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 7860
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: workspace
+        emptyDir: {}
+      - name: models
+        persistentVolumeClaim:
+          claimName: model-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llama-factory-webui
+  labels:
+    app: llama-factory-webui
+spec:
+  type: ClusterIP
+  selector:
+    app: llama-factory-webui
+  ports:
+    - name: http
+      port: 7860
+      targetPort: 7860

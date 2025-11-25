@@ -1,0 +1,77 @@
+# Job do pobrania modelu bazowego
+# Uruchom raz na początku: kubectl apply -f 08-download-model-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: download-model
+  namespace: llm-training
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: downloader
+        # ZMIEŃ na swój registry
+        image: eu.gcr.io/PROJECT_ID/llama-factory-train:latest
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          echo "=== Pobieranie modelu bazowego ==="
+
+          # Opcja 1: Z HuggingFace (wymaga tokena dla gated models)
+          # python -c "
+          # from huggingface_hub import snapshot_download
+          # snapshot_download(
+          #     'meta-llama/Meta-Llama-3-8B',
+          #     local_dir='/models/base-model',
+          #     token='$HF_TOKEN'
+          # )
+          # "
+
+          # Opcja 2: Z MLFlow (jeśli model jest zarejestrowany)
+          python -c "
+          import mlflow
+          import os
+          mlflow.set_tracking_uri(os.environ['MLFLOW_TRACKING_URI'])
+          try:
+              mlflow.artifacts.download_artifacts(
+                  'models:/llama-3-8b-base/latest',
+                  dst_path='/models/base-model'
+              )
+              print('Model pobrany z MLFlow')
+          except Exception as e:
+              print(f'Błąd pobierania z MLFlow: {e}')
+              print('Pobierz model ręcznie lub z HuggingFace')
+          "
+
+          echo "=== Zakończono ==="
+          ls -la /models/
+        env:
+        - name: MLFLOW_TRACKING_URI
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-config
+              key: MLFLOW_TRACKING_URI
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token
+              key: token
+              optional: true
+        volumeMounts:
+        - name: storage
+          mountPath: /models
+          subPath: models
+        resources:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llama-storage

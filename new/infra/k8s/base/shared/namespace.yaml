@@ -1,0 +1,8 @@
+# Namespace: llm-shared
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: llm-shared
+  labels:
+    purpose: shared
+    istio-injection: disabled

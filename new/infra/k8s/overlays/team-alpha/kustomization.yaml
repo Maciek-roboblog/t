@@ -1,0 +1,67 @@
+# Kustomization - team-alpha workspace
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: llm-workspace-team-alpha
+
+resources:
+  - ../../base/workspace-template
+
+# Namespace patch
+patches:
+  - target:
+      kind: Namespace
+      name: llm-workspace-template
+    patch: |
+      - op: replace
+        path: /metadata/name
+        value: llm-workspace-team-alpha
+      - op: replace
+        path: /metadata/labels/workspace
+        value: team-alpha
+
+# Secret patches
+  - target:
+      kind: Secret
+      name: mlflow-secret
+    patch: |
+      - op: replace
+        path: /stringData/MLFLOW_TRACKING_URI
+        value: "http://mlflow.llm-workspace-team-alpha.svc.cluster.local:5000"
+
+# Image overrides
+images:
+  - name: llama-factory-train
+    newName: eu.gcr.io/PROJECT_ID/llama-factory-train
+    newTag: v1.0.0
+  - name: llama-factory-api
+    newName: eu.gcr.io/PROJECT_ID/llama-factory-api
+    newTag: v1.0.0
+  - name: prompt-console
+    newName: eu.gcr.io/PROJECT_ID/prompt-console
+    newTag: v1.0.0
+
+# ConfigMap patches
+configMapGenerator:
+  - name: workspace-config
+    behavior: merge
+    literals:
+      - WORKSPACE_NAME=team-alpha
+      - MLFLOW_DB_HOST=10.0.0.5
+
+# Secret patches (nadpisanie hasła)
+secretGenerator:
+  - name: mlflow-db-secret
+    behavior: replace
+    literals:
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=TEAM_ALPHA_DB_PASSWORD_CHANGE_ME
+    type: Opaque
+
+# Labels dla tego workspace'u
+commonLabels:
+  workspace: team-alpha
+  environment: dev
+
+commonAnnotations:
+  owner: team-alpha@company.com

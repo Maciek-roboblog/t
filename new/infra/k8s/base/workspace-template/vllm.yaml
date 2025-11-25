@@ -1,0 +1,115 @@
+# vLLM Service - Inference
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-factory-inference
+  labels:
+    app: llama-infer
+    component: inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama-infer
+  template:
+    metadata:
+      labels:
+        app: llama-infer
+        component: inference
+    spec:
+      serviceAccountName: llm-workload-sa
+      initContainers:
+      - name: model-loader
+        image: llama-factory-train:latest  # Nadpisane w overlay
+        command: ["python", "-c"]
+        args:
+          - |
+            import mlflow
+            import os
+            import sys
+
+            model_name = os.environ.get('MODEL_NAME', 'default-model')
+            mlflow_uri = os.environ.get('MLFLOW_TRACKING_URI')
+
+            if not mlflow_uri:
+                print("MLFLOW_TRACKING_URI not set, skipping model download")
+                sys.exit(0)
+
+            mlflow.set_tracking_uri(mlflow_uri)
+
+            try:
+                mlflow.artifacts.download_artifacts(
+                    f"models:/{model_name}/latest",
+                    dst_path=f"/models/{model_name}"
+                )
+                print(f"Model {model_name} loaded from MLFlow")
+            except Exception as e:
+                print(f"Could not load model (may not exist yet): {e}")
+                sys.exit(0)
+        env:
+        - name: MLFLOW_TRACKING_URI
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secret
+              key: MLFLOW_TRACKING_URI
+        - name: MODEL_NAME
+          value: "ft-llama3-8b-v1"
+        volumeMounts:
+        - name: model-storage
+          mountPath: /models
+      containers:
+      - name: inference
+        image: llama-factory-api:latest  # Nadpisane w overlay
+        ports:
+          - name: http
+            containerPort: 8000
+        env:
+          - name: MODEL_PATH
+            value: "/models/ft-llama3-8b-v1"
+        volumeMounts:
+          - name: model-storage
+            mountPath: /models
+        resources:
+          requests:
+            nvidia.com/gpu: "1"
+            memory: "16Gi"
+            cpu: "4"
+          limits:
+            nvidia.com/gpu: "1"
+            memory: "32Gi"
+            cpu: "8"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+      tolerations:
+      - key: "nvidia.com/gpu"
+        operator: "Exists"
+        effect: "NoSchedule"
+      volumes:
+        - name: model-storage
+          persistentVolumeClaim:
+            claimName: model-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llama-inference-internal
+  labels:
+    app: llama-infer
+spec:
+  type: ClusterIP
+  selector:
+    app: llama-infer
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000

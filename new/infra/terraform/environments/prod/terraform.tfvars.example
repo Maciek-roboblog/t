@@ -1,0 +1,16 @@
+# Production Environment Configuration
+# Skopiuj do terraform.tfvars i uzupełnij wartości
+
+project_id = "your-gcp-project-id"
+region     = "europe-west4"
+
+# MLFlow database password (użyj silnego hasła!)
+# UWAGA: W produkcji użyj Secret Manager lub Vault
+sql_password = "CHANGE_ME_VERY_STRONG_PASSWORD"
+
+# Workspaces do utworzenia
+workspace_names = [
+  "team-alpha",
+  "team-beta",
+  "team-gamma",
+]

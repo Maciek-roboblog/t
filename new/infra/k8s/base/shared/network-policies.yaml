@@ -1,0 +1,54 @@
+# Network Policies dla llm-shared
+---
+# Domyślna polityka - deny all ingress
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# MLFlow Common - dostęp z workspace'ów
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-mlflow-common-access
+spec:
+  podSelector:
+    matchLabels:
+      app: mlflow-common
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # Z dowolnego namespace'u z labelem workspace
+    - namespaceSelector:
+        matchLabels:
+          purpose: workspace
+    # Z tego samego namespace'u
+    - podSelector: {}
+    ports:
+    - protocol: TCP
+      port: 5000
+---
+# Prompt Console - dostęp z Gateway
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-prompt-console-access
+spec:
+  podSelector:
+    matchLabels:
+      app: prompt-console
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: llm-gateway
+    ports:
+    - protocol: TCP
+      port: 8501

@@ -1,0 +1,41 @@
+# ConfigMap z przykładową konfiguracją treningu
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: train-config
+  namespace: llm-training
+data:
+  # Przykładowa konfiguracja treningu LoRA
+  train.yaml: |
+    ### Model
+    model_name_or_path: /models/base-model
+
+    ### Method
+    stage: sft
+    finetuning_type: lora
+    lora_rank: 8
+    lora_alpha: 16
+    lora_dropout: 0.1
+
+    ### Dataset
+    dataset: my_dataset
+    template: llama3
+    cutoff_len: 2048
+
+    ### Output
+    output_dir: /output/lora-model
+    logging_steps: 10
+    save_steps: 500
+    save_total_limit: 3
+
+    ### Training
+    per_device_train_batch_size: 1
+    gradient_accumulation_steps: 8
+    learning_rate: 1.0e-4
+    num_train_epochs: 3
+    lr_scheduler_type: cosine
+    warmup_ratio: 0.1
+    fp16: true
+
+    ### MLFlow
+    report_to: mlflow

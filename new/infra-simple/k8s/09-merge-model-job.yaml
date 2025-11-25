@@ -1,0 +1,72 @@
+# Job do mergowania adaptera LoRA z modelem bazowym
+# Uruchom po treningu: kubectl apply -f 09-merge-model-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: merge-lora
+  namespace: llm-training
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: merger
+        # ZMIEŃ na swój registry
+        image: eu.gcr.io/PROJECT_ID/llama-factory-train:latest
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          echo "=== Mergowanie LoRA z modelem bazowym ==="
+
+          llamafactory-cli export \
+            --model_name_or_path /models/base-model \
+            --adapter_name_or_path /output/lora-model \
+            --template llama3 \
+            --finetuning_type lora \
+            --export_dir /models/merged-model \
+            --export_size 2 \
+            --export_legacy_format false
+
+          echo "=== Model zmergowany ==="
+          ls -la /models/merged-model/
+
+          # Rejestracja w MLFlow
+          python -c "
+          import mlflow
+          import os
+          mlflow.set_tracking_uri(os.environ['MLFLOW_TRACKING_URI'])
+          mlflow.set_experiment('llama-finetune')
+          with mlflow.start_run(run_name='merged-model'):
+              mlflow.log_artifacts('/models/merged-model', 'model')
+              mlflow.register_model(
+                  'runs:/' + mlflow.active_run().info.run_id + '/model',
+                  'llama-finetuned'
+              )
+              print('Model zarejestrowany w MLFlow')
+          "
+        env:
+        - name: MLFLOW_TRACKING_URI
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-config
+              key: MLFLOW_TRACKING_URI
+        volumeMounts:
+        - name: storage
+          mountPath: /models
+          subPath: models
+        - name: storage
+          mountPath: /output
+          subPath: output
+        resources:
+          requests:
+            cpu: "4"
+            memory: "32Gi"
+          limits:
+            cpu: "8"
+            memory: "64Gi"
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llama-storage

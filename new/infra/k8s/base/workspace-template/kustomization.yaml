@@ -1,0 +1,34 @@
+# Kustomization - Workspace Template
+# Szablon dla namespace'u workspace'owego
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Namespace jest ustawiany w overlay
+# namespace: llm-workspace-WORKSPACE_NAME
+
+resources:
+  - namespace.yaml
+  - service-account.yaml
+  - secrets.yaml
+  - pvc.yaml
+  - mlflow.yaml
+  - llama-webui.yaml
+  - vllm.yaml
+  - network-policies.yaml
+  - hpa.yaml
+
+configMapGenerator:
+  - name: workspace-config
+    literals:
+      - WORKSPACE_NAME=template
+      - MLFLOW_PORT=5000
+      - VLLM_PORT=8000
+      - WEBUI_PORT=7860
+
+commonLabels:
+  app.kubernetes.io/part-of: llm-platform
+  app.kubernetes.io/managed-by: kustomize
+
+commonAnnotations:
+  team: mlops

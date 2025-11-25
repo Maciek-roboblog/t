@@ -1,0 +1,34 @@
+# Kustomization - Shared Resources
+# Namespace llm-shared: Gateway, MLFlow Common, Streamlit Console
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: llm-shared
+
+resources:
+  - namespace.yaml
+  - service-account.yaml
+  - mlflow-common.yaml
+  - prompt-console.yaml
+  - network-policies.yaml
+
+configMapGenerator:
+  - name: shared-config
+    literals:
+      - ENVIRONMENT=base
+      - MLFLOW_COMMON_PORT=5000
+
+secretGenerator:
+  - name: mlflow-db-secret
+    literals:
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=CHANGE_ME
+    type: Opaque
+
+commonLabels:
+  app.kubernetes.io/part-of: llm-platform
+  app.kubernetes.io/managed-by: kustomize
+
+commonAnnotations:
+  team: mlops

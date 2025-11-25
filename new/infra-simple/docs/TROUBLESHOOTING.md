@@ -1,0 +1,728 @@
+# Troubleshooting - Rozwiazywanie problemow
+
+## Spis tresci
+
+1. [Problemy z GPU](#problemy-z-gpu)
+2. [Problemy z pamiecia (OOM)](#problemy-z-pamiecia-oom)
+3. [Problemy z treningiem](#problemy-z-treningiem)
+4. [Problemy z vLLM](#problemy-z-vllm)
+5. [Problemy z Kubernetes](#problemy-z-kubernetes)
+6. [Problemy z MLFlow](#problemy-z-mlflow)
+7. [Problemy z danymi](#problemy-z-danymi)
+8. [Diagnostyka ogolna](#diagnostyka-ogolna)
+
+---
+
+## Problemy z GPU
+
+### Pod nie startuje - brak GPU
+
+**Objaw:**
+```
+0/3 nodes are available: 3 Insufficient nvidia.com/gpu
+```
+
+**Przyczyny i rozwiazania:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    PROBLEM: BRAK GPU                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   1. Sprawdz czy sa GPU nodes:                                          │
+│      kubectl get nodes -l nvidia.com/gpu                                │
+│                                                                          │
+│   2. Jesli brak nodes - dodaj GPU node pool:                           │
+│      gcloud container node-pools create gpu-pool \                      │
+│        --cluster=CLUSTER_NAME \                                         │
+│        --accelerator=type=nvidia-tesla-t4,count=1 \                     │
+│        --num-nodes=1                                                    │
+│                                                                          │
+│   3. Sprawdz czy NVIDIA device plugin dziala:                          │
+│      kubectl get pods -n kube-system -l name=nvidia-device-plugin       │
+│                                                                          │
+│   4. Jesli nie dziala - zainstaluj:                                    │
+│      kubectl apply -f https://raw.githubusercontent.com/...             │
+│        /nvidia-device-plugin.yml                                        │
+│                                                                          │
+│   5. Sprawdz toleration w podzie:                                      │
+│      tolerations:                                                       │
+│      - key: "nvidia.com/gpu"                                           │
+│        operator: "Exists"                                               │
+│        effect: "NoSchedule"                                             │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Diagnostyka:**
+
+```bash
+# Sprawdz GPU nodes
+kubectl get nodes -o json | jq '.items[].status.capacity | select(."nvidia.com/gpu")'
+
+# Sprawdz alokacje GPU
+kubectl describe nodes | grep -A5 "Allocated resources"
+
+# Sprawdz eventy poda
+kubectl -n llm-training describe pod <nazwa-poda>
+```
+
+### CUDA error: device-side assert triggered
+
+**Objaw:**
+```
+RuntimeError: CUDA error: device-side assert triggered
+```
+
+**Rozwiazania:**
+
+1. **Sprawdz kompatybilnosc CUDA:**
+```bash
+# W podzie
+python -c "import torch; print(torch.cuda.is_available()); print(torch.version.cuda)"
+```
+
+2. **Zrestartuj pod** (czasem wystarczy):
+```bash
+kubectl -n llm-training delete pod <nazwa>
+```
+
+3. **Sprawdz wersje PyTorch/CUDA:**
+```dockerfile
+# Dockerfile.train - uzywamy CUDA 11.8
+pip install torch==2.2.0 --extra-index-url https://download.pytorch.org/whl/cu118
+```
+
+### GPU nie jest widoczne
+
+**Objaw:**
+```python
+>>> import torch
+>>> torch.cuda.is_available()
+False
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz nvidia-smi w podzie
+kubectl -n llm-training exec -it <pod> -- nvidia-smi
+
+# 2. Sprawdz CUDA_VISIBLE_DEVICES
+kubectl -n llm-training exec -it <pod> -- printenv | grep CUDA
+
+# 3. Sprawdz czy resources.limits zawiera GPU
+kubectl -n llm-training get pod <pod> -o yaml | grep -A5 resources
+
+# 4. Upewnij sie ze obraz ma CUDA
+kubectl -n llm-training exec -it <pod> -- nvcc --version
+```
+
+---
+
+## Problemy z pamiecia (OOM)
+
+### CUDA out of memory
+
+**Objaw:**
+```
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate X GiB
+```
+
+**Diagram diagnostyczny:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    CUDA OOM - DRZEWO DECYZYJNE                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   CUDA OOM?                                                             │
+│   │                                                                      │
+│   ├── Czy uzywasz QLoRA?                                               │
+│   │   └── NIE → Wlacz quantization_bit: 4                              │
+│   │                                                                      │
+│   ├── Czy batch_size > 1?                                              │
+│   │   └── TAK → Zmniejsz do 1, zwieksz gradient_accumulation           │
+│   │                                                                      │
+│   ├── Czy cutoff_len > 2048?                                           │
+│   │   └── TAK → Zmniejsz do 1024 lub 2048                              │
+│   │                                                                      │
+│   ├── Czy gradient_checkpointing jest wlaczony?                        │
+│   │   └── NIE → Wlacz: gradient_checkpointing: true                    │
+│   │                                                                      │
+│   ├── Czy lora_rank > 16?                                              │
+│   │   └── TAK → Zmniejsz do 8                                          │
+│   │                                                                      │
+│   └── Czy model jest za duzy dla GPU?                                  │
+│       └── TAK → Uzyj mniejszego modelu lub wiecej GPU                  │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Rozwiazania krok po kroku:**
+
+```yaml
+# 1. Wlacz QLoRA (jesli LoRA)
+quantization_bit: 4
+
+# 2. Zmniejsz batch size
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16  # Efektywny batch = 16
+
+# 3. Zmniejsz cutoff_len
+cutoff_len: 1024  # Zamiast 2048
+
+# 4. Wlacz gradient checkpointing
+gradient_checkpointing: true
+
+# 5. Zmniejsz rank LoRA
+lora_rank: 4  # Zamiast 8
+
+# 6. Wylacz niepotrzebne feature'y
+flash_attn: null  # Wylacz Flash Attention jesli brak wsparcia
+```
+
+**Sprawdzenie zuzycia pamieci:**
+
+```bash
+# W trakcie treningu
+watch -n 1 'kubectl -n llm-training exec <pod> -- nvidia-smi'
+
+# Lub w pythonie
+kubectl -n llm-training exec -it <pod> -- python -c "
+import torch
+print(f'Allocated: {torch.cuda.memory_allocated()/1e9:.2f} GB')
+print(f'Reserved: {torch.cuda.memory_reserved()/1e9:.2f} GB')
+"
+```
+
+### OOMKilled przez Kubernetes
+
+**Objaw:**
+```
+State: Terminated
+Reason: OOMKilled
+Exit Code: 137
+```
+
+**Rozwiazania:**
+
+```yaml
+# Zwieksz limity pamieci RAM
+resources:
+  requests:
+    memory: "32Gi"
+  limits:
+    memory: "64Gi"
+
+# Lub zmniejsz wymagania aplikacji
+# - mniejszy model
+# - mniejszy batch
+```
+
+---
+
+## Problemy z treningiem
+
+### Loss = NaN
+
+**Objaw:**
+```
+Step 100: loss = nan
+```
+
+**Przyczyny i rozwiazania:**
+
+| Przyczyna | Rozwiazanie |
+|-----------|-------------|
+| Za wysoki learning rate | Zmniejsz do 5e-5 lub 1e-5 |
+| Overflow w FP16 | Uzyj bf16 (jesli Ampere+) |
+| Zle dane | Waliduj dataset |
+| Gradient explosion | Dodaj max_grad_norm |
+
+```yaml
+# Bezpieczna konfiguracja
+learning_rate: 5.0e-5  # Nizszy LR
+bf16: true             # Zamiast fp16
+max_grad_norm: 1.0     # Gradient clipping
+warmup_ratio: 0.1      # Warmup
+```
+
+### Trening nie postepuje (loss stoi)
+
+**Objaw:**
+```
+Step 1: loss = 2.5
+Step 100: loss = 2.5
+Step 500: loss = 2.5
+```
+
+**Rozwiazania:**
+
+```yaml
+# 1. Zwieksz learning rate
+learning_rate: 2.0e-4  # Wyzszy LR
+
+# 2. Zwieksz lora_rank
+lora_rank: 16  # Zamiast 8
+
+# 3. Sprawdz czy dane sie laduja
+# Dodaj logi:
+logging_steps: 1
+```
+
+**Diagnostyka:**
+
+```bash
+# Sprawdz czy dane laduja sie poprawnie
+kubectl -n llm-training logs job/<job> | grep "Loading dataset"
+
+# Sprawdz gradient norm
+kubectl -n llm-training logs job/<job> | grep "grad_norm"
+```
+
+### Slow training
+
+**Objaw:** Kazdy step trwa bardzo dlugo.
+
+**Rozwiazania:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    PRZYSPIESZENIE TRENINGU                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   1. Wlacz Flash Attention (jesli Ampere GPU):                         │
+│      flash_attn: fa2                                                    │
+│                                                                          │
+│   2. Zmniejsz logging frequency:                                        │
+│      logging_steps: 50  # Zamiast 1                                    │
+│                                                                          │
+│   3. Zwieksz batch size (jesli pamiec pozwala):                        │
+│      per_device_train_batch_size: 2                                    │
+│                                                                          │
+│   4. Uzyj optymalizowanego dataloadera:                                │
+│      dataloader_num_workers: 4                                         │
+│                                                                          │
+│   5. Wlacz bf16 zamiast fp16:                                          │
+│      bf16: true                                                         │
+│                                                                          │
+│   6. Sprawdz I/O (PVC):                                                │
+│      - SSD zamiast HDD                                                 │
+│      - Lokalne dane zamiast NFS                                        │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Problemy z vLLM
+
+### vLLM nie startuje
+
+**Objaw:**
+```
+kubectl -n llm-training get pods
+NAME                              READY   STATUS             RESTARTS   AGE
+vllm-inference-xxx                0/1     CrashLoopBackOff   5          10m
+```
+
+**Diagnostyka:**
+
+```bash
+# 1. Sprawdz logi
+kubectl -n llm-training logs deploy/vllm-inference
+
+# 2. Typowe bledy:
+```
+
+**Blad: Model not found**
+```
+FileNotFoundError: /models/merged-model
+```
+Rozwiazanie:
+```bash
+# Sprawdz czy model istnieje
+kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /models/
+
+# Jesli brak - uruchom merge lub download
+kubectl apply -f k8s/09-merge-model-job.yaml
+```
+
+**Blad: OOM przy ladowaniu**
+```
+torch.cuda.OutOfMemoryError: CUDA out of memory
+```
+Rozwiazanie:
+```yaml
+# Zmniejsz gpu-memory-utilization
+args:
+- "--gpu-memory-utilization=0.8"
+- "--max-model-len=2048"
+```
+
+**Blad: Niekompatybilny model**
+```
+ValueError: Cannot load this model, tokenizer mismatch
+```
+Rozwiazanie:
+```yaml
+# Dodaj trust-remote-code
+args:
+- "--trust-remote-code"
+```
+
+### vLLM zwraca bledne odpowiedzi
+
+**Objaw:** Model odpowiada bzdury lub powtarza sie.
+
+**Przyczyny:**
+
+| Przyczyna | Rozwiazanie |
+|-----------|-------------|
+| Zly template | Sprawdz --chat-template |
+| Model nie zmergowany | Uruchom merge job |
+| Zla tokenizacja | Sprawdz --tokenizer |
+
+```bash
+# Test z curl
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llama-finetuned",
+    "messages": [{"role": "user", "content": "test"}],
+    "max_tokens": 10
+  }'
+```
+
+### vLLM - wysoka latencja
+
+**Objaw:** Odpowiedzi trwaja bardzo dlugo.
+
+**Diagnostyka:**
+
+```bash
+# Sprawdz kolejke
+curl http://localhost:8000/metrics | grep waiting
+
+# vllm:num_requests_waiting 50  <- za duzo!
+```
+
+**Rozwiazania:**
+
+```yaml
+# 1. Zwieksz max-num-seqs
+args:
+- "--max-num-seqs=512"
+
+# 2. Zmniejsz max-model-len
+args:
+- "--max-model-len=2048"
+
+# 3. Dodaj wiecej replik
+spec:
+  replicas: 3
+```
+
+---
+
+## Problemy z Kubernetes
+
+### PVC nie montuje sie
+
+**Objaw:**
+```
+Warning  FailedMount  Unable to attach or mount volumes
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz czy PVC istnieje
+kubectl -n llm-training get pvc
+
+# 2. Sprawdz storage class
+kubectl get storageclass
+
+# 3. Sprawdz eventy PVC
+kubectl -n llm-training describe pvc llama-storage
+
+# 4. Jesli Pending - sprawdz czy storage class pozwala na dynamiczny provisioning
+```
+
+### Pod w stanie Pending
+
+**Objaw:**
+```
+NAME                         READY   STATUS    AGE
+llama-webui-xxx              0/1     Pending   10m
+```
+
+**Diagnostyka:**
+
+```bash
+# Sprawdz eventy
+kubectl -n llm-training describe pod <pod>
+
+# Typowe przyczyny:
+# - Insufficient cpu/memory/gpu
+# - No matching nodes (tolerations/affinity)
+# - PVC not bound
+```
+
+**Rozwiazania:**
+
+```yaml
+# 1. Sprawdz resource requests
+resources:
+  requests:
+    cpu: "2"      # Zmniejsz jesli za duze
+    memory: "8Gi"
+
+# 2. Sprawdz tolerations
+tolerations:
+- key: "nvidia.com/gpu"
+  operator: "Exists"
+  effect: "NoSchedule"
+
+# 3. Sprawdz node selector
+nodeSelector:
+  cloud.google.com/gke-accelerator: nvidia-tesla-t4
+```
+
+### ImagePullBackOff
+
+**Objaw:**
+```
+Warning  Failed  Failed to pull image "eu.gcr.io/project/image:tag"
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz czy obraz istnieje
+gcloud container images list --repository=eu.gcr.io/PROJECT_ID
+
+# 2. Sprawdz auth
+gcloud auth configure-docker eu.gcr.io
+
+# 3. Sprawdz imagePullSecrets
+kubectl -n llm-training get secrets
+```
+
+---
+
+## Problemy z MLFlow
+
+### Nie mozna polaczyc z MLFlow
+
+**Objaw:**
+```
+ConnectionError: HTTPConnectionPool(host='mlflow', port=5000)
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz czy MLFlow dziala
+kubectl -n mlflow get pods
+
+# 2. Sprawdz service
+kubectl -n mlflow get svc
+
+# 3. Sprawdz URL w secret
+kubectl -n llm-training get secret mlflow-config -o yaml
+
+# 4. Test polaczenia z poda
+kubectl -n llm-training exec -it <pod> -- curl http://mlflow.mlflow.svc:5000/health
+```
+
+### Artefakty nie zapisuja sie
+
+**Objaw:**
+```
+mlflow.exceptions.MlflowException: Could not write to artifact store
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz backend store
+kubectl -n mlflow logs deploy/mlflow | grep "artifact"
+
+# 2. Sprawdz permissions (GCS/S3)
+gsutil ls gs://mlflow-artifacts/
+
+# 3. Sprawdz Workload Identity
+kubectl -n llm-training describe sa llama-factory
+```
+
+---
+
+## Problemy z danymi
+
+### Dataset nie laduje sie
+
+**Objaw:**
+```
+FileNotFoundError: Dataset 'my_dataset' not found
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Sprawdz czy plik istnieje
+kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /data/
+
+# 2. Sprawdz dataset_info.json
+kubectl -n llm-training exec -it deploy/llama-webui -- \
+  cat /app/LLaMA-Factory/data/dataset_info.json
+
+# 3. Zarejestruj dataset
+# Dodaj wpis do dataset_info.json
+```
+
+### Bledy formatu danych
+
+**Objaw:**
+```
+json.decoder.JSONDecodeError: Expecting value
+```
+
+**Rozwiazania:**
+
+```bash
+# 1. Waliduj JSON
+python -m json.tool my_dataset.json > /dev/null
+
+# 2. Sprawdz encoding
+file my_dataset.json
+# Powinno byc: UTF-8
+
+# 3. Uzyj walidatora (z FORMATY-DANYCH.md)
+python validate_dataset.py my_dataset.json
+```
+
+---
+
+## Diagnostyka ogolna
+
+### Komendy diagnostyczne
+
+```bash
+# Status wszystkiego
+./scripts/status.sh
+
+# Logi wszystkich podow
+kubectl -n llm-training logs -l app=llama-webui --tail=100
+kubectl -n llm-training logs -l app=vllm-inference --tail=100
+
+# Eventy w namespace
+kubectl -n llm-training get events --sort-by='.lastTimestamp'
+
+# Resource usage
+kubectl -n llm-training top pods
+
+# Describe problematycznego poda
+kubectl -n llm-training describe pod <nazwa>
+```
+
+### Debug pod
+
+Jesli potrzebujesz interaktywnego debugowania:
+
+```bash
+# Utworz debug pod
+kubectl -n llm-training run debug --rm -it \
+  --image=eu.gcr.io/PROJECT_ID/llama-factory-train:latest \
+  --overrides='{
+    "spec": {
+      "containers": [{
+        "name": "debug",
+        "image": "eu.gcr.io/PROJECT_ID/llama-factory-train:latest",
+        "stdin": true,
+        "tty": true,
+        "command": ["/bin/bash"],
+        "volumeMounts": [{
+          "name": "storage",
+          "mountPath": "/data"
+        }],
+        "resources": {
+          "limits": {"nvidia.com/gpu": "1"}
+        }
+      }],
+      "volumes": [{
+        "name": "storage",
+        "persistentVolumeClaim": {"claimName": "llama-storage"}
+      }]
+    }
+  }'
+```
+
+### Checklist diagnostyczny
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    CHECKLIST DIAGNOSTYCZNY                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   PODSTAWY                                                              │
+│   [ ] kubectl moze polaczyc sie z klastrem                             │
+│   [ ] Namespace llm-training istnieje                                  │
+│   [ ] Secrets sa utworzone                                             │
+│   [ ] PVC jest Bound                                                   │
+│                                                                          │
+│   GPU                                                                   │
+│   [ ] GPU nodes istnieja (kubectl get nodes -l nvidia.com/gpu)         │
+│   [ ] NVIDIA device plugin dziala                                      │
+│   [ ] Pody maja toleration dla GPU                                     │
+│   [ ] Resources zawieraja nvidia.com/gpu                               │
+│                                                                          │
+│   STORAGE                                                               │
+│   [ ] Model bazowy jest na PVC                                         │
+│   [ ] Dataset jest na PVC                                              │
+│   [ ] Sciezki w konfiguracji sa poprawne                               │
+│                                                                          │
+│   SIEC                                                                  │
+│   [ ] Services sa utworzone                                            │
+│   [ ] Port-forward dziala                                              │
+│   [ ] MLFlow jest dostepny                                             │
+│                                                                          │
+│   OBRAZY                                                                │
+│   [ ] Obrazy sa w registry                                             │
+│   [ ] Tag jest poprawny                                                │
+│   [ ] Auth do registry dziala                                          │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Przydatne aliasy
+
+Dodaj do `~/.bashrc`:
+
+```bash
+# LLaMA-Factory aliases
+alias kllm='kubectl -n llm-training'
+alias llm-logs='kubectl -n llm-training logs -f'
+alias llm-pods='kubectl -n llm-training get pods -w'
+alias llm-status='./scripts/status.sh'
+
+# Szybki dostep
+alias llm-webui='kubectl -n llm-training port-forward svc/llama-webui 7860:7860'
+alias llm-api='kubectl -n llm-training port-forward svc/vllm-inference 8000:8000'
+```
+
+---
+
+## Kontakt i wsparcie
+
+Jesli powyzsze rozwiazania nie pomagaja:
+
+1. **Sprawdz logi** - wiekszość problemow widac w logach
+2. **Sprawdz dokumentacje** - LLaMA-Factory, vLLM, Kubernetes
+3. **GitHub Issues** - [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory/issues), [vLLM](https://github.com/vllm-project/vllm/issues)
+4. **Zglos problem** - z pelnym opisem, logami i konfiguracją
+
+---
+
+*Troubleshooting guide dla LLaMA-Factory*

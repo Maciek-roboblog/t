@@ -1,0 +1,8 @@
+# Namespace dla workspace'u
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: llm-workspace-template  # Nadpisane w overlay
+  labels:
+    purpose: workspace
+    workspace: template

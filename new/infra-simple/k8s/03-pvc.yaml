@@ -1,0 +1,15 @@
+# Storage dla modeli i danych treningowych
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: llama-storage
+  namespace: llm-training
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  # Zmień storageClassName na dostępny w twoim klastrze
+  # np. standard, premium-rwo, local-path
+  storageClassName: standard
