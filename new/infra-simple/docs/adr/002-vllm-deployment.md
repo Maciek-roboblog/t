@@ -237,7 +237,7 @@ infra-simple/
 - ✅ **Mały zespół** (< 5 osób) zarządzający wszystkim
 - ✅ **Development/staging** environment
 - ✅ **Tight integration** - szybkie testy po treningu
-- ✅ **Cost optimization** - współdzielone GPU
+- ✅ **Shared resources** - współdzielone GPU
 - ✅ **Prototyping** - szybkie iteracje
 - ✅ **Single cluster** - brak multi-region requirements
 
@@ -257,7 +257,7 @@ infra-simple/
 
 **Uzasadnienie:**
 - Prostsze zarządzanie (jedno repo, jeden zespół)
-- Niższe koszty (współdzielone GPU)
+- Współdzielone zasoby GPU
 - Szybsze iteracje (deploy → train → merge → test)
 - End-to-end visibility
 

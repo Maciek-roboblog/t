@@ -462,7 +462,7 @@ kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/data/
 kubectl -n llm-training get configmap llm-config -o yaml | grep DATASET_PATH
 
 # 3. Upewnij sie ze dataset jest we wlasciwym formacie (JSON)
-# Szczegoly w docs/FORMATY-DANYCH.md
+# Szczegoly w docs/PRZEWODNIK-UZYCIA.md (sekcja Przygotowanie danych)
 ```
 
 ### Bledy formatu danych
@@ -482,7 +482,7 @@ python -m json.tool my_dataset.json > /dev/null
 file my_dataset.json
 # Powinno byc: UTF-8
 
-# 3. Uzyj walidatora (z FORMATY-DANYCH.md)
+# 3. Uzyj walidatora JSON
 python validate_dataset.py my_dataset.json
 ```
 
