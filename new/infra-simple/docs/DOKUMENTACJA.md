@@ -8,7 +8,8 @@
 4. [Wdrożenie](#wdrożenie)
 5. [Workflow](#workflow)
 6. [Konfiguracja](#konfiguracja)
-7. [Troubleshooting](#troubleshooting)
+7. [Model Registry](#model-registry)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -17,9 +18,10 @@
 ### Zasady projektowe
 
 1. **Idempotentność** - LLaMA-Factory korzysta z zewnętrznych usług, nie zarządza nimi
-2. **Single Responsibility** - 2 obrazy Docker, każdy z jedną odpowiedzialnością
+2. **Single Responsibility** - 1 obraz Docker do treningu
 3. **GPU-first** - wszystkie workloady uruchamiane na nodach GPU
 4. **Shared Storage** - NFS (ReadWriteMany) dla współdzielonych modeli i danych
+5. **External Inference** - vLLM jest zewnętrzną usługą
 
 ### Diagram architektury
 
@@ -27,7 +29,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     ZEWNĘTRZNE USŁUGI (już istnieją)                │
+│                   ZEWNĘTRZNE USŁUGI (już istnieją)                  │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │   ┌─────────────────────┐        ┌─────────────────────────────┐   │
@@ -35,41 +37,38 @@
 │   │  (Tracking Server)  │        │     (ReadWriteMany)         │   │
 │   │  (Model Registry)   │        │                             │   │
 │   └─────────────────────┘        │  /storage/models/base-model │   │
-│            ▲                     │  /storage/models/merged     │   │
-│            │                     │  /storage/output/lora       │   │
-│            │ metryki             │  /storage/data              │   │
+│            ▲                     │  /storage/models/merged ────┼───┐
+│            │ metryki             │  /storage/output/lora       │   │
+│            │                     │  /storage/data              │   │
 │            │                     └─────────────────────────────┘   │
-└────────────┼─────────────────────────────────┬──────────────────────┘
-             │                                 │
-             │                                 │ mount /storage
-             │                                 ▼
-┌────────────┴─────────────────────────────────────────────────────────┐
-│                     KUBERNETES (GPU Nodes)                           │
-├──────────────────────────────────────────────────────────────────────┤
-│                                                                       │
-│   ┌─────────────────────────────────────────────────────────────┐   │
-│   │                   llama-factory-train                        │   │
-│   │                                                              │   │
-│   │   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   │   │
-│   │   │   WebUI      │   │  Training    │   │    Merge     │   │   │
-│   │   │  (7860)      │   │    Job       │   │    Job       │   │   │
-│   │   └──────────────┘   └──────────────┘   └──────────────┘   │   │
-│   │                                                              │   │
-│   │   Zawiera: LLaMA-Factory, MLflow client, peft, datasets     │   │
-│   └─────────────────────────────────────────────────────────────┘   │
-│                                                                       │
-│   ┌─────────────────────────────────────────────────────────────┐   │
-│   │                   llama-factory-api                          │   │
-│   │                                                              │   │
-│   │   ┌──────────────────────────────────────────────────────┐  │   │
-│   │   │                  vLLM Server (8000)                   │  │   │
-│   │   │              OpenAI-compatible API                    │  │   │
-│   │   └──────────────────────────────────────────────────────┘  │   │
-│   │                                                              │   │
-│   │   Zawiera: vLLM (minimalny obraz)                           │   │
-│   └─────────────────────────────────────────────────────────────┘   │
-│                                                                       │
-└───────────────────────────────────────────────────────────────────────┘
+│            │                                                        │
+│   ┌────────┴────────────────────────────────────────────────────┐  │
+│   │                    vLLM Server (ZEWNĘTRZNY)                  │◄─┘
+│   │                    OpenAI-compatible API                     │
+│   │                    Czyta modele z NFS                        │
+│   └─────────────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────────┘
+                                │
+                                │ mount /storage
+                                ▼
+┌────────────────────────────────────────────────────────────────────┐
+│                     KUBERNETES (GPU Nodes)                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│   ┌─────────────────────────────────────────────────────────────┐  │
+│   │                   llama-factory-train                        │  │
+│   │                                                              │  │
+│   │   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   │  │
+│   │   │   WebUI      │   │  Training    │   │    Merge     │   │  │
+│   │   │  (7860)      │   │    Job       │   │    Job       │   │  │
+│   │   └──────────────┘   └──────────────┘   └──────────────┘   │  │
+│   │                                                              │  │
+│   │   Zawiera: LLaMA-Factory, MLflow client, peft, datasets     │  │
+│   └─────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│   vLLM NIE jest wdrażany z tego repozytorium                        │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -87,20 +86,21 @@
 | **Training Job** | NFS Storage, MLflow, ConfigMap | NFS mount, HTTP |
 | **Merge Job** | NFS Storage, ConfigMap | NFS mount |
 | **WebUI** | NFS Storage, ConfigMap | NFS mount |
-| **vLLM Inference** | NFS Storage, ConfigMap | NFS mount |
+| **vLLM (zewnętrzny)** | NFS Storage | Czyta z /storage/models/merged |
 
 ### Zewnętrzne usługi
 
-| Usługa | Adres | Konfiguracja |
-|--------|-------|--------------|
-| MLflow | `http://mlflow.mlflow.svc.cluster.local:5000` | Secret: `mlflow-config` |
-| NFS Storage | Zewnętrzny NFS Server | PVC: `llama-storage` (storageClass: nfs-client) |
+| Usługa | Rola | Konfiguracja |
+|--------|------|--------------|
+| MLflow | Metryki, model registry | Secret: `mlflow-config` |
+| NFS Storage | Storage modeli i danych | PVC: `llama-storage` |
+| vLLM | Inference (OpenAI API) | **Zewnętrzna usługa** |
 
 ---
 
 ## Komponenty
 
-### Docker Images
+### Docker Image
 
 #### llama-factory-train
 
@@ -117,20 +117,7 @@ Zawiera:
 - datasets 2.16.1
 - MLflow 2.10.0
 
-NIE zawiera: vLLM
-```
-
-#### llama-factory-api
-
-```dockerfile
-# Obraz do inference (minimalny)
-# Base: Debian 11 + Python 3.10.14
-
-Zawiera:
-- vLLM 0.4.0 (cu118 wheel)
-- PyTorch 2.1.2 + CUDA 11.8
-
-NIE zawiera: LLaMA-Factory, MLflow, datasets
+NIE zawiera: vLLM (zewnętrzna usługa)
 ```
 
 ### Kubernetes Manifests
@@ -143,7 +130,6 @@ NIE zawiera: LLaMA-Factory, MLflow, datasets
 | `04-configmap.yaml` | ConfigMap | Unified config | - |
 | `05-llama-webui.yaml` | Deployment | WebUI | ✓ |
 | `06-training-job.yaml` | Job | Training | ✓ |
-| `07-vllm-inference.yaml` | Deployment | vLLM | ✓ |
 | `09-merge-model-job.yaml` | Job | LoRA merge | ✓ |
 
 ### GPU Node Affinity
@@ -168,8 +154,8 @@ tolerations:
 - Klaster Kubernetes z GPU nodes (NVIDIA)
 - NFS Storage (ReadWriteMany)
 - MLflow (opcjonalnie)
+- vLLM Server (zewnętrzny, z dostępem do NFS)
 - `kubectl`, `docker`
-- GCR/Artifact Registry
 
 ### Krok 1: Zmienne środowiskowe
 
@@ -177,7 +163,7 @@ tolerations:
 export PROJECT_ID="your-gcp-project"
 ```
 
-### Krok 2: Budowa obrazów
+### Krok 2: Budowa obrazu
 
 ```bash
 ./scripts/build.sh v1.0.0
@@ -185,7 +171,6 @@ export PROJECT_ID="your-gcp-project"
 
 Buduje i pushuje:
 - `eu.gcr.io/${PROJECT_ID}/llama-factory-train:v1.0.0`
-- `eu.gcr.io/${PROJECT_ID}/llama-factory-api:v1.0.0`
 
 ### Krok 3: Konfiguracja MLflow
 
@@ -259,23 +244,16 @@ kubectl -n llm-training logs -f job/merge-lora
 
 Wynik: Pełny model w `/storage/models/merged-model/`
 
-#### 4. Inference
+#### 4. Inference (zewnętrzny vLLM)
+
+vLLM jest **zewnętrzną usługą** - nie wdrażamy go z tego repozytorium.
+
+Po merge, model jest dostępny w `/storage/models/merged-model/`.
+Zewnętrzny vLLM czyta model z tej lokalizacji:
 
 ```bash
-./scripts/deploy.sh inference
-./scripts/ui.sh inference
-# API na http://localhost:8000
-```
-
-Test:
-```bash
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "llama-finetuned",
-    "messages": [{"role": "user", "content": "Hello!"}],
-    "max_tokens": 100
-  }'
+# Na zewnętrznym serwerze vLLM
+vllm serve --model /storage/models/merged-model
 ```
 
 ---
@@ -295,9 +273,6 @@ Wszystkie parametry w jednym miejscu:
 | `FINETUNING_TYPE` | `lora` | lora/qlora/full |
 | `LORA_RANK` | `8` | Rank LoRA (8-64) |
 | `TEMPLATE` | `llama3` | Template promptów |
-| `SERVED_MODEL_NAME` | `llama-finetuned` | Nazwa w API |
-| `MAX_MODEL_LEN` | `4096` | Długość kontekstu |
-| `TENSOR_PARALLEL_SIZE` | `1` | Multi-GPU |
 
 ### Format datasetu
 
@@ -313,15 +288,32 @@ Wszystkie parametry w jednym miejscu:
 
 ---
 
+## Model Registry
+
+### Opcje udostępniania modeli dla vLLM
+
+Szczegółowe porównanie w: **[ADR-001: Model Registry](adr/001-model-registry.md)**
+
+| Opcja | Złożoność | Wersjonowanie | Multi-cluster |
+|-------|-----------|---------------|---------------|
+| **NFS/PVC** (obecna) | ⭐ | ❌ | ❌ |
+| **Object Storage** (GCS/S3) | ⭐⭐ | ⭐⭐ | ✅ |
+| **MLflow Registry** | ⭐⭐⭐ | ⭐⭐⭐ | ✅ |
+
+### Rekomendacja
+
+- **Development:** NFS/PVC (proste, szybkie)
+- **Produkcja z audytem:** MLflow Registry (wersjonowanie, rollback)
+- **Multi-cluster:** Object Storage lub MLflow + GCS
+
+---
+
 ## Troubleshooting
 
 ### Pod nie startuje (GPU)
 
 ```bash
-# Sprawdź eventy
 kubectl -n llm-training describe pod <nazwa>
-
-# Sprawdź GPU nodes
 kubectl get nodes -l nvidia.com/gpu=true
 ```
 
@@ -332,38 +324,31 @@ Zmniejsz w ConfigMap:
 - `CUTOFF_LEN: "1024"`
 - Lub użyj `FINETUNING_TYPE: "qlora"`
 
-### vLLM nie startuje
+### Model nie istnieje
 
 ```bash
-# Logi
-kubectl -n llm-training logs deploy/llm-inference
-
-# Sprawdź model
 kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/models/
 ```
 
 ### MLflow nie łączy się
 
 ```bash
-# Sprawdź secret
 kubectl -n llm-training get secret mlflow-config -o yaml
-
-# Sprawdź połączenie
 kubectl -n llm-training run test --rm -it --image=curlimages/curl -- \
-  curl -v http://mlflow.mlflow.svc.cluster.local:5000/api/2.0/mlflow/experiments/list
+  curl -v http://mlflow.mlflow.svc.cluster.local:5000/health
 ```
 
 ---
 
 ## Dodatkowa dokumentacja
 
+- [ADR-001: Model Registry](adr/001-model-registry.md) - NFS vs Object Storage vs MLflow
 - [PARAMETRY-LORA.md](PARAMETRY-LORA.md) - Szczegóły konfiguracji LoRA/QLoRA
 - [FORMATY-DANYCH.md](FORMATY-DANYCH.md) - Przygotowanie datasetów
-- [VLLM-KONFIGURACJA.md](VLLM-KONFIGURACJA.md) - Optymalizacja vLLM
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Rozwiązywanie problemów
 
 ## Źródła
 
 - [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
-- [vLLM Documentation](https://docs.vllm.ai/)
+- [vLLM Documentation](https://docs.vllm.ai/) (zewnętrzna usługa)
 - [MLflow](https://mlflow.org/docs/latest/)
