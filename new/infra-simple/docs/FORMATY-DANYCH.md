@@ -28,27 +28,14 @@ LLaMA-Factory wspiera wiele formatow danych:
 
 ### Wybor formatu
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     WYBOR FORMATU DANYCH                                 │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Czy masz konwersacje (wiele tur)?                                     │
-│   │                                                                      │
-│   ├── NIE → Format ALPACA                                               │
-│   │         (pojedyncze pytania/odpowiedzi)                             │
-│   │                                                                      │
-│   └── TAK → Format SHAREGPT                                             │
-│             (konwersacje z wieloma wiadomosciami)                       │
-│                                                                          │
-│   Czy masz system prompt?                                               │
-│   │                                                                      │
-│   ├── TAK → Dodaj pole "system" (Alpaca) lub role "system" (ShareGPT)  │
-│   │                                                                      │
-│   └── NIE → Pomiń pole system                                           │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Wybor Formatu](diagrams/format-selection.puml)
+
+| Pytanie | Odpowiedz | Format |
+|---------|-----------|--------|
+| Czy masz konwersacje (wiele tur)? | NIE | **Alpaca** (pojedyncze Q/A) |
+| | TAK | **ShareGPT** (multi-turn) |
+| Czy masz system prompt? | TAK | Dodaj pole "system" |
+| | NIE | Pomin pole system |
 
 ---
 
@@ -402,35 +389,15 @@ dataset: polish_qa,customer_service  # Mozna laczyc datasety
 
 ### Proces przygotowania
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PROCES PRZYGOTOWANIA DANYCH                           │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   1. ZBIERANIE                                                          │
-│      └── Surowe dane (CSV, TXT, bazy danych, API)                      │
-│                                                                          │
-│   2. CZYSZCZENIE                                                        │
-│      ├── Usuwanie duplikatow                                           │
-│      ├── Usuwanie pustych/blednych rekordow                            │
-│      ├── Normalizacja tekstu                                           │
-│      └── Anonimizacja danych wrazliwych                                │
-│                                                                          │
-│   3. FORMATOWANIE                                                       │
-│      └── Konwersja do formatu Alpaca/ShareGPT                          │
-│                                                                          │
-│   4. WALIDACJA                                                          │
-│      ├── Sprawdzenie struktury JSON                                    │
-│      ├── Sprawdzenie wymaganych pol                                    │
-│      └── Statystyki dlugosci                                           │
-│                                                                          │
-│   5. PODZIAL                                                            │
-│      ├── Train: 80-90%                                                 │
-│      ├── Validation: 10-15%                                            │
-│      └── Test: 5-10%                                                   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Proces Przygotowania](diagrams/data-preparation.puml)
+
+| Etap | Opis | Czynnosci |
+|------|------|-----------|
+| **1. Zbieranie** | Surowe dane | CSV, TXT, bazy danych, API |
+| **2. Czyszczenie** | Jakosc danych | Duplikaty, bledy, normalizacja, anonimizacja |
+| **3. Formatowanie** | Struktura | Konwersja do Alpaca/ShareGPT |
+| **4. Walidacja** | Sprawdzenie | JSON, wymagane pola, statystyki |
+| **5. Podzial** | Train/Val/Test | 80-90% / 10-15% / 5-10% |
 
 ### Skrypt konwersji (CSV → Alpaca)
 
@@ -768,28 +735,22 @@ python validate_dataset.py my_dataset.json
 
 ### Jakosc danych
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    DOBRE PRAKTYKI - JAKOSC DANYCH                        │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   DO:                                                                   │
-│   ✓ Usun duplikaty i prawie-duplikaty                                  │
-│   ✓ Sprawdz poprawnosc gramatyczna i ortograficzna                     │
-│   ✓ Zachowaj spojnosc stylu (formalny/nieformalny)                     │
-│   ✓ Uzywaj kompletnych zdan                                            │
-│   ✓ Dodawaj kontekst gdy potrzebny                                     │
-│   ✓ Balansuj dlugosci odpowiedzi                                       │
-│                                                                          │
-│   NIE:                                                                  │
-│   ✗ Nie wstawiaj danych osobowych (RODO!)                              │
-│   ✗ Nie zostawiaj smieci (HTML, specjalne znaki)                       │
-│   ✗ Nie uzywaj zbyt krotkich odpowiedzi (<10 slow)                     │
-│   ✗ Nie powtarzaj tych samych pytan/odpowiedzi                         │
-│   ✗ Nie mieszaj jezykow bez powodu                                     │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Jakosc Danych](diagrams/data-quality.puml)
+
+**DO (Zalecane):**
+- Usun duplikaty i prawie-duplikaty
+- Sprawdz poprawnosc gramatyczna i ortograficzna
+- Zachowaj spojnosc stylu (formalny/nieformalny)
+- Uzywaj kompletnych zdan
+- Dodawaj kontekst gdy potrzebny
+- Balansuj dlugosci odpowiedzi
+
+**NIE (Unikaj):**
+- Dane osobowe (RODO!)
+- Smieci (HTML, specjalne znaki)
+- Zbyt krotkie odpowiedzi (<10 slow)
+- Powtorzenia tych samych Q/A
+- Mieszanie jezykow bez powodu
 
 ### Rozmiar datasetu
 

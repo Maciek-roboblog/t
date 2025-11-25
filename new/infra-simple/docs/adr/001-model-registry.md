@@ -30,7 +30,6 @@ LLaMA-Factory (trening) i vLLM (inference) to **oddzielne usługi**. Po treningu
 | **Latencja** | ⭐⭐⭐ Natychmiastowa | Brak download |
 | **Wersjonowanie** | ❌ Brak | Nadpisywanie |
 | **Multi-cluster** | ❌ Nie | Tylko lokalny klaster |
-| **Koszt** | ⭐⭐ | NFS: $500-1500/TB/miesiąc (szybki) |
 | **Skalowalność** | ⭐ | Bottleneck przy wielu nodes (~2.5 GB/s) |
 
 **Implementacja (obecna):**
@@ -77,7 +76,6 @@ vllm serve --model /storage/models/merged-model
 | **Latencja** | ⭐ | Download: minuty dla dużych modeli |
 | **Wersjonowanie** | ⭐⭐ | Object versioning |
 | **Multi-cluster** | ⭐⭐⭐ | Globalny dostęp |
-| **Koszt** | ⭐⭐⭐ | ~$20/TB/miesiąc + egress |
 | **Skalowalność** | ⭐⭐⭐ | 10x lepsza niż NFS przy scale-out |
 
 **Three-Tier Architecture (best practice 2025):**
@@ -135,7 +133,6 @@ vllm serve --model /cache/model
 | **Latencja** | ⭐⭐ | Download z artifact store |
 | **Wersjonowanie** | ⭐⭐⭐ | Pełne: v1, v2, stages |
 | **Multi-cluster** | ⭐⭐⭐ | Przez artifact store |
-| **Koszt** | ⭐⭐ | MLflow infra + artifact storage |
 | **Audyt/Lineage** | ⭐⭐⭐ | Pełny tracking |
 
 **MLflow Model Lifecycle:**
@@ -217,7 +214,6 @@ local_path = mlflow.artifacts.download_artifacts(model_uri)
 | Rollback | Manual | Manual | 1-click |
 | Lineage | ❌ | ❌ | ✅ |
 | A/B testing | ❌ | Manual | ✅ |
-| Koszt (100TB) | ~$50-150k/rok | ~$2.4k/rok | ~$3k/rok + infra |
 | **Już mamy** | ✅ PVC | ❓ GCS? | ✅ MLflow |
 
 ---

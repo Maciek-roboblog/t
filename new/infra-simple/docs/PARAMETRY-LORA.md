@@ -390,23 +390,17 @@ deepspeed: ds_z2_config.json  # ZeRO Stage 2
 
 ### Podsumowanie technik
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│               TECHNIKI OPTYMALIZACJI PAMIECI                             │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Bazowe zuzycie: 100%                                                  │
-│   │                                                                      │
-│   ├─ + QLoRA (4-bit)              → -60%  = 40%                         │
-│   ├─ + Gradient checkpointing     → -15%  = 25%                         │
-│   ├─ + Flash Attention            → -10%  = 15%                         │
-│   └─ + Mniejszy batch             → -5%   = 10%                         │
-│                                                                          │
-│   Przyklad 7B model:                                                    │
-│   FP16 LoRA: ~16 GB  →  QLoRA + optymalizacje: ~4 GB                   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Optymalizacja Pamieci](diagrams/memory-optimization.puml)
+
+| Technika | Redukcja | Wynik |
+|----------|----------|-------|
+| Bazowe zuzycie | - | 100% |
+| + QLoRA (4-bit) | -60% | 40% |
+| + Gradient checkpointing | -15% | 25% |
+| + Flash Attention | -10% | 15% |
+| + Mniejszy batch | -5% | 10% |
+
+**Przyklad 7B model:** FP16 LoRA ~16 GB → QLoRA + optymalizacje ~4 GB
 
 ---
 
@@ -533,36 +527,14 @@ save_steps: 200
 
 ### Strategia eksperymentowania
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    STRATEGIA TUNING HIPERPARAMETROW                      │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Krok 1: Baseline                                                      │
-│   ├── lora_rank: 8                                                      │
-│   ├── lora_alpha: 16                                                    │
-│   ├── learning_rate: 1e-4                                               │
-│   └── epochs: 3                                                         │
-│                                                                          │
-│   Krok 2: Jesli underfitting (loss nie spada)                          │
-│   ├── Zwieksz lora_rank: 16, 32                                        │
-│   ├── Zwieksz learning_rate: 2e-4, 3e-4                                │
-│   └── Zwieksz epochs: 5, 10                                             │
-│                                                                          │
-│   Krok 3: Jesli overfitting (val_loss rosnie)                          │
-│   ├── Zmniejsz lora_rank: 4                                            │
-│   ├── Zwieksz lora_dropout: 0.1, 0.15                                  │
-│   ├── Zmniejsz epochs                                                   │
-│   └── Dodaj early stopping                                              │
-│                                                                          │
-│   Krok 4: Jesli OOM (brak pamieci)                                     │
-│   ├── Uzyj QLoRA (quantization_bit: 4)                                 │
-│   ├── Zmniejsz cutoff_len                                              │
-│   ├── Zmniejsz batch_size, zwieksz grad_accum                          │
-│   └── Wlacz gradient_checkpointing                                      │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Strategia Tuning](diagrams/tuning-strategy.puml)
+
+| Krok | Problem | Rozwiazanie |
+|------|---------|-------------|
+| **1. Baseline** | - | lora_rank: 8, lora_alpha: 16, lr: 1e-4, epochs: 3 |
+| **2. Underfitting** | Loss nie spada | Zwieksz lora_rank (16, 32), lr (2e-4), epochs (5, 10) |
+| **3. Overfitting** | Val_loss rosnie | Zmniejsz lora_rank (4), zwieksz dropout (0.1), early stopping |
+| **4. OOM** | Brak pamieci | QLoRA, mniejszy cutoff_len, batch_size, gradient_checkpointing |
 
 ### Grid search przykladowy
 

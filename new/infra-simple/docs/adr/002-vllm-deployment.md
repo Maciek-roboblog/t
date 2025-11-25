@@ -142,7 +142,6 @@ spec:
 | **Złożoność operacyjna** | ⭐⭐⭐ | ⭐⭐ | B łatwiejsze, jedno repo |
 | **Izolacja błędów** | ⭐⭐⭐ | ⭐ | A lepsza izolacja |
 | **Izolacja zasobów GPU** | ⭐⭐⭐ | ⭐⭐ | A dedykowane GPU |
-| **Koszt infrastruktury** | ⭐ | ⭐⭐⭐ | B tańsze (shared) |
 | **Latencja model load** | ⭐ | ⭐⭐⭐ | B szybsze (ten sam PVC) |
 | **Niezależne skalowanie** | ⭐⭐⭐ | ⭐⭐ | A bardziej elastyczne |
 | **Spójność wersji** | ⭐ | ⭐⭐⭐ | B gwarantowana |
@@ -219,24 +218,6 @@ infra-simple/
 | **Secret management** | Oddzielne sekrety | Wspólne sekrety |
 | **RBAC** | Prostsze (izolacja) | Bardziej złożone |
 | **Compliance** | Łatwiejsze SOC2/ISO | Wymaga dodatkowej pracy |
-
-### Wpływ na koszty
-
-**Przykład kalkulacji:**
-
-| Założenia | |
-|-----------|---|
-| GPU nodes dla training | 2× A100 40GB |
-| Trening | 20 godzin/tydzień |
-| Inference | 24/7 |
-| GCP pricing | ~$2.9/GPU/godz |
-
-| Opcja | Kalkulacja | Koszt/tydzień |
-|-------|------------|---------------|
-| **A: Zewnętrzny** | Training: 2 GPU × 168h × $2.9 + Inference: 2 GPU × 168h × $2.9 | ~$1,950 |
-| **B: Wewnętrzny** | Unified: 3 GPU × 168h × $2.9 | ~$1,461 |
-
-**Oszczędność z opcji B:** ~25% ($489/tydzień, ~$25k/rok)
 
 ---
 
