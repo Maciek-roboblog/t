@@ -15,35 +15,11 @@
 
 ### Problemy bez wersjonowania
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                  PROBLEMY BEZ WERSJONOWANIA DANYCH                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Scenariusz 1: Data drift                                                   │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Styczeń: train_data.json (10,000 samples)                      │       │
-│   │  Luty: train_data.json (12,000 samples) ← nadpisany!           │       │
-│   │                                                                  │       │
-│   │  Problem: Nie można odtworzyć modelu ze stycznia                │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Scenariusz 2: Debugging                                                    │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Model A: accuracy 95% (dane z wersji X)                        │       │
-│   │  Model B: accuracy 82% (dane z wersji Y)                        │       │
-│   │                                                                  │       │
-│   │  Problem: Nie wiadomo co się zmieniło w danych                  │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Scenariusz 3: Compliance                                                   │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Audytor: "Na jakich danych trenowaliście model w produkcji?"   │       │
-│   │  Zespół: "Ehm... te dane zostały zaktualizowane..."             │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+| Scenariusz | Problem |
+|------------|---------|
+| **Data drift** | train_data.json nadpisany - nie można odtworzyć modelu ze stycznia |
+| **Debugging** | Model A: 95%, Model B: 82% - nie wiadomo co się zmieniło w danych |
+| **Compliance** | Audytor pyta o dane, ale zostały zaktualizowane bez śledzenia zmian |
 
 ### Korzyści wersjonowania
 
@@ -61,61 +37,34 @@
 
 ### 1. Semantic versioning (rekomendowane)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    SEMANTIC VERSIONING DANYCH                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Format: MAJOR.MINOR.PATCH                                                  │
-│                                                                              │
-│   MAJOR (1.0.0 → 2.0.0)                                                     │
-│   └── Zmiana struktury/schematu                                             │
-│   └── Usunięcie/zmiana pól                                                  │
-│   └── Niekompatybilne z poprzednią wersją                                   │
-│                                                                              │
-│   MINOR (1.0.0 → 1.1.0)                                                     │
-│   └── Nowe dane dodane                                                      │
-│   └── Rozszerzenie datasetu                                                 │
-│   └── Backward compatible                                                    │
-│                                                                              │
-│   PATCH (1.0.0 → 1.0.1)                                                     │
-│   └── Korekty błędów                                                        │
-│   └── Poprawki literówek                                                    │
-│   └── Czyszczenie danych                                                    │
-│                                                                              │
-│   Przykład:                                                                  │
-│   company_qa_v1.0.0.json  → Inicjalny dataset                               │
-│   company_qa_v1.1.0.json  → +2000 nowych Q&A                                │
-│   company_qa_v1.1.1.json  → Poprawione błędy w odpowiedziach               │
-│   company_qa_v2.0.0.json  → Zmieniony format (dodano "context" field)      │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [dataset-versioning.puml](diagrams/dataset-versioning.puml) - strategia wersjonowania datasetów.
+
+**Format: MAJOR.MINOR.PATCH**
+
+| Typ zmiany | Kiedy | Przykład |
+|------------|-------|----------|
+| **MAJOR** | Zmiana struktury/schematu, niekompatybilne | `v1.0.0` → `v2.0.0` |
+| **MINOR** | Nowe dane dodane, backward compatible | `v1.0.0` → `v1.1.0` |
+| **PATCH** | Korekty błędów, poprawki | `v1.0.0` → `v1.0.1` |
+
+**Przykład:**
+- `company_qa_v1.0.0.json` → Inicjalny dataset
+- `company_qa_v1.1.0.json` → +2000 nowych Q&A
+- `company_qa_v1.1.1.json` → Poprawione błędy
+- `company_qa_v2.0.0.json` → Zmieniony format (dodano "context" field)
 
 ### 2. Hash-based versioning
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      HASH-BASED VERSIONING                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Nazwa pliku: train_data.json                                              │
-│   Hash: sha256:a1b2c3d4e5f6g7h8...                                          │
-│                                                                              │
-│   Zalety:                                                                    │
-│   ✓ Automatyczne wykrywanie zmian                                           │
-│   ✓ Niemożliwe konflikty nazw                                               │
-│   ✓ Content-addressable (jak Git)                                           │
-│                                                                              │
-│   Wady:                                                                      │
-│   ✗ Hash nie mówi nic o zawartości                                          │
-│   ✗ Trudne do zapamiętania                                                  │
-│                                                                              │
-│   Rekomendacja: Używaj hash jako dodatkowy identyfikator,                   │
-│   nie jako główne wersjonowanie                                              │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Nazwa pliku:** `train_data.json`
+**Hash:** `sha256:a1b2c3d4e5f6g7h8...`
+
+| Zalety | Wady |
+|--------|------|
+| Automatyczne wykrywanie zmian | Hash nie mówi nic o zawartości |
+| Niemożliwe konflikty nazw | Trudne do zapamiętania |
+| Content-addressable (jak Git) | |
+
+**Rekomendacja:** Używaj hash jako dodatkowy identyfikator, nie jako główne wersjonowanie.
 
 ### 3. Date-based versioning
 
@@ -446,24 +395,17 @@ data:
 
 ### 2. Zawsze oddzielaj test set
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    TEST SET BEST PRACTICES                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ✓ Test set wydzielony PRZED jakimkolwiek treningiem                       │
-│   ✓ Ten sam test set dla WSZYSTKICH eksperymentów                           │
-│   ✓ Test set NIGDY nie używany podczas treningu                             │
-│   ✓ Test set NIGDY nie używany do tuning hiperparametrów                    │
-│                                                                              │
-│   Procedura:                                                                 │
-│   1. Pobierz surowe dane                                                    │
-│   2. Wydziel test set (np. 10%) z seedem                                    │
-│   3. Test set zablokowany - nie zmieniaj!                                   │
-│   4. Reszta to train + validation (val_size w LLaMA-Factory)               │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Zasady:**
+- Test set wydzielony **PRZED** jakimkolwiek treningiem
+- Ten sam test set dla **WSZYSTKICH** eksperymentów
+- Test set **NIGDY** nie używany podczas treningu
+- Test set **NIGDY** nie używany do tuning hiperparametrów
+
+**Procedura:**
+1. Pobierz surowe dane
+2. Wydziel test set (np. 10%) z seedem
+3. Test set zablokowany - nie zmieniaj!
+4. Reszta to train + validation (val_size w LLaMA-Factory)
 
 ### 3. Dokumentuj preprocessing
 

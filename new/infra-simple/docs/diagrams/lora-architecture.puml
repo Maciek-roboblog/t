@@ -1,0 +1,26 @@
+@startuml lora-architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Architektura LoRA
+
+package "Standardowy fine-tuning" as standard #LightCoral {
+    rectangle "W (d x k)\nnp. 4096x4096\n= 16.7M parametrow\nna warstwe" as w1
+    note right of w1 : Aktualizacja\nwszystkich wag
+}
+
+package "LoRA fine-tuning" as lora #LightGreen {
+    rectangle "W (zamrozone)\n4096 x 4096" as w2
+    rectangle "A (d x r)\n4096 x 8" as a
+    rectangle "B (r x k)\n8 x 4096" as b
+
+    w2 -[hidden]right-> a
+    a --> b : rank r = 8
+}
+
+note bottom of lora
+    Parametry: 2 x 4096 x 8 = 65K
+    **Redukcja: 99.6%!**
+end note
+
+@enduml

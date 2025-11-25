@@ -1,0 +1,22 @@
+@startuml vllm-checklist
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Checklist: LLaMA-Factory → vLLM
+
+package "CHECKLIST INTEGRACJI" as checklist #LightYellow {
+    rectangle "Trening ukonczony\n(LoRA adapter w /storage/output/lora-adapter)" as c1
+    rectangle "Merge job ukonczony\n(model w /storage/models/merged-model)" as c2
+    rectangle "Model ma wszystkie pliki\n(config.json, *.safetensors)" as c3
+    rectangle "vLLM ma dostep do NFS\n(/storage/models/merged-model)" as c4
+    rectangle "vLLM uzywa tego samego template\nco trening" as c5
+    rectangle "vLLM uzywa --trust-remote-code\n(jesli potrzebne)" as c6
+}
+
+c1 --> c2
+c2 --> c3
+c3 --> c4
+c4 --> c5
+c5 --> c6
+
+@enduml
