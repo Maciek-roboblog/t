@@ -1,15 +1,31 @@
-# Storage dla modeli i danych treningowych
+# PersistentVolumeClaim - współdzielony storage dla modeli i danych
+#
+# WYMAGANIA:
+# - NFS lub inny storage z ReadWriteMany (dostęp z wielu podów)
+# - Modele są NASZE WŁASNE - wgrane wcześniej do tego PVC
+#
+# STRUKTURA:
+# /storage/
+# ├── models/
+# │   ├── base-model/      <- nasz model bazowy (pre-loaded)
+# │   └── merged-model/    <- model po merge LoRA
+# ├── output/
+# │   └── lora-adapter/    <- adaptery z treningu
+# └── data/
+#     └── dataset.json     <- dane treningowe
+#
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: llama-storage
   namespace: llm-training
 spec:
+  # ReadWriteMany - wymagane dla dostępu z wielu podów (training, inference)
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 100Gi
-  # Zmień storageClassName na dostępny w twoim klastrze
-  # np. standard, premium-rwo, local-path
-  storageClassName: standard
+      storage: 200Gi
+  # ZMIEŃ na swoją klasę storage z NFS
+  # Przykłady: nfs-client, filestore-nfs, efs-sc
+  storageClassName: nfs-client

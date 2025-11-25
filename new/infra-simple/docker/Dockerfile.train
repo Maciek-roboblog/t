@@ -1,18 +1,40 @@
 # LLaMA-Factory Training Image
-# Obraz do fine-tuningu i WebUI
+# Obraz do fine-tuningu, merge LoRA i WebUI
+# Base: Debian 11 (bullseye) + Python 3.10.14
+#
+# ODPOWIEDZIALNOŚĆ:
+# - Trening modeli (LoRA, QLoRA, Full)
+# - Merge LoRA z modelem bazowym
+# - WebUI do konfiguracji
+# - Logowanie do zewnętrznego MLflow
+#
+# ZALEŻNOŚCI ZEWNĘTRZNE:
+# - MLflow (tracking URI z Secret)
+# - NFS Storage (modele, dane)
+#
+# NIE ZAWIERA: vLLM (inference to osobny obraz)
 
-FROM debian:12
+FROM debian:11
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    PYTHON_VERSION=3.10.14
 
-# System + Python 3.11
+# Zależności systemowe do kompilacji Python 3.10
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.11 \
-    python3.11-venv \
-    python3-pip \
     build-essential \
+    libncursesw5-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    tk-dev \
+    libgdbm-dev \
+    libc6-dev \
+    libbz2-dev \
+    libffi-dev \
+    zlib1g-dev \
+    libreadline-dev \
+    liblzma-dev \
     git \
     curl \
     wget \
@@ -20,30 +42,47 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Linki
-RUN ln -sf /usr/bin/python3.11 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
+# Kompilacja Python 3.10.14 ze źródeł
+RUN cd /tmp && \
+    wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
+    tar xzf Python-${PYTHON_VERSION}.tgz && \
+    cd Python-${PYTHON_VERSION} && \
+    ./configure --enable-optimizations --with-ensurepip=install && \
+    make -j$(nproc) && \
+    make altinstall && \
+    cd / && \
+    rm -rf /tmp/Python-${PYTHON_VERSION}*
 
-# PyTorch + CUDA 11.8
+# Linki do Python 3.10
+RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python && \
+    ln -sf /usr/local/bin/python3.10 /usr/bin/python3 && \
+    ln -sf /usr/local/bin/pip3.10 /usr/bin/pip && \
+    ln -sf /usr/local/bin/pip3.10 /usr/bin/pip3
+
+# PyTorch 2.1.2 + CUDA 11.8 (kompatybilne z Python 3.10)
 RUN pip install --upgrade pip && \
     pip install \
-      torch==2.2.0 \
-      torchvision==0.17.0 \
-      torchaudio==2.2.0 \
+      torch==2.1.2 \
+      torchvision==0.16.2 \
+      torchaudio==2.1.2 \
       --extra-index-url https://download.pytorch.org/whl/cu118
 
-# Transformers + Datasets
+# Transformers + Datasets (wersje kompatybilne z Python 3.10 i PyTorch 2.1)
 RUN pip install \
-    transformers==4.37.0 \
-    datasets==2.17.0 \
-    accelerate \
-    peft
+    transformers==4.36.2 \
+    datasets==2.16.1 \
+    accelerate==0.26.1 \
+    peft==0.7.1
 
-# LLaMA-Factory + MLFlow
+# LLaMA-Factory + MLFlow (do logowania eksperymentów)
 RUN pip install \
     "llamafactory[torch,metrics]==0.9.3" \
     mlflow==2.10.0
 
 WORKDIR /app
+
+# Zmienne środowiskowe przekazywane z K8s:
+# - MLFLOW_TRACKING_URI (Secret) - adres zewnętrznego MLflow
+# - Ścieżki modeli z ConfigMap (BASE_MODEL_PATH, LORA_OUTPUT_PATH, etc.)
 
 ENTRYPOINT ["/bin/bash"]

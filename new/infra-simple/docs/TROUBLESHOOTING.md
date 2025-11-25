@@ -324,28 +324,28 @@ kubectl -n llm-training logs job/<job> | grep "grad_norm"
 ```
 kubectl -n llm-training get pods
 NAME                              READY   STATUS             RESTARTS   AGE
-vllm-inference-xxx                0/1     CrashLoopBackOff   5          10m
+llm-inference-xxx                 0/1     CrashLoopBackOff   5          10m
 ```
 
 **Diagnostyka:**
 
 ```bash
 # 1. Sprawdz logi
-kubectl -n llm-training logs deploy/vllm-inference
+kubectl -n llm-training logs deploy/llm-inference
 
 # 2. Typowe bledy:
 ```
 
 **Blad: Model not found**
 ```
-FileNotFoundError: /models/merged-model
+FileNotFoundError: /storage/models/merged-model
 ```
 Rozwiazanie:
 ```bash
 # Sprawdz czy model istnieje
-kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /models/
+kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/models/
 
-# Jesli brak - uruchom merge lub download
+# Jesli brak - uruchom merge job
 kubectl apply -f k8s/09-merge-model-job.yaml
 ```
 
@@ -572,14 +572,13 @@ FileNotFoundError: Dataset 'my_dataset' not found
 
 ```bash
 # 1. Sprawdz czy plik istnieje
-kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /data/
+kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/data/
 
-# 2. Sprawdz dataset_info.json
-kubectl -n llm-training exec -it deploy/llama-webui -- \
-  cat /app/LLaMA-Factory/data/dataset_info.json
+# 2. Sprawdz konfiguracje sciezki w ConfigMap
+kubectl -n llm-training get configmap llm-config -o yaml | grep DATASET_PATH
 
-# 3. Zarejestruj dataset
-# Dodaj wpis do dataset_info.json
+# 3. Upewnij sie ze dataset jest we wlasciwym formacie (JSON)
+# Szczegoly w docs/FORMATY-DANYCH.md
 ```
 
 ### Bledy formatu danych
@@ -615,7 +614,7 @@ python validate_dataset.py my_dataset.json
 
 # Logi wszystkich podow
 kubectl -n llm-training logs -l app=llama-webui --tail=100
-kubectl -n llm-training logs -l app=vllm-inference --tail=100
+kubectl -n llm-training logs -l app=llm-inference --tail=100
 
 # Eventy w namespace
 kubectl -n llm-training get events --sort-by='.lastTimestamp'
@@ -709,7 +708,7 @@ alias llm-status='./scripts/status.sh'
 
 # Szybki dostep
 alias llm-webui='kubectl -n llm-training port-forward svc/llama-webui 7860:7860'
-alias llm-api='kubectl -n llm-training port-forward svc/vllm-inference 8000:8000'
+alias llm-api='kubectl -n llm-training port-forward svc/llm-inference 8000:8000'
 ```
 
 ---

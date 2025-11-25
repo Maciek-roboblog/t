@@ -1,5 +1,20 @@
-# Job do treningu - uruchamiany ręcznie lub przez Jenkins/Airflow
+# Job do treningu - uruchamiany ręcznie lub przez CI/CD
+#
+# ZALEŻNOŚCI:
+# - MLflow (Secret: mlflow-config)
+# - NFS Storage (PVC: llama-storage)
+# - GPU Node (nvidia.com/gpu)
+#
+# WEJŚCIE:
+# - Model bazowy: $BASE_MODEL_PATH (z PVC)
+# - Dataset: $DATASET_PATH (z PVC)
+#
+# WYJŚCIE:
+# - LoRA adapter: $LORA_OUTPUT_PATH (do PVC)
+# - Metryki: MLflow
+#
 # Użycie: kubectl apply -f 06-training-job.yaml
+#
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -9,74 +24,86 @@ metadata:
     app: llama-train
 spec:
   backoffLimit: 0
-  ttlSecondsAfterFinished: 86400  # Usuń job po 24h
+  ttlSecondsAfterFinished: 86400
   template:
     metadata:
       labels:
         app: llama-train
     spec:
       restartPolicy: Never
+
+      # GPU Node Selector
+      nodeSelector:
+        nvidia.com/gpu: "true"
+      tolerations:
+      - key: "nvidia.com/gpu"
+        operator: "Exists"
+        effect: "NoSchedule"
+
       containers:
       - name: trainer
-        # ZMIEŃ na swój registry
         image: eu.gcr.io/PROJECT_ID/llama-factory-train:latest
         command: ["/bin/bash", "-c"]
         args:
         - |
-          echo "=== Start treningu ==="
-          echo "MLFlow: $MLFLOW_TRACKING_URI"
+          echo "=== LLaMA-Factory Training ==="
+          echo "Model bazowy: ${BASE_MODEL_PATH}"
+          echo "Output LoRA: ${LORA_OUTPUT_PATH}"
+          echo "MLflow: ${MLFLOW_TRACKING_URI}"
+
+          # Generuj config treningu z env vars
+          cat > /tmp/train.yaml << EOF
+          model_name_or_path: ${BASE_MODEL_PATH}
+          stage: sft
+          finetuning_type: ${FINETUNING_TYPE}
+          lora_rank: ${LORA_RANK}
+          lora_alpha: ${LORA_ALPHA}
+          template: ${TEMPLATE}
+          cutoff_len: ${CUTOFF_LEN}
+          dataset_dir: ${DATASET_PATH}
+          dataset: train_data
+          output_dir: ${LORA_OUTPUT_PATH}
+          per_device_train_batch_size: ${BATCH_SIZE}
+          gradient_accumulation_steps: ${GRADIENT_ACCUMULATION}
+          learning_rate: ${LEARNING_RATE}
+          num_train_epochs: ${NUM_EPOCHS}
+          fp16: true
+          report_to: mlflow
+          EOF
 
           # Uruchom trening
-          llamafactory-cli train /config/train.yaml
+          llamafactory-cli train /tmp/train.yaml
 
           echo "=== Trening zakończony ==="
+          ls -la ${LORA_OUTPUT_PATH}/
 
-          # Opcjonalnie: rejestracja w MLFlow
-          python -c "
-          import mlflow
-          import os
-          mlflow.set_tracking_uri(os.environ['MLFLOW_TRACKING_URI'])
-          mlflow.set_experiment('llama-finetune')
-          with mlflow.start_run(run_name='lora-model'):
-              mlflow.log_artifacts('/output/lora-model', 'model')
-              print('Model zarejestrowany w MLFlow')
-          "
+        # Konfiguracja z ConfigMap i Secret
+        envFrom:
+        - configMapRef:
+            name: llm-config
         env:
         - name: MLFLOW_TRACKING_URI
           valueFrom:
             secretKeyRef:
               name: mlflow-config
               key: MLFLOW_TRACKING_URI
+
+        # Storage
         volumeMounts:
         - name: storage
-          mountPath: /models
-          subPath: models
-        - name: storage
-          mountPath: /output
-          subPath: output
-        - name: storage
-          mountPath: /data
-          subPath: data
-        - name: config
-          mountPath: /config
+          mountPath: /storage
+
         resources:
           requests:
             cpu: "4"
-            memory: "16Gi"
+            memory: "32Gi"
             nvidia.com/gpu: "1"
           limits:
             cpu: "8"
-            memory: "32Gi"
+            memory: "64Gi"
             nvidia.com/gpu: "1"
-      # Toleracja dla GPU nodes
-      tolerations:
-      - key: "nvidia.com/gpu"
-        operator: "Exists"
-        effect: "NoSchedule"
+
       volumes:
       - name: storage
         persistentVolumeClaim:
           claimName: llama-storage
-      - name: config
-        configMap:
-          name: train-config

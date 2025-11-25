@@ -1,6 +1,6 @@
 #!/bin/bash
 # Czyszczenie zasobów
-# Użycie: ./cleanup.sh [all|jobs|inference]
+# Użycie: ./cleanup.sh [all|jobs]
 
 set -e
 
@@ -26,14 +26,11 @@ case "$ACTION" in
         kubectl -n llm-training delete jobs --field-selector status.failed=1 2>/dev/null || true
         echo "Gotowe"
         ;;
-    inference)
-        echo "Usuwam vLLM inference..."
-        kubectl -n llm-training delete deployment vllm-inference 2>/dev/null || true
-        kubectl -n llm-training delete svc vllm-inference 2>/dev/null || true
-        echo "Gotowe"
-        ;;
     *)
-        echo "Użycie: $0 [all|jobs|inference]"
+        echo "Użycie: $0 [all|jobs]"
+        echo ""
+        echo "  all  - usuń cały namespace llm-training"
+        echo "  jobs - usuń zakończone joby"
         exit 1
         ;;
 esac

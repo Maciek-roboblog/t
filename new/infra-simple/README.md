@@ -1,39 +1,77 @@
-# LLaMA-Factory - Proste wdrożenie
+# LLaMA-Factory - Kubernetes Deployment
 
-Minimalna konfiguracja do wdrożenia LLaMA-Factory na istniejącym klastrze Kubernetes.
+Konfiguracja Kubernetes dla LLaMA-Factory - platformy do fine-tuningu modeli LLM.
+
+## Architektura
+
+System korzysta z **zewnętrznych usług** (MLflow, NFS Storage) i jest **idempotentny** - LLaMA-Factory odpowiada tylko za trening i inference.
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                 ZEWNĘTRZNE USŁUGI (już istnieją)               │
+│   ┌──────────────┐              ┌──────────────────────────┐   │
+│   │    MLflow    │              │      NFS Storage         │   │
+│   │   (metryki)  │              │  /storage/models/base    │   │
+│   └──────────────┘              │  /storage/models/merged  │   │
+│                                 │  /storage/output/lora    │   │
+│                                 │  /storage/data           │   │
+│                                 └──────────────────────────┘   │
+└────────────────────────────────────────────────────────────────┘
+                    │                         │
+                    ▼                         ▼
+┌────────────────────────────────────────────────────────────────┐
+│                KUBERNETES (GPU Nodes)                          │
+│                                                                 │
+│   ┌─────────────────┐    ┌─────────────────────────────────┐  │
+│   │  llama-factory  │    │           Jobs (GPU)            │  │
+│   │     -train      │    │  ┌──────────┐  ┌──────────┐    │  │
+│   │   (WebUI)       │    │  │ Training │  │  Merge   │    │  │
+│   └─────────────────┘    │  │   Job    │  │   Job    │    │  │
+│                          │  └──────────┘  └──────────┘    │  │
+│   ┌─────────────────┐    └─────────────────────────────────┘  │
+│   │  llama-factory  │                                         │
+│   │     -api        │                                         │
+│   │   (vLLM)        │                                         │
+│   └─────────────────┘                                         │
+└────────────────────────────────────────────────────────────────┘
+```
+
+**Diagramy PlantUML:** `docs/diagrams/`
 
 ## Wymagania
 
-- Klaster Kubernetes z GPU (NVIDIA)
-- `kubectl` skonfigurowany
-- `docker` do budowania obrazów
-- Istniejący MLFlow (opcjonalnie)
-- GCR/Artifact Registry do obrazów
+- Klaster Kubernetes z **GPU nodes** (NVIDIA)
+- **NFS Storage** (ReadWriteMany) z modelami i danymi
+- **MLflow** (opcjonalnie, do śledzenia metryk)
+- `kubectl`, `docker`, GCR/Artifact Registry
 
 ## Struktura
 
 ```
 infra-simple/
 ├── docker/
-│   ├── Dockerfile.train     # Obraz do treningu + WebUI
-│   └── Dockerfile.api       # Obraz do inference (vLLM)
+│   ├── Dockerfile.train     # Trening + WebUI + Merge + MLflow
+│   └── Dockerfile.api       # vLLM inference (minimalny)
 ├── k8s/
-│   ├── 01-namespace.yaml    # Namespace
-│   ├── 02-secrets.yaml      # MLFlow config, HF token
-│   ├── 03-pvc.yaml          # Storage na modele
-│   ├── 04-configmap.yaml    # Konfiguracja treningu
-│   ├── 05-llama-webui.yaml  # WebUI deployment
-│   ├── 06-training-job.yaml # Job treningowy
-│   ├── 07-vllm-inference.yaml # vLLM inference
-│   ├── 08-download-model-job.yaml # Pobranie modelu
-│   └── 09-merge-model-job.yaml    # Merge LoRA
+│   ├── 01-namespace.yaml    # Namespace: llm-training
+│   ├── 02-secrets.yaml      # MLflow URI
+│   ├── 03-pvc.yaml          # NFS Storage (ReadWriteMany)
+│   ├── 04-configmap.yaml    # Unified config (ścieżki, parametry)
+│   ├── 05-llama-webui.yaml  # WebUI Deployment (GPU)
+│   ├── 06-training-job.yaml # Training Job (GPU)
+│   ├── 07-vllm-inference.yaml # vLLM Deployment (GPU)
+│   └── 09-merge-model-job.yaml # Merge LoRA Job (GPU)
 ├── scripts/
-│   ├── build.sh             # Budowa obrazów
-│   ├── deploy.sh            # Wdrożenie
+│   ├── build.sh             # Budowa 2 obrazów Docker
+│   ├── deploy.sh            # Wdrożenie na K8s
 │   ├── train.sh             # Uruchomienie treningu
 │   ├── ui.sh                # Port-forward do UI
 │   ├── status.sh            # Status wdrożenia
 │   └── cleanup.sh           # Czyszczenie
+├── docs/
+│   ├── diagrams/            # PlantUML diagramy
+│   ├── DOKUMENTACJA.md      # Pełna dokumentacja
+│   └── ...                  # Dodatkowe docs
 └── README.md
 ```
 
@@ -42,85 +80,80 @@ infra-simple/
 ### 1. Ustaw zmienne
 
 ```bash
-export PROJECT_ID="twoj-projekt-gcp"
+export PROJECT_ID="your-gcp-project"
 ```
 
 ### 2. Zbuduj obrazy
 
 ```bash
-cd scripts
-./build.sh v1.0.0
+./scripts/build.sh v1.0.0
 ```
 
-### 3. Skonfiguruj secrets
+Buduje 2 obrazy:
+- `llama-factory-train` - trening, merge, WebUI, MLflow
+- `llama-factory-api` - vLLM inference (minimalny)
+
+### 3. Skonfiguruj MLflow
 
 Edytuj `k8s/02-secrets.yaml`:
-- `MLFLOW_TRACKING_URI` - adres twojego MLFlow
-- `token` - token HuggingFace (opcjonalnie)
+
+```yaml
+MLFLOW_TRACKING_URI: "http://mlflow.mlflow.svc.cluster.local:5000"
+```
 
 ### 4. Wdróż
 
 ```bash
-./deploy.sh all
+./scripts/deploy.sh all
 ```
 
 ### 5. Otwórz WebUI
 
 ```bash
-./ui.sh webui
+./scripts/ui.sh webui
 # -> http://localhost:7860
 ```
 
 ## Workflow
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     WORKFLOW TRENINGU                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  1. PRZYGOTOWANIE                                           │
-│     └─> ./deploy.sh base                                    │
-│     └─> Pobierz model: kubectl apply -f 08-download-...     │
-│     └─> Wgraj dataset do PVC                                │
-│                                                              │
-│  2. FINE-TUNING (wybierz jeden sposób)                      │
-│     ├─> WebUI: ./ui.sh webui -> konfiguruj w przeglądarce  │
-│     └─> CLI:   ./train.sh                                   │
-│                                                              │
-│  3. MERGE (po treningu LoRA)                                │
-│     └─> kubectl apply -f 09-merge-model-job.yaml            │
-│                                                              │
-│  4. INFERENCE                                                │
-│     └─> ./deploy.sh inference                               │
-│     └─> ./ui.sh inference -> http://localhost:8000          │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+1. PRZYGOTOWANIE
+   - Modele bazowe już są na NFS: /storage/models/base-model
+   - Datasety już są na NFS: /storage/data/
+   - ./deploy.sh base
+
+2. TRENING (wybierz jeden sposób)
+   - WebUI: ./ui.sh webui -> konfiguruj w przeglądarce
+   - CLI: ./train.sh
+
+3. MERGE LoRA (po treningu)
+   - kubectl apply -f k8s/09-merge-model-job.yaml
+
+4. INFERENCE
+   - ./deploy.sh inference
+   - ./ui.sh inference -> http://localhost:8000
 ```
 
 ## Komendy
 
 | Komenda | Opis |
 |---------|------|
-| `./build.sh [tag]` | Buduj obrazy Docker |
-| `./deploy.sh all` | Wdróż wszystko |
-| `./deploy.sh base` | Tylko namespace, PVC, secrets |
-| `./deploy.sh webui` | Tylko WebUI |
-| `./deploy.sh inference` | Tylko vLLM |
-| `./train.sh` | Uruchom job treningowy |
-| `./ui.sh webui` | Port-forward do WebUI |
-| `./ui.sh inference` | Port-forward do vLLM API |
-| `./status.sh` | Pokaż status |
-| `./cleanup.sh jobs` | Usuń zakończone joby |
+| `./scripts/build.sh [tag]` | Buduj 2 obrazy Docker |
+| `./scripts/deploy.sh all` | Wdróż wszystko (base + webui) |
+| `./scripts/deploy.sh base` | Tylko namespace, secrets, pvc, config |
+| `./scripts/deploy.sh webui` | Tylko WebUI |
+| `./scripts/deploy.sh inference` | Tylko vLLM |
+| `./scripts/train.sh` | Uruchom job treningowy |
+| `./scripts/ui.sh webui` | Port-forward do WebUI (7860) |
+| `./scripts/ui.sh inference` | Port-forward do vLLM API (8000) |
+| `./scripts/status.sh` | Pokaż status |
+| `./scripts/cleanup.sh jobs` | Usuń zakończone joby |
 
 ## Testowanie API
 
-Po wdrożeniu inference:
-
 ```bash
-# Port-forward
-./ui.sh inference &
+./scripts/ui.sh inference &
 
-# Test
 curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
@@ -130,128 +163,40 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
-## Konfiguracja treningu
+## Konfiguracja
 
-Edytuj `k8s/04-configmap.yaml` lub użyj WebUI:
+Wszystkie parametry w jednym `k8s/04-configmap.yaml`:
 
-```yaml
-# Główne parametry
-model_name_or_path: /models/base-model  # Ścieżka do modelu
-finetuning_type: lora                    # lora, qlora, full
-lora_rank: 8                             # Rank LoRA (8-64)
+| Parametr | Opis |
+|----------|------|
+| `BASE_MODEL_PATH` | Ścieżka do modelu bazowego na NFS |
+| `LORA_OUTPUT_PATH` | Gdzie zapisać adapter LoRA |
+| `MERGED_MODEL_PATH` | Gdzie zapisać zmergowany model |
+| `DATASET_PATH` | Ścieżka do datasetów |
+| `FINETUNING_TYPE` | lora / qlora / full |
+| `LORA_RANK` | Rank LoRA (8-64) |
+| `SERVED_MODEL_NAME` | Nazwa modelu w vLLM API |
 
-# Dataset
-dataset: my_dataset                       # Nazwa datasetu
-template: llama3                          # Template promptów
+## Docker Images
 
-# Training
-per_device_train_batch_size: 1
-num_train_epochs: 3
-learning_rate: 1.0e-4
-```
+| Obraz | Zawartość | NIE zawiera |
+|-------|-----------|-------------|
+| `llama-factory-train` | LLaMA-Factory, MLflow, peft, datasets | vLLM |
+| `llama-factory-api` | vLLM (minimalny) | MLflow, LLaMA-Factory |
 
-## Wgrywanie danych
-
-Dataset musi być w formacie JSON:
-
-```json
-[
-  {
-    "instruction": "Pytanie",
-    "input": "",
-    "output": "Odpowiedź"
-  }
-]
-```
-
-Wgraj do PVC:
-
-```bash
-# Utwórz pod pomocniczy
-kubectl -n llm-training run uploader --image=busybox --restart=Never \
-  --overrides='{"spec":{"containers":[{"name":"uploader","image":"busybox","command":["sleep","3600"],"volumeMounts":[{"name":"data","mountPath":"/data"}]}],"volumes":[{"name":"data","persistentVolumeClaim":{"claimName":"llama-storage"}}]}}'
-
-# Skopiuj dane
-kubectl -n llm-training cp ./my_dataset.json uploader:/data/data/my_dataset.json
-
-# Usuń pod
-kubectl -n llm-training delete pod uploader
-```
-
-## Troubleshooting
-
-### Pod nie startuje (GPU)
-
-```bash
-# Sprawdź eventy
-kubectl -n llm-training describe pod <nazwa>
-
-# Sprawdź GPU nodes
-kubectl get nodes -l nvidia.com/gpu
-```
-
-### OOM (Out of Memory)
-
-Zmniejsz w configmap:
-- `per_device_train_batch_size: 1`
-- `cutoff_len: 1024`
-- Lub użyj `finetuning_type: qlora`
-
-### vLLM nie startuje
-
-```bash
-# Logi
-kubectl -n llm-training logs deploy/vllm-inference
-
-# Sprawdź czy model istnieje
-kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /models/
-```
-
-## Integracja z Jenkins
-
-Przykładowy pipeline:
-
-```groovy
-pipeline {
-    agent any
-    environment {
-        PROJECT_ID = 'your-project'
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh './scripts/build.sh ${BUILD_NUMBER}'
-            }
-        }
-        stage('Train') {
-            steps {
-                sh './scripts/train.sh train-${BUILD_NUMBER}'
-                sh 'kubectl -n llm-training wait --for=condition=complete job/train-${BUILD_NUMBER} --timeout=3600s'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh './scripts/deploy.sh inference'
-            }
-        }
-    }
-}
-```
+Base: **Debian 11 + Python 3.10.14**, PyTorch 2.1.2 + CUDA 11.8
 
 ## Dokumentacja
 
-W folderze `docs/` znajduje sie szczegolowa dokumentacja:
-
 | Dokument | Opis |
 |----------|------|
-| [DOKUMENTACJA.md](docs/DOKUMENTACJA.md) | Kompletny przewodnik wdrozeniowy |
-| [PARAMETRY-LORA.md](docs/PARAMETRY-LORA.md) | Szczegoly konfiguracji LoRA/QLoRA |
-| [FORMATY-DANYCH.md](docs/FORMATY-DANYCH.md) | Przygotowanie datasetow (Alpaca, ShareGPT) |
-| [VLLM-KONFIGURACJA.md](docs/VLLM-KONFIGURACJA.md) | Optymalizacja vLLM inference |
-| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Rozwiazywanie problemow |
+| [DOKUMENTACJA.md](docs/DOKUMENTACJA.md) | Pełny przewodnik |
+| [PARAMETRY-LORA.md](docs/PARAMETRY-LORA.md) | Konfiguracja LoRA/QLoRA |
+| [FORMATY-DANYCH.md](docs/FORMATY-DANYCH.md) | Formaty datasetów |
+| [VLLM-KONFIGURACJA.md](docs/VLLM-KONFIGURACJA.md) | Optymalizacja vLLM |
+| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Rozwiązywanie problemów |
 
-## Zrodla
+## Źródła
 
 - [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
-- [vLLM Kubernetes](https://docs.vllm.ai/en/latest/deployment/k8s/)
-- [LLaMA-Factory K8s PR](https://github.com/hiyouga/LLaMA-Factory/pull/8861)
+- [vLLM](https://docs.vllm.ai/)

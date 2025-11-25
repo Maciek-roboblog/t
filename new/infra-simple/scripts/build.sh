@@ -1,6 +1,9 @@
 #!/bin/bash
-# Budowa obrazów Docker
+# Budowa obrazu Docker
 # Użycie: ./build.sh [tag]
+#
+# Buduje 1 obraz:
+# - llama-factory-train: trening + merge + WebUI + MLflow
 
 set -e
 
@@ -18,43 +21,38 @@ fi
 REGISTRY="eu.gcr.io/${PROJECT_ID}"
 
 echo "=========================================="
-echo "  Budowa obrazów LLaMA-Factory"
+echo "  Budowa obrazu LLaMA-Factory"
 echo "=========================================="
 echo "Registry: ${REGISTRY}"
 echo "Tag: ${TAG}"
 echo ""
+echo "Obraz:"
+echo "  - llama-factory-train (trening + merge + WebUI)"
+echo ""
+echo "UWAGA: vLLM inference używa zewnętrznego serwera"
+echo ""
 
 # Autoryzacja (jeśli GCR)
-echo "[1/3] Autoryzacja Docker..."
+echo "[1/2] Autoryzacja Docker..."
 gcloud auth configure-docker eu.gcr.io --quiet 2>/dev/null || true
 
 # Budowa
-echo "[2/3] Budowanie obrazów..."
+echo "[2/2] Budowanie i push..."
 echo ""
 
-echo ">>> llama-factory-train"
+echo ">>> llama-factory-train (trening + merge + WebUI + MLflow)"
 docker build \
     -f "${DOCKER_DIR}/Dockerfile.train" \
     -t "${REGISTRY}/llama-factory-train:${TAG}" \
     "${DOCKER_DIR}"
 
-echo ""
-echo ">>> llama-factory-api"
-docker build \
-    -f "${DOCKER_DIR}/Dockerfile.api" \
-    -t "${REGISTRY}/llama-factory-api:${TAG}" \
-    "${DOCKER_DIR}"
-
-# Push
-echo ""
-echo "[3/3] Push do registry..."
 docker push "${REGISTRY}/llama-factory-train:${TAG}"
-docker push "${REGISTRY}/llama-factory-api:${TAG}"
 
 echo ""
 echo "=========================================="
 echo "  GOTOWE!"
 echo "=========================================="
-echo "Obrazy:"
-echo "  ${REGISTRY}/llama-factory-train:${TAG}"
-echo "  ${REGISTRY}/llama-factory-api:${TAG}"
+echo "Obraz: ${REGISTRY}/llama-factory-train:${TAG}"
+echo ""
+echo "Inference: użyj zewnętrznego vLLM serwera"
+echo "  vLLM czyta modele z NFS: /storage/models/merged-model"

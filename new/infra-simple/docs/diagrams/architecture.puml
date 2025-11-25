@@ -1,0 +1,78 @@
+@startuml architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLaMA-Factory - Architektura Systemu
+
+' Zewnętrzne usługi
+cloud "Zewnętrzne Usługi (już istnieją)" as external {
+    database "MLflow" as mlflow {
+        [Tracking Server]
+        [Model Registry]
+    }
+    rectangle "vLLM Server" as vllm_ext #LightGreen {
+        [OpenAI API\nport: 8000]
+    }
+}
+
+' Storage
+storage "NFS Storage\n(ReadWriteMany)" as nfs {
+    folder "/storage/models/base-model" as base_model
+    folder "/storage/models/merged-model" as merged_model
+    folder "/storage/output/lora-adapter" as lora
+    folder "/storage/data" as data
+}
+
+' Kubernetes Cluster
+rectangle "Kubernetes Cluster (GPU)" {
+
+    ' Namespace
+    rectangle "Namespace: llm-training" {
+
+        ' ConfigMap i Secret
+        rectangle "Konfiguracja" {
+            file "ConfigMap\nllm-config" as config
+            file "Secret\nmlflow-config" as secret
+        }
+
+        ' Training service
+        rectangle "llama-factory-train" as train_svc #LightBlue {
+            [WebUI\nport: 7860] as webui
+            [Training Job] as train_job
+            [Merge Job] as merge_job
+        }
+    }
+}
+
+' Relacje - Config
+secret --> mlflow : MLFLOW_TRACKING_URI
+config --> train_svc
+
+' Relacje - Training
+base_model --> train_job : odczyt
+data --> train_job : dataset
+train_job --> lora : zapis adaptera
+train_job --> mlflow : metryki
+
+' Relacje - Merge
+base_model --> merge_job : odczyt
+lora --> merge_job : odczyt
+merge_job --> merged_model : zapis
+
+' Relacje - Inference (zewnętrzny vLLM)
+merged_model --> vllm_ext : odczyt modelu
+
+note right of vllm_ext
+  vLLM jest ZEWNĘTRZNĄ usługą
+  Nie zarządzamy nim w tym repo
+  Czyta modele z NFS
+end note
+
+note bottom of train_svc
+  LLaMA-Factory odpowiada za:
+  - Trening (LoRA/QLoRA/Full)
+  - Merge adaptera z modelem
+  - WebUI do konfiguracji
+end note
+
+@enduml

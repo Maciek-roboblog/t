@@ -1,6 +1,8 @@
 #!/bin/bash
 # Wdrożenie LLaMA-Factory na Kubernetes
-# Użycie: ./deploy.sh [all|base|webui|inference]
+# Użycie: ./deploy.sh [all|base|webui]
+#
+# UWAGA: vLLM inference jest ZEWNĘTRZNĄ usługą - nie wdrażamy go tutaj
 
 set -e
 
@@ -37,10 +39,13 @@ case "$ACTION" in
         kubectl apply -f "$TEMP_DIR/04-configmap.yaml"
         kubectl apply -f "$TEMP_DIR/05-llama-webui.yaml"
         echo ""
-        echo "WebUI wdrożone. Inference wdróż osobno po treningu."
+        echo "WebUI wdrożone."
+        echo ""
+        echo "UWAGA: Inference przez zewnętrzny vLLM serwer"
+        echo "  Po treningu/merge model będzie w: /storage/models/merged-model"
         ;;
     base)
-        echo "Wdrażam tylko bazę (namespace, secrets, pvc)..."
+        echo "Wdrażam tylko bazę (namespace, secrets, pvc, config)..."
         kubectl apply -f "$TEMP_DIR/01-namespace.yaml"
         kubectl apply -f "$TEMP_DIR/02-secrets.yaml"
         kubectl apply -f "$TEMP_DIR/03-pvc.yaml"
@@ -48,14 +53,17 @@ case "$ACTION" in
         ;;
     webui)
         echo "Wdrażam WebUI..."
+        kubectl apply -f "$TEMP_DIR/04-configmap.yaml"
         kubectl apply -f "$TEMP_DIR/05-llama-webui.yaml"
         ;;
-    inference)
-        echo "Wdrażam vLLM inference..."
-        kubectl apply -f "$TEMP_DIR/07-vllm-inference.yaml"
-        ;;
     *)
-        echo "Użycie: $0 [all|base|webui|inference]"
+        echo "Użycie: $0 [all|base|webui]"
+        echo ""
+        echo "  all   - namespace, secrets, pvc, config, webui"
+        echo "  base  - namespace, secrets, pvc, config"
+        echo "  webui - tylko WebUI deployment"
+        echo ""
+        echo "UWAGA: vLLM inference jest zewnętrzną usługą"
         exit 1
         ;;
 esac

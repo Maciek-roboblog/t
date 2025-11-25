@@ -1,6 +1,8 @@
 #!/bin/bash
 # Port-forward do UI
-# Użycie: ./ui.sh [webui|inference|mlflow]
+# Użycie: ./ui.sh [webui|mlflow]
+#
+# UWAGA: vLLM inference jest zewnętrzną usługą - nie zarządzamy nim tutaj
 
 set -e
 
@@ -17,12 +19,6 @@ case "$SERVICE" in
         echo ""
         kubectl -n llm-training port-forward svc/llama-webui 7860:7860
         ;;
-    inference)
-        echo "vLLM API -> http://localhost:8000"
-        echo "Naciśnij Ctrl+C aby zakończyć"
-        echo ""
-        kubectl -n llm-training port-forward svc/vllm-inference 8000:8000
-        ;;
     mlflow)
         echo "MLFlow -> http://localhost:5000"
         echo "Naciśnij Ctrl+C aby zakończyć"
@@ -33,7 +29,12 @@ case "$SERVICE" in
         echo "BŁĄD: Nie znaleziono MLFlow service"
         ;;
     *)
-        echo "Użycie: $0 [webui|inference|mlflow]"
+        echo "Użycie: $0 [webui|mlflow]"
+        echo ""
+        echo "  webui  - LLaMA-Factory WebUI (port 7860)"
+        echo "  mlflow - MLFlow UI (port 5000)"
+        echo ""
+        echo "UWAGA: vLLM inference jest zewnętrzną usługą"
         exit 1
         ;;
 esac

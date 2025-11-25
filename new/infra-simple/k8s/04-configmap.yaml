@@ -1,41 +1,56 @@
-# ConfigMap z przykładową konfiguracją treningu
+# ConfigMap - konfiguracja ścieżek i parametrów
+#
+# ŚCIEŻKI MODELI:
+# Wszystkie modele są NASZE WŁASNE (nie z HuggingFace)
+# Przechowywane w PVC: llama-storage (NFS ReadWriteMany)
+#
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: train-config
+  name: llm-config
   namespace: llm-training
 data:
-  # Przykładowa konfiguracja treningu LoRA
-  train.yaml: |
-    ### Model
-    model_name_or_path: /models/base-model
+  # ==========================================
+  # ŚCIEŻKI W PVC (storage)
+  # ==========================================
 
-    ### Method
-    stage: sft
-    finetuning_type: lora
-    lora_rank: 8
-    lora_alpha: 16
-    lora_dropout: 0.1
+  # Model bazowy (wgrany wcześniej do PVC)
+  BASE_MODEL_PATH: "/storage/models/base-model"
 
-    ### Dataset
-    dataset: my_dataset
-    template: llama3
-    cutoff_len: 2048
+  # Katalog na adaptery LoRA (output treningu)
+  LORA_OUTPUT_PATH: "/storage/output/lora-adapter"
 
-    ### Output
-    output_dir: /output/lora-model
-    logging_steps: 10
-    save_steps: 500
-    save_total_limit: 3
+  # Model po merge (input dla vLLM)
+  MERGED_MODEL_PATH: "/storage/models/merged-model"
 
-    ### Training
-    per_device_train_batch_size: 1
-    gradient_accumulation_steps: 8
-    learning_rate: 1.0e-4
-    num_train_epochs: 3
-    lr_scheduler_type: cosine
-    warmup_ratio: 0.1
-    fp16: true
+  # Katalog na datasety
+  DATASET_PATH: "/storage/data"
 
-    ### MLFlow
-    report_to: mlflow
+  # ==========================================
+  # KONFIGURACJA TRENINGU (LLaMA-Factory)
+  # ==========================================
+
+  FINETUNING_TYPE: "lora"
+  LORA_RANK: "8"
+  LORA_ALPHA: "16"
+  TEMPLATE: "llama3"
+  CUTOFF_LEN: "2048"
+
+  # Hiperparametry
+  BATCH_SIZE: "1"
+  GRADIENT_ACCUMULATION: "8"
+  LEARNING_RATE: "1.0e-4"
+  NUM_EPOCHS: "3"
+
+  # ==========================================
+  # KONFIGURACJA INFERENCE (vLLM)
+  # ==========================================
+
+  # Nazwa modelu w API
+  SERVED_MODEL_NAME: "llama-finetuned"
+
+  # Maksymalna długość kontekstu
+  MAX_MODEL_LEN: "4096"
+
+  # Tensor parallelism (1 = single GPU)
+  TENSOR_PARALLEL_SIZE: "1"

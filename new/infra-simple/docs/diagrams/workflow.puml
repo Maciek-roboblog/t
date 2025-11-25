@@ -1,0 +1,73 @@
+@startuml workflow
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLaMA-Factory - Workflow Treningu
+
+' Aktorzy
+actor "ML Engineer" as user
+
+' Zewnętrzne usługi
+cloud "Zewnętrzne Usługi" {
+    database "MLflow" as mlflow
+    storage "NFS Storage" as nfs
+    rectangle "vLLM Server\n(zewnętrzny)" as vllm #LightGreen
+}
+
+' Kubernetes
+rectangle "Kubernetes Cluster (GPU)" {
+
+    rectangle "1. Przygotowanie" as prep #LightYellow {
+        file "Model bazowy\n(już na NFS)" as base_model
+        file "Dataset\n(już na NFS)" as dataset
+        file "ConfigMap" as config
+    }
+
+    rectangle "2. Trening" as train_phase #LightBlue {
+        [WebUI\nport: 7860] as webui
+        [Training Job\n(GPU)] as train_job
+    }
+
+    rectangle "3. Merge LoRA" as merge_phase #LightCoral {
+        [Merge Job\n(GPU)] as merge_job
+    }
+}
+
+' Flow
+user --> config : 1. konfiguruje
+user --> webui : 2. uruchamia trening\n(lub Job)
+
+base_model --> train_job : odczyt
+dataset --> train_job : odczyt
+config --> train_job : parametry
+train_job --> nfs : zapis\nLoRA adapter
+train_job --> mlflow : metryki
+
+nfs --> merge_job : model + LoRA
+merge_job --> nfs : merged model
+
+nfs --> vllm : 4. vLLM czyta model\n(zewnętrzna usługa)
+
+note right of prep
+  Modele i dane są już na NFS
+  NIE pobieramy z HuggingFace
+end note
+
+note right of train_phase
+  Trening przez WebUI lub Job
+  Wyniki logowane do MLflow
+  LoRA adaptery na NFS
+end note
+
+note right of merge_phase
+  Merge LoRA z modelem bazowym
+  Wynik: pełny model na NFS
+end note
+
+note right of vllm
+  vLLM jest zewnętrzną usługą
+  Nie wdrażamy go z tego repo
+  Ma dostęp do tego samego NFS
+end note
+
+@enduml

@@ -1,0 +1,83 @@
+@startuml dependencies
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLaMA-Factory - Zależności Usług
+
+' Definicja komponentów
+package "Zewnętrzne Usługi (już istnieją)" as external {
+    database "MLflow\nTracking Server" as mlflow #LightGray
+    storage "NFS Storage\n(ReadWriteMany)" as nfs #LightGray
+    cloud "GCR\neu.gcr.io/PROJECT_ID" as gcr #LightGray
+    rectangle "vLLM Server\n(inference)" as vllm_ext #LightGreen
+}
+
+package "Docker Images" as images {
+    artifact "llama-factory-train\n(Debian 11 + Python 3.10.14)" as img_train #LightBlue {
+        component "LLaMA-Factory 0.9.3"
+        component "PyTorch 2.1.2+cu118"
+        component "MLflow 2.10.0"
+        component "peft, datasets"
+    }
+}
+
+package "Kubernetes Resources" as k8s {
+    rectangle "Namespace: llm-training" {
+
+        file "Secret\nmlflow-config" as secret
+        file "ConfigMap\nllm-config" as configmap
+        file "PVC\nllama-storage" as pvc
+
+        rectangle "Deployment\nllama-webui" as webui #LightBlue
+        rectangle "Job\ntraining-job" as train_job #LightBlue
+        rectangle "Job\nmerge-lora" as merge_job #LightBlue
+    }
+}
+
+' Zależności obrazów
+img_train --> gcr : push
+
+' Zależności K8s
+webui --> img_train : uses
+train_job --> img_train : uses
+merge_job --> img_train : uses
+
+' Storage
+webui --> pvc : mount /storage
+train_job --> pvc : mount /storage
+merge_job --> pvc : mount /storage
+pvc --> nfs : NFS backend
+
+' Config
+webui --> configmap : envFrom
+train_job --> configmap : envFrom
+merge_job --> configmap : envFrom
+
+' Secrets
+train_job --> secret : envFrom
+secret --> mlflow : MLFLOW_TRACKING_URI
+
+' vLLM (zewnętrzny)
+nfs --> vllm_ext : czyta modele\nz /storage/models/merged
+
+' Legenda
+legend right
+  |= Kolor |= Znaczenie |
+  | <#LightGray> | Zewnętrzna usługa |
+  | <#LightBlue> | LLaMA-Factory (trening) |
+  | <#LightGreen> | vLLM (zewnętrzny) |
+endlegend
+
+note bottom of vllm_ext
+  vLLM jest zewnętrzną usługą
+  NIE zarządzamy nim w tym repo
+
+  Opcje model registry:
+  - NFS (obecna)
+  - Object Storage (GCS/S3)
+  - MLflow Registry
+
+  Zobacz: docs/adr/001-model-registry.md
+end note
+
+@enduml
