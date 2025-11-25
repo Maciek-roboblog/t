@@ -124,3 +124,11 @@ JSON array with instruction/input/output:
 ```json
 [{"instruction": "Question", "input": "", "output": "Answer"}]
 ```
+
+### Usage Guide
+See **[PRZEWODNIK-UZYCIA.md](docs/PRZEWODNIK-UZYCIA.md)** for complete fine-tuning guide including:
+- Model sources (HuggingFace, local)
+- Dataset formats (Alpaca, ShareGPT)
+- WebUI vs CLI/YAML configuration
+- LoRA/QLoRA best practices
+- Merge and vLLM deployment

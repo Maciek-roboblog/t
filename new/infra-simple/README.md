@@ -177,8 +177,9 @@ Base: **Debian 11 + Python 3.10.14**, PyTorch 2.1.2 + CUDA 11.8
 
 | Dokument | Opis |
 |----------|------|
+| [PRZEWODNIK-UZYCIA.md](docs/PRZEWODNIK-UZYCIA.md) | **Kompletny przewodnik fine-tuningu** |
 | [ADR-001](docs/adr/001-model-registry.md) | Model Registry - NFS vs Object Storage vs MLflow |
-| [DOKUMENTACJA.md](docs/DOKUMENTACJA.md) | Pełny przewodnik |
+| [DOKUMENTACJA.md](docs/DOKUMENTACJA.md) | Dokumentacja wdrożeniowa |
 | [PARAMETRY-LORA.md](docs/PARAMETRY-LORA.md) | Konfiguracja LoRA/QLoRA |
 | [FORMATY-DANYCH.md](docs/FORMATY-DANYCH.md) | Formaty datasetów |
 | [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Rozwiązywanie problemów |

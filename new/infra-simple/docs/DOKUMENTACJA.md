@@ -342,6 +342,7 @@ kubectl -n llm-training run test --rm -it --image=curlimages/curl -- \
 
 ## Dodatkowa dokumentacja
 
+- **[PRZEWODNIK-UZYCIA.md](PRZEWODNIK-UZYCIA.md)** - Kompletny przewodnik fine-tuningu (modele, dane, WebUI, CLI)
 - [ADR-001: Model Registry](adr/001-model-registry.md) - NFS vs Object Storage vs MLflow
 - [PARAMETRY-LORA.md](PARAMETRY-LORA.md) - Szczegóły konfiguracji LoRA/QLoRA
 - [FORMATY-DANYCH.md](FORMATY-DANYCH.md) - Przygotowanie datasetów
