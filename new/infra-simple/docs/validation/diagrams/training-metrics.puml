@@ -1,0 +1,67 @@
+@startuml training-metrics
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Training & Validation Loss Patterns
+
+legend top
+  |= Pattern |= Diagnosis |= Action |
+  | train↓ val↓ | Normal training | Continue |
+  | train↓ val→ | Early overfitting | Consider early stop |
+  | train↓ val↑ | Overfitting | STOP, use earlier checkpoint |
+  | train→ val→ | Plateau | Change LR or finish |
+endlegend
+
+package "Normal Training" as normal {
+    card "Loss" as loss1
+    note right of loss1
+        Training Loss: ████████████▄▄▄▄▃▃▃▂▂▂▁▁
+        Val Loss:      ████████████▄▄▄▄▃▃▃▂▂▂▁▁
+
+        ✓ Both decreasing together
+        ✓ Gap remains small
+        → Continue training
+    end note
+}
+
+package "Overfitting" as overfit {
+    card "Loss" as loss2
+    note right of loss2
+        Training Loss: ████████▄▄▃▃▂▂▁▁▁▁▁▁▁▁
+        Val Loss:      ████████▄▄▄▄▄▄▅▅▆▆▇▇██
+
+        ✗ Training continues to decrease
+        ✗ Validation starts increasing
+        → STOP at divergence point
+    end note
+}
+
+package "Underfitting" as underfit {
+    card "Loss" as loss3
+    note right of loss3
+        Training Loss: ████████████████████████
+        Val Loss:      ████████████████████████
+
+        ✗ Neither loss decreasing
+        → Increase learning rate
+        → Increase model capacity (rank)
+    end note
+}
+
+package "Instability" as unstable {
+    card "Loss" as loss4
+    note right of loss4
+        Training Loss: █▄█▃█▄█▂█▃█▄█▂█▃█▄█▂█▃
+        Val Loss:      █▅█▄█▅█▃█▄█▅█▃█▄█▅█▃█▄
+
+        ✗ Oscillating values
+        → Decrease learning rate
+        → Try bf16 instead of fp16
+    end note
+}
+
+normal -[hidden]-> overfit
+overfit -[hidden]-> underfit
+underfit -[hidden]-> unstable
+
+@enduml

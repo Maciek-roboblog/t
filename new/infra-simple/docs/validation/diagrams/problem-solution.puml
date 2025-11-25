@@ -1,0 +1,68 @@
+@startuml problem-solution
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Why Validation Matters
+
+package "Without Validation" as without #LightCoral {
+
+    card "Training #1" as t1 {
+        card "Loss: ?" as l1
+        card "Params: ???" as p1
+    }
+
+    card "Training #2" as t2 {
+        card "Loss: ?" as l2
+        card "Params: ???" as p2
+    }
+
+    card "Training #3" as t3 {
+        card "Loss: ?" as l3
+        card "Params: ???" as p3
+    }
+
+    t1 -right-> t2 : "???"
+    t2 -right-> t3 : "???"
+
+    note bottom of without
+        ✗ Unknown which model is better
+        ✗ Cannot reproduce best result
+        ✗ No debugging capability
+        ✗ No audit for compliance
+    end note
+}
+
+package "With Validation" as with #LightGreen {
+
+    card "Training #1" as v1 {
+        card "Loss: 0.42" as vl1
+        card "LR: 1e-4, r=8" as vp1
+    }
+
+    card "Training #2" as v2 {
+        card "Loss: 0.38" as vl2
+        card "LR: 2e-4, r=16" as vp2
+    }
+
+    card "Training #3" as v3 {
+        card "Loss: 0.35 ⭐" as vl3
+        card "LR: 2e-4, r=32" as vp3
+    }
+
+    database "MLflow\nTracking" as mlflow
+
+    v1 --> mlflow
+    v2 --> mlflow
+    v3 --> mlflow
+
+    note bottom of with
+        ✓ Compare results between experiments
+        ✓ Full reproducibility
+        ✓ Model lineage tracking
+        ✓ Compliance & audit ready
+    end note
+}
+
+without -[hidden]down-> with
+
+@enduml

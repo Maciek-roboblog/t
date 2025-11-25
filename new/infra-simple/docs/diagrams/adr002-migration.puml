@@ -1,0 +1,35 @@
+@startuml adr002-migration
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-002: Plan Migracji do Wewnętrznego vLLM
+
+|Faza 1: Przygotowanie|
+start
+:Dodaj k8s/07-vllm-inference.yaml;
+:Zaktualizuj scripts/deploy.sh;
+:Zaktualizuj scripts/ui.sh;
+:Przetestuj na dev cluster;
+
+|Faza 2: Parallel Run|
+:Deploy wewnętrzny vLLM
+(nie eksponowany);
+:Porównaj odpowiedzi
+z zewnętrznym;
+:Zmierz latencję i throughput;
+:Monitoruj GPU utilization;
+
+|Faza 3: Cutover|
+:Przełącz ruch na
+wewnętrzny vLLM;
+:Zatrzymaj zewnętrzny
+(ale nie usuwaj);
+:Monitoruj przez 48h;
+
+|Faza 4: Cleanup|
+:Usuń zewnętrzną
+infrastrukturę vLLM;
+:Zaktualizuj dokumentację;
+stop
+
+@enduml

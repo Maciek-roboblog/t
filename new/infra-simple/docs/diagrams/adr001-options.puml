@@ -1,0 +1,49 @@
+@startuml adr001-options
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-001: Trzy opcje Model Registry
+
+rectangle "LLaMA-Factory" as llama #LightBlue
+
+package "Opcja 1: NFS/PVC" as opt1 {
+    storage "NFS\n/storage/models/merged\nReadWriteMany" as nfs #LightCoral
+}
+
+package "Opcja 2: Object Storage" as opt2 {
+    cloud "GCS/S3\ngs://models/" as gcs #LightYellow
+}
+
+package "Opcja 3: MLflow" as opt3 {
+    database "MLflow Registry\nmodels:/merged/Production" as mlflow #LightGreen
+}
+
+rectangle "vLLM" as vllm #LightGray
+
+llama --> nfs
+llama --> gcs
+llama --> mlflow
+
+nfs --> vllm
+gcs --> vllm
+mlflow --> vllm
+
+note right of nfs
+  + Proste, natychmiastowe
+  - Brak wersjonowania
+  - Tylko lokalny klaster
+end note
+
+note right of gcs
+  + Multi-cluster
+  + Object versioning
+  - Latencja download
+end note
+
+note right of mlflow
+  + Pełne wersjonowanie
+  + Audyt, lineage
+  - Złożoność setup
+end note
+
+@enduml

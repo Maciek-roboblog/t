@@ -1,0 +1,31 @@
+@startuml adr001-hybrid
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Architektura Hybrydowa (Production)
+
+rectangle "PRODUCTION" {
+
+    rectangle "LLaMA-Factory" as llama #LightBlue
+
+    storage "NFS (temp)\n/storage/" as nfs #LightGray
+
+    database "MLflow Registry\n(wersjonowanie)\n+ GCS artifacts" as mlflow #LightYellow
+
+    package "vLLM Cluster" as vllm_cluster #LightGreen {
+        node "Node 1\nNVMe" as n1
+        node "Node 2\nNVMe" as n2
+        node "Node 3\nNVMe" as n3
+    }
+
+    llama -down-> nfs : "1. Train + Merge"
+    nfs -right-> mlflow : "2. Register"
+    mlflow -down-> vllm_cluster : "3. Promote to\nProduction"
+
+    note bottom of vllm_cluster
+        4. Download from MLflow/GCS
+        (cache locally on NVMe)
+    end note
+}
+
+@enduml

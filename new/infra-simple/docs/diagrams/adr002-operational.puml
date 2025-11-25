@@ -1,0 +1,37 @@
+@startuml adr002-operational
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-002: Operational Impact
+
+rectangle "DEPLOYMENT" as deploy {
+    rectangle "Zewnętrzny:\n2 zespoły, 2 CI/CD" as d1 #LightCoral
+    rectangle "Wewnętrzny:\n1 zespół, 1 CI/CD" as d2 #LightGreen
+}
+
+rectangle "MONITORING" as monitor {
+    rectangle "Zewnętrzny:\nOddzielne dashboardy" as m1 #LightCoral
+    rectangle "Wewnętrzny:\nUnified observability" as m2 #LightGreen
+}
+
+rectangle "TROUBLESHOOTING" as trouble {
+    rectangle "Zewnętrzny:\n'To nie nasz problem'" as tr1 #LightCoral
+    rectangle "Wewnętrzny:\nEnd-to-end visibility" as tr2 #LightGreen
+}
+
+rectangle "UPGRADES" as upgrade {
+    rectangle "Zewnętrzny:\nPotencjalne incompatibility" as u1 #LightYellow
+    rectangle "Wewnętrzny:\nAtomowe, testowane razem" as u2 #LightGreen
+}
+
+rectangle "ROLLBACK" as rollback {
+    rectangle "Zewnętrzny:\nSkomplikowane (koordynacja)" as r1 #LightCoral
+    rectangle "Wewnętrzny:\nProste (jeden helm)" as r2 #LightGreen
+}
+
+deploy -[hidden]down- monitor
+monitor -[hidden]down- trouble
+trouble -[hidden]down- upgrade
+upgrade -[hidden]down- rollback
+
+@enduml

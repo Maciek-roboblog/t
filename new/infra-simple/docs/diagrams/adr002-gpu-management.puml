@@ -1,0 +1,44 @@
+@startuml adr002-gpu-management
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-002: GPU Resource Management
+
+package "Opcja A: Zewnętrzny" as optA {
+    package "Training Cluster" as tc #LightBlue {
+        rectangle "GPU 1: Training" as t1
+        rectangle "GPU 2: Training" as t2
+        rectangle "GPU 3: (idle)" as t3 #LightGray
+    }
+    package "Inference Cluster" as ic #LightGreen {
+        rectangle "GPU 1: vLLM" as i1
+        rectangle "GPU 2: vLLM" as i2
+        rectangle "GPU 3: vLLM" as i3
+    }
+}
+
+note bottom of optA
+  + Pełna izolacja
+  + Niezależne skalowanie
+  - Wyższy koszt (idle GPU)
+  - Duplikacja infrastruktury
+end note
+
+package "Opcja B: Wewnętrzny" as optB {
+    package "Unified Cluster" as uc #LightYellow {
+        rectangle "GPU 1: Training → vLLM" as u1 #LightBlue
+        rectangle "GPU 2: Training / spare" as u2
+        rectangle "GPU 3: vLLM (dedicated)" as u3 #LightGreen
+    }
+}
+
+note bottom of optB
+  + Lepsze wykorzystanie GPU
+  + Niższy koszt (~25%)
+  - Potencjalne konflikty
+  - Wymaga time-slicing/MIG
+end note
+
+optA -[hidden]right- optB
+
+@enduml

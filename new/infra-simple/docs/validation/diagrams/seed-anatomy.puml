@@ -1,0 +1,74 @@
+@startuml seed-anatomy
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Seed Configuration for Reproducibility
+
+package "Configuration" {
+    card "seed: 42" as seed
+    card "data_seed: 42" as data_seed
+}
+
+package "PyTorch" {
+    component "torch.manual_seed()" as torch_cpu
+    component "torch.cuda.manual_seed_all()" as torch_gpu
+}
+
+package "Python" {
+    component "random.seed()" as py_random
+    component "numpy.random.seed()" as numpy
+}
+
+package "HuggingFace" {
+    component "transformers.set_seed()" as hf_seed
+}
+
+package "Data Loading" {
+    component "DataLoader shuffle" as dataloader
+    component "Dataset sampling" as sampling
+}
+
+package "CUDA Determinism" as cuda {
+    component "cudnn.deterministic = True" as cudnn_det
+    component "cudnn.benchmark = False" as cudnn_bench
+    component "use_deterministic_algorithms()" as det_algo
+}
+
+seed --> torch_cpu
+seed --> torch_gpu
+seed --> py_random
+seed --> numpy
+seed --> hf_seed
+
+data_seed --> dataloader
+data_seed --> sampling
+
+note bottom of cuda
+    **For full reproducibility (slower):**
+    ```
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.use_deterministic_algorithms(True)
+    ```
+
+    **Note:** Even with seeds, results may vary due to:
+    - Different CUDA versions
+    - Different GPU architectures
+    - Non-deterministic operations
+end note
+
+note right of seed
+    **Global seed affects:**
+    - Weight initialization
+    - Dropout masks
+    - Random augmentations
+end note
+
+note right of data_seed
+    **Data seed affects:**
+    - Batch ordering
+    - Train/val split
+    - Data shuffling
+end note
+
+@enduml

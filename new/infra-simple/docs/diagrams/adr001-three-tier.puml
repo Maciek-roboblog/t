@@ -1,0 +1,28 @@
+@startuml adr001-three-tier
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Three-Tier Storage Architecture (2025)
+
+package "HOT TIER" as hot #LightCoral {
+    node "Local NVMe\ncache" as nvme
+    note right: ~2.5 GB/s/node
+}
+
+package "WARM TIER" as warm #LightYellow {
+    node "Distributed\ncache" as dist
+    note right: P2P między nodes
+}
+
+package "COLD TIER" as cold #LightBlue {
+    cloud "Object Storage\nGCS/S3" as obj
+    note right: Backup, archiwum
+}
+
+hot -[hidden]down- warm
+warm -[hidden]down- cold
+
+nvme <--> dist : sync
+dist <--> obj : fetch/push
+
+@enduml

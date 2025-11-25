@@ -1,0 +1,19 @@
+@startuml adr001-context
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-001: Model Registry - Kontekst
+
+rectangle "LLaMA-Factory" as llama #LightBlue
+rectangle "Model Storage\n???" as storage #LightYellow
+rectangle "vLLM\n(zewnętrzny)" as vllm #LightGreen
+
+llama -right-> storage : export model
+storage <-right- vllm : load model
+
+note bottom of storage
+  Pytanie: Jak udostępnić
+  model dla vLLM?
+end note
+
+@enduml

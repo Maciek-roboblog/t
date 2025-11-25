@@ -1,0 +1,39 @@
+@startuml adr002-external
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-002: vLLM Zewnętrzny (Opcja A)
+
+package "Kubernetes Cluster\n(Training)" as k8s #LightBlue {
+    rectangle "Namespace: llm-training" {
+        rectangle "LLaMA-Factory" as llama {
+            component "WebUI" as webui
+            component "Training Job" as train
+            component "Merge Job" as merge
+        }
+    }
+}
+
+package "Zewnętrzna Infrastruktura" as external #LightGreen {
+    rectangle "vLLM Server(s)" as vllm {
+        node "GPU Node 1\nvLLM instance" as v1
+        node "GPU Node 2\nvLLM instance" as v2
+    }
+}
+
+storage "NFS Storage\n(Shared)" as nfs #LightYellow
+
+llama --> nfs : write model
+nfs <-- vllm : read model
+
+note bottom of k8s
+  Oddzielne zarządzanie
+  Dedykowane GPU dla training
+end note
+
+note bottom of external
+  Oddzielne zarządzanie
+  Dedykowane GPU dla inference
+end note
+
+@enduml

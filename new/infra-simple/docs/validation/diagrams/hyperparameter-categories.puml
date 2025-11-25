@@ -1,0 +1,60 @@
+@startuml hyperparameter-categories
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Hyperparameter Categories for LLM Fine-Tuning
+
+package "1. Model / Architecture" as model #LightBlue {
+    card "model_name_or_path" as m1
+    card "finetuning_type\n(lora, qlora, full)" as m2
+    card "quantization_bit\n(4, 8, none)" as m3
+}
+
+package "2. LoRA Specific" as lora #LightGreen {
+    card "lora_rank\n(8, 16, 32, 64)" as l1
+    card "lora_alpha\n(scaling factor)" as l2
+    card "lora_dropout\n(0.0, 0.05, 0.1)" as l3
+    card "lora_target\n(q,v,k,o,all)" as l4
+}
+
+package "3. Training" as training #LightYellow {
+    card "learning_rate\n(1e-5 to 3e-4)" as t1
+    card "num_train_epochs\n(1-10)" as t2
+    card "batch_size\n(1, 2, 4)" as t3
+    card "gradient_accumulation\n(4, 8, 16)" as t4
+    card "warmup_ratio\n(0.03, 0.1)" as t5
+    card "lr_scheduler\n(cosine, linear)" as t6
+}
+
+package "4. Data" as data #LightPink {
+    card "cutoff_len\n(512-4096)" as d1
+    card "val_size\n(0.05-0.2)" as d2
+    card "template\n(llama3, alpaca)" as d3
+}
+
+package "5. Optimization" as optim #LightGray {
+    card "fp16 / bf16" as o1
+    card "gradient_checkpointing" as o2
+    card "flash_attn" as o3
+    card "deepspeed" as o4
+}
+
+note bottom of lora
+    **Most Important to Tune:**
+    1. learning_rate
+    2. lora_rank
+    3. num_epochs
+    4. cutoff_len
+end note
+
+note bottom of training
+    **Impact Matrix:**
+    | Param | Quality | Speed | Memory |
+    |-------|---------|-------|--------|
+    | ↑rank | ↑ | ↓ | ↑ |
+    | ↑lr | ? | → | → |
+    | ↑batch | ↑ | ↑ | ↑ |
+    | ↑cutoff| ↑ | ↓ | ↑↑ |
+end note
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml adr002-internal
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title ADR-002: vLLM Wewnętrzny (Opcja B)
+
+package "Kubernetes Cluster (Unified)" as k8s #LightBlue {
+    rectangle "Namespace: llm-training" {
+
+        rectangle "LLaMA-Factory" as llama {
+            component "WebUI" as webui
+            component "Training Job" as train
+            component "Merge Job" as merge
+        }
+
+        rectangle "vLLM Server\n(Deployment/Helm)" as vllm #LightGreen {
+            component "OpenAI API\n:8000" as api
+        }
+
+        storage "PVC: llama-storage\n/storage/models" as pvc #LightYellow
+
+        llama --> pvc
+        pvc <-- vllm
+    }
+
+    package "GPU Nodes" {
+        node "Node 1\nTraining GPU" as n1
+        node "Node 2\nTraining/spare" as n2
+        node "Node 3\nvLLM GPU" as n3 #LightGreen
+    }
+}
+
+note right of k8s
+  Jedno repo, jeden team
+  Współdzielone lub dedykowane GPU
+  Niższy koszt
+end note
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml cicd-pipeline
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title CI/CD Evaluation Pipeline
+
+|Training|
+start
+:Training Job Completes;
+:Save Checkpoint to NFS;
+
+|Evaluation|
+:Trigger Evaluation Job;
+fork
+    :Compute eval_loss;
+fork again
+    :Compute BLEU/ROUGE;
+fork again
+    :Run MMLU Benchmark;
+end fork
+
+:Aggregate Metrics;
+:Log to MLflow;
+
+|Quality Gate|
+:Load Baseline Metrics;
+
+if (eval_loss < baseline * 1.05?) then (yes)
+    if (task_metric > threshold?) then (yes)
+        #LightGreen:Quality Gate PASSED;
+
+        |Deployment|
+        :Tag Model as "Candidate";
+
+        if (Human Review Required?) then (yes)
+            :Request Human Review;
+            if (Approved?) then (yes)
+                :Promote to "Production";
+                :Deploy to vLLM;
+            else (no)
+                :Flag for Iteration;
+            endif
+        else (no)
+            :Auto-promote to "Staging";
+        endif
+
+    else (no)
+        #LightYellow:Task Metric Below Threshold;
+        :Log Failure Reason;
+    endif
+else (no)
+    #LightCoral:Quality Gate FAILED;
+    :Log Regression Details;
+endif
+
+:Notify Team;
+stop
+
+note right of start
+    **Gate Conditions:**
+    - eval_loss < baseline * 1.05
+    - exact_match > 0.8 (Q&A)
+    - MMLU score >= baseline
+end note
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml adr001-mlflow-lifecycle
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title MLflow Model Registry - Lifecycle
+
+package "MLflow Model Registry" {
+    rectangle "Model: llama-finetuned" as model {
+
+        rectangle "Version 1\n(Archived)" as v1 #LightGray {
+            note right: loss=0.45\ndataset=v1
+        }
+
+        rectangle "Version 2\n(Staging)" as v2 #LightYellow {
+            note right: loss=0.32\ndataset=v2
+        }
+
+        rectangle "Version 3\n(Production)" as v3 #LightGreen {
+            note right: loss=0.28\ndataset=v3
+        }
+    }
+}
+
+rectangle "Alias: @production" as alias #Pink
+
+alias --> v3 : points to
+
+v1 -[hidden]down- v2
+v2 -[hidden]down- v3
+
+@enduml
