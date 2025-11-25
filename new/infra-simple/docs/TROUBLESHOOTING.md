@@ -286,20 +286,16 @@ cat /storage/models/merged-model/config.json | head -20
 
 ### Checklist integracji vLLM
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│              CHECKLIST: LLaMA-Factory → vLLM                             │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   [ ] Trening ukonczony (LoRA adapter w /storage/output/lora-adapter)   │
-│   [ ] Merge job ukonczony (model w /storage/models/merged-model)        │
-│   [ ] Model ma wszystkie pliki (config.json, *.safetensors)             │
-│   [ ] vLLM ma dostep do NFS (/storage/models/merged-model)              │
-│   [ ] vLLM uzywa tego samego template co trening                        │
-│   [ ] vLLM uzywa --trust-remote-code (jesli potrzebne)                  │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Checklist vLLM](diagrams/vllm-checklist.puml)
+
+| Krok | Weryfikacja |
+|------|-------------|
+| Trening ukonczony | LoRA adapter w `/storage/output/lora-adapter` |
+| Merge job ukonczony | Model w `/storage/models/merged-model` |
+| Model kompletny | Pliki: `config.json`, `*.safetensors` |
+| vLLM ma dostep | Dostep do NFS `/storage/models/merged-model` |
+| Template zgodny | vLLM uzywa tego samego template co trening |
+| Trust remote code | `--trust-remote-code` jesli potrzebne |
 
 ### Przykladowa konfiguracja vLLM (zewnętrzna)
 
@@ -547,40 +543,27 @@ kubectl -n llm-training run debug --rm -it \
 
 ### Checklist diagnostyczny
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    CHECKLIST DIAGNOSTYCZNY                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   PODSTAWY                                                              │
-│   [ ] kubectl moze polaczyc sie z klastrem                             │
-│   [ ] Namespace llm-training istnieje                                  │
-│   [ ] Secrets sa utworzone                                             │
-│   [ ] PVC jest Bound                                                   │
-│                                                                          │
-│   GPU                                                                   │
-│   [ ] GPU nodes istnieja (kubectl get nodes -l nvidia.com/gpu)         │
-│   [ ] NVIDIA device plugin dziala                                      │
-│   [ ] Pody maja toleration dla GPU                                     │
-│   [ ] Resources zawieraja nvidia.com/gpu                               │
-│                                                                          │
-│   STORAGE                                                               │
-│   [ ] Model bazowy jest na PVC                                         │
-│   [ ] Dataset jest na PVC                                              │
-│   [ ] Sciezki w konfiguracji sa poprawne                               │
-│                                                                          │
-│   SIEC                                                                  │
-│   [ ] Services sa utworzone                                            │
-│   [ ] Port-forward dziala                                              │
-│   [ ] MLFlow jest dostepny                                             │
-│                                                                          │
-│   OBRAZY                                                                │
-│   [ ] Obrazy sa w registry                                             │
-│   [ ] Tag jest poprawny                                                │
-│   [ ] Auth do registry dziala                                          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Checklist Diagnostyczny](diagrams/troubleshoot-checklist.puml)
+
+| Kategoria | Punkt kontrolny | Komenda |
+|-----------|-----------------|---------|
+| **PODSTAWY** | kubectl połączenie | `kubectl cluster-info` |
+| | Namespace istnieje | `kubectl get ns llm-training` |
+| | Secrets utworzone | `kubectl -n llm-training get secrets` |
+| | PVC jest Bound | `kubectl -n llm-training get pvc` |
+| **GPU** | GPU nodes istnieją | `kubectl get nodes -l nvidia.com/gpu` |
+| | NVIDIA plugin działa | `kubectl -n kube-system get pods \| grep nvidia` |
+| | Pody mają tolerations | Sprawdź spec w YAML |
+| | Resources nvidia.com/gpu | Sprawdź limits w YAML |
+| **STORAGE** | Model bazowy na PVC | `ls /storage/models/` |
+| | Dataset na PVC | `ls /storage/data/` |
+| | Ścieżki poprawne | Porównaj z ConfigMap |
+| **SIEĆ** | Services utworzone | `kubectl -n llm-training get svc` |
+| | Port-forward działa | `./scripts/ui.sh webui` |
+| | MLflow dostępny | `./scripts/ui.sh mlflow` |
+| **OBRAZY** | Obrazy w registry | `gcloud container images list` |
+| | Tag poprawny | Sprawdź w deployment YAML |
+| | Auth działa | `gcloud auth configure-docker` |
 
 ### Przydatne aliasy
 

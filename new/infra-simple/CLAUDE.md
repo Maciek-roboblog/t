@@ -8,19 +8,13 @@ Kubernetes deployment for LLaMA-Factory - a platform for fine-tuning large langu
 
 ## Architecture
 
-```
-EXTERNAL SERVICES (already exist)              KUBERNETES (GPU Nodes)
-┌──────────────────────────────────────┐      ┌─────────────────────────────┐
-│  MLflow (metrics/tracking)           │◄─────│  Training Job               │
-│  NFS Storage (ReadWriteMany)         │◄─────│  Merge Job                  │
-│   /storage/models/base-model         │◄─────│  WebUI                      │
-│   /storage/models/merged-model ──────┼──┐   └─────────────────────────────┘
-│   /storage/output/lora-adapter       │  │
-│   /storage/data                      │  │
-│                                      │  │
-│  vLLM Server (EXTERNAL) ◄────────────┼──┘ reads merged models
-└──────────────────────────────────────┘
-```
+![Architecture](docs/diagrams/architecture.puml)
+
+| Component | Description |
+|-----------|-------------|
+| **External Services** | MLflow (metrics), NFS Storage (ReadWriteMany), vLLM (inference) |
+| **Kubernetes** | Training Job, Merge Job, WebUI (all on GPU nodes) |
+| **Storage paths** | `/storage/models/`, `/storage/output/`, `/storage/data/` |
 
 **vLLM is an EXTERNAL service** - we do NOT deploy it from this repository.
 

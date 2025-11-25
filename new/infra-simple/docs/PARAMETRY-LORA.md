@@ -24,31 +24,14 @@
 
 ### Jak dziala LoRA?
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          ARCHITEKTURA LoRA                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Standardowy fine-tuning:                                              │
-│   ┌─────────────────┐                                                   │
-│   │   W (d x k)     │  <- Aktualizacja wszystkich wag                  │
-│   │   np. 4096x4096 │     = 16.7M parametrow na warstwe               │
-│   └─────────────────┘                                                   │
-│                                                                          │
-│   LoRA fine-tuning:                                                     │
-│   ┌─────────────────┐      ┌─────────┐   ┌─────────┐                   │
-│   │   W (zamrozone) │  +   │  A (d×r)│ × │  B (r×k)│                   │
-│   │   4096 x 4096   │      │ 4096×8  │   │  8×4096 │                   │
-│   └─────────────────┘      └─────────┘   └─────────┘                   │
-│                                  │             │                        │
-│                                  └─────┬───────┘                        │
-│                                        │                                │
-│                              rank r = 8 (domyslnie)                    │
-│                              Parametry: 2 × 4096 × 8 = 65K            │
-│                              Redukcja: 99.6%!                          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Architektura LoRA](diagrams/lora-architecture.puml)
+
+| Metoda | Macierz | Parametry |
+|--------|---------|-----------|
+| **Standardowy fine-tuning** | W (d x k) = 4096 x 4096 | 16.7M na warstwe |
+| **LoRA** | W (zamrozone) + A (d x r) × B (r x k) | 2 × 4096 × 8 = 65K |
+
+**Redukcja parametrow: 99.6%!**
 
 ### Wzor matematyczny
 
@@ -202,27 +185,14 @@ use_dora: true  # Lepsza jakosc, wolniejszy trening
 
 **QLoRA** laczy LoRA z 4-bitowa kwantyzacja modelu bazowego:
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          QLoRA vs LoRA                                   │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   LoRA:                                                                 │
-│   ┌─────────────────┐    ┌─────────┐                                   │
-│   │ Model bazowy    │    │ Adapter │                                   │
-│   │ FP16 (14GB)     │ +  │ FP16    │ = ~16GB GPU RAM (7B model)       │
-│   └─────────────────┘    └─────────┘                                   │
-│                                                                          │
-│   QLoRA:                                                                │
-│   ┌─────────────────┐    ┌─────────┐                                   │
-│   │ Model bazowy    │    │ Adapter │                                   │
-│   │ 4-bit (4GB)     │ +  │ FP16    │ = ~6GB GPU RAM (7B model)        │
-│   └─────────────────┘    └─────────┘                                   │
-│                                                                          │
-│   Redukcja pamieci: ~60%!                                              │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![QLoRA vs LoRA](diagrams/qlora-comparison.puml)
+
+| Metoda | Model bazowy | Adapter | GPU RAM (7B) |
+|--------|--------------|---------|--------------|
+| **LoRA** | FP16 (14GB) | FP16 | ~16GB |
+| **QLoRA** | 4-bit (4GB) | FP16 | ~6GB |
+
+**Redukcja pamieci: ~60%!**
 
 ### Parametry kwantyzacji
 

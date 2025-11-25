@@ -1,0 +1,25 @@
+@startuml memory-optimization
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Techniki Optymalizacji Pamieci
+
+rectangle "Bazowe zuzycie: 100%" as base #LightCoral
+
+rectangle "QLoRA (4-bit)\n-60% = 40%" as qlora #LightGreen
+rectangle "Gradient checkpointing\n-15% = 25%" as gc #LightGreen
+rectangle "Flash Attention\n-10% = 15%" as fa #LightGreen
+rectangle "Mniejszy batch\n-5% = 10%" as batch #LightGreen
+
+base --> qlora
+qlora --> gc
+gc --> fa
+fa --> batch
+
+note bottom of batch
+  Przyklad 7B model:
+  FP16 LoRA: ~16 GB
+  QLoRA + optymalizacje: ~4 GB
+end note
+
+@enduml

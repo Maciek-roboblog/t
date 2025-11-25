@@ -1,0 +1,27 @@
+@startuml format-selection
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Wybor Formatu Danych
+
+start
+:Dane wejsciowe;
+
+if (Konwersacje multi-turn?) then (TAK)
+  :Format ShareGPT;
+  note right: wiele wiadomosci w konwersacji
+else (NIE)
+  :Format Alpaca;
+  note right: pojedyncze pytania/odpowiedzi
+endif
+
+if (System prompt?) then (TAK)
+  :Dodaj pole "system" (Alpaca)
+  lub role "system" (ShareGPT);
+else (NIE)
+  :Pomin pole system;
+endif
+
+stop
+
+@enduml

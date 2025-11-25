@@ -15,81 +15,34 @@
 
 ### Kategorie hiperparametrów
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    KATEGORIE HIPERPARAMETRÓW                                 │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   1. MODEL / ARCHITEKTURA                                                    │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • model_name_or_path    - bazowy model                         │       │
-│   │  • finetuning_type       - lora, qlora, full                    │       │
-│   │  • quantization_bit      - 4, 8, none                           │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   2. LoRA SPECIFIC                                                           │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • lora_rank             - 8, 16, 32, 64                        │       │
-│   │  • lora_alpha            - scaling factor                        │       │
-│   │  • lora_dropout          - 0.0, 0.05, 0.1                       │       │
-│   │  • lora_target           - q_proj, v_proj, all                  │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   3. TRAINING                                                                │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • learning_rate         - 1e-5 do 3e-4                         │       │
-│   │  • num_train_epochs      - 1-10                                 │       │
-│   │  • per_device_batch_size - 1, 2, 4                              │       │
-│   │  • gradient_accumulation - 4, 8, 16                             │       │
-│   │  • warmup_ratio          - 0.03, 0.1                            │       │
-│   │  • lr_scheduler_type     - cosine, linear                       │       │
-│   │  • weight_decay          - 0.0, 0.01                            │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   4. DATA                                                                    │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • cutoff_len            - 512, 1024, 2048, 4096                │       │
-│   │  • val_size              - 0.05, 0.1, 0.2                       │       │
-│   │  • template              - llama3, alpaca, custom               │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   5. OPTIMIZATION                                                            │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • fp16 / bf16           - mixed precision                      │       │
-│   │  • gradient_checkpointing- true/false                           │       │
-│   │  • flash_attn            - fa2, none                            │       │
-│   │  • deepspeed             - stage 2, 3                           │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [hyperparameter-categories.puml](diagrams/hyperparameter-categories.puml) - kategorie i wpływ hiperparametrów.
+
+| Kategoria | Parametry | Typowe wartości |
+|-----------|-----------|-----------------|
+| **Model/Architektura** | model_name_or_path, finetuning_type, quantization_bit | lora/qlora/full, 4/8/none |
+| **LoRA Specific** | lora_rank, lora_alpha, lora_dropout, lora_target | 8-64, 16-64, 0.0-0.1, q_proj/v_proj/all |
+| **Training** | learning_rate, epochs, batch_size, gradient_accumulation | 1e-5 do 3e-4, 1-10, 1-4, 4-16 |
+| **Data** | cutoff_len, val_size, template | 512-4096, 0.05-0.2, llama3/alpaca |
+| **Optimization** | fp16/bf16, gradient_checkpointing, flash_attn | true/false, fa2/none |
 
 ### Wpływ hiperparametrów
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     WPŁYW NA WYNIKI                                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Parametr            │ Jakość │ Szybkość │ Pamięć │ Stabilność             │
-│   ────────────────────┼────────┼──────────┼────────┼──────────              │
-│   ↑ lora_rank         │   ↑    │    ↓     │   ↑    │    →                   │
-│   ↑ learning_rate     │   ?    │    →     │   →    │    ↓                   │
-│   ↑ batch_size        │   ↑    │    ↑     │   ↑    │    ↑                   │
-│   ↑ cutoff_len        │   ↑    │    ↓     │   ↑↑   │    →                   │
-│   ↑ epochs            │   ↑/↓* │    ↓     │   →    │    ↓*                  │
-│   ↑ lora_dropout      │   →    │    →     │   →    │    ↑                   │
-│                                                                              │
-│   * = do pewnego punktu, potem overfitting                                  │
-│                                                                              │
-│   Najważniejsze parametry do tuningu:                                       │
-│   1. learning_rate (największy wpływ na konwergencję)                       │
-│   2. lora_rank (kompromis jakość/wydajność)                                 │
-│   3. epochs (unikanie overfitting)                                          │
-│   4. cutoff_len (zależnie od długości danych)                               │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+| Parametr | Jakość | Szybkość | Pamięć | Stabilność |
+|----------|--------|----------|--------|------------|
+| ↑ lora_rank | ↑ | ↓ | ↑ | → |
+| ↑ learning_rate | ? | → | → | ↓ |
+| ↑ batch_size | ↑ | ↑ | ↑ | ↑ |
+| ↑ cutoff_len | ↑ | ↓ | ↑↑ | → |
+| ↑ epochs | ↑/↓* | ↓ | → | ↓* |
+| ↑ lora_dropout | → | → | → | ↑ |
+
+*\* = do pewnego punktu, potem overfitting*
+
+**Najważniejsze parametry do tuningu:**
+1. `learning_rate` - największy wpływ na konwergencję
+2. `lora_rank` - kompromis jakość/wydajność
+3. `epochs` - unikanie overfitting
+4. `cutoff_len` - zależnie od długości danych
 
 ---
 
@@ -295,53 +248,23 @@ args:
 
 ### MLflow UI - porównanie
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     MLflow COMPARE VIEW                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Select runs to compare:                                        │       │
-│   │  ☑ run_001 (lora_rank=8)                                       │       │
-│   │  ☑ run_002 (lora_rank=16)                                      │       │
-│   │  ☑ run_003 (lora_rank=32)                                      │       │
-│   │  ☐ run_004 (failed)                                            │       │
-│   │                                       [Compare]                 │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Parameters Diff:                                                           │
-│   ┌────────────────┬─────────┬─────────┬─────────┐                          │
-│   │ Parameter      │ run_001 │ run_002 │ run_003 │                          │
-│   ├────────────────┼─────────┼─────────┼─────────┤                          │
-│   │ lora_rank      │ 8       │ 16      │ 32      │ ← różnica               │
-│   │ lora_alpha     │ 16      │ 32      │ 64      │ ← różnica               │
-│   │ learning_rate  │ 1e-4    │ 1e-4    │ 1e-4    │                          │
-│   └────────────────┴─────────┴─────────┴─────────┘                          │
-│                                                                              │
-│   Metrics:                                                                   │
-│   ┌────────────────┬─────────┬─────────┬─────────┐                          │
-│   │ Metric         │ run_001 │ run_002 │ run_003 │                          │
-│   ├────────────────┼─────────┼─────────┼─────────┤                          │
-│   │ final_loss     │ 0.45    │ 0.38    │ 0.35 ⭐ │                          │
-│   │ eval_loss      │ 0.48    │ 0.41    │ 0.39 ⭐ │                          │
-│   │ train_time (h) │ 2.1     │ 2.8     │ 3.5     │                          │
-│   └────────────────┴─────────┴─────────┴─────────┘                          │
-│                                                                              │
-│   Loss Curves:                                                               │
-│   │                                                                          │
-│   │  ▓▓▓ run_001                                                            │
-│   │  ███ run_002                                                            │
-│   │  ░░░ run_003                                                            │
-│   │                                                                          │
-│   │  ▓▓                                                                     │
-│   │    ▓▓██                                                                 │
-│   │      ▓▓██░░                                                             │
-│   │        ▓▓██░░░░                                                         │
-│   │          ▓▓▓███░░░░░░                                                   │
-│   └──────────────────────────────────────────────► steps                    │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [hyperparameter-search.puml](diagrams/hyperparameter-search.puml) - strategia przeszukiwania hiperparametrów.
+
+**Parameters Diff:**
+
+| Parameter | run_001 | run_002 | run_003 |
+|-----------|---------|---------|---------|
+| lora_rank | 8 | 16 | 32 |
+| lora_alpha | 16 | 32 | 64 |
+| learning_rate | 1e-4 | 1e-4 | 1e-4 |
+
+**Metrics:**
+
+| Metric | run_001 | run_002 | run_003 |
+|--------|---------|---------|---------|
+| final_loss | 0.45 | 0.38 | 0.35 |
+| eval_loss | 0.48 | 0.41 | 0.39 |
+| train_time (h) | 2.1 | 2.8 | 3.5 |
 
 ### Programatyczne porównanie
 

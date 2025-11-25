@@ -6,30 +6,14 @@ Konfiguracja Kubernetes dla LLaMA-Factory - platformy do fine-tuningu modeli LLM
 
 System korzysta z **zewnętrznych usług** (MLflow, NFS Storage, vLLM) i jest **idempotentny**.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│              ZEWNĘTRZNE USŁUGI (już istnieją)                    │
-│   ┌──────────────┐  ┌────────────────────┐  ┌──────────────┐    │
-│   │    MLflow    │  │    NFS Storage     │  │    vLLM      │    │
-│   │   (metryki)  │  │  /storage/models/  │  │  (inference) │    │
-│   └──────────────┘  │  /storage/data/    │  └──────┬───────┘    │
-│                     └─────────┬──────────┘         │            │
-└───────────────────────────────┼────────────────────┼────────────┘
-                                │                    │
-                                │ mount              │ czyta modele
-                                ▼                    │
-┌───────────────────────────────────────────────────┼─────────────┐
-│                KUBERNETES (GPU Nodes)              │             │
-│                                                    │             │
-│   ┌─────────────────────────────────────────────┐ │             │
-│   │          llama-factory-train                 │ │             │
-│   │  ┌──────────┐  ┌──────────┐  ┌──────────┐  │ │             │
-│   │  │  WebUI   │  │ Training │  │  Merge   │──┼─┘             │
-│   │  │  (7860)  │  │   Job    │  │   Job    │  │               │
-│   │  └──────────┘  └──────────┘  └──────────┘  │               │
-│   └─────────────────────────────────────────────┘               │
-└─────────────────────────────────────────────────────────────────┘
-```
+![Architektura](docs/diagrams/architecture.puml)
+
+| Komponent | Opis |
+|-----------|------|
+| **MLflow** | Tracking server dla metryk i eksperymentów |
+| **NFS Storage** | `/storage/models/`, `/storage/data/` (ReadWriteMany) |
+| **vLLM** | Zewnętrzny serwer inference (czyta modele z NFS) |
+| **llama-factory-train** | WebUI (7860), Training Job, Merge Job |
 
 **vLLM jest zewnętrzną usługą** - nie wdrażamy go z tego repozytorium.
 Po treningu/merge model jest dostępny na NFS, skąd vLLM go czyta.

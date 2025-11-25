@@ -27,49 +27,13 @@
 
 ![Architecture](diagrams/architecture.puml)
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                   ZEWNĘTRZNE USŁUGI (już istnieją)                  │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│   ┌─────────────────────┐        ┌─────────────────────────────┐   │
-│   │       MLflow        │        │        NFS Storage          │   │
-│   │  (Tracking Server)  │        │     (ReadWriteMany)         │   │
-│   │  (Model Registry)   │        │                             │   │
-│   └─────────────────────┘        │  /storage/models/base-model │   │
-│            ▲                     │  /storage/models/merged ────┼───┐
-│            │ metryki             │  /storage/output/lora       │   │
-│            │                     │  /storage/data              │   │
-│            │                     └─────────────────────────────┘   │
-│            │                                                        │
-│   ┌────────┴────────────────────────────────────────────────────┐  │
-│   │                    vLLM Server (ZEWNĘTRZNY)                  │◄─┘
-│   │                    OpenAI-compatible API                     │
-│   │                    Czyta modele z NFS                        │
-│   └─────────────────────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────────────────────┘
-                                │
-                                │ mount /storage
-                                ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                     KUBERNETES (GPU Nodes)                          │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│   ┌─────────────────────────────────────────────────────────────┐  │
-│   │                   llama-factory-train                        │  │
-│   │                                                              │  │
-│   │   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   │  │
-│   │   │   WebUI      │   │  Training    │   │    Merge     │   │  │
-│   │   │  (7860)      │   │    Job       │   │    Job       │   │  │
-│   │   └──────────────┘   └──────────────┘   └──────────────┘   │  │
-│   │                                                              │  │
-│   │   Zawiera: LLaMA-Factory, MLflow client, peft, datasets     │  │
-│   └─────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│   vLLM NIE jest wdrażany z tego repozytorium                        │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
-```
+| Warstwa | Komponenty |
+|---------|------------|
+| **Zewnętrzne usługi** | MLflow (Tracking + Registry), NFS Storage, vLLM (ZEWNĘTRZNY) |
+| **Kubernetes** | llama-factory-train: WebUI, Training Job, Merge Job |
+| **Storage** | `/storage/models/`, `/storage/output/`, `/storage/data/` |
+
+**vLLM NIE jest wdrażany z tego repozytorium** - czyta modele z NFS po merge.
 
 ---
 
