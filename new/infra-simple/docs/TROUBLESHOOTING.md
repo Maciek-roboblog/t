@@ -24,35 +24,7 @@
 
 **Przyczyny i rozwiazania:**
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PROBLEM: BRAK GPU                                     │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   1. Sprawdz czy sa GPU nodes:                                          │
-│      kubectl get nodes -l nvidia.com/gpu                                │
-│                                                                          │
-│   2. Jesli brak nodes - dodaj GPU node pool:                           │
-│      gcloud container node-pools create gpu-pool \                      │
-│        --cluster=CLUSTER_NAME \                                         │
-│        --accelerator=type=nvidia-tesla-t4,count=1 \                     │
-│        --num-nodes=1                                                    │
-│                                                                          │
-│   3. Sprawdz czy NVIDIA device plugin dziala:                          │
-│      kubectl get pods -n kube-system -l name=nvidia-device-plugin       │
-│                                                                          │
-│   4. Jesli nie dziala - zainstaluj:                                    │
-│      kubectl apply -f https://raw.githubusercontent.com/...             │
-│        /nvidia-device-plugin.yml                                        │
-│                                                                          │
-│   5. Sprawdz toleration w podzie:                                      │
-│      tolerations:                                                       │
-│      - key: "nvidia.com/gpu"                                           │
-│        operator: "Exists"                                               │
-│        effect: "NoSchedule"                                             │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Troubleshooting GPU](diagrams/troubleshoot-gpu.puml)
 
 **Diagnostyka:**
 
@@ -131,33 +103,7 @@ torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate X GiB
 
 **Diagram diagnostyczny:**
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    CUDA OOM - DRZEWO DECYZYJNE                           │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   CUDA OOM?                                                             │
-│   │                                                                      │
-│   ├── Czy uzywasz QLoRA?                                               │
-│   │   └── NIE → Wlacz quantization_bit: 4                              │
-│   │                                                                      │
-│   ├── Czy batch_size > 1?                                              │
-│   │   └── TAK → Zmniejsz do 1, zwieksz gradient_accumulation           │
-│   │                                                                      │
-│   ├── Czy cutoff_len > 2048?                                           │
-│   │   └── TAK → Zmniejsz do 1024 lub 2048                              │
-│   │                                                                      │
-│   ├── Czy gradient_checkpointing jest wlaczony?                        │
-│   │   └── NIE → Wlacz: gradient_checkpointing: true                    │
-│   │                                                                      │
-│   ├── Czy lora_rank > 16?                                              │
-│   │   └── TAK → Zmniejsz do 8                                          │
-│   │                                                                      │
-│   └── Czy model jest za duzy dla GPU?                                  │
-│       └── TAK → Uzyj mniejszego modelu lub wiecej GPU                  │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![CUDA OOM Troubleshooting](diagrams/troubleshoot-oom.puml)
 
 **Rozwiazania krok po kroku:**
 
@@ -287,32 +233,7 @@ kubectl -n llm-training logs job/<job> | grep "grad_norm"
 
 **Rozwiazania:**
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PRZYSPIESZENIE TRENINGU                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   1. Wlacz Flash Attention (jesli Ampere GPU):                         │
-│      flash_attn: fa2                                                    │
-│                                                                          │
-│   2. Zmniejsz logging frequency:                                        │
-│      logging_steps: 50  # Zamiast 1                                    │
-│                                                                          │
-│   3. Zwieksz batch size (jesli pamiec pozwala):                        │
-│      per_device_train_batch_size: 2                                    │
-│                                                                          │
-│   4. Uzyj optymalizowanego dataloadera:                                │
-│      dataloader_num_workers: 4                                         │
-│                                                                          │
-│   5. Wlacz bf16 zamiast fp16:                                          │
-│      bf16: true                                                         │
-│                                                                          │
-│   6. Sprawdz I/O (PVC):                                                │
-│      - SSD zamiast HDD                                                 │
-│      - Lokalne dane zamiast NFS                                        │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Przyspieszenie Treningu](diagrams/troubleshoot-training.puml)
 
 ---
 

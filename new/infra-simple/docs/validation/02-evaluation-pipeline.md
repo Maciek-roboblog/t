@@ -476,30 +476,14 @@ spec:
 
 ### Automatyczny pipeline ewaluacji
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      CI/CD EVALUATION PIPELINE                               │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐ │
-│   │ Training│───►│Checkpoint│───►│  Eval   │───►│ Compare │───►│ Deploy? │ │
-│   │   Job   │    │  Saved  │    │   Job   │    │Baseline │    │         │ │
-│   └─────────┘    └─────────┘    └─────────┘    └─────────┘    └─────────┘ │
-│                                      │              │              │        │
-│                                      ▼              ▼              ▼        │
-│                                 ┌─────────┐   ┌─────────┐   ┌─────────┐   │
-│                                 │ Metrics │   │  Pass/  │   │ Promote │   │
-│                                 │ to      │   │  Fail   │   │ or      │   │
-│                                 │ MLflow  │   │         │   │ Reject  │   │
-│                                 └─────────┘   └─────────┘   └─────────┘   │
-│                                                                              │
-│   Gate conditions:                                                           │
-│   ✓ eval_loss < baseline_loss * 1.05                                        │
-│   ✓ exact_match > 0.8 (dla Q&A tasks)                                       │
-│   ✓ MMLU score > baseline_score                                             │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [cicd-pipeline.puml](diagrams/cicd-pipeline.puml) - pełny pipeline CI/CD ewaluacji.
+
+**Przepływ:** Training Job → Checkpoint → Eval Job → Compare Baseline → Deploy/Reject
+
+**Gate conditions:**
+- `eval_loss < baseline_loss * 1.05`
+- `exact_match > 0.8` (dla Q&A tasks)
+- `MMLU score > baseline_score`
 
 ### Skrypt porównania z baseline
 

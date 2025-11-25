@@ -15,65 +15,27 @@
 
 ### Problem nieodtwarzalnych wyników
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                   PROBLEM: BRAK REPRODUKOWALNOŚCI                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Scenariusz 1: "U mnie działało"                                           │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Badacz A: "Osiągnąłem 95% accuracy!"                           │       │
-│   │  Badacz B: "U mnie tylko 82%... co zrobiłeś inaczej?"          │       │
-│   │  Badacz A: "Nie wiem, nie zapisałem wszystkich parametrów"      │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Scenariusz 2: Model degradation                                            │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Miesiąc 1: Model w produkcji działa świetnie                   │       │
-│   │  Miesiąc 3: Jakość spada, trzeba retrenować                     │       │
-│   │  Problem: Nie można odtworzyć oryginalnego modelu!              │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   Scenariusz 3: Audyt compliance                                             │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  Audytor: "Na jakich danych trenowaliście ten model?"           │       │
-│   │  Zespół: "Ehm... to było pół roku temu..."                      │       │
-│   │  Audytor: "Czy możecie odtworzyć trening?"                      │       │
-│   │  Zespół: "Teoretycznie... ale nie jesteśmy pewni"               │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [problem-solution.puml](diagrams/problem-solution.puml) - dlaczego walidacja i reprodukowalność są kluczowe.
+
+**Typowe scenariusze problemów:**
+
+| Scenariusz | Problem |
+|------------|---------|
+| "U mnie działało" | Badacz A osiągnął 95% accuracy, badacz B tylko 82% - nie wiadomo co było inne |
+| Model degradation | Model w produkcji degraduje, ale nie można odtworzyć oryginalnego treningu |
+| Audyt compliance | Audytor pyta o dane treningowe - zespół nie pamięta szczegółów sprzed 6 miesięcy |
 
 ### Korzyści z reprodukowalności
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    KORZYŚCI REPRODUKOWALNOŚCI                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ✓ DEBUGOWANIE                                                             │
-│     - Łatwe znalezienie, co poszło nie tak                                  │
-│     - Porównanie working vs broken konfiguracji                             │
-│                                                                              │
-│   ✓ ITERACJA                                                                │
-│     - Pewność, że poprawa wynika ze zmiany, nie z losowości                │
-│     - Systematyczne eksperymenty z kontrolą zmiennych                       │
-│                                                                              │
-│   ✓ WSPÓŁPRACA                                                              │
-│     - Każdy może odtworzyć wyniki                                           │
-│     - Łatwe przekazanie projektu                                            │
-│                                                                              │
-│   ✓ PRODUKCJA                                                               │
-│     - Pewność deploymentu tego samego modelu                                │
-│     - Możliwość rollback do poprzedniej wersji                              │
-│                                                                              │
-│   ✓ COMPLIANCE                                                              │
-│     - Pełny audit trail                                                      │
-│     - Spełnienie wymagań regulacyjnych (GDPR, AI Act)                       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [reproducibility-components.puml](diagrams/reproducibility-components.puml) - komponenty stacku reprodukowalności.
+
+| Obszar | Korzyści |
+|--------|----------|
+| **Debugowanie** | Łatwe znalezienie błędów, porównanie working vs broken konfiguracji |
+| **Iteracja** | Pewność, że poprawa wynika ze zmiany nie z losowości |
+| **Współpraca** | Każdy może odtworzyć wyniki, łatwe przekazanie projektu |
+| **Produkcja** | Pewność deploymentu, możliwość rollback |
+| **Compliance** | Pełny audit trail, zgodność z GDPR/AI Act |
 
 ---
 
@@ -81,36 +43,28 @@
 
 ### Przed treningiem
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      CHECKLIST: PRZED TRENINGIEM                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   DANE                                                                       │
-│   □ Dataset zapisany w wersjonowanym storage                                │
-│   □ Hash/checksum datasetu obliczony i zapisany                             │
-│   □ Train/val/test split wykonany deterministycznie (seed!)                 │
-│   □ Preprocessing udokumentowany (skrypty w repo)                           │
-│   □ Data augmentation (jeśli stosowana) z seedem                            │
-│                                                                              │
-│   MODEL BAZOWY                                                               │
-│   □ Dokładna wersja/commit modelu bazowego zapisana                         │
-│   □ Źródło modelu (HuggingFace hub, lokalna kopia)                          │
-│   □ Hash wag modelu (opcjonalnie)                                           │
-│                                                                              │
-│   ŚRODOWISKO                                                                 │
-│   □ Wersje bibliotek zapisane (requirements.txt / pip freeze)               │
-│   □ Wersja CUDA i driver                                                    │
-│   □ Typ GPU                                                                  │
-│   □ Docker image tag                                                         │
-│                                                                              │
-│   KONFIGURACJA                                                               │
-│   □ Wszystkie hiperparametry w pliku YAML                                   │
-│   □ Seed globalny ustawiony                                                 │
-│   □ Konfiguracja w repozytorium git                                         │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**DANE:**
+- [ ] Dataset zapisany w wersjonowanym storage
+- [ ] Hash/checksum datasetu obliczony i zapisany
+- [ ] Train/val/test split wykonany deterministycznie (seed!)
+- [ ] Preprocessing udokumentowany (skrypty w repo)
+- [ ] Data augmentation (jeśli stosowana) z seedem
+
+**MODEL BAZOWY:**
+- [ ] Dokładna wersja/commit modelu bazowego zapisana
+- [ ] Źródło modelu (HuggingFace hub, lokalna kopia)
+- [ ] Hash wag modelu (opcjonalnie)
+
+**ŚRODOWISKO:**
+- [ ] Wersje bibliotek zapisane (requirements.txt / pip freeze)
+- [ ] Wersja CUDA i driver
+- [ ] Typ GPU
+- [ ] Docker image tag
+
+**KONFIGURACJA:**
+- [ ] Wszystkie hiperparametry w pliku YAML
+- [ ] Seed globalny ustawiony
+- [ ] Konfiguracja w repozytorium git
 
 ### Podczas treningu
 
