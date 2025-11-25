@@ -1,0 +1,112 @@
+@startuml dataset-versioning
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Dataset Versioning Strategy
+
+package "Data Pipeline" {
+
+    node "Raw Data Source" as source {
+        database "Internal DB" as db
+        file "Export" as export
+    }
+
+    node "Preprocessing" as preprocess {
+        component "Clean Data" as clean
+        component "Split Data" as split
+        component "Compute Hash" as hash
+    }
+
+    node "Version Control" as version {
+        component "Create Manifest" as manifest
+        component "Tag Version" as tag
+    }
+}
+
+package "NFS Storage" as storage {
+
+    folder "/storage/data" {
+
+        folder "versions" {
+            folder "v1.0.0" as v1 {
+                artifact "train.json" as train1
+                artifact "test.json" as test1
+                artifact "manifest.json" as m1
+            }
+
+            folder "v1.1.0" as v11 {
+                artifact "train.json" as train11
+                artifact "test.json" as test11
+                artifact "manifest.json" as m11
+            }
+
+            folder "v2.0.0" as v2 #LightGreen {
+                artifact "train.json" as train2
+                artifact "test.json" as test2
+                artifact "manifest.json" as m2
+            }
+        }
+
+        folder "current" as current #LightBlue {
+            artifact "train.json -> ../versions/v2.0.0/train.json" as link1
+            artifact "test.json -> ../versions/v2.0.0/test.json" as link2
+        }
+
+        artifact "dataset_info.json" as info
+    }
+}
+
+package "Training" as training {
+    node "Training Job" as job {
+        component "Verify Hash" as verify
+        component "Load Data" as load
+        component "Log Version" as log
+    }
+}
+
+' Flow
+db --> export
+export --> clean
+clean --> split : seed=42
+split --> hash : SHA256
+
+hash --> manifest
+manifest --> tag
+tag --> v2
+
+current --> v2 : symlink
+
+job --> current : read
+verify --> current : compare hash
+load --> current : load data
+log --> m2 : read metadata
+
+note right of v2
+  **manifest.json:**
+  {
+    "version": "v2.0.0",
+    "created_at": "2025-01-25",
+    "files": {
+      "train.json": {
+        "samples": 9000,
+        "hash": "a1b2c3..."
+      },
+      "test.json": {
+        "samples": 1000,
+        "hash": "d4e5f6..."
+      }
+    },
+    "changes": {
+      "from": "v1.1.0",
+      "description": "Added context field"
+    }
+  }
+end note
+
+note bottom of current
+  **Symlinks to current version**
+  Training always reads from /current
+  Easy to switch versions
+end note
+
+@enduml

@@ -119,6 +119,13 @@ Three options for sharing models with external vLLM:
 
 See `docs/adr/001-model-registry.md` for detailed comparison.
 
+### vLLM Deployment Options (ADR-002)
+Two deployment models for vLLM:
+1. **External** (current) - separate infrastructure, better isolation
+2. **Internal** - same cluster, lower cost, simpler ops
+
+See `docs/adr/002-vllm-deployment.md` for pros/cons and architecture impact.
+
 ### Dataset Format
 JSON array with instruction/input/output:
 ```json

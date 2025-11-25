@@ -179,6 +179,29 @@ Ten folder zawiera kompletny przewodnik dotyczący **walidowalności** (validati
 | [04-dataset-versioning.md](04-dataset-versioning.md) | Wersjonowanie datasetów |
 | [05-hyperparameter-tracking.md](05-hyperparameter-tracking.md) | Śledzenie hiperparametrów |
 
+### Diagramy PlantUML
+
+| Diagram | Opis |
+|---------|------|
+| [validation-flow.puml](diagrams/validation-flow.puml) | Główny przepływ walidacji end-to-end |
+| [mlflow-integration.puml](diagrams/mlflow-integration.puml) | Architektura integracji z MLflow |
+| [dataset-versioning.puml](diagrams/dataset-versioning.puml) | Strategia wersjonowania datasetów |
+| [evaluation-pipeline.puml](diagrams/evaluation-pipeline.puml) | Pipeline ewaluacji modeli |
+| [reproducibility-components.puml](diagrams/reproducibility-components.puml) | Komponenty reprodukowalności |
+| [hyperparameter-search.puml](diagrams/hyperparameter-search.puml) | Strategia przeszukiwania hiperparametrów |
+
+**Renderowanie diagramów:**
+```bash
+# Zainstaluj PlantUML
+brew install plantuml  # macOS
+apt install plantuml   # Ubuntu
+
+# Renderuj wszystkie diagramy
+plantuml docs/validation/diagrams/*.puml
+
+# Lub użyj online: https://www.plantuml.com/plantuml/
+```
+
 ---
 
 ## Quick Start

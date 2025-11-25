@@ -1,0 +1,127 @@
+@startuml validation-flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam roundCorner 10
+
+title Validation Flow - Fine-Tuning Pipeline
+
+|#LightBlue|Pre-Training|
+start
+:Dataset Preparation;
+note right
+  * Load raw data
+  * Clean & preprocess
+  * Split train/val/test
+end note
+
+:Dataset Versioning;
+note right
+  * Compute SHA256 hash
+  * Create manifest.json
+  * Tag version (vX.Y.Z)
+end note
+
+:Baseline Evaluation;
+note right
+  * Evaluate base model
+  * Record baseline metrics
+  * Store in MLflow
+end note
+
+|#LightGreen|Training|
+:Start Training Job;
+
+fork
+  :Log Parameters to MLflow;
+  note right
+    * lora_rank, lora_alpha
+    * learning_rate, epochs
+    * seed, batch_size
+  end note
+fork again
+  :Log Dataset Info;
+  note right
+    * version, hash
+    * samples count
+    * split ratios
+  end note
+end fork
+
+repeat
+  :Training Step;
+  :Log Training Loss;
+  note right: Every logging_steps
+
+  if (eval_steps reached?) then (yes)
+    :Validation Step;
+    :Log Validation Loss;
+    note right
+      * eval_loss
+      * eval_accuracy (optional)
+    end note
+
+    if (Early stopping triggered?) then (yes)
+      break
+    endif
+  endif
+
+  if (save_steps reached?) then (yes)
+    :Save Checkpoint;
+    note right: To NFS storage
+  endif
+
+repeat while (more steps?) is (yes)
+
+:Training Complete;
+
+|#LightYellow|Post-Training|
+:Save Final Model;
+note right
+  * LoRA adapter
+  * Config files
+  * Training args
+end note
+
+:Evaluate on Test Set;
+note right
+  * BLEU/ROUGE (if generation)
+  * Exact Match
+  * Perplexity
+end note
+
+:Compare with Baseline;
+
+if (Metrics improved?) then (yes)
+  :Register Model in MLflow;
+  note right
+    * Tag as "candidate"
+    * Add evaluation results
+  end note
+
+  |#LightPink|Pre-Deployment|
+  :Human Review (sample);
+  :Safety Checks;
+  note right
+    * Bias testing
+    * Toxicity check
+  end note
+
+  if (Approved?) then (yes)
+    :Promote to Production;
+    note right
+      * Update model stage
+      * Create deployment artifact
+    end note
+    :Deploy to vLLM;
+  else (no)
+    :Flag for Iteration;
+  endif
+else (no)
+  :Analyze Failure;
+  :Log Insights;
+  :Plan Next Experiment;
+endif
+
+stop
+
+@enduml

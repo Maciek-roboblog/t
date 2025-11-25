@@ -1,0 +1,93 @@
+@startuml mlflow-integration
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title MLflow Integration Architecture
+
+package "Kubernetes Cluster" {
+
+    node "Training Job" as train {
+        component "LLaMA-Factory\nTrainer" as trainer
+        component "MLflow\nCallback" as callback
+    }
+
+    node "WebUI" as webui {
+        component "LlamaBoard" as board
+    }
+
+    node "Evaluation Job" as eval {
+        component "Evaluator" as evaluator
+    }
+
+    database "NFS Storage" as nfs {
+        folder "/storage" {
+            folder "models" {
+                artifact "base-model"
+                artifact "merged-model"
+            }
+            folder "output" {
+                artifact "lora-adapter"
+                artifact "checkpoints"
+            }
+            folder "data" {
+                artifact "train.json"
+                artifact "test.json"
+            }
+        }
+    }
+}
+
+cloud "External Services" {
+
+    node "MLflow Server" as mlflow {
+        component "Tracking Server" as tracking {
+            collections "Experiments"
+            collections "Runs"
+            collections "Metrics"
+            collections "Parameters"
+        }
+
+        component "Model Registry" as registry {
+            collections "Models"
+            collections "Versions"
+            collections "Stages"
+        }
+
+        database "Artifact Store" as artifacts
+    }
+}
+
+' Connections
+trainer --> callback : on_log()\non_evaluate()
+callback --> tracking : HTTP API\n(metrics, params)
+callback --> artifacts : log_artifact()\n(checkpoints)
+
+trainer --> nfs : read model\nwrite adapter
+evaluator --> nfs : read model\nread test data
+evaluator --> tracking : log metrics
+
+webui --> nfs : read/write
+board --> tracking : query metrics
+
+registry --> artifacts : store models
+
+note right of mlflow
+  **Logged Data:**
+
+  **Parameters:**
+  - lora_rank, lora_alpha
+  - learning_rate, epochs
+  - dataset_version, seed
+
+  **Metrics (per step):**
+  - loss, eval_loss
+  - learning_rate
+  - grad_norm
+
+  **Artifacts:**
+  - config.yaml
+  - requirements.txt
+  - model checkpoints
+end note
+
+@enduml

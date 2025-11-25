@@ -1,0 +1,114 @@
+@startuml evaluation-pipeline
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Evaluation Pipeline
+
+|Datasets|
+start
+partition "Data Preparation" {
+    :Full Dataset;
+    note right: 100% of data
+
+    fork
+        :Training Set;
+        note right: 80%
+    fork again
+        :Validation Set;
+        note right: 10%
+    fork again
+        :Test Set;
+        note right
+          10%
+          **HOLDOUT**
+          Never seen
+          during training!
+        end note
+    end fork
+}
+
+|Training|
+partition "Training Phase" {
+    :Load Training Set;
+
+    repeat
+        :Train Step;
+        :Compute Training Loss;
+
+        if (eval_steps?) then (yes)
+            :Evaluate on Validation Set;
+            :Compute Val Loss;
+            :Log to MLflow;
+
+            if (Early stopping?) then (yes)
+                break
+            endif
+        endif
+    repeat while (more epochs?)
+
+    :Save Best Checkpoint;
+    note right
+      Based on
+      val_loss
+    end note
+}
+
+|Evaluation|
+partition "Post-Training Evaluation" {
+    :Load Test Set;
+    note right: First time model sees this data!
+
+    :Run Inference;
+
+    fork
+        :Compute Loss-based Metrics;
+        note right
+          * Perplexity
+          * Cross-Entropy
+        end note
+    fork again
+        :Compute Generation Metrics;
+        note right
+          * BLEU
+          * ROUGE
+          * Exact Match
+        end note
+    fork again
+        :Run Benchmarks;
+        note right
+          * MMLU
+          * Custom benchmarks
+        end note
+    end fork
+
+    :Aggregate Results;
+    :Log to MLflow;
+}
+
+|Comparison|
+partition "Model Comparison" {
+    :Load Baseline Results;
+
+    :Compare Metrics;
+
+    if (Improved?) then (yes)
+        :Mark as Candidate;
+        #LightGreen:Proceed to Deployment Review;
+    else (no)
+        :Analyze Regression;
+        #LightYellow:Document Findings;
+        :Plan Next Experiment;
+    endif
+}
+
+stop
+
+legend right
+  |= Metric |= Type |= Used For |
+  | Loss | Training | Optimization |
+  | Val Loss | Validation | Early stopping, Hyperparameter tuning |
+  | Test Metrics | Test | Final evaluation, Deployment decision |
+  | MMLU | Benchmark | Capability assessment |
+endlegend
+
+@enduml

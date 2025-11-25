@@ -1,0 +1,93 @@
+@startuml reproducibility-components
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Reproducibility Components
+
+package "Reproducibility Stack" {
+
+    package "Code Versioning" as code #LightBlue {
+        component "Git Repository" as git {
+            file "train.yaml" as config
+            file "scripts/*.sh" as scripts
+            file "requirements.txt" as reqs
+        }
+        note right of git
+          * Commit hash tracked
+          * Config in version control
+          * Scripts versioned
+        end note
+    }
+
+    package "Data Versioning" as data #LightGreen {
+        database "NFS Storage" as nfs {
+            folder "versions/" as versions
+            file "manifest.json" as manifest
+        }
+        note right of nfs
+          * SHA256 hashes
+          * Semantic versioning
+          * Immutable versions
+        end note
+    }
+
+    package "Environment Versioning" as env #LightYellow {
+        node "Docker Image" as docker {
+            component "Python 3.10.14" as python
+            component "PyTorch 2.1.2" as torch
+            component "CUDA 11.8" as cuda
+        }
+        note right of docker
+          * Pinned versions
+          * Tagged images
+          * Reproducible builds
+        end note
+    }
+
+    package "Experiment Tracking" as tracking #LightPink {
+        node "MLflow Server" as mlflow {
+            collections "Parameters" as params
+            collections "Metrics" as metrics
+            collections "Artifacts" as artifacts
+        }
+        note right of mlflow
+          * All hyperparameters logged
+          * Metrics with timestamps
+          * Model artifacts stored
+        end note
+    }
+
+    package "Random State" as random #LightGray {
+        component "Global Seed" as seed {
+            artifact "seed: 42" as s1
+            artifact "data_seed: 42" as s2
+        }
+        note right of seed
+          * PyTorch seed
+          * NumPy seed
+          * Data shuffle seed
+        end note
+    }
+}
+
+package "Training Run" as run {
+    component "Training Job" as job
+}
+
+' Connections
+git --> job : config
+versions --> job : data
+docker --> job : environment
+seed --> job : determinism
+job --> mlflow : logging
+
+note bottom of run
+  **To reproduce:**
+  1. Checkout git commit
+  2. Use dataset version from manifest
+  3. Use same Docker image tag
+  4. Set same seed
+  5. Run with logged parameters
+end note
+
+@enduml
