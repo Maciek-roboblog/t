@@ -5,7 +5,7 @@
 1. [Problemy z GPU](#problemy-z-gpu)
 2. [Problemy z pamiecia (OOM)](#problemy-z-pamiecia-oom)
 3. [Problemy z treningiem](#problemy-z-treningiem)
-4. [Problemy z vLLM](#problemy-z-vllm)
+4. [Problemy z vLLM (zewnętrzny)](#problemy-z-vllm-zewnętrzny)
 5. [Problemy z Kubernetes](#problemy-z-kubernetes)
 6. [Problemy z MLFlow](#problemy-z-mlflow)
 7. [Problemy z danymi](#problemy-z-danymi)
@@ -316,63 +316,31 @@ kubectl -n llm-training logs job/<job> | grep "grad_norm"
 
 ---
 
-## Problemy z vLLM
+## Problemy z vLLM (zewnętrzny)
 
-### vLLM nie startuje
+> **UWAGA:** vLLM jest zewnętrzną usługą - NIE wdrażamy go z tego repozytorium.
+> Ta sekcja dotyczy problemów z integracją modeli wytrenowanych przez LLaMA-Factory z zewnętrznym serwerem vLLM.
 
-**Objaw:**
-```
-kubectl -n llm-training get pods
-NAME                              READY   STATUS             RESTARTS   AGE
-llm-inference-xxx                 0/1     CrashLoopBackOff   5          10m
-```
+### Model nie jest widoczny dla vLLM
 
-**Diagnostyka:**
+**Objaw:** Zewnętrzny vLLM nie widzi zmergowanego modelu.
+
+**Rozwiazania:**
 
 ```bash
-# 1. Sprawdz logi
-kubectl -n llm-training logs deploy/llm-inference
+# 1. Sprawdz czy model zostal zmergowany
+kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/models/merged-model/
 
-# 2. Typowe bledy:
-```
-
-**Blad: Model not found**
-```
-FileNotFoundError: /storage/models/merged-model
-```
-Rozwiazanie:
-```bash
-# Sprawdz czy model istnieje
-kubectl -n llm-training exec -it deploy/llama-webui -- ls -la /storage/models/
-
-# Jesli brak - uruchom merge job
+# 2. Jesli brak - uruchom merge job
 kubectl apply -f k8s/09-merge-model-job.yaml
+kubectl -n llm-training logs -f job/merge-lora
+
+# 3. Sprawdz czy vLLM ma dostep do tego samego NFS
+# Na serwerze vLLM:
+ls -la /storage/models/merged-model/
 ```
 
-**Blad: OOM przy ladowaniu**
-```
-torch.cuda.OutOfMemoryError: CUDA out of memory
-```
-Rozwiazanie:
-```yaml
-# Zmniejsz gpu-memory-utilization
-args:
-- "--gpu-memory-utilization=0.8"
-- "--max-model-len=2048"
-```
-
-**Blad: Niekompatybilny model**
-```
-ValueError: Cannot load this model, tokenizer mismatch
-```
-Rozwiazanie:
-```yaml
-# Dodaj trust-remote-code
-args:
-- "--trust-remote-code"
-```
-
-### vLLM zwraca bledne odpowiedzi
+### vLLM zwraca bledne odpowiedzi po fine-tuningu
 
 **Objaw:** Model odpowiada bzdury lub powtarza sie.
 
@@ -380,48 +348,47 @@ args:
 
 | Przyczyna | Rozwiazanie |
 |-----------|-------------|
-| Zly template | Sprawdz --chat-template |
 | Model nie zmergowany | Uruchom merge job |
-| Zla tokenizacja | Sprawdz --tokenizer |
+| Zly template w vLLM | Uzij tego samego template co w treningu |
+| LoRA nie zintegrowane | Sprawdz czy uzyto `llamafactory-cli export` |
+
+**Weryfikacja modelu:**
 
 ```bash
-# Test z curl
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "llama-finetuned",
-    "messages": [{"role": "user", "content": "test"}],
-    "max_tokens": 10
-  }'
+# Sprawdz czy model ma wszystkie pliki
+ls -la /storage/models/merged-model/
+# Powinny byc: config.json, tokenizer.json, model*.safetensors
+
+# Sprawdz config.json
+cat /storage/models/merged-model/config.json | head -20
 ```
 
-### vLLM - wysoka latencja
+### Checklist integracji vLLM
 
-**Objaw:** Odpowiedzi trwaja bardzo dlugo.
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│              CHECKLIST: LLaMA-Factory → vLLM                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   [ ] Trening ukonczony (LoRA adapter w /storage/output/lora-adapter)   │
+│   [ ] Merge job ukonczony (model w /storage/models/merged-model)        │
+│   [ ] Model ma wszystkie pliki (config.json, *.safetensors)             │
+│   [ ] vLLM ma dostep do NFS (/storage/models/merged-model)              │
+│   [ ] vLLM uzywa tego samego template co trening                        │
+│   [ ] vLLM uzywa --trust-remote-code (jesli potrzebne)                  │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
 
-**Diagnostyka:**
+### Przykladowa konfiguracja vLLM (zewnętrzna)
 
 ```bash
-# Sprawdz kolejke
-curl http://localhost:8000/metrics | grep waiting
-
-# vllm:num_requests_waiting 50  <- za duzo!
-```
-
-**Rozwiazania:**
-
-```yaml
-# 1. Zwieksz max-num-seqs
-args:
-- "--max-num-seqs=512"
-
-# 2. Zmniejsz max-model-len
-args:
-- "--max-model-len=2048"
-
-# 3. Dodaj wiecej replik
-spec:
-  replicas: 3
+# Na zewnętrznym serwerze vLLM
+vllm serve /storage/models/merged-model \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --trust-remote-code \
+  --gpu-memory-utilization 0.9
 ```
 
 ---
@@ -614,7 +581,6 @@ python validate_dataset.py my_dataset.json
 
 # Logi wszystkich podow
 kubectl -n llm-training logs -l app=llama-webui --tail=100
-kubectl -n llm-training logs -l app=llm-inference --tail=100
 
 # Eventy w namespace
 kubectl -n llm-training get events --sort-by='.lastTimestamp'
@@ -708,7 +674,7 @@ alias llm-status='./scripts/status.sh'
 
 # Szybki dostep
 alias llm-webui='kubectl -n llm-training port-forward svc/llama-webui 7860:7860'
-alias llm-api='kubectl -n llm-training port-forward svc/llm-inference 8000:8000'
+# vLLM jest zewnetrzna usluga - nie ma aliasu do port-forward
 ```
 
 ---

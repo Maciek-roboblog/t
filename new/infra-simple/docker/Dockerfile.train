@@ -12,7 +12,7 @@
 # - MLflow (tracking URI z Secret)
 # - NFS Storage (modele, dane)
 #
-# NIE ZAWIERA: vLLM (inference to osobny obraz)
+# NIE ZAWIERA: vLLM (vLLM jest zewnętrzną usługą)
 
 FROM debian:11
 
