@@ -1,0 +1,43 @@
+@startuml troubleshoot-oom
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Troubleshooting: CUDA OOM
+
+start
+:CUDA out of memory;
+
+if (Używasz QLoRA?) then (nie)
+  :Włącz quantization_bit: 4;
+  stop
+else (tak)
+endif
+
+if (batch_size > 1?) then (tak)
+  :Zmniejsz do 1\nzwiększ gradient_accumulation;
+  stop
+else (nie)
+endif
+
+if (cutoff_len > 2048?) then (tak)
+  :Zmniejsz do 1024 lub 2048;
+  stop
+else (nie)
+endif
+
+if (gradient_checkpointing?) then (nie)
+  :Włącz gradient_checkpointing: true;
+  stop
+else (tak)
+endif
+
+if (lora_rank > 16?) then (tak)
+  :Zmniejsz do 8;
+  stop
+else (nie)
+endif
+
+:Model za duży dla GPU\nUżyj mniejszego modelu\nlub więcej GPU;
+stop
+
+@enduml

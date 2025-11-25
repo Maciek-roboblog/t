@@ -1,0 +1,39 @@
+@startuml troubleshoot-checklist
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Checklist Diagnostyczny
+
+package "PODSTAWY" as basics #LightYellow {
+    rectangle "kubectl połączenie" as b1
+    rectangle "Namespace llm-training" as b2
+    rectangle "Secrets utworzone" as b3
+    rectangle "PVC jest Bound" as b4
+}
+
+package "GPU" as gpu #LightGreen {
+    rectangle "GPU nodes istnieją" as g1
+    rectangle "NVIDIA plugin działa" as g2
+    rectangle "Pody mają tolerations" as g3
+    rectangle "Resources: nvidia.com/gpu" as g4
+}
+
+package "STORAGE" as storage #LightBlue {
+    rectangle "Model bazowy na PVC" as s1
+    rectangle "Dataset na PVC" as s2
+    rectangle "Ścieżki poprawne" as s3
+}
+
+package "SIEĆ" as network #LightCoral {
+    rectangle "Services utworzone" as n1
+    rectangle "Port-forward działa" as n2
+    rectangle "MLflow dostępny" as n3
+}
+
+package "OBRAZY" as images #LightGray {
+    rectangle "Obrazy w registry" as i1
+    rectangle "Tag poprawny" as i2
+    rectangle "Auth działa" as i3
+}
+
+@enduml

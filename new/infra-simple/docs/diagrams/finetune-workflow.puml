@@ -1,0 +1,35 @@
+@startuml finetune-workflow
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLaMA-Factory - Workflow Fine-tuningu
+
+|Przygotowanie|
+start
+:Model bazowy + Dataset na NFS;
+
+|Konfiguracja|
+if (Metoda?) then (WebUI)
+  :Konfiguracja interaktywna
+  w przeglądarce;
+else (YAML + CLI)
+  :Plik YAML + automatyzacja;
+endif
+
+|Trening|
+:LoRA / QLoRA / Full fine-tuning;
+note right
+  Metryki logowane do MLflow
+  LoRA adapter zapisany na NFS
+end note
+
+|Merge|
+:LoRA adapter + Model bazowy;
+:Pełny model na NFS;
+
+|Deployment|
+:vLLM czyta zmergowany
+model z NFS;
+stop
+
+@enduml

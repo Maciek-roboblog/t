@@ -1,0 +1,39 @@
+@startuml gpu-recommendations
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Rekomendacje GPU dla Fine-tuningu
+
+package "RTX 3090/4090 (24GB)" as rtx #LightYellow {
+    rectangle "Model: Llama-3.1-8B" as r1
+    rectangle "Metoda: LoRA lub QLoRA" as r2
+    rectangle "lora_rank: 16" as r3
+    rectangle "batch_size: 2" as r4
+    rectangle "cutoff_len: 2048" as r5
+}
+
+package "A100 40GB" as a100_40 #LightBlue {
+    rectangle "Model: 8B lub 70B (QLoRA)" as a1
+    rectangle "Metoda: LoRA" as a2
+    rectangle "lora_rank: 32" as a3
+    rectangle "batch_size: 4" as a4
+    rectangle "cutoff_len: 4096" as a5
+}
+
+package "A100 80GB / H100" as a100_80 #LightGreen {
+    rectangle "Model: Llama-3.1-70B" as h1
+    rectangle "Metoda: LoRA lub Full" as h2
+    rectangle "lora_rank: 64" as h3
+    rectangle "batch_size: 8" as h4
+    rectangle "cutoff_len: 8192" as h5
+}
+
+package "T4 (16GB)" as t4 #LightCoral {
+    rectangle "Model: Llama-3.2-3B / Phi-3" as t1
+    rectangle "Metoda: QLoRA (4-bit)" as t2
+    rectangle "lora_rank: 8" as t3
+    rectangle "batch_size: 1" as t4_b
+    rectangle "cutoff_len: 1024" as t5
+}
+
+@enduml

@@ -24,48 +24,19 @@ Ten folder zawiera kompletny przewodnik dotyczący **walidowalności** (validati
 
 ### Dlaczego walidacja jest kluczowa?
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    PROBLEM BEZ WALIDACJI                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Trening #1          Trening #2          Trening #3                        │
-│   ┌─────────┐         ┌─────────┐         ┌─────────┐                       │
-│   │ Loss: ? │         │ Loss: ? │         │ Loss: ? │                       │
-│   │ Params: │  ???    │ Params: │  ???    │ Params: │                       │
-│   │   ???   │ ───►    │   ???   │ ───►    │   ???   │                       │
-│   └─────────┘         └─────────┘         └─────────┘                       │
-│                                                                              │
-│   ✗ Nie wiadomo który model jest lepszy                                     │
-│   ✗ Nie można odtworzyć najlepszego wyniku                                  │
-│   ✗ Brak możliwości debugowania                                             │
-│   ✗ Brak audytu dla compliance                                              │
-│                                                                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                    ROZWIĄZANIE Z WALIDACJĄ                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Trening #1          Trening #2          Trening #3                        │
-│   ┌─────────┐         ┌─────────┐         ┌─────────┐                       │
-│   │Loss:0.42│         │Loss:0.38│         │Loss:0.35│  ◄── Najlepszy       │
-│   │ LR:1e-4 │  ───►   │ LR:2e-4 │  ───►   │ LR:2e-4 │                       │
-│   │ r=8     │         │ r=16    │         │ r=32    │                       │
-│   └────┬────┘         └────┬────┘         └────┬────┘                       │
-│        │                   │                   │                             │
-│        └───────────────────┴───────────────────┘                            │
-│                            │                                                 │
-│                       ┌────▼────┐                                           │
-│                       │  MLflow │  ◄── Centralne repozytorium               │
-│                       │ Tracking│      wszystkich eksperymentów             │
-│                       └─────────┘                                           │
-│                                                                              │
-│   ✓ Porównanie wyników między eksperymentami                                │
-│   ✓ Pełna reprodukowalność                                                  │
-│   ✓ Śledzenie liniażu modeli                                                │
-│   ✓ Compliance i audyt                                                      │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [problem-solution.puml](diagrams/problem-solution.puml) - porównanie podejścia bez i z walidacją.
+
+**Problem bez walidacji:**
+- Nie wiadomo który model jest lepszy
+- Nie można odtworzyć najlepszego wyniku
+- Brak możliwości debugowania
+- Brak audytu dla compliance
+
+**Rozwiązanie z walidacją:**
+- Porównanie wyników między eksperymentami
+- Pełna reprodukowalność
+- Śledzenie liniażu modeli
+- Compliance i audyt
 
 ---
 
@@ -73,99 +44,28 @@ Ten folder zawiera kompletny przewodnik dotyczący **walidowalności** (validati
 
 ### Komponenty systemu walidacji
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      ARCHITEKTURA WALIDACJI                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌──────────────────────────────────────────────────────────────────┐     │
-│   │                         MLflow Server                             │     │
-│   │                    (Zewnętrzna usługa)                            │     │
-│   ├──────────────────────────────────────────────────────────────────┤     │
-│   │  Tracking Server        │  Model Registry     │  Artifact Store  │     │
-│   │  ├─ Metryki            │  ├─ Wersje modeli   │  ├─ Checkpointy  │     │
-│   │  ├─ Parametry          │  ├─ Stage (dev/prod)│  ├─ Datasety     │     │
-│   │  ├─ Tagi               │  └─ Aliases         │  └─ Logi         │     │
-│   │  └─ Eksperymenty       │                     │                   │     │
-│   └──────────────────────────────────────────────────────────────────┘     │
-│                              ▲                                              │
-│                              │ HTTP API                                     │
-│                              │                                              │
-│   ┌──────────────────────────┴───────────────────────────────────────┐     │
-│   │                    Kubernetes Cluster                             │     │
-│   ├──────────────────────────────────────────────────────────────────┤     │
-│   │                                                                   │     │
-│   │   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐       │     │
-│   │   │ Training Job│     │   WebUI     │     │  Eval Job   │       │     │
-│   │   │             │     │ (LlamaBoard)│     │             │       │     │
-│   │   │ report_to:  │     │             │     │ Benchmarks: │       │     │
-│   │   │   mlflow    │     │ Real-time   │     │ - MMLU      │       │     │
-│   │   │             │     │ monitoring  │     │ - Custom    │       │     │
-│   │   └──────┬──────┘     └──────┬──────┘     └──────┬──────┘       │     │
-│   │          │                   │                   │               │     │
-│   │          └───────────────────┴───────────────────┘               │     │
-│   │                              │                                   │     │
-│   │                        ┌─────▼─────┐                            │     │
-│   │                        │    NFS    │                            │     │
-│   │                        │  Storage  │                            │     │
-│   │                        │           │                            │     │
-│   │                        │ /storage/ │                            │     │
-│   │                        │ ├─models/ │                            │     │
-│   │                        │ ├─output/ │                            │     │
-│   │                        │ └─data/   │                            │     │
-│   │                        └───────────┘                            │     │
-│   │                                                                   │     │
-│   └──────────────────────────────────────────────────────────────────┘     │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [mlflow-integration.puml](diagrams/mlflow-integration.puml) - architektura integracji z MLflow.
+
+**Komponenty:**
+
+| Warstwa | Komponenty |
+|---------|------------|
+| **MLflow Server** | Tracking Server (metryki, parametry, tagi), Model Registry (wersje, stage), Artifact Store (checkpointy, datasety) |
+| **Kubernetes** | Training Job (report_to: mlflow), WebUI (LlamaBoard), Eval Job (benchmarki) |
+| **Storage** | NFS: /storage/models/, /storage/output/, /storage/data/ |
 
 ### Przepływ danych walidacji
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       PRZEPŁYW WALIDACJI                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   1. PRZED TRENINGIEM                                                        │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  □ Przygotuj dataset (train/val/test split)                     │       │
-│   │  □ Wersjonuj dataset (hash/tag w MLflow)                        │       │
-│   │  □ Zdefiniuj baseline (metryki modelu przed fine-tuningiem)     │       │
-│   │  □ Ustaw seed dla reprodukowalności                             │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                     │                                        │
-│                                     ▼                                        │
-│   2. PODCZAS TRENINGU                                                        │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  ○ Training Loss → MLflow (każde logging_steps)                 │       │
-│   │  ○ Validation Loss → MLflow (każde eval_steps)                  │       │
-│   │  ○ Learning Rate → MLflow                                       │       │
-│   │  ○ GPU Memory Usage → Logs                                      │       │
-│   │  ○ Checkpointy → NFS (każde save_steps)                         │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                     │                                        │
-│                                     ▼                                        │
-│   3. PO TRENINGU                                                             │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  □ Ewaluacja na test set (BLEU, ROUGE, accuracy)                │       │
-│   │  □ Benchmark standardowy (MMLU, jeśli dotyczy)                  │       │
-│   │  □ Porównanie z baseline                                        │       │
-│   │  □ Zapisz artefakty do MLflow                                   │       │
-│   │  □ Tag/rejestracja najlepszego modelu                           │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                     │                                        │
-│                                     ▼                                        │
-│   4. PRZED DEPLOYMENTEM                                                      │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  □ A/B testing (opcjonalnie)                                    │       │
-│   │  □ Human evaluation (próbka)                                    │       │
-│   │  □ Safety checks (bias, toxicity)                               │       │
-│   │  □ Promocja do "Production" w MLflow Registry                   │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [validation-flow.puml](diagrams/validation-flow.puml) - pełny przepływ walidacji end-to-end.
+
+**Etapy walidacji:**
+
+| Etap | Czynności |
+|------|-----------|
+| **1. Przed treningiem** | Przygotuj dataset (train/val/test split), wersjonuj dataset, zdefiniuj baseline, ustaw seed |
+| **2. Podczas treningu** | Training Loss → MLflow, Validation Loss → MLflow, Learning Rate, checkpointy → NFS |
+| **3. Po treningu** | Ewaluacja na test set, benchmark MMLU, porównanie z baseline, tag najlepszego modelu |
+| **4. Przed deploymentem** | A/B testing, human evaluation, safety checks, promocja do Production |
 
 ---
 

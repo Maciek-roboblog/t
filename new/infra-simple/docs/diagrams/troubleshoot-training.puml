@@ -1,0 +1,40 @@
+@startuml troubleshoot-training
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Troubleshooting: Przyspieszenie Treningu
+
+rectangle "OPTYMALIZACJE" {
+
+    rectangle "1. Flash Attention" as fa #LightGreen {
+        note right: flash_attn: fa2\n(Ampere GPU+)
+    }
+
+    rectangle "2. Logging frequency" as log #LightYellow {
+        note right: logging_steps: 50\n(zamiast 1)
+    }
+
+    rectangle "3. Batch size" as batch #LightBlue {
+        note right: Zwiększ jeśli\npamięć pozwala
+    }
+
+    rectangle "4. Dataloader" as dl #LightCoral {
+        note right: dataloader_num_workers: 4
+    }
+
+    rectangle "5. bf16 precision" as bf #LightGray {
+        note right: bf16: true\n(zamiast fp16)
+    }
+
+    rectangle "6. I/O (PVC)" as io #Pink {
+        note right: SSD zamiast HDD\nLokalne dane
+    }
+}
+
+fa -[hidden]down- log
+log -[hidden]down- batch
+batch -[hidden]down- dl
+dl -[hidden]down- bf
+bf -[hidden]down- io
+
+@enduml

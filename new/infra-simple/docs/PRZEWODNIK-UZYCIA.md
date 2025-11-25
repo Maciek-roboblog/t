@@ -20,29 +20,7 @@ Kompletny przewodnik fine-tuningu modeli LLM z wykorzystaniem LLaMA-Factory na K
 
 ### Workflow
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    WORKFLOW FINE-TUNINGU                                 │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   1. PRZYGOTOWANIE                                                      │
-│      └── Model bazowy + Dataset na NFS                                  │
-│                                                                          │
-│   2. KONFIGURACJA                                                       │
-│      ├── WebUI (interaktywnie)                                          │
-│      └── YAML + CLI (automatyzacja)                                     │
-│                                                                          │
-│   3. TRENING                                                            │
-│      └── LoRA / QLoRA / Full fine-tuning                                │
-│                                                                          │
-│   4. MERGE                                                              │
-│      └── LoRA adapter + Model bazowy → Pełny model                      │
-│                                                                          │
-│   5. DEPLOYMENT                                                         │
-│      └── vLLM czyta zmergowany model z NFS                              │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Workflow Fine-tuningu](diagrams/finetune-workflow.puml)
 
 ### Komponenty systemu
 
@@ -236,41 +214,7 @@ with open('/storage/data/my_data.json') as f:
 
 ### Rekomendacje dla GPU
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│              REKOMENDACJE DLA RÓŻNYCH GPU                                │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   RTX 3090 / 4090 (24GB)                                                │
-│   ├── Model: Llama-3.1-8B                                               │
-│   ├── Metoda: LoRA lub QLoRA                                            │
-│   ├── lora_rank: 16                                                     │
-│   ├── batch_size: 2                                                     │
-│   └── cutoff_len: 2048                                                  │
-│                                                                          │
-│   A100 40GB                                                              │
-│   ├── Model: Llama-3.1-8B lub 70B (QLoRA)                              │
-│   ├── Metoda: LoRA                                                      │
-│   ├── lora_rank: 32                                                     │
-│   ├── batch_size: 4                                                     │
-│   └── cutoff_len: 4096                                                  │
-│                                                                          │
-│   A100 80GB / H100                                                       │
-│   ├── Model: Llama-3.1-70B                                              │
-│   ├── Metoda: LoRA lub Full                                             │
-│   ├── lora_rank: 64                                                     │
-│   ├── batch_size: 8                                                     │
-│   └── cutoff_len: 8192                                                  │
-│                                                                          │
-│   T4 (16GB)                                                              │
-│   ├── Model: Llama-3.2-3B lub Phi-3-mini                               │
-│   ├── Metoda: QLoRA (4-bit)                                             │
-│   ├── lora_rank: 8                                                      │
-│   ├── batch_size: 1                                                     │
-│   └── cutoff_len: 1024                                                  │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Rekomendacje GPU](diagrams/gpu-recommendations.puml)
 
 ### LoRA vs QLoRA vs Full
 
@@ -299,45 +243,28 @@ with open('/storage/data/my_data.json') as f:
 
 ### 2. Konfiguracja w WebUI (LlamaBoard)
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    KONFIGURACJA W WEBUI                                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Zakładka: Train                                                       │
-│                                                                          │
-│   MODEL                                                                 │
-│   ├── Model name: (wybierz z listy lub wpisz ścieżkę)                  │
-│   ├── Model path: /storage/models/llama-3.1-8b-instruct                │
-│   └── Template: llama3 (musi pasować do modelu!)                       │
-│                                                                          │
-│   DATASET                                                               │
-│   ├── Dataset dir: /storage/data                                       │
-│   ├── Dataset: my_dataset (zdefiniowany w dataset_info.json)           │
-│   └── Preview: (sprawdź czy dane wyglądają poprawnie)                  │
-│                                                                          │
-│   METHOD                                                                │
-│   ├── Finetuning type: lora                                            │
-│   ├── LoRA rank: 8 (zwiększ dla lepszej jakości)                       │
-│   ├── LoRA alpha: 16                                                   │
-│   └── LoRA target: all                                                 │
-│                                                                          │
-│   TRAINING                                                              │
-│   ├── Learning rate: 5e-5                                              │
-│   ├── Epochs: 3                                                        │
-│   ├── Batch size: 2                                                    │
-│   ├── Gradient accumulation: 8 (efektywny batch = 16)                 │
-│   ├── Cutoff length: 2048                                              │
-│   └── Quantization bit: None (lub 4 dla QLoRA)                         │
-│                                                                          │
-│   OUTPUT                                                                │
-│   ├── Output dir: /storage/output/lora-adapter                         │
-│   └── Logging dir: /storage/output/logs                                │
-│                                                                          │
-│   [Start] - rozpocznij trening                                         │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+**Zakładka: Train**
+
+| Sekcja | Parametr | Wartość |
+|--------|----------|---------|
+| **MODEL** | Model path | `/storage/models/llama-3.1-8b-instruct` |
+| | Template | `llama3` (musi pasować do modelu!) |
+| **DATASET** | Dataset dir | `/storage/data` |
+| | Dataset | `my_dataset` (z dataset_info.json) |
+| **METHOD** | Finetuning type | `lora` |
+| | LoRA rank | `8` (zwiększ dla lepszej jakości) |
+| | LoRA alpha | `16` |
+| | LoRA target | `all` |
+| **TRAINING** | Learning rate | `5e-5` |
+| | Epochs | `3` |
+| | Batch size | `2` |
+| | Gradient accumulation | `8` (efektywny batch = 16) |
+| | Cutoff length | `2048` |
+| | Quantization bit | `None` (lub `4` dla QLoRA) |
+| **OUTPUT** | Output dir | `/storage/output/lora-adapter` |
+| | Logging dir | `/storage/output/logs` |
+
+Kliknij **[Start]** aby rozpocząć trening.
 
 ### 3. Monitorowanie w WebUI
 
@@ -568,22 +495,7 @@ curl http://vllm-server:8000/v1/chat/completions \
 
 ### Diagram przepływu
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    LLAMA-FACTORY → vLLM                                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   LLaMA-Factory (K8s)                    NFS                   vLLM     │
-│   ┌──────────────────┐      ┌──────────────────┐    ┌──────────────┐   │
-│   │                  │      │                  │    │              │   │
-│   │   1. Trening     │──────│  LoRA adapter    │    │              │   │
-│   │      ↓           │      │       ↓          │    │              │   │
-│   │   2. Merge       │──────│  Merged model ───┼────│  3. Serve    │   │
-│   │                  │      │                  │    │              │   │
-│   └──────────────────┘      └──────────────────┘    └──────────────┘   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![LLaMA-Factory → vLLM Flow](diagrams/llama-vllm-flow.puml)
 
 ---
 
@@ -591,28 +503,7 @@ curl http://vllm-server:8000/v1/chat/completions \
 
 ### Jakość danych > Ilość
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PRIORYTETY                                            │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   1. JAKOŚĆ DANYCH (najważniejsze!)                                     │
-│      └── 1000 wysokiej jakości przykładów > 100,000 słabych            │
-│                                                                          │
-│   2. ODPOWIEDNI TEMPLATE                                                │
-│      └── Musi pasować do modelu (llama3, mistral, qwen, etc.)          │
-│                                                                          │
-│   3. LEARNING RATE                                                      │
-│      └── Za wysoki = niestabilność, za niski = brak postępu            │
-│                                                                          │
-│   4. LORA RANK                                                          │
-│      └── Wyższy = lepsza jakość, więcej VRAM                           │
-│                                                                          │
-│   5. LICZBA EPOK                                                        │
-│      └── Zazwyczaj 1-5, więcej = ryzyko overfittingu                   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Priorytety Fine-tuningu](diagrams/training-priorities.puml)
 
 ### Checklisty
 

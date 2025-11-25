@@ -7,13 +7,7 @@
 
 LLaMA-Factory (trening) i vLLM (inference) to **oddzielne usługi**. Po treningu/merge model musi być dostępny dla zewnętrznego serwera vLLM.
 
-```
-LLaMA-Factory          ???           vLLM (zewnętrzny)
-     │                  │                  │
-     │  export model    │   load model     │
-     └─────────────────►│◄─────────────────┘
-                    Model Storage
-```
+![Kontekst](../diagrams/adr001-context.puml)
 
 **Rozmiary modeli (2025):**
 - 7B model: ~14 GB (FP16)
@@ -26,10 +20,7 @@ LLaMA-Factory          ???           vLLM (zewnętrzny)
 
 ### Opcja 1: NFS/PVC (Shared Storage)
 
-```
-LLaMA-Factory  ──────►  NFS (/storage/models/merged)  ◄──────  vLLM
-                           ReadWriteMany
-```
+![Opcje](../diagrams/adr001-options.puml)
 
 **Ocena:**
 
@@ -76,10 +67,7 @@ vllm serve --model /storage/models/merged-model
 
 ### Opcja 2: Object Storage (GCS/S3)
 
-```
-LLaMA-Factory  ──►  GCS/S3 Bucket  ◄──  vLLM
-                   gs://models/
-```
+*(Diagram w opcji 1)*
 
 **Ocena:**
 
@@ -93,15 +81,8 @@ LLaMA-Factory  ──►  GCS/S3 Bucket  ◄──  vLLM
 | **Skalowalność** | ⭐⭐⭐ | 10x lepsza niż NFS przy scale-out |
 
 **Three-Tier Architecture (best practice 2025):**
-```
-┌─────────────────────────────────────────────────────────────┐
-│  HOT TIER     │  Local NVMe cache    │  ~2.5 GB/s/node    │
-├───────────────┼──────────────────────┼────────────────────┤
-│  WARM TIER    │  Distributed cache   │  P2P między nodes  │
-├───────────────┼──────────────────────┼────────────────────┤
-│  COLD TIER    │  Object Storage      │  GCS/S3 backup     │
-└─────────────────────────────────────────────────────────────┘
-```
+
+![Three-Tier Storage](../diagrams/adr001-three-tier.puml)
 
 **Implementacja (LLaMA-Factory export):**
 ```python
@@ -144,10 +125,7 @@ vllm serve --model /cache/model
 
 ### Opcja 3: MLflow Model Registry
 
-```
-LLaMA-Factory  ──►  MLflow Registry  ◄──  vLLM
-                    models:/merged/Production
-```
+*(Diagram w opcji 1)*
 
 **Ocena:**
 
@@ -161,24 +139,8 @@ LLaMA-Factory  ──►  MLflow Registry  ◄──  vLLM
 | **Audyt/Lineage** | ⭐⭐⭐ | Pełny tracking |
 
 **MLflow Model Lifecycle:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    MLflow Model Registry                     │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│   Model: llama-finetuned                                    │
-│   │                                                          │
-│   ├── Version 1 (Archived)                                  │
-│   │   └── Metrics: loss=0.45, dataset=v1                    │
-│   │                                                          │
-│   ├── Version 2 (Staging)                                   │
-│   │   └── Metrics: loss=0.32, dataset=v2                    │
-│   │                                                          │
-│   └── Version 3 (Production) ◄── Alias: @production        │
-│       └── Metrics: loss=0.28, dataset=v3                    │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-```
+
+![MLflow Lifecycle](../diagrams/adr001-mlflow-lifecycle.puml)
 
 **Implementacja (LLaMA-Factory):**
 ```python
@@ -262,37 +224,7 @@ local_path = mlflow.artifacts.download_artifacts(model_uri)
 
 ## Architektura hybrydowa (rekomendowana dla produkcji)
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         PRODUCTION                               │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│   LLaMA-Factory                                                 │
-│        │                                                         │
-│        │ 1. Train + Merge                                       │
-│        ▼                                                         │
-│   ┌─────────────┐     2. Register      ┌─────────────────────┐ │
-│   │ NFS (temp)  │ ──────────────────► │   MLflow Registry    │ │
-│   │ /storage/   │                      │   (wersjonowanie)    │ │
-│   └─────────────┘                      │   + GCS artifacts    │ │
-│                                         └──────────┬──────────┘ │
-│                                                     │            │
-│                              3. Promote to Production            │
-│                                                     ▼            │
-│   ┌─────────────────────────────────────────────────────────┐   │
-│   │                    vLLM Cluster                          │   │
-│   │  ┌─────────┐  ┌─────────┐  ┌─────────┐                 │   │
-│   │  │ Node 1  │  │ Node 2  │  │ Node 3  │  ...            │   │
-│   │  │ NVMe    │  │ NVMe    │  │ NVMe    │  (local cache)  │   │
-│   │  └─────────┘  └─────────┘  └─────────┘                 │   │
-│   │       │             │             │                      │   │
-│   │       └─────────────┴─────────────┘                      │   │
-│   │              4. Download from MLflow/GCS                 │   │
-│   │                 (cache locally on NVMe)                  │   │
-│   └─────────────────────────────────────────────────────────┘   │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
+![Architektura Hybrydowa](../diagrams/adr001-hybrid.puml)
 
 ---
 

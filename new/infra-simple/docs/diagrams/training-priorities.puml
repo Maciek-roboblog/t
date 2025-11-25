@@ -1,0 +1,47 @@
+@startuml training-priorities
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Priorytety Fine-tuningu
+
+rectangle "1. JAKOŚĆ DANYCH" as p1 #LightGreen {
+    note right
+        Najważniejsze!
+        1000 dobrych > 100k słabych
+    end note
+}
+
+rectangle "2. ODPOWIEDNI TEMPLATE" as p2 #LightBlue {
+    note right
+        Musi pasować do modelu
+        llama3, mistral, qwen...
+    end note
+}
+
+rectangle "3. LEARNING RATE" as p3 #LightYellow {
+    note right
+        Za wysoki = niestabilność
+        Za niski = brak postępu
+    end note
+}
+
+rectangle "4. LORA RANK" as p4 #LightCoral {
+    note right
+        Wyższy = lepsza jakość
+        Wyższy = więcej VRAM
+    end note
+}
+
+rectangle "5. LICZBA EPOK" as p5 #LightGray {
+    note right
+        Zazwyczaj 1-5
+        Więcej = overfitting
+    end note
+}
+
+p1 -[hidden]down- p2
+p2 -[hidden]down- p3
+p3 -[hidden]down- p4
+p4 -[hidden]down- p5
+
+@enduml

@@ -7,21 +7,9 @@
 
 vLLM to wysokowydajny silnik inference dla LLM. W obecnej architekturze vLLM jest **zewnętrzną usługą** - nie wdrażamy go z tego repozytorium. Istnieje jednak możliwość wdrożenia vLLM jako **wewnętrzny komponent** w tym samym klastrze Kubernetes.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                    PYTANIE ARCHITEKTONICZNE                             │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   Czy vLLM powinien być:                                               │
-│                                                                         │
-│   A) ZEWNĘTRZNY (obecny stan)                                          │
-│      └── Oddzielna infrastruktura, zarządzana niezależnie              │
-│                                                                         │
-│   B) WEWNĘTRZNY (nowa opcja)                                           │
-│      └── Wdrażany z tego repozytorium, wspólny klaster z treningiem   │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-```
+**Pytanie architektoniczne:**
+- **A) ZEWNĘTRZNY** (obecny stan) - oddzielna infrastruktura, zarządzana niezależnie
+- **B) WEWNĘTRZNY** (nowa opcja) - wdrażany z tego repozytorium, wspólny klaster z treningiem
 
 **Tło techniczne (2025):**
 
@@ -38,32 +26,7 @@ vLLM to wysokowydajny silnik inference dla LLM. W obecnej architekturze vLLM jes
 
 ### Opcja A: vLLM Zewnętrzny (obecna architektura)
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                         ARCHITEKTURA ZEWNĘTRZNA                         │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   KUBERNETES CLUSTER (Training)      │    ZEWNĘTRZNA INFRASTRUKTURA   │
-│   ┌────────────────────────────┐    │    ┌────────────────────────┐   │
-│   │  Namespace: llm-training   │    │    │     vLLM Server(s)     │   │
-│   │  ┌──────────────────────┐  │    │    │  ┌────────────────┐    │   │
-│   │  │   LLaMA-Factory      │  │    │    │  │  GPU Node 1    │    │   │
-│   │  │   - WebUI            │  │    │    │  │  vLLM instance │    │   │
-│   │  │   - Training Job     │  │    │    │  └────────────────┘    │   │
-│   │  │   - Merge Job        │  │    │    │  ┌────────────────┐    │   │
-│   │  └──────────┬───────────┘  │    │    │  │  GPU Node 2    │    │   │
-│   │             │              │    │    │  │  vLLM instance │    │   │
-│   └─────────────┼──────────────┘    │    │  └────────────────┘    │   │
-│                 │                    │    └──────────┬─────────────┘   │
-│                 │                    │               │                  │
-│                 ▼                    │               ▼                  │
-│   ┌──────────────────────────────────┴───────────────────────────────┐ │
-│   │                    NFS Storage (SharedStorage)                    │ │
-│   │              /storage/models/merged-model                         │ │
-│   └──────────────────────────────────────────────────────────────────┘ │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-```
+![vLLM Zewnętrzny](../diagrams/adr002-external.puml)
 
 **Charakterystyka:**
 
@@ -92,39 +55,7 @@ vllm serve /storage/models/merged-model \
 
 ### Opcja B: vLLM Wewnętrzny (nowa możliwość)
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                         ARCHITEKTURA WEWNĘTRZNA                         │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   KUBERNETES CLUSTER (Unified)                                         │
-│   ┌────────────────────────────────────────────────────────────────┐   │
-│   │  Namespace: llm-training                                        │   │
-│   │  ┌──────────────────────┐        ┌──────────────────────┐      │   │
-│   │  │   LLaMA-Factory      │        │      vLLM Server      │      │   │
-│   │  │   - WebUI            │        │   (Deployment/Helm)   │      │   │
-│   │  │   - Training Job     │        │                       │      │   │
-│   │  │   - Merge Job        │        │   OpenAI-compatible   │      │   │
-│   │  └──────────┬───────────┘        │   API :8000           │      │   │
-│   │             │                     └───────────┬───────────┘      │   │
-│   │             │                                 │                   │   │
-│   │             ▼                                 ▼                   │   │
-│   │  ┌──────────────────────────────────────────────────────────┐   │   │
-│   │  │              PVC: llama-storage (NFS)                     │   │   │
-│   │  │           /storage/models/merged-model                    │   │   │
-│   │  └──────────────────────────────────────────────────────────┘   │   │
-│   │                                                                  │   │
-│   │  GPU Nodes:                                                      │   │
-│   │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │   │
-│   │  │   Node 1     │  │   Node 2     │  │   Node 3     │          │   │
-│   │  │ Training GPU │  │ Training GPU │  │ vLLM GPU     │          │   │
-│   │  │   (Jobs)     │  │   (spare)    │  │ (inference)  │          │   │
-│   │  └──────────────┘  └──────────────┘  └──────────────┘          │   │
-│   │                                                                  │   │
-│   └──────────────────────────────────────────────────────────────────┘   │
-│                                                                         │
-└────────────────────────────────────────────────────────────────────────┘
-```
+![vLLM Wewnętrzny](../diagrams/adr002-internal.puml)
 
 **Charakterystyka:**
 
@@ -221,39 +152,7 @@ spec:
 
 ### Wpływ na GPU
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    GPU RESOURCE MANAGEMENT                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   OPCJA A: ZEWNĘTRZNY                                                   │
-│   ┌─────────────────────┐    ┌─────────────────────┐                   │
-│   │  Training Cluster   │    │  Inference Cluster  │                   │
-│   │  GPU 1: Training    │    │  GPU 1: vLLM        │                   │
-│   │  GPU 2: Training    │    │  GPU 2: vLLM        │                   │
-│   │  GPU 3: (idle)      │    │  GPU 3: vLLM        │                   │
-│   └─────────────────────┘    └─────────────────────┘                   │
-│   + Pełna izolacja                                                      │
-│   + Niezależne skalowanie                                               │
-│   - Wyższy koszt (idle GPU)                                            │
-│   - Duplikacja infrastruktury                                           │
-│                                                                          │
-│   ═══════════════════════════════════════════════════════════════════   │
-│                                                                          │
-│   OPCJA B: WEWNĘTRZNY                                                   │
-│   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │  Unified Cluster                                                 │   │
-│   │  GPU 1: Training (podczas treningu) → vLLM (po merge)           │   │
-│   │  GPU 2: Training / spare                                        │   │
-│   │  GPU 3: vLLM (dedicated)                                        │   │
-│   └─────────────────────────────────────────────────────────────────┘   │
-│   + Lepsze wykorzystanie GPU                                            │
-│   + Niższy koszt                                                        │
-│   - Potencjalne konflikty zasobów                                      │
-│   - Wymaga GPU time-slicing lub MIG                                    │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![GPU Management](../diagrams/adr002-gpu-management.puml)
 
 **GPU Sharing Options (dla opcji B):**
 
@@ -266,33 +165,7 @@ spec:
 
 ### Wpływ na operacje
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    OPERATIONAL IMPACT                                    │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   DEPLOYMENT                                                            │
-│   ├── Zewnętrzny: 2 zespoły, 2 procesy CI/CD                          │
-│   └── Wewnętrzny: 1 zespół, 1 proces CI/CD                            │
-│                                                                          │
-│   MONITORING                                                            │
-│   ├── Zewnętrzny: Oddzielne dashboardy                                │
-│   └── Wewnętrzny: Unified observability                               │
-│                                                                          │
-│   TROUBLESHOOTING                                                       │
-│   ├── Zewnętrzny: "To nie nasz problem" syndrom                       │
-│   └── Wewnętrzny: End-to-end visibility                               │
-│                                                                          │
-│   UPGRADES                                                              │
-│   ├── Zewnętrzny: Niezależne, potencjalne incompatibility             │
-│   └── Wewnętrzny: Atomowe, testowane razem                            │
-│                                                                          │
-│   ROLLBACK                                                              │
-│   ├── Zewnętrzny: Skomplikowane (koordynacja)                         │
-│   └── Wewnętrzny: Proste (jeden helm release)                         │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Operational Impact](../diagrams/adr002-operational.puml)
 
 ### Wpływ na architekturę repozytorium
 
@@ -349,32 +222,21 @@ infra-simple/
 
 ### Wpływ na koszty
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    COST COMPARISON (przykład)                            │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   Założenia:                                                            │
-│   - 2 GPU nodes dla training (A100 40GB)                               │
-│   - Trening: 20 godzin/tydzień                                         │
-│   - Inference: 24/7                                                     │
-│   - GCP pricing: ~$2.9/GPU/godz (A100)                                 │
-│                                                                          │
-│   OPCJA A: ZEWNĘTRZNY                                                   │
-│   ├── Training cluster: 2 GPU × 168h × $2.9 = $975/tydzień            │
-│   ├── Inference cluster: 2 GPU × 168h × $2.9 = $975/tydzień           │
-│   └── RAZEM: ~$1,950/tydzień                                           │
-│                                                                          │
-│   OPCJA B: WEWNĘTRZNY (z GPU sharing)                                  │
-│   ├── Unified cluster: 3 GPU × 168h × $2.9 = $1,461/tydzień           │
-│   │   - 1 GPU: dedicated inference (24/7)                              │
-│   │   - 2 GPU: training (20h) + inference overflow                     │
-│   └── RAZEM: ~$1,461/tydzień                                           │
-│                                                                          │
-│   OSZCZĘDNOŚĆ: ~25% ($489/tydzień, ~$25k/rok)                          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+**Przykład kalkulacji:**
+
+| Założenia | |
+|-----------|---|
+| GPU nodes dla training | 2× A100 40GB |
+| Trening | 20 godzin/tydzień |
+| Inference | 24/7 |
+| GCP pricing | ~$2.9/GPU/godz |
+
+| Opcja | Kalkulacja | Koszt/tydzień |
+|-------|------------|---------------|
+| **A: Zewnętrzny** | Training: 2 GPU × 168h × $2.9 + Inference: 2 GPU × 168h × $2.9 | ~$1,950 |
+| **B: Wewnętrzny** | Unified: 3 GPU × 168h × $2.9 | ~$1,461 |
+
+**Oszczędność z opcji B:** ~25% ($489/tydzień, ~$25k/rok)
 
 ---
 
@@ -404,34 +266,7 @@ infra-simple/
 
 ### Etapy wdrożenia wewnętrznego vLLM:
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PLAN MIGRACJI                                         │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   FAZA 1: Przygotowanie (1-2 dni)                                      │
-│   ├── [ ] Dodaj k8s/07-vllm-inference.yaml                            │
-│   ├── [ ] Zaktualizuj scripts/deploy.sh                               │
-│   ├── [ ] Zaktualizuj scripts/ui.sh (port-forward)                    │
-│   └── [ ] Przetestuj na dev cluster                                   │
-│                                                                          │
-│   FAZA 2: Parallel run (1 tydzień)                                     │
-│   ├── [ ] Deploy wewnętrzny vLLM (nie eksponowany)                    │
-│   ├── [ ] Porównaj odpowiedzi z zewnętrznym                           │
-│   ├── [ ] Zmierz latencję i throughput                                │
-│   └── [ ] Monitoruj GPU utilization                                   │
-│                                                                          │
-│   FAZA 3: Cutover                                                       │
-│   ├── [ ] Przełącz ruch na wewnętrzny vLLM                            │
-│   ├── [ ] Zatrzymaj zewnętrzny (ale nie usuwaj)                       │
-│   └── [ ] Monitoruj przez 48h                                         │
-│                                                                          │
-│   FAZA 4: Cleanup                                                       │
-│   ├── [ ] Usuń zewnętrzną infrastrukturę vLLM                         │
-│   └── [ ] Zaktualizuj dokumentację                                    │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Plan Migracji](../diagrams/adr002-migration.puml)
 
 ---
 

@@ -15,79 +15,25 @@
 
 ### Przegląd
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        TYPY EWALUACJI                                        │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   1. PODCZAS TRENINGU (Online Evaluation)                                    │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • Validation Loss - automatycznie co eval_steps                │       │
-│   │  • Token Accuracy - opcjonalnie                                 │       │
-│   │  • Szybkie, ale ograniczone metryki                            │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   2. PO TRENINGU (Offline Evaluation)                                        │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • Pełna ewaluacja na test set                                  │       │
-│   │  • BLEU, ROUGE, Exact Match                                     │       │
-│   │  • Benchmarki (MMLU, custom)                                    │       │
-│   │  • Human evaluation (próbka)                                    │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   3. PRZED DEPLOYMENTEM (Production Readiness)                               │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │  • A/B testing vs baseline                                      │       │
-│   │  • Safety checks (bias, toxicity)                               │       │
-│   │  • Latency/throughput tests                                     │       │
-│   │  • Edge case testing                                            │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [evaluation-pipeline.puml](diagrams/evaluation-pipeline.puml) - pipeline ewaluacji modeli.
+
+| Typ ewaluacji | Kiedy | Metryki |
+|---------------|-------|---------|
+| **Online (podczas treningu)** | Co eval_steps | Validation Loss, Token Accuracy |
+| **Offline (po treningu)** | Po zakończeniu | BLEU, ROUGE, Exact Match, MMLU |
+| **Production Readiness** | Przed deploymentem | A/B testing, safety checks, latency |
 
 ### Podział datasetu
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     PODZIAŁ DATASETU                                         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Cały dataset (100%)                                                        │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │                                                                  │       │
-│   │  ┌───────────────────────────────────────────┐  80%             │       │
-│   │  │              TRAINING SET                  │                  │       │
-│   │  │                                            │                  │       │
-│   │  │  Używany do: uczenia modelu               │                  │       │
-│   │  │  Kiedy: podczas każdego kroku treningu    │                  │       │
-│   │  └───────────────────────────────────────────┘                  │       │
-│   │                                                                  │       │
-│   │  ┌─────────────────┐  10%                                       │       │
-│   │  │ VALIDATION SET  │                                            │       │
-│   │  │                 │                                            │       │
-│   │  │ Używany do:     │                                            │       │
-│   │  │ - monitoring    │                                            │       │
-│   │  │ - early stop    │                                            │       │
-│   │  │ - hyperparam    │                                            │       │
-│   │  │   tuning        │                                            │       │
-│   │  └─────────────────┘                                            │       │
-│   │                                                                  │       │
-│   │  ┌─────────────────┐  10%                                       │       │
-│   │  │    TEST SET     │  ◄── NIGDY nie używany podczas treningu!  │       │
-│   │  │                 │                                            │       │
-│   │  │ Używany do:     │                                            │       │
-│   │  │ - final eval    │                                            │       │
-│   │  │ - benchmarks    │                                            │       │
-│   │  │ - porównania    │                                            │       │
-│   │  └─────────────────┘                                            │       │
-│   │                                                                  │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-│   WAŻNE: Test set musi być oddzielony PRZED treningiem!                     │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+> **Diagram:** Zobacz [dataset-versioning.puml](diagrams/dataset-versioning.puml) - strategia wersjonowania i podziału danych.
+
+| Set | Procent | Cel | Kiedy używany |
+|-----|---------|-----|---------------|
+| **Training** | 80% | Uczenie modelu | Każdy krok treningu |
+| **Validation** | 10% | Monitoring, early stop, hyperparameter tuning | Co eval_steps |
+| **Test** | 10% | Final eval, benchmarki, porównania | **NIGDY** podczas treningu! |
+
+**WAŻNE:** Test set musi być oddzielony **PRZED** treningiem!
 
 ---
 
@@ -124,66 +70,39 @@ PPL = exp(CE_Loss)
 
 **Zastosowanie:** Tłumaczenia, podsumowania, generacja tekstu.
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          BLEU SCORE                                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   Mierzy: Podobieństwo n-gramów między generacją a referencją               │
-│                                                                              │
-│   Reference: "The cat sat on the mat"                                        │
-│   Generated: "The cat is on the mat"                                         │
-│                                                                              │
-│   1-gramy: 5/6 = 0.83                                                       │
-│   2-gramy: 3/5 = 0.60                                                       │
-│   3-gramy: 1/4 = 0.25                                                       │
-│   4-gramy: 0/3 = 0.00                                                       │
-│                                                                              │
-│   BLEU-4 = BP × (p1 × p2 × p3 × p4)^(1/4)                                   │
-│          ≈ 0.0 (z powodu 4-gramów = 0)                                      │
-│                                                                              │
-│   Interpretacja:                                                             │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │ Score     │ Jakość                                              │       │
-│   ├───────────┼─────────────────────────────────────────────────────┤       │
-│   │ 0.0 - 0.1 │ Słaba jakość                                        │       │
-│   │ 0.1 - 0.3 │ Podstawowa jakość                                   │       │
-│   │ 0.3 - 0.5 │ Dobra jakość                                        │       │
-│   │ 0.5 - 0.7 │ Bardzo dobra jakość                                 │       │
-│   │ > 0.7     │ Doskonała (bliska human-level)                      │       │
-│   └───────────┴─────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Mierzy:** Podobieństwo n-gramów między generacją a referencją.
+
+**Przykład:**
+- Reference: "The cat sat on the mat"
+- Generated: "The cat is on the mat"
+- BLEU-4 = BP × (p1 × p2 × p3 × p4)^(1/4)
+
+**Interpretacja:**
+
+| Score | Jakość |
+|-------|--------|
+| 0.0 - 0.1 | Słaba jakość |
+| 0.1 - 0.3 | Podstawowa jakość |
+| 0.3 - 0.5 | Dobra jakość |
+| 0.5 - 0.7 | Bardzo dobra jakość |
+| > 0.7 | Doskonała (bliska human-level) |
 
 #### ROUGE Score
 
 **Zastosowanie:** Podsumowania, ekstrakcja informacji.
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          ROUGE SCORES                                        │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ROUGE-1: Overlap 1-gramów (słów)                                          │
-│   ROUGE-2: Overlap 2-gramów                                                 │
-│   ROUGE-L: Longest Common Subsequence                                        │
-│                                                                              │
-│   Każdy ma 3 warianty:                                                      │
-│   - Precision: ile z wygenerowanych jest w referencji                       │
-│   - Recall: ile z referencji jest w wygenerowanych                          │
-│   - F1: harmonic mean of P and R                                            │
-│                                                                              │
-│   Przykład:                                                                  │
-│   Reference: "The quick brown fox jumps"                                     │
-│   Generated: "A quick brown dog jumps high"                                  │
-│                                                                              │
-│   ROUGE-1 Recall = 4/5 = 0.80 (quick, brown, jumps w ref)                   │
-│   ROUGE-1 Precision = 4/6 = 0.67                                            │
-│   ROUGE-1 F1 = 0.73                                                         │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+| Typ | Mierzy |
+|-----|--------|
+| ROUGE-1 | Overlap 1-gramów (słów) |
+| ROUGE-2 | Overlap 2-gramów |
+| ROUGE-L | Longest Common Subsequence |
+
+**Warianty:** Precision, Recall, F1
+
+**Przykład:**
+- Reference: "The quick brown fox jumps"
+- Generated: "A quick brown dog jumps high"
+- ROUGE-1 F1 = 0.73
 
 #### Exact Match (EM)
 
@@ -297,39 +216,24 @@ output_dir: /storage/eval_results
 
 ### MMLU (Massive Multitask Language Understanding)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                            MMLU BENCHMARK                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   57 zadań w 4 kategoriach:                                                 │
-│                                                                              │
-│   ┌─────────────────┬─────────────────┬─────────────────┬───────────────┐  │
-│   │     STEM        │    Humanities   │  Social Science │    Other      │  │
-│   ├─────────────────┼─────────────────┼─────────────────┼───────────────┤  │
-│   │ Mathematics     │ History         │ Economics       │ Business      │  │
-│   │ Physics         │ Philosophy      │ Psychology      │ Health        │  │
-│   │ Chemistry       │ Law             │ Sociology       │ Misc          │  │
-│   │ Biology         │ Literature      │ Politics        │               │  │
-│   │ CS              │ Ethics          │                 │               │  │
-│   └─────────────────┴─────────────────┴─────────────────┴───────────────┘  │
-│                                                                              │
-│   Format: Multiple choice (A, B, C, D)                                      │
-│   Metryka: Accuracy (% poprawnych)                                          │
-│                                                                              │
-│   Typowe wyniki:                                                            │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │ Model              │ MMLU Score                                 │       │
-│   ├────────────────────┼────────────────────────────────────────────┤       │
-│   │ Random baseline    │ 25%                                        │       │
-│   │ LLaMA-2 7B         │ ~46%                                       │       │
-│   │ LLaMA-2 70B        │ ~68%                                       │       │
-│   │ GPT-4              │ ~86%                                       │       │
-│   │ Human expert       │ ~90%                                       │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**57 zadań w 4 kategoriach:**
+
+| STEM | Humanities | Social Science | Other |
+|------|------------|----------------|-------|
+| Mathematics, Physics, Chemistry, Biology, CS | History, Philosophy, Law, Literature, Ethics | Economics, Psychology, Sociology, Politics | Business, Health, Misc |
+
+**Format:** Multiple choice (A, B, C, D)
+**Metryka:** Accuracy (% poprawnych)
+
+**Typowe wyniki:**
+
+| Model | MMLU Score |
+|-------|------------|
+| Random baseline | 25% |
+| LLaMA-2 7B | ~46% |
+| LLaMA-2 70B | ~68% |
+| GPT-4 | ~86% |
+| Human expert | ~90% |
 
 **Konfiguracja dla LLaMA-Factory:**
 
