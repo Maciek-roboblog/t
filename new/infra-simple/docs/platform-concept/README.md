@@ -28,67 +28,19 @@ Platforma umożliwia Data Scientistom fine-tuning modeli LLM (Large Language Mod
 
 ## Architektura wysokopoziomowa
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              UŻYTKOWNICY                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌──────────────────┐              ┌──────────────────┐                    │
-│   │  Data Scientist  │              │  Data Scientist  │                    │
-│   │    (WebUI)       │              │   (YAML/Git)     │                    │
-│   └────────┬─────────┘              └────────┬─────────┘                    │
-│            │                                  │                              │
-│            │ Konfiguracja                     │ Commit YAML                  │
-│            │ parametrów                       │ do GitLab                    │
-│            ▼                                  ▼                              │
-│   ┌──────────────────┐              ┌──────────────────┐                    │
-│   │  LLaMA Factory   │              │  Jenkins/GitLab  │                    │
-│   │     WebUI        │              │      CI/CD       │                    │
-│   │   (Gradio)       │              │                  │                    │
-│   └────────┬─────────┘              └────────┬─────────┘                    │
-│            │                                  │                              │
-│            └──────────────┬──────────────────┘                              │
-│                           │                                                  │
-│                           ▼                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                         KUBERNETES CLUSTER                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌─────────────────────────────────────────────────────────────────────┐   │
-│   │                    Namespace: llm-training                           │   │
-│   │                                                                      │   │
-│   │  ┌───────────────┐    ┌───────────────┐    ┌───────────────┐        │   │
-│   │  │  Training     │    │    Merge      │    │    WebUI      │        │   │
-│   │  │    Job        │    │     Job       │    │  Deployment   │        │   │
-│   │  │   (GPU)       │    │    (GPU)      │    │    (GPU)      │        │   │
-│   │  └───────┬───────┘    └───────┬───────┘    └───────────────┘        │   │
-│   │          │                    │                                      │   │
-│   │          └────────────────────┴────────────────┐                    │   │
-│   │                                                │                    │   │
-│   │                                                ▼                    │   │
-│   │  ┌─────────────────────────────────────────────────────────────┐   │   │
-│   │  │                    PVC (NFS Storage)                         │   │   │
-│   │  │  /storage/models/    /storage/output/    /storage/data/      │   │   │
-│   │  └─────────────────────────────────────────────────────────────┘   │   │
-│   │                                                                      │   │
-│   └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                          USŁUGI ZEWNĘTRZNE                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌───────────────┐    ┌───────────────┐    ┌───────────────┐              │
-│   │    MLflow     │    │  NFS Storage  │    │     vLLM      │              │
-│   │   (Tracking   │    │ (ReadWriteMany│    │  (Inference   │              │
-│   │  & Registry)  │    │    200Gi)     │    │   Service)    │              │
-│   └───────────────┘    └───────────────┘    └───────────────┘              │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+![Architektura systemu](./diagrams/platform-architecture.puml)
+
+**Główne warstwy:**
+- **Użytkownicy**: Data Scientists (WebUI lub YAML/Git)
+- **Orchestracja**: Jenkins/GitLab CI, ArgoCD
+- **Kubernetes**: Training Job, Merge Job, WebUI (wszystkie na GPU)
+- **Usługi zewnętrzne**: MLflow, NFS Storage, vLLM
 
 ---
 
 ## Komponenty systemu
+
+![Komponenty platformy](./diagrams/platform-components.puml)
 
 ### 1. LLaMA Factory
 **Rola**: Główne narzędzie do fine-tuningu modeli LLM
@@ -181,137 +133,44 @@ nodeSelector:
 
 ### Pełny przepływ fine-tuningu
 
-```
-┌────────────────────────────────────────────────────────────────────────────┐
-│                          FAZA 1: PRZYGOTOWANIE                              │
-├────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  1. Data Scientist przygotowuje dataset                                     │
-│     └─→ Format: JSON array [{instruction, input, output}]                   │
-│     └─→ Upload do: /storage/data/                                           │
-│                                                                             │
-│  2. Wybór modelu bazowego                                                   │
-│     └─→ Z predefiniowanej listy (ConfigMap)                                 │
-│     └─→ Lub z MLflow Model Registry                                         │
-│                                                                             │
-├────────────────────────────────────────────────────────────────────────────┤
-│                          FAZA 2: KONFIGURACJA                               │
-├────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  OPCJA A: WebUI                          OPCJA B: YAML/Git                  │
-│  ┌─────────────────────┐                 ┌─────────────────────┐            │
-│  │ • Wybór modelu      │                 │ • Commit YAML       │            │
-│  │ • Parametry LoRA    │                 │ • MR/PR approval    │            │
-│  │ • Learning rate     │                 │ • CI walidacja      │            │
-│  │ • Epochs            │                 │                     │            │
-│  │ • Batch size        │                 │                     │            │
-│  │ → Submit            │                 │ → Pipeline start    │            │
-│  └─────────────────────┘                 └─────────────────────┘            │
-│                                                                             │
-├────────────────────────────────────────────────────────────────────────────┤
-│                          FAZA 3: TRENING                                    │
-├────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                    KUBERNETES TRAINING JOB                           │   │
-│  │                                                                      │   │
-│  │  PRE-TRAINING:                                                       │   │
-│  │  • Walidacja konfiguracji                                            │   │
-│  │  • Rejestracja parametrów w MLflow                                   │   │
-│  │  • Hash datasetu do MLflow                                           │   │
-│  │                                                                      │   │
-│  │  TRAINING:                                                           │   │
-│  │  • LLaMA Factory wykonuje fine-tuning                                │   │
-│  │  • Logowanie metryk do MLflow (real-time)                            │   │
-│  │  • Checkpointy zapisywane do NFS                                     │   │
-│  │                                                                      │   │
-│  │  POST-TRAINING:                                                      │   │
-│  │  • Zapis adaptera LoRA do /storage/output/                           │   │
-│  │  • Rejestracja modelu w MLflow                                       │   │
-│  │                                                                      │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                             │
-├────────────────────────────────────────────────────────────────────────────┤
-│                          FAZA 4: MERGE & DEPLOY                             │
-├────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  1. Merge Job łączy LoRA adapter z base model                              │
-│     └─→ Output: /storage/models/merged-model/                              │
-│                                                                             │
-│  2. Pipeline CI/CD wdraża model na vLLM                                    │
-│     └─→ ArgoCD synchronizuje konfigurację                                  │
-│     └─→ vLLM ładuje nowy model                                             │
-│                                                                             │
-│  3. Rejestracja w API Gateway (Stream)                                     │
-│     └─→ Model dostępny przez endpoint                                      │
-│                                                                             │
-└────────────────────────────────────────────────────────────────────────────┘
-```
+![Workflow treningu](./diagrams/platform-workflow.puml)
+
+**Etapy:**
+
+| Faza | Opis | Output |
+|------|------|--------|
+| **1. Przygotowanie** | Dataset (JSON) + wybór modelu bazowego | `/storage/data/`, ConfigMap |
+| **2. Konfiguracja** | WebUI lub YAML/Git commit | Parametry treningu |
+| **3. Trening** | Kubernetes Job + MLflow logging | `/storage/output/lora-adapter/` |
+| **4. Merge & Deploy** | LoRA + base → merged model → vLLM | `/storage/models/merged-model/` |
 
 ---
 
 ## Dwa podejścia do triggerowania treningu
 
+![Dwa podejścia](./diagrams/platform-two-approaches.puml)
+
 ### Podejście A: LLaMA Factory WebUI
 
-```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    Data     │───▶│   WebUI     │───▶│ Kubernetes  │───▶│   MLflow    │
-│  Scientist  │    │  (Gradio)   │    │    Job      │    │  Tracking   │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-```
+| Zalety | Wady |
+|--------|------|
+| Intuicyjny interfejs graficzny | Brak natywnej autoryzacji użytkowników |
+| Wizualizacja postępu (loss curve) | Trudniejsza audytowalność |
+| Wbudowany chat do testów | Wymaga dodatkowego komponentu |
+| Eksport konfiguracji do YAML | Problem z sesjami przy wielu użytkownikach |
 
-**Zalety**:
-- Intuicyjny interfejs graficzny
-- Wizualizacja postępu (loss curve)
-- Możliwość testowania modelu w wbudowanym chacie
-- Eksport konfiguracji do YAML
-
-**Wady**:
-- Brak natywnej autoryzacji użytkowników
-- Trudniejsza audytowalność (kto co uruchomił)
-- Wymaga dodatkowego komponentu do utrzymania
-- Problem z sesjami przy wielu użytkownikach
-
-**Kiedy używać**:
-- Eksperymentowanie i prototypowanie
-- Szybkie testy parametrów
-- Użytkownicy mniej techniczni
+**Kiedy używać**: Eksperymentowanie, prototypowanie, szybkie testy parametrów
 
 ### Podejście B: YAML + Git + CI/CD
 
-```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│    Data     │───▶│   GitLab    │───▶│  Jenkins/   │───▶│ Kubernetes  │
-│  Scientist  │    │   Commit    │    │   GitLab CI │    │    Job      │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-       │                  │                  │                  │
-       │                  ▼                  │                  │
-       │           ┌─────────────┐           │                  │
-       │           │     MR      │◀──────────┘                  │
-       │           │   Review    │                              │
-       │           └─────────────┘                              │
-       │                                                        │
-       └────────────────────────────────────────────────────────┘
-                         Audyt trail w Git
-```
+| Zalety | Wady |
+|--------|------|
+| Pełna audytowalność (Git history) | Wymaga znajomości YAML |
+| Code review przez MR/PR | Brak wizualizacji real-time |
+| Integracja z istniejącym CI/CD | Mniej intuicyjne dla nie-programistów |
+| Walidacja przed uruchomieniem | |
 
-**Zalety**:
-- Pełna audytowalność (Git history)
-- Kontrola przez MR/PR i code review
-- Łatwiejsza integracja z istniejącymi procesami CI/CD
-- Możliwość walidacji przed uruchomieniem
-- Nie wymaga dodatkowych komponentów UI
-
-**Wady**:
-- Wymaga znajomości formatu YAML
-- Brak wizualizacji postępu w czasie rzeczywistym
-- Mniej intuicyjne dla nie-programistów
-
-**Kiedy używać**:
-- Produkcyjne workloady
-- Procesy wymagające audytu
-- Powtarzalne eksperymenty
+**Kiedy używać**: Produkcyjne workloady, procesy wymagające audytu, powtarzalne eksperymenty
 
 ### Rekomendacja
 
@@ -330,35 +189,17 @@ nodeSelector:
 
 ### Repozytoria i ArgoCD
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        STRUKTURA REPOZYTORIÓW                            │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  Grupa: llm-finetuning/                                                  │
-│  │                                                                       │
-│  ├── llama-factory-image/        # Dockerfile + build pipeline          │
-│  │   ├── Dockerfile                                                      │
-│  │   ├── requirements.txt                                                │
-│  │   └── .gitlab-ci.yml                                                  │
-│  │                                                                       │
-│  ├── training-jobs/               # Definicje jobów treningowych        │
-│  │   ├── templates/                                                      │
-│  │   │   └── training-job.yaml                                           │
-│  │   └── configs/                 # Konfiguracje per eksperyment        │
-│  │       └── experiment-001.yaml                                         │
-│  │                                                                       │
-│  └── argo-deployment/             # Helm charts + ArgoCD values         │
-│      ├── charts/                                                         │
-│      │   └── llm-training/                                               │
-│      └── values/                                                         │
-│          ├── dev.yaml                                                    │
-│          └── prod.yaml                                                   │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+![Struktura repozytoriów](./diagrams/platform-repo-structure.puml)
+
+| Repozytorium | Cel | Zawartość |
+|--------------|-----|-----------|
+| `llama-factory-image/` | Build obrazu Docker | Dockerfile, requirements.txt, .gitlab-ci.yml |
+| `training-jobs/` | Definicje jobów | templates/, configs/experiment-*.yaml |
+| `argo-deployment/` | GitOps deployment | Helm charts, values/dev.yaml, values/prod.yaml |
 
 ### Pipeline CI/CD (Jenkins/GitLab CI)
+
+![Integracja CI/CD](./diagrams/platform-cicd-integration.puml)
 
 ```yaml
 # Przykładowy pipeline dla treningu
@@ -438,15 +279,14 @@ data:
 
 **Podejście**: Izolacja przez namespace'y Kubernetes
 
-```
-Namespace: tenant-a-training    → Zespół A
-Namespace: tenant-b-training    → Zespół B
-```
+![Multi-tenancy](./diagrams/platform-multi-tenant.puml)
 
 **Uzasadnienie**:
 - LLaMA Factory nie wspiera multi-user natywnie
-- Każdy tenant ma własną instancję
-- Izolacja zasobów GPU przez resource quotas
+- Każdy tenant ma własną instancję WebUI
+- Izolacja zasobów GPU przez Resource Quotas
+- Network Policies dla izolacji sieci
+- RBAC - zespoły widzą tylko swój namespace
 
 ### ADR-004: Orchestracja - Airflow vs Jenkins
 
@@ -462,6 +302,8 @@ Namespace: tenant-b-training    → Zespół B
 ---
 
 ## Fazy wdrożenia
+
+![Fazy wdrożenia](./diagrams/platform-phases.puml)
 
 ### Faza 1: MVP (Minimum Viable Product)
 
@@ -580,6 +422,7 @@ Namespace: tenant-b-training    → Zespół B
 - [Fazy wdrożenia](./diagrams/platform-phases.puml) - MVP → Rozszerzenia → Enterprise
 - [Multi-tenancy](./diagrams/platform-multi-tenant.puml) - Izolacja przez namespace'y
 - [CI/CD Integration](./diagrams/platform-cicd-integration.puml) - Integracja z pipeline'ami
+- [Struktura repozytoriów](./diagrams/platform-repo-structure.puml) - Organizacja kodu w GitLab
 
 ### Inne
 - [Przewodnik użycia](../PRZEWODNIK-UZYCIA.md) - Instrukcja dla Data Scientistów

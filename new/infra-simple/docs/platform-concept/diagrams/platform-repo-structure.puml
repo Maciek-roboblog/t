@@ -1,0 +1,86 @@
+@startuml platform-repo-structure
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam package {
+    BackgroundColor #FAFAFA
+    BorderColor #BDBDBD
+}
+
+skinparam folder {
+    BackgroundColor #FFFFFF
+    BorderColor #757575
+}
+
+skinparam file {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+
+title Struktura Repozytoriów GitLab
+
+package "Grupa: llm-finetuning/" {
+
+    package "llama-factory-image/" <<Repository>> #E8F5E9 {
+        file "Dockerfile" as df
+        file "requirements.txt" as req
+        file ".gitlab-ci.yml" as ci1
+
+        note right of df
+          **Cel:**
+          Build obrazu Docker
+          dla treningu
+        end note
+    }
+
+    package "training-jobs/" <<Repository>> #FFF3E0 {
+        folder "templates/" {
+            file "training-job.yaml" as tj
+        }
+        folder "configs/" {
+            file "experiment-001.yaml" as exp1
+            file "experiment-002.yaml" as exp2
+        }
+
+        note right of tj
+          **Cel:**
+          Definicje jobów
+          treningowych
+        end note
+    }
+
+    package "argo-deployment/" <<Repository>> #F3E5F5 {
+        folder "charts/" {
+            folder "llm-training/" {
+                file "Chart.yaml" as chart
+                file "values.yaml" as values
+            }
+        }
+        folder "values/" {
+            file "dev.yaml" as dev
+            file "prod.yaml" as prod
+        }
+
+        note right of chart
+          **Cel:**
+          Helm charts +
+          ArgoCD values
+        end note
+    }
+}
+
+' Flow
+ci1 -[hidden]-> tj
+tj -[hidden]-> chart
+
+legend right
+  |= Repozytorium |= Odpowiedzialność |
+  | llama-factory-image | Docker build & push |
+  | training-jobs | Konfiguracje eksperymentów |
+  | argo-deployment | GitOps deployment |
+endlegend
+
+@enduml
