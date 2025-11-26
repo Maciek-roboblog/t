@@ -568,8 +568,18 @@ Namespace: tenant-b-training    → Zespół B
 
 ## Załączniki
 
-- [ADR-001: Model Registry](./adr/001-model-registry.md)
-- [ADR-002: vLLM Deployment](./adr/002-vllm-deployment.md)
-- [Diagram architektury](./diagrams/architecture.puml)
-- [Diagram workflow](./diagrams/workflow.puml)
-- [Przewodnik użycia](./PRZEWODNIK-UZYCIA.md)
+### Dokumenty ADR
+- [ADR-001: Model Registry](../adr/001-model-registry.md) - NFS vs Object Storage vs MLflow
+- [ADR-002: vLLM Deployment](../adr/002-vllm-deployment.md) - Zewnętrzny vs Wewnętrzny
+
+### Diagramy PlantUML
+- [Architektura systemu](./diagrams/platform-architecture.puml) - Pełna architektura platformy
+- [Workflow treningu](./diagrams/platform-workflow.puml) - Przepływ od konfiguracji do inference
+- [Dwa podejścia](./diagrams/platform-two-approaches.puml) - WebUI vs YAML/Git
+- [Komponenty](./diagrams/platform-components.puml) - Szczegółowy opis komponentów
+- [Fazy wdrożenia](./diagrams/platform-phases.puml) - MVP → Rozszerzenia → Enterprise
+- [Multi-tenancy](./diagrams/platform-multi-tenant.puml) - Izolacja przez namespace'y
+- [CI/CD Integration](./diagrams/platform-cicd-integration.puml) - Integracja z pipeline'ami
+
+### Inne
+- [Przewodnik użycia](../PRZEWODNIK-UZYCIA.md) - Instrukcja dla Data Scientistów

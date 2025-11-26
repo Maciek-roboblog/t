@@ -235,6 +235,7 @@ Infrastruktura Kubernetes do **fine-tuningu modeli LLM** przy użyciu [LLaMA-Fac
 
 | Dokument | Cel | Dla kogo? |
 |----------|-----|-----------|
+| [**platform-concept/**](platform-concept/README.md) | Koncepcja architektoniczna platformy (fazy wdrożenia, multi-tenancy, CI/CD) | Architekci, PM |
 | [PRZEWODNIK-UZYCIA.md](PRZEWODNIK-UZYCIA.md) | Krok po kroku: modele, dane, trening | ML Engineers |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Rozwiązywanie problemów | Wszyscy |
 | [ADR-001](adr/001-model-registry.md) | Decyzja: Model Registry | Architekci |

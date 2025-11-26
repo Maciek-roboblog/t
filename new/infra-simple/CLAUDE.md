@@ -22,6 +22,12 @@ Kubernetes deployment for LLaMA-Factory - a platform for fine-tuning large langu
 
 **PlantUML diagrams:** `docs/diagrams/` (architecture.puml, workflow.puml, dependencies.puml)
 
+**Platform Concept:** See [docs/platform-concept/](docs/platform-concept/README.md) for detailed architecture concept including:
+- Phased implementation (MVP → Enterprise)
+- Multi-tenancy through namespaces
+- CI/CD integration (Jenkins, GitLab, ArgoCD)
+- Two approaches: WebUI vs YAML/Git
+
 ## Key Commands
 
 ```bash
