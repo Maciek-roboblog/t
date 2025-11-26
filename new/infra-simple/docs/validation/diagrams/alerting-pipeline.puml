@@ -1,0 +1,125 @@
+@startuml alerting-pipeline
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Alerting Pipeline for LLM Training
+
+|Prometheus|
+start
+:Evaluate Alert Rules\n(every 15s);
+
+partition "Training Alerts" {
+    if (train_loss = NaN or Inf?) then (yes)
+        #LightCoral:CRITICAL: Training_NaNLoss;
+    else (no)
+    endif
+
+    if (train_loss increased 50%?) then (yes)
+        #Orange:WARNING: Training_LossSpike;
+    else (no)
+    endif
+
+    if (no metrics for 5min?) then (yes)
+        #Orange:WARNING: Training_Stalled;
+    else (no)
+    endif
+
+    if (eval_loss > train_loss * 1.5?) then (yes)
+        #Yellow:INFO: Training_Overfitting;
+    else (no)
+    endif
+}
+
+partition "GPU Alerts" {
+    if (gpu_memory > 95%?) then (yes)
+        #LightCoral:CRITICAL: GPU_MemoryExhausted;
+    else (no)
+    endif
+
+    if (gpu_temp > 85C?) then (yes)
+        #Orange:WARNING: GPU_HighTemperature;
+    else (no)
+    endif
+
+    if (gpu_utilization < 10% for 10min?) then (yes)
+        #Yellow:INFO: GPU_Underutilized;
+    else (no)
+    endif
+}
+
+partition "Infrastructure Alerts" {
+    if (disk_used > 90%?) then (yes)
+        #Orange:WARNING: Disk_AlmostFull;
+    else (no)
+    endif
+
+    if (pod OOMKilled?) then (yes)
+        #LightCoral:CRITICAL: Pod_OOMKilled;
+    else (no)
+    endif
+}
+
+|Alertmanager|
+:Receive Firing Alerts;
+:Group by (alertname, severity);
+:Apply Inhibition Rules;
+note right
+    **Inhibition:**
+    CRITICAL inhibits WARNING
+    for same alert type
+end note
+
+:Apply Routing Rules;
+
+|Routing|
+switch (severity?)
+case (CRITICAL)
+    :Route to PagerDuty;
+    :Route to Slack #alerts-critical;
+    :Route to Email (on-call);
+case (WARNING)
+    :Route to Slack #alerts-warning;
+    :Route to Email (team);
+case (INFO)
+    :Route to Slack #alerts-info;
+endswitch
+
+|Actions|
+fork
+    :Human Review;
+fork again
+    if (auto-remediation enabled?) then (yes)
+        switch (alert type?)
+        case (GPU_MemoryExhausted)
+            :Reduce batch_size;
+            :Restart training;
+        case (Training_Stalled)
+            :Check logs;
+            :Restart if needed;
+        case (Disk_AlmostFull)
+            :Cleanup old checkpoints;
+        case (Training_Overfitting)
+            :Enable early stopping;
+        endswitch
+    else (no)
+    endif
+end fork
+
+|Resolution|
+if (Alert resolved?) then (yes)
+    :Send "Resolved" notification;
+    :Log incident;
+else (no)
+    :Escalate after 30min;
+endif
+
+stop
+
+legend right
+    |= Severity |= Response Time |= Notification |
+    | CRITICAL | Immediate | PagerDuty + Slack + Email |
+    | WARNING | < 1 hour | Slack + Email |
+    | INFO | Next business day | Slack only |
+endlegend
+
+@enduml

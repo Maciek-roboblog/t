@@ -1,0 +1,117 @@
+@startuml gpu-monitoring
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title GPU & Infrastructure Monitoring Stack
+
+package "GPU Node" as gpu_node #LightBlue {
+    component "NVIDIA GPU" as gpu {
+        component "SM Cores" as sm
+        component "GPU Memory\n(VRAM)" as vram
+        component "Tensor Cores" as tensor
+    }
+
+    component "DCGM Exporter" as dcgm {
+        card "dcgm_gpu_utilization" as util
+        card "dcgm_fb_used" as fb
+        card "dcgm_sm_clock" as clock
+        card "dcgm_gpu_temp" as temp
+        card "dcgm_power_usage" as power
+    }
+
+    component "Node Exporter" as node_exp {
+        card "node_cpu_*" as cpu
+        card "node_memory_*" as mem
+        card "node_disk_*" as disk
+        card "node_network_*" as net
+    }
+}
+
+package "Training Pod" as train_pod #LightGreen {
+    component "LLaMA-Factory\nTrainer" as trainer
+    component "Custom Metrics\nExporter" as custom {
+        card "llm_training_step" as step
+        card "llm_loss_current" as loss
+        card "llm_tokens_processed" as tokens
+        card "llm_batch_time_seconds" as batch_time
+    }
+}
+
+package "Kubernetes" as k8s #LightYellow {
+    component "kube-state-metrics" as ksm {
+        card "kube_pod_*" as kpod
+        card "kube_node_*" as knode
+        card "kube_job_*" as kjob
+    }
+
+    component "metrics-server" as metrics_server {
+        card "container_cpu_usage" as ccpu
+        card "container_memory_usage" as cmem
+    }
+}
+
+package "Monitoring Stack" as monitoring #LightPink {
+    database "Prometheus" as prom
+
+    component "Grafana" as grafana {
+        card "GPU Dashboard" as gpu_dash
+        card "Training Dashboard" as train_dash
+        card "K8s Dashboard" as k8s_dash
+    }
+
+    component "Alertmanager" as alertmgr
+}
+
+' Connections
+gpu --> dcgm
+trainer --> custom
+
+dcgm --> prom : scrape /metrics
+node_exp --> prom
+custom --> prom
+ksm --> prom
+metrics_server --> prom
+
+prom --> grafana
+prom --> alertmgr
+
+note bottom of dcgm
+    **Key GPU Metrics:**
+    - Utilization (0-100%)
+    - Memory Used/Free
+    - Temperature
+    - Power Usage
+    - SM Clock Speed
+    - PCIe Throughput
+end note
+
+note bottom of custom
+    **Training Metrics:**
+    - Current step/epoch
+    - Loss value
+    - Tokens/second
+    - Batch processing time
+    - Gradient norm
+end note
+
+note right of alertmgr
+    **Alert Examples:**
+    - GPU temp > 85C
+    - GPU memory > 95%
+    - Training loss = NaN
+    - Pod OOMKilled
+    - Job failed
+end note
+
+package "Alert Rules" as rules #LightGray {
+    card "GPU_HighTemperature" as r1
+    card "GPU_MemoryExhausted" as r2
+    card "Training_LossAnomaly" as r3
+    card "Training_Stalled" as r4
+    card "Node_DiskFull" as r5
+}
+
+prom --> rules
+rules --> alertmgr
+
+@enduml

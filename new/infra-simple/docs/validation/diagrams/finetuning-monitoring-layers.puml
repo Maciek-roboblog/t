@@ -1,0 +1,95 @@
+@startuml finetuning-monitoring-layers
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Fine-Tuning Monitoring Stack - Warstwy
+
+rectangle "Warstwa 4: Audyt & Compliance" as L4 #LightGray {
+    card "Audit Log\n(kto, kiedy, co)" as audit_log
+    card "Model Registry\n(wersje, stage)" as registry
+    card "Reproducibility\nReport" as repro_report
+    card "Compliance\nTags" as compliance_tags
+}
+
+rectangle "Warstwa 3: Analiza & Decyzje" as L3 #LightPink {
+    card "Quality Gates\n(pass/fail)" as quality_gates
+    card "Drift Detection\n(data/model)" as drift
+    card "Experiment\nComparison" as comparison
+    card "Alerting Rules\n(thresholds)" as alerts
+}
+
+rectangle "Warstwa 2: Wizualizacja & Query" as L2 #LightYellow {
+    card "Training\nDashboard" as train_dash
+    card "Experiment\nUI" as exp_ui
+    card "Resource\nDashboard" as res_dash
+    card "Metrics\nAPI" as metrics_api
+}
+
+rectangle "Warstwa 1: Storage & Persistence" as L1 #LightGreen {
+    card "Experiment\nDatabase" as exp_db
+    card "Time-Series\nMetrics" as tsdb
+    card "Artifact\nStore" as artifact_store
+    card "Log\nStorage" as log_store
+}
+
+rectangle "Warstwa 0: Kolekcja Danych" as L0 #LightBlue {
+    card "Training\nCallbacks" as callbacks
+    card "Resource\nExporters" as exporters
+    card "Checkpoint\nEvents" as ckpt_events
+    card "Evaluation\nResults" as eval_results
+}
+
+' Vertical flow
+callbacks --> exp_db
+callbacks --> tsdb
+exporters --> tsdb
+ckpt_events --> artifact_store
+ckpt_events --> log_store
+eval_results --> exp_db
+
+exp_db --> train_dash
+exp_db --> exp_ui
+tsdb --> res_dash
+artifact_store --> exp_ui
+exp_db --> metrics_api
+
+train_dash --> quality_gates
+exp_ui --> comparison
+tsdb --> drift
+metrics_api --> alerts
+
+quality_gates --> registry
+comparison --> audit_log
+drift --> alerts
+alerts --> audit_log
+
+registry --> repro_report
+audit_log --> compliance_tags
+
+note right of L4
+    **Audit Trail:**
+    - Data provenance
+    - Model lineage
+    - Config versioning
+    - User actions
+end note
+
+note right of L0
+    **LLaMA-Factory Events:**
+    - on_train_begin
+    - on_log (metrics)
+    - on_evaluate
+    - on_save (checkpoint)
+    - on_train_end
+end note
+
+legend bottom
+    |= Warstwa |= Odpowiedzialność |= Przykłady narzędzi |
+    | L4 | Compliance, audyt, governance | Model Registry, Git, Tagging |
+    | L3 | Analiza, decyzje, alerting | Quality gates, Drift detection |
+    | L2 | Wizualizacja, dostęp | Dashboards, API, UI |
+    | L1 | Przechowywanie danych | Database, Object Store, TSDB |
+    | L0 | Zbieranie danych | Callbacks, Exporters, Hooks |
+endlegend
+
+@enduml

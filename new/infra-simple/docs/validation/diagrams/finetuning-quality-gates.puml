@@ -1,0 +1,110 @@
+@startuml finetuning-quality-gates
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Fine-Tuning Quality Gates - Bramki Jakości
+
+|Training Complete|
+start
+:Training Finished;
+:Load Final Metrics;
+
+|Gate 1: Training Stability|
+if (train_loss = NaN or Inf?) then (fail)
+    #LightCoral:FAIL: Invalid Loss;
+    :Log failure reason;
+    stop
+else (pass)
+endif
+
+if (loss decreased during training?) then (yes)
+    #LightGreen:PASS: Convergence OK;
+else (no)
+    #Orange:WARNING: No convergence;
+    :Flag for review;
+endif
+
+|Gate 2: Generalization|
+:Load eval_loss;
+
+if (eval_loss < train_loss * 1.2?) then (pass)
+    #LightGreen:PASS: No severe overfitting;
+else (fail)
+    #Orange:WARNING: Possible overfitting;
+    :Recommend earlier checkpoint;
+endif
+
+|Gate 3: Quality vs Baseline|
+:Load baseline metrics;
+:Load current metrics;
+
+if (baseline exists?) then (yes)
+    if (current_metric >= baseline * 0.95?) then (pass)
+        #LightGreen:PASS: No regression;
+    else (fail)
+        #LightCoral:FAIL: Quality regression;
+        :Log regression details;
+        :Block promotion;
+        stop
+    endif
+else (no baseline)
+    :Set current as baseline;
+endif
+
+|Gate 4: Task-Specific|
+:Run task evaluation;
+note right
+    **Task Metrics:**
+    - Q&A: exact_match
+    - Summarization: ROUGE
+    - Translation: BLEU
+    - General: MMLU
+end note
+
+if (task_metric > threshold?) then (pass)
+    #LightGreen:PASS: Task quality OK;
+else (fail)
+    #Orange:WARNING: Below threshold;
+    :Flag for human review;
+endif
+
+|Gate 5: Audit Completeness|
+if (all artifacts logged?) then (yes)
+    if (all hashes computed?) then (yes)
+        if (config versioned?) then (yes)
+            #LightGreen:PASS: Audit complete;
+        else (no)
+            #Orange:WARNING: Config not versioned;
+        endif
+    else (no)
+        #Orange:WARNING: Missing hashes;
+    endif
+else (no)
+    #LightCoral:FAIL: Incomplete audit trail;
+    stop
+endif
+
+|Decision|
+if (all gates passed?) then (yes)
+    #LightGreen:Model APPROVED;
+    :Tag as "Candidate";
+    :Register in Model Registry;
+    :Notify: Ready for review;
+else (warnings only)
+    #Yellow:Model CONDITIONAL;
+    :Tag as "Review Required";
+    :Notify: Human review needed;
+endif
+
+stop
+
+legend bottom
+    |= Gate |= Metric |= Threshold |= Action on Fail |
+    | Stability | train_loss | != NaN/Inf | Block |
+    | Generalization | eval/train ratio | < 1.2 | Warn |
+    | Baseline | regression | < 5% drop | Block |
+    | Task | task_metric | > threshold | Review |
+    | Audit | completeness | 100% | Block |
+endlegend
+
+@enduml

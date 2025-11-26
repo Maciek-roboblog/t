@@ -1,0 +1,105 @@
+@startuml monitoring-layers
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Monitoring Stack Layers
+
+rectangle "Layer 5: Actions & Automation" as L5 #LightGray {
+    card "Auto-retrain\nTrigger" as retrain
+    card "Auto-scale\nGPU Nodes" as scale
+    card "CI/CD\nPipeline" as cicd
+    card "Incident\nResponse" as incident
+}
+
+rectangle "Layer 4: Alerting & Notifications" as L4 #LightCoral {
+    card "Alertmanager" as alertmgr
+    card "PagerDuty/\nOpsGenie" as pager
+    card "Slack/Teams\nIntegration" as slack
+    card "Email\nNotifications" as email
+}
+
+rectangle "Layer 3: Visualization & Dashboards" as L3 #LightPink {
+    card "Grafana\n(Infrastructure)" as grafana
+    card "MLflow UI\n(Experiments)" as mlflow_ui
+    card "Custom\nDashboards" as custom_dash
+    card "Jupyter\n(Analysis)" as jupyter
+}
+
+rectangle "Layer 2: Storage & Query" as L2 #LightYellow {
+    card "Prometheus\nTSDB" as prom
+    card "PostgreSQL\n(MLflow)" as postgres
+    card "Object Store\n(Artifacts)" as s3
+    card "Loki/ELK\n(Logs)" as loki
+}
+
+rectangle "Layer 1: Collection & Export" as L1 #LightGreen {
+    card "MLflow\nClient SDK" as mlflow_sdk
+    card "Prometheus\nExporters" as exporters
+    card "OpenTelemetry\nSDK" as otel
+    card "Log\nShippers" as logship
+}
+
+rectangle "Layer 0: Data Sources" as L0 #LightBlue {
+    card "Training\nJob" as train
+    card "GPU\nMetrics" as gpu
+    card "K8s\nCluster" as k8s
+    card "Inference\nAPI" as api
+}
+
+' Vertical connections
+train --> mlflow_sdk
+gpu --> exporters
+k8s --> exporters
+k8s --> otel
+api --> otel
+api --> exporters
+
+mlflow_sdk --> postgres
+mlflow_sdk --> s3
+exporters --> prom
+otel --> loki
+logship --> loki
+
+prom --> grafana
+postgres --> mlflow_ui
+loki --> grafana
+s3 --> mlflow_ui
+
+prom --> alertmgr
+mlflow_ui --> custom_dash
+
+alertmgr --> slack
+alertmgr --> pager
+alertmgr --> email
+
+slack --> incident
+pager --> incident
+alertmgr --> scale
+alertmgr --> retrain
+custom_dash --> cicd
+
+note right of L5
+    **Actions:**
+    - Automatic retraining on drift
+    - Scale GPU resources on demand
+    - Trigger evaluation pipeline
+    - Create incident tickets
+end note
+
+note right of L2
+    **Retention:**
+    - Prometheus: 15-30 days
+    - PostgreSQL: indefinite
+    - Object Store: indefinite
+    - Logs: 7-90 days
+end note
+
+note right of L0
+    **Metrics Types:**
+    - Counter (requests, tokens)
+    - Gauge (loss, memory)
+    - Histogram (latency)
+    - Summary (percentiles)
+end note
+
+@enduml

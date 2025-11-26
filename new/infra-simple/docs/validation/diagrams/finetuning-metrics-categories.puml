@@ -1,0 +1,93 @@
+@startuml finetuning-metrics-categories
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Fine-Tuning Metrics - Kategorie
+
+package "1. Training Metrics" as training #LightBlue {
+    card "train_loss\n(per step)" as train_loss
+    card "learning_rate\n(scheduler)" as lr
+    card "epoch\n(progress)" as epoch
+    card "grad_norm\n(stability)" as grad_norm
+    card "tokens_processed\n(throughput)" as tokens
+
+    note bottom of training
+        **Źródło:** Trainer callbacks
+        **Częstotliwość:** logging_steps
+        **Cel:** Monitorowanie konwergencji
+    end note
+}
+
+package "2. Validation Metrics" as validation #LightGreen {
+    card "eval_loss\n(generalization)" as eval_loss
+    card "eval_accuracy\n(task quality)" as eval_acc
+    card "perplexity\n(confidence)" as ppl
+
+    note bottom of validation
+        **Źródło:** Evaluation loop
+        **Częstotliwość:** eval_steps
+        **Cel:** Wykrywanie overfittingu
+    end note
+}
+
+package "3. Resource Metrics" as resources #LightYellow {
+    card "gpu_memory\n(VRAM usage)" as gpu_mem
+    card "gpu_utilization\n(compute %)" as gpu_util
+    card "batch_time\n(step duration)" as batch_time
+    card "throughput\n(samples/sec)" as throughput_metric
+
+    note bottom of resources
+        **Źródło:** Hardware exporters
+        **Częstotliwość:** 15-30s
+        **Cel:** Capacity planning
+    end note
+}
+
+package "4. Quality Metrics" as quality #LightPink {
+    card "BLEU/ROUGE\n(generation)" as bleu
+    card "exact_match\n(Q&A)" as em
+    card "MMLU score\n(benchmark)" as mmlu
+
+    note bottom of quality
+        **Źródło:** Post-training eval
+        **Częstotliwość:** Per experiment
+        **Cel:** Model quality assessment
+    end note
+}
+
+package "5. Audit Metrics" as audit #LightGray {
+    card "dataset_hash\n(integrity)" as data_hash
+    card "config_version\n(reproducibility)" as config_ver
+    card "model_hash\n(artifact tracking)" as model_hash
+    card "experiment_id\n(lineage)" as exp_id
+
+    note bottom of audit
+        **Źródło:** Pipeline automation
+        **Częstotliwość:** Per run
+        **Cel:** Compliance & reproducibility
+    end note
+}
+
+' Relationships showing what leads to what
+train_loss --> eval_loss : "compare for\noverfitting"
+eval_loss --> ppl : "exp(loss)"
+eval_acc --> bleu : "detailed\nevaluation"
+eval_acc --> em
+
+gpu_mem --> throughput_metric : "capacity\nimpacts"
+batch_time --> throughput_metric
+
+data_hash --> exp_id : "links to"
+config_ver --> exp_id
+model_hash --> exp_id
+
+legend bottom
+    |= Kategoria |= Kluczowa metryka |= Alert threshold |
+    | Training | train_loss | NaN, spike >50% |
+    | Validation | eval_loss | > train_loss * 1.5 |
+    | Resource | gpu_memory | > 95% |
+    | Quality | task_metric | < baseline |
+    | Audit | all hashes | mismatch |
+endlegend
+
+@enduml

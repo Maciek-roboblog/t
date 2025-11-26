@@ -1,0 +1,149 @@
+@startuml finetuning-audit-trail
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Fine-Tuning Audit Trail - Śledzenie Liniażu
+
+|Before Training|
+start
+:Record Base Model;
+note right
+    **Model Provenance:**
+    - model_name_or_path
+    - HuggingFace revision/commit
+    - Model hash (optional)
+end note
+
+:Record Dataset Version;
+note right
+    **Data Provenance:**
+    - dataset_dir
+    - dataset name
+    - SHA256 hash
+    - sample count
+    - schema version
+end note
+
+:Record Configuration;
+note right
+    **Config Tracking:**
+    - train.yaml content
+    - git commit hash
+    - environment variables
+end note
+
+:Generate Experiment ID;
+:Log to Experiment Tracker;
+
+|During Training|
+:Start Training Run;
+
+repeat
+    :Execute Training Step;
+    :Log Step Metrics;
+    note right
+        **Per-Step Log:**
+        - step number
+        - timestamp
+        - loss value
+        - learning_rate
+        - grad_norm
+    end note
+
+    if (checkpoint interval?) then (yes)
+        :Save Checkpoint;
+        :Log Checkpoint Event;
+        note right
+            **Checkpoint Record:**
+            - checkpoint path
+            - step number
+            - metrics at save
+            - hash (optional)
+        end note
+    endif
+
+    if (eval interval?) then (yes)
+        :Run Evaluation;
+        :Log Eval Metrics;
+        note right
+            **Eval Record:**
+            - eval_loss
+            - eval_accuracy
+            - timestamp
+        end note
+    endif
+
+repeat while (training complete?) is (no)
+
+|After Training|
+:Record Final Metrics;
+:Save Final Model/Adapter;
+
+:Compute Model Hash;
+note right
+    **Artifact Fingerprint:**
+    - adapter_model.safetensors hash
+    - adapter_config.json hash
+    - training_args.json preserved
+end note
+
+:Link All Artifacts;
+
+|Audit Record|
+:Create Audit Entry;
+
+partition "Complete Audit Record" {
+    :Experiment Metadata;
+    note right
+        - experiment_id
+        - run_id
+        - start_time
+        - end_time
+        - user/system
+    end note
+
+    :Input Artifacts;
+    note right
+        - base_model: path + version
+        - dataset: path + hash
+        - config: content + git_commit
+    end note
+
+    :Training Log;
+    note right
+        - all step metrics
+        - all eval metrics
+        - checkpoint history
+        - resource usage
+    end note
+
+    :Output Artifacts;
+    note right
+        - adapter: path + hash
+        - final_metrics: values
+        - quality_gate: pass/fail
+    end note
+
+    :Reproducibility Proof;
+    note right
+        - seed values
+        - library versions
+        - hardware info
+        - determinism flags
+    end note
+}
+
+:Store in Audit Database;
+stop
+
+legend right
+    **Audit Requirements:**
+    | Element | Why |
+    | Input hashes | Verify exact data used |
+    | Config version | Reproduce settings |
+    | Metric history | Track convergence |
+    | Output hashes | Verify model integrity |
+    | Timestamps | Timeline reconstruction |
+endlegend
+
+@enduml

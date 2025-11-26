@@ -1,0 +1,107 @@
+@startuml finetuning-monitoring-overview
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLM Fine-Tuning Monitoring - Auditable Pipeline
+
+package "Fine-Tuning Process" as ft #LightBlue {
+    rectangle "Input" as input {
+        card "Base Model\n(versioned)" as base_model
+        card "Dataset\n(versioned, hashed)" as dataset
+        card "Config\n(YAML, git tracked)" as config
+    }
+
+    rectangle "Training" as training {
+        card "LLaMA-Factory\nTrainer" as trainer
+        card "Checkpoints\n(periodic saves)" as checkpoints
+    }
+
+    rectangle "Output" as output {
+        card "LoRA Adapter\n(versioned)" as adapter
+        card "Merged Model\n(optional)" as merged
+    }
+}
+
+package "Monitoring & Tracking" as monitoring #LightGreen {
+    rectangle "Experiment Tracking" as exp_track {
+        card "Parameters\n(all hyperparams)" as params
+        card "Metrics\n(loss, accuracy)" as metrics
+        card "Artifacts\n(configs, models)" as artifacts
+    }
+
+    rectangle "Resource Monitoring" as res_mon {
+        card "GPU Utilization\n& Memory" as gpu
+        card "Training\nThroughput" as throughput
+        card "Time &\nCost" as cost
+    }
+}
+
+package "Audit Trail" as audit #LightYellow {
+    rectangle "Lineage" as lineage {
+        card "Data Lineage\n(source → model)" as data_lin
+        card "Model Lineage\n(base → adapter)" as model_lin
+        card "Config History\n(git commits)" as config_hist
+    }
+
+    rectangle "Compliance" as compliance {
+        card "Reproducibility\nProof" as repro
+        card "Quality\nMetrics" as quality
+        card "Approval\nStatus" as approval
+    }
+}
+
+package "Quality Gates" as gates #LightPink {
+    card "Validation\nLoss Check" as val_check
+    card "Benchmark\nComparison" as bench
+    card "Drift\nDetection" as drift
+}
+
+' Flow
+base_model --> trainer
+dataset --> trainer
+config --> trainer
+
+trainer --> checkpoints
+trainer --> metrics
+trainer --> params
+trainer --> gpu
+
+checkpoints --> adapter
+adapter --> merged
+
+params --> artifacts
+metrics --> artifacts
+config --> artifacts
+
+artifacts --> data_lin
+artifacts --> model_lin
+config --> config_hist
+
+data_lin --> repro
+model_lin --> repro
+config_hist --> repro
+
+metrics --> val_check
+val_check --> quality
+bench --> quality
+drift --> quality
+
+quality --> approval
+
+note bottom of audit
+    **Audytowalność wymaga:**
+    - Pełna historia eksperymentów
+    - Hash datasetu i modelu
+    - Wersjonowanie konfiguracji
+    - Metryki z timestampami
+    - Możliwość odtworzenia
+end note
+
+note bottom of gates
+    **Quality Gates:**
+    - eval_loss < threshold
+    - Brak regresji vs baseline
+    - Stabilność metryk
+end note
+
+@enduml

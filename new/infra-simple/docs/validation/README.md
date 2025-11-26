@@ -78,6 +78,7 @@ Ten folder zawiera kompletny przewodnik dotyczący **walidowalności** (validati
 | [03-reproducibility-checklist.md](03-reproducibility-checklist.md) | Checklist reprodukowalności |
 | [04-dataset-versioning.md](04-dataset-versioning.md) | Wersjonowanie datasetów |
 | [05-hyperparameter-tracking.md](05-hyperparameter-tracking.md) | Śledzenie hiperparametrów |
+| [06-monitoring-architecture.md](06-monitoring-architecture.md) | **Architektura monitoringu (Prometheus, Grafana, alerting)** |
 
 ### Diagramy PlantUML
 
@@ -89,6 +90,11 @@ Ten folder zawiera kompletny przewodnik dotyczący **walidowalności** (validati
 | [evaluation-pipeline.puml](diagrams/evaluation-pipeline.puml) | Pipeline ewaluacji modeli |
 | [reproducibility-components.puml](diagrams/reproducibility-components.puml) | Komponenty reprodukowalności |
 | [hyperparameter-search.puml](diagrams/hyperparameter-search.puml) | Strategia przeszukiwania hiperparametrów |
+| [finetuning-monitoring-overview.puml](diagrams/finetuning-monitoring-overview.puml) | **Ogólny widok monitoringu fine-tuningu** |
+| [finetuning-monitoring-layers.puml](diagrams/finetuning-monitoring-layers.puml) | **Warstwy stacku (L0-L4)** |
+| [finetuning-metrics-categories.puml](diagrams/finetuning-metrics-categories.puml) | **Kategorie metryk (training, validation, audit)** |
+| [finetuning-audit-trail.puml](diagrams/finetuning-audit-trail.puml) | **Audit trail - śledzenie liniażu** |
+| [finetuning-quality-gates.puml](diagrams/finetuning-quality-gates.puml) | **Quality gates - bramki jakości** |
 
 **Renderowanie diagramów:**
 ```bash

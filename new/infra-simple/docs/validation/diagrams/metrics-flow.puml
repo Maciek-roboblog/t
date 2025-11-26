@@ -1,0 +1,112 @@
+@startuml metrics-flow
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title Metrics Flow: From Training to Alert
+
+|Training Job|
+start
+:Training Step Executed;
+fork
+    :Calculate Loss;
+    :Calculate Gradients;
+fork again
+    :Update Learning Rate;
+fork again
+    :GPU Memory Snapshot;
+end fork
+
+|MLflow Client|
+:Log Metrics (every logging_steps);
+note right
+    **Logged per step:**
+    - train_loss
+    - learning_rate
+    - epoch
+    - grad_norm
+end note
+
+:Log Parameters (once);
+note right
+    **Logged once:**
+    - lora_rank
+    - lora_alpha
+    - batch_size
+    - seed
+end note
+
+if (eval_steps reached?) then (yes)
+    |Evaluation|
+    :Run Validation;
+    :Calculate eval_loss;
+    :Calculate eval_accuracy;
+
+    |MLflow Client|
+    :Log Evaluation Metrics;
+else (no)
+endif
+
+|Prometheus Exporter|
+:Expose /metrics endpoint;
+note right
+    **Exposed metrics:**
+    - llm_training_loss_total
+    - llm_gpu_memory_bytes
+    - llm_tokens_processed
+    - llm_step_duration_seconds
+end note
+
+|Prometheus Server|
+:Scrape metrics (15s interval);
+:Store in TSDB;
+:Evaluate Alert Rules;
+
+if (Alert condition met?) then (yes)
+    |Alertmanager|
+    :Group alerts;
+    :Apply routing rules;
+
+    fork
+        :Send Slack notification;
+    fork again
+        :Send Email;
+    fork again
+        :Trigger webhook;
+    end fork
+else (no)
+endif
+
+|Grafana|
+:Query Prometheus;
+:Update Dashboards;
+:Show real-time charts;
+
+if (Training complete?) then (yes)
+    |Post-Training|
+    :Run final evaluation;
+    :Log to MLflow;
+    :Register model (if passed);
+
+    |Quality Gate|
+    if (eval_loss < threshold?) then (pass)
+        #LightGreen:Tag as "Candidate";
+        :Notify team;
+    else (fail)
+        #LightCoral:Flag for review;
+        :Create alert;
+    endif
+else (no)
+    :Continue training loop;
+endif
+
+stop
+
+legend right
+    |= Metric Type |= Example |= Purpose |
+    | Loss | train_loss=0.42 | Model learning |
+    | Resource | gpu_memory=12GB | Capacity |
+    | Throughput | tokens/sec=1500 | Performance |
+    | Quality | eval_accuracy=0.85 | Validation |
+endlegend
+
+@enduml

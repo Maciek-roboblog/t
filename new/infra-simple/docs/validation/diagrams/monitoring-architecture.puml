@@ -1,0 +1,126 @@
+@startuml monitoring-architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+title LLM Fine-Tuning Monitoring Architecture
+
+package "Data Sources" as sources #LightBlue {
+    component "Training Job\n(LLaMA-Factory)" as training {
+        component "Trainer Callbacks" as callbacks
+        component "GPU Metrics" as gpu_metrics
+        component "Loss/Accuracy" as loss
+    }
+
+    component "Inference\n(vLLM)" as inference {
+        component "Latency" as latency
+        component "Throughput" as throughput
+        component "Token Usage" as tokens
+    }
+
+    component "Kubernetes" as k8s {
+        component "Pod Metrics" as pod
+        component "Node Metrics" as node
+        component "Events" as events
+    }
+}
+
+package "Collection Layer" as collection #LightGreen {
+    component "MLflow Client\n(Experiment Tracking)" as mlflow_client
+    component "Prometheus Exporters" as prom_export {
+        component "DCGM Exporter\n(GPU)" as dcgm
+        component "Node Exporter\n(System)" as node_exp
+        component "Custom Exporter\n(App Metrics)" as custom_exp
+    }
+    component "OpenTelemetry\nCollector" as otel
+}
+
+package "Storage Layer" as storage #LightYellow {
+    database "MLflow Backend\n(PostgreSQL)" as mlflow_db
+    database "Prometheus\nTSDB" as prom_db
+    database "Artifact Store\n(NFS/S3)" as artifacts
+    database "Logs\n(Loki/ELK)" as logs
+}
+
+package "Processing & Analysis" as processing #LightPink {
+    component "Prometheus\nAlerting Rules" as alert_rules
+    component "MLflow\nModel Registry" as model_reg
+    component "Drift Detection\n(Evidently)" as drift
+    component "Quality Gates" as gates
+}
+
+package "Visualization Layer" as viz #LightCoral {
+    component "Grafana\nDashboards" as grafana
+    component "MLflow UI" as mlflow_ui
+    component "LlamaBoard\n(WebUI)" as llamaboard
+}
+
+package "Alerting & Actions" as alerting #LightGray {
+    component "Alertmanager" as alertmgr
+    component "Slack/Email\nNotifications" as notify
+    component "Auto-scaling\nTriggers" as autoscale
+    component "CI/CD\nWebhooks" as cicd
+}
+
+' Data flow from sources to collection
+callbacks --> mlflow_client
+gpu_metrics --> dcgm
+loss --> mlflow_client
+loss --> custom_exp
+
+latency --> custom_exp
+throughput --> custom_exp
+tokens --> custom_exp
+
+pod --> node_exp
+node --> node_exp
+events --> otel
+
+' Collection to Storage
+mlflow_client --> mlflow_db
+mlflow_client --> artifacts
+dcgm --> prom_db
+node_exp --> prom_db
+custom_exp --> prom_db
+otel --> logs
+otel --> prom_db
+
+' Storage to Processing
+prom_db --> alert_rules
+mlflow_db --> model_reg
+mlflow_db --> drift
+prom_db --> drift
+model_reg --> gates
+
+' Storage to Visualization
+prom_db --> grafana
+mlflow_db --> mlflow_ui
+mlflow_db --> llamaboard
+logs --> grafana
+
+' Processing to Alerting
+alert_rules --> alertmgr
+gates --> cicd
+drift --> alertmgr
+
+' Alerting outputs
+alertmgr --> notify
+alertmgr --> autoscale
+cicd --> training
+
+note bottom of sources
+    **Data Sources:**
+    - Training metrics (loss, lr, gradients)
+    - GPU metrics (memory, utilization, temp)
+    - System metrics (CPU, RAM, disk I/O)
+    - Application metrics (latency, throughput)
+end note
+
+note bottom of alerting
+    **Alert Types:**
+    - Training anomalies (loss spike, NaN)
+    - Resource exhaustion (GPU OOM)
+    - Model degradation (drift detected)
+    - Quality gate failures
+end note
+
+@enduml
