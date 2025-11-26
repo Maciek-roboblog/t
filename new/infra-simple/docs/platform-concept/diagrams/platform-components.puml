@@ -1,0 +1,131 @@
+@startuml platform-components
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam package {
+    BackgroundColor #FAFAFA
+    BorderColor #BDBDBD
+}
+
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #616161
+}
+
+title Komponenty Platformy Fine-Tuningu
+
+package "Warstwa Użytkownika" #FFF3E0 {
+    [LLaMA Factory WebUI] as webui
+    note right of webui
+      **Technologia:** Gradio
+      **Port:** 7860
+      **Funkcje:**
+      - Konfiguracja parametrów
+      - Wizualizacja treningu
+      - Chat testowy
+    end note
+
+    [GitLab Repository] as gitlab
+    note right of gitlab
+      **Zawartość:**
+      - training-config.yaml
+      - .gitlab-ci.yml
+      - Dokumentacja
+    end note
+}
+
+package "Warstwa Orchestracji" #FFFDE7 {
+    [Jenkins Pipeline] as jenkins
+    note right of jenkins
+      **Etapy:**
+      1. Validate config
+      2. Build image (opcja)
+      3. Create K8s Job
+      4. Wait for completion
+    end note
+
+    [ArgoCD] as argo
+    note right of argo
+      **Rola:**
+      - GitOps deployment
+      - Sync Helm charts
+      - vLLM deployment
+    end note
+}
+
+package "Warstwa Wykonania (Kubernetes)" #E3F2FD {
+    package "Training Jobs" {
+        [Training Job] as train
+        [Merge Job] as merge
+    }
+
+    note bottom of train
+      **Image:** llama-factory-train
+      **GPU:** nvidia.com/gpu: "true"
+      **Resources:**
+      - GPU: 1-8 (depending on model)
+      - Memory: 32-128Gi
+    end note
+
+    package "Configuration" {
+        [ConfigMap] as cm
+        [Secrets] as sec
+    }
+
+    note bottom of cm
+      **Zawiera:**
+      - BASE_MODEL_PATH
+      - LORA_OUTPUT_PATH
+      - TRAINING_PARAMS
+    end note
+}
+
+package "Warstwa Danych" #E8F5E9 {
+    database "NFS Storage" as nfs {
+        storage "/models/base" as base
+        storage "/models/merged" as merged
+        storage "/output/" as output
+        storage "/data/" as data
+    }
+
+    note right of nfs
+      **Specyfikacja:**
+      - Access: ReadWriteMany
+      - Size: 200Gi
+      - Class: nfs-client
+    end note
+}
+
+package "Usługi Zewnętrzne" #F3E5F5 {
+    database "MLflow" as mlflow
+    note right of mlflow
+      **Funkcje:**
+      - Experiment tracking
+      - Model registry
+      - Artifact storage
+      **Integracja:** MLFLOW_TRACKING_URI
+    end note
+
+    [vLLM Server] as vllm
+    note right of vllm
+      **Status:** Zewnętrzny
+      **Port:** 8000
+      **Model source:** /models/merged
+    end note
+}
+
+' Connections
+webui --> train : trigger
+gitlab --> jenkins : webhook
+jenkins --> train : kubectl apply
+train --> nfs : read/write
+train --> mlflow : log metrics
+merge --> nfs : read/write
+merge --> mlflow : register
+argo --> vllm : deploy
+nfs --> vllm : model files
+
+@enduml

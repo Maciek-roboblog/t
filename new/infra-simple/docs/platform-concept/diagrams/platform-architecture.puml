@@ -1,0 +1,108 @@
+@startuml platform-architecture
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<user>> #FFF3E0
+    BorderColor<<user>> #E65100
+    BackgroundColor<<external>> #F3E5F5
+    BorderColor<<external>> #7B1FA2
+    BackgroundColor<<k8s>> #E3F2FD
+    BorderColor<<k8s>> #1976D2
+    BackgroundColor<<storage>> #E8F5E9
+    BorderColor<<storage>> #388E3C
+    BackgroundColor<<cicd>> #FFFDE7
+    BorderColor<<cicd>> #F9A825
+}
+
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #616161
+}
+
+skinparam database {
+    BackgroundColor #FFFFFF
+    BorderColor #616161
+}
+
+title Platforma Fine-Tuningu LLM - Architektura Docelowa
+
+rectangle "Użytkownicy" <<user>> {
+    actor "Data Scientist\n(WebUI)" as ds_ui
+    actor "Data Scientist\n(YAML/Git)" as ds_git
+}
+
+rectangle "CI/CD Pipeline" <<cicd>> {
+    component "GitLab\nRepository" as gitlab
+    component "Jenkins\nPipeline" as jenkins
+}
+
+rectangle "Kubernetes Cluster (GPU Nodes)" <<k8s>> {
+    package "Namespace: llm-training" {
+        component "LLaMA Factory\nWebUI :7860" as webui
+        component "Training Job\n(GPU)" as train
+        component "Merge Job\n(GPU)" as merge
+    }
+
+    component "ConfigMap\n(training params)" as configmap
+    component "Secrets\n(MLflow URI)" as secrets
+}
+
+rectangle "External Services" <<external>> {
+    database "MLflow\nTracking & Registry" as mlflow
+    component "vLLM Server\nInference :8000" as vllm
+    component "API Gateway\n(Stream)" as gateway
+}
+
+rectangle "NFS Storage (ReadWriteMany 200Gi)" <<storage>> {
+    storage "/models/base" as base_model
+    storage "/models/merged" as merged_model
+    storage "/output/lora" as lora_output
+    storage "/output/checkpoints" as checkpoints
+    storage "/data/datasets" as datasets
+}
+
+' User flows
+ds_ui --> webui : "1. Configure params"
+ds_git --> gitlab : "1. Commit YAML"
+gitlab --> jenkins : "2. Trigger pipeline"
+jenkins --> train : "3. Create Job"
+webui --> train : "2. Trigger Job"
+
+' Training flow
+base_model --> train : read model
+datasets --> train : read data
+configmap --> train : params
+secrets --> train : credentials
+train --> lora_output : write adapter
+train --> checkpoints : write checkpoints
+train ..> mlflow : log metrics
+
+' Merge flow
+base_model --> merge : read
+lora_output --> merge : read adapter
+merge --> merged_model : write final model
+merge ..> mlflow : register model
+
+' Inference flow
+merged_model --> vllm : load model
+vllm --> gateway : API endpoint
+
+note right of mlflow
+  **Integracja MLflow:**
+  - Experiment tracking
+  - Model versioning
+  - Artifact storage
+end note
+
+note bottom of vllm
+  **Zewnętrzna usługa**
+  - Nie zarządzana z tego repo
+  - Czyta z NFS Storage
+  - Skalowana niezależnie
+end note
+
+@enduml

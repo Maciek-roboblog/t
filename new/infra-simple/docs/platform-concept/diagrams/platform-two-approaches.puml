@@ -1,0 +1,91 @@
+@startuml platform-two-approaches
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<webui>> #E8F5E9
+    BorderColor<<webui>> #388E3C
+    BackgroundColor<<yaml>> #E3F2FD
+    BorderColor<<yaml>> #1976D2
+    BackgroundColor<<common>> #F5F5F5
+    BorderColor<<common>> #757575
+}
+
+title Dwa Podejścia do Triggerowania Treningu
+
+rectangle "PODEJŚCIE A: WebUI (LLaMA Factory)" <<webui>> {
+    actor "Data Scientist" as ds_a
+
+    component "LLaMA Factory\nWebUI (Gradio)" as webui
+
+    note right of webui
+      **Zalety:**
+      + Intuicyjny interfejs
+      + Wizualizacja loss curve
+      + Wbudowany chat do testów
+      + Eksport do YAML
+
+      **Wady:**
+      - Brak autoryzacji users
+      - Trudna audytowalność
+      - Problem z multi-user
+    end note
+
+    ds_a --> webui : "Formularz\nparametrów"
+}
+
+rectangle "PODEJŚCIE B: YAML + Git (CI/CD)" <<yaml>> {
+    actor "Data Scientist" as ds_b
+
+    component "GitLab\nRepository" as git
+    component "MR Review\nApproval" as mr
+    component "Jenkins\nPipeline" as jenkins
+
+    note right of jenkins
+      **Zalety:**
+      + Pełna audytowalność
+      + Code review (MR)
+      + Istniejąca infra
+      + Walidacja przed run
+
+      **Wady:**
+      - Wymaga YAML
+      - Brak live progress
+    end note
+
+    ds_b --> git : "Commit\nYAML config"
+    git --> mr : "Create MR"
+    mr --> jenkins : "Merge →\nTrigger"
+}
+
+rectangle "Wspólne Komponenty" <<common>> {
+    component "Kubernetes\nTraining Job" as job
+    database "MLflow\nTracking" as mlflow
+    storage "NFS Storage\n/storage/*" as nfs
+}
+
+webui --> job : "Trigger\nJob"
+jenkins --> job : "Create\nJob"
+
+job --> mlflow : "Log metrics"
+job --> nfs : "Read/Write"
+
+note bottom of job
+  **Training Job:**
+  - GPU Node (nvidia.com/gpu)
+  - LLaMA Factory image
+  - ConfigMap params
+end note
+
+legend right
+  |= Rekomendacja |
+  | **Faza 1 (MVP):** Podejście B |
+  | Prostsze, audytowalne |
+  | **Faza 2:** Dodać WebUI |
+  | Dla eksperymentów |
+endlegend
+
+@enduml

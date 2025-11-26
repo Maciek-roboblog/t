@@ -1,0 +1,140 @@
+@startuml platform-cicd-integration
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+
+skinparam partition {
+    BackgroundColor #FAFAFA
+    BorderColor #BDBDBD
+}
+
+title Integracja z CI/CD Pipeline
+
+|GitLab|
+start
+:Data Scientist\ncommit YAML config;
+
+partition "GitLab CI" #FFFDE7 {
+    :Trigger pipeline;
+
+    :Stage: validate;
+    note right
+      python validate_config.py
+      - Schema validation
+      - Model path exists
+      - Dataset format check
+    end note
+
+    if (Validation OK?) then (yes)
+        :Stage: build (opcjonalnie);
+        note right
+          docker build -t llama-factory:$TAG
+          docker push $REGISTRY/...
+        end note
+    else (no)
+        :Pipeline failed;
+        stop
+    endif
+}
+
+|Jenkins|
+partition "Jenkins Pipeline" #E8F5E9 {
+    :Receive webhook;
+
+    :Create ConfigMap;
+    note right
+      kubectl create configmap training-config-$ID \
+        --from-file=config.yaml
+    end note
+
+    :Apply Training Job;
+    note right
+      kubectl apply -f training-job.yaml
+      envsubst for $CONFIG_ID, $IMAGE_TAG
+    end note
+
+    :Wait for Job completion;
+    note right
+      kubectl wait --for=condition=complete \
+        job/training-$ID --timeout=24h
+    end note
+
+    if (Job succeeded?) then (yes)
+        :Trigger Merge Job;
+    else (no)
+        :Notify failure;
+        stop
+    endif
+}
+
+|Kubernetes|
+partition "Kubernetes Jobs" #E3F2FD {
+    :Training Job runs;
+    note right
+      - GPU allocation
+      - LLaMA Factory training
+      - MLflow logging
+    end note
+
+    :Merge Job runs;
+    note right
+      - Combine LoRA + base
+      - Output merged model
+      - Register in MLflow
+    end note
+}
+
+|ArgoCD|
+partition "ArgoCD Deployment" #F3E5F5 {
+    :Sync vLLM config;
+    note right
+      Git repo: argo-deployment/
+      values.yaml updated
+    end note
+
+    :Rolling update vLLM;
+    note right
+      Load new model
+      Zero-downtime deploy
+    end note
+}
+
+|API Gateway|
+:Model available\non endpoint;
+
+stop
+
+note right
+  **Przykład training-job.yaml:**
+  ```yaml
+  apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: training-${CONFIG_ID}
+  spec:
+    template:
+      spec:
+        containers:
+        - name: trainer
+          image: ${REGISTRY}/llama-factory:${TAG}
+          envFrom:
+          - configMapRef:
+              name: training-config-${CONFIG_ID}
+          - secretRef:
+              name: mlflow-credentials
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+        nodeSelector:
+          nvidia.com/gpu: "true"
+        restartPolicy: Never
+  ```
+end note
+
+@enduml

@@ -1,0 +1,87 @@
+@startuml platform-phases
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<phase1>> #C8E6C9
+    BorderColor<<phase1>> #2E7D32
+    BackgroundColor<<phase2>> #BBDEFB
+    BorderColor<<phase2>> #1565C0
+    BackgroundColor<<phase3>> #E1BEE7
+    BorderColor<<phase3>> #7B1FA2
+}
+
+title Fazy Wdrożenia Platformy Fine-Tuningu
+
+rectangle "FAZA 1: MVP" <<phase1>> {
+    card "Single-node Training" as f1_train
+    card "YAML/Git Workflow" as f1_yaml
+    card "Predefiniowane modele" as f1_models
+    card "Podstawowa integracja MLflow" as f1_mlflow
+    card "Manual merge & deploy" as f1_deploy
+
+    note bottom of f1_train
+      **Komponenty do zbudowania:**
+      1. Docker image: llama-factory-train
+      2. K8s manifesty (Namespace, PVC, ConfigMap)
+      3. Jenkins pipeline
+
+      **Deliverables:**
+      - commit YAML → trening → model w NFS
+      - Metryki w MLflow
+      - Dokumentacja użytkownika
+    end note
+}
+
+rectangle "FAZA 2: Rozszerzenia" <<phase2>> {
+    card "WebUI (opcjonalnie)" as f2_webui
+    card "Dynamiczny słownik modeli" as f2_dynamic
+    card "Auto pipeline: merge → vLLM" as f2_auto
+    card "Multi-tenant (namespace'y)" as f2_tenant
+    card "MLflow Model Registry" as f2_registry
+
+    note bottom of f2_webui
+      **Nowe komponenty:**
+      - Zmodyfikowany LLaMA Factory UI
+      - Artifactory proxy do HuggingFace
+      - ArgoCD Application
+      - Per-tenant namespace setup
+    end note
+}
+
+rectangle "FAZA 3: Enterprise" <<phase3>> {
+    card "Multi-node training" as f3_multi
+    card "Zaawansowane benchmarki" as f3_bench
+    card "Integration testy modeli" as f3_tests
+    card "Auto porównanie modeli" as f3_compare
+    card "Self-service portal" as f3_portal
+
+    note bottom of f3_multi
+      **Zaawansowane funkcje:**
+      - Distributed training
+      - A/B testing modeli
+      - Automatyczne quality gates
+      - Dashboard dla PM/stakeholders
+    end note
+}
+
+' Dependencies
+f1_train --> f2_webui : "bazuje na"
+f1_mlflow --> f2_registry : "rozszerza"
+f1_yaml --> f2_auto : "automatyzuje"
+
+f2_tenant --> f3_multi : "skaluje"
+f2_registry --> f3_compare : "umożliwia"
+f2_auto --> f3_tests : "integruje"
+
+legend right
+  |= Symbol |= Znaczenie |
+  | <<phase1>> | Rozpoczęcie natychmiast |
+  | <<phase2>> | Po walidacji MVP |
+  | <<phase3>> | Przyszłość |
+endlegend
+
+@enduml

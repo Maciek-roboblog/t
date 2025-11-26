@@ -1,0 +1,134 @@
+@startuml platform-workflow
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+
+skinparam partition {
+    BackgroundColor #FAFAFA
+    BorderColor #BDBDBD
+}
+
+title Fine-Tuning Workflow - Pełny Przepływ
+
+|Data Scientist|
+start
+
+partition "FAZA 1: Przygotowanie" #E8F5E9 {
+    :Przygotuj dataset;
+    note right
+      Format: JSON array
+      [{instruction, input, output}]
+      Upload: /storage/data/
+    end note
+
+    :Wybierz model bazowy;
+    note right
+      Z predefiniowanej listy
+      lub MLflow Registry
+    end note
+}
+
+|System|
+partition "FAZA 2: Konfiguracja" #FFF3E0 {
+    if (Wybór podejścia?) then (WebUI)
+        |Data Scientist|
+        :Otwórz WebUI;
+        :Ustaw parametry w formularzu;
+        note right
+          - Model bazowy
+          - LoRA rank
+          - Learning rate
+          - Epochs, batch size
+        end note
+        :Kliknij Submit;
+    else (YAML/Git)
+        |Data Scientist|
+        :Stwórz plik YAML;
+        :Commit do GitLab;
+        :Utwórz MR;
+
+        |Reviewer|
+        :Review konfiguracji;
+        :Approve MR;
+
+        |System|
+        :Jenkins trigger;
+    endif
+}
+
+|System|
+partition "FAZA 3: Trening" #E3F2FD {
+    :Walidacja konfiguracji;
+
+    :Rejestracja w MLflow;
+    note right
+      - Parametry eksperymentu
+      - Hash datasetu
+      - Wersja modelu bazowego
+    end note
+
+    :Kubernetes Training Job;
+    note right
+      GPU Node
+      nodeSelector: nvidia.com/gpu
+    end note
+
+    fork
+        :Fine-tuning (GPU);
+    fork again
+        :Log metrics → MLflow;
+        note right
+          - Training loss
+          - Learning rate
+          - Epoch progress
+        end note
+    fork again
+        :Checkpoints → NFS;
+    end fork
+
+    :Zapis LoRA adapter;
+    note right: /storage/output/lora-adapter
+}
+
+partition "FAZA 4: Merge" #F3E5F5 {
+    :Merge LoRA + Base Model;
+    note right
+      kubectl apply -f merge-job.yaml
+      Output: /storage/models/merged-model
+    end note
+
+    :Rejestracja w MLflow Registry;
+    note right
+      Model version: v1, v2...
+      Alias: staging → production
+    end note
+}
+
+partition "FAZA 5: Deploy (opcjonalne)" #FFFDE7 {
+    :CI/CD Pipeline;
+    note right
+      ArgoCD synchronizacja
+      Aktualizacja vLLM config
+    end note
+
+    :vLLM ładuje model;
+    note right
+      Zewnętrzna usługa
+      Czyta z NFS
+    end note
+
+    :Rejestracja w Gateway;
+}
+
+|Data Scientist|
+:Model dostępny przez API;
+
+stop
+
+@enduml

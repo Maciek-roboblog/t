@@ -1,0 +1,86 @@
+@startuml platform-multi-tenant
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<tenant_a>> #E8F5E9
+    BorderColor<<tenant_a>> #388E3C
+    BackgroundColor<<tenant_b>> #E3F2FD
+    BorderColor<<tenant_b>> #1976D2
+    BackgroundColor<<shared>> #FFF3E0
+    BorderColor<<shared>> #E65100
+}
+
+title Multi-Tenancy przez Namespace'y Kubernetes
+
+rectangle "Tenant A (Zespół Data Science)" <<tenant_a>> {
+    package "namespace: tenant-a-training" {
+        [WebUI A\n:7860] as webui_a
+        [Training Job A] as train_a
+        [Merge Job A] as merge_a
+        [ConfigMap A] as cm_a
+        [PVC A\n(/storage-a)] as pvc_a
+    }
+
+    actor "DS Team A" as ds_a
+    ds_a --> webui_a
+}
+
+rectangle "Tenant B (Zespół NLP)" <<tenant_b>> {
+    package "namespace: tenant-b-training" {
+        [WebUI B\n:7860] as webui_b
+        [Training Job B] as train_b
+        [Merge Job B] as merge_b
+        [ConfigMap B] as cm_b
+        [PVC B\n(/storage-b)] as pvc_b
+    }
+
+    actor "NLP Team B" as ds_b
+    ds_b --> webui_b
+}
+
+rectangle "Shared Services" <<shared>> {
+    database "MLflow\n(shared)" as mlflow
+    [vLLM Pool\n(shared)" as vllm
+
+    note right of mlflow
+      **Izolacja w MLflow:**
+      - Experiment: tenant-a/*
+      - Experiment: tenant-b/*
+      - Model names: tenant-a-*
+    end note
+}
+
+' Connections
+train_a --> mlflow : "log (tenant-a)"
+train_b --> mlflow : "log (tenant-b)"
+merge_a --> vllm : "deploy model-a"
+merge_b --> vllm : "deploy model-b"
+
+note bottom
+  **Uzasadnienie izolacji przez namespace'y:**
+
+  1. LLaMA Factory **nie wspiera** natywnie multi-user
+  2. Każdy tenant ma **własną instancję** WebUI
+  3. **Resource Quotas** per namespace
+  4. **Network Policies** dla izolacji sieci
+  5. **RBAC** - zespoły widzą tylko swój namespace
+
+  **Przykład Resource Quota:**
+  ```yaml
+  apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: gpu-quota
+    namespace: tenant-a-training
+  spec:
+    hard:
+      requests.nvidia.com/gpu: "4"
+      limits.nvidia.com/gpu: "4"
+  ```
+end note
+
+@enduml
