@@ -1,0 +1,5978 @@
+WEBVTT
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/17-0
+00:00:05.989 --> 00:00:08.681
+<v Matusz Jakub (EXT)>Zdaje się, że tak,
+że w większym składzie nie będziemy na</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/17-1
+00:00:08.681 --> 00:00:08.959
+<v Matusz Jakub (EXT)>razie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/30-0
+00:00:09.649 --> 00:00:12.077
+<v Dymarczyk Maciej (EXT)>Jasne,
+to ja mam pytanie tak naprawdę</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/30-1
+00:00:12.077 --> 00:00:15.399
+<v Dymarczyk Maciej (EXT)>przedstawione 2 podejścia,
+jedno no takim bardziej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/36-0
+00:00:16.509 --> 00:00:18.969
+<v Dymarczyk Maciej (EXT)>Grubych klockach,
+drugie już takie wchodzące.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/61-0
+00:00:20.279 --> 00:00:24.007
+<v Dymarczyk Maciej (EXT)>Bardziej wewnątrz całego procesu setup
+Lenovo,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/61-1
+00:00:24.007 --> 00:00:29.717
+<v Dymarczyk Maciej (EXT)>ktory jeżeli chodzi o te grube klocki,
+to nawiązując jeszcze do naszego</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/61-2
+00:00:29.717 --> 00:00:33.603
+<v Dymarczyk Maciej (EXT)>piątkowego kole,
+którego mieliśmy na temat tego,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/61-3
+00:00:33.603 --> 00:00:36.299
+<v Dymarczyk Maciej (EXT)>jakie teraz mamy usługi i z czego.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/68-0
+00:00:37.159 --> 00:00:40.329
+<v Dymarczyk Maciej (EXT)>Możemy skorzystać to tutaj,
+przygotowałem diagram.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/83-0
+00:00:41.689 --> 00:00:45.857
+<v Dymarczyk Maciej (EXT)>Który pokazuje,
+jak można by było stepować lama Factory</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/83-1
+00:00:45.857 --> 00:00:48.759
+<v Dymarczyk Maciej (EXT)>oraz jak umieścić je w naszym procesie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/119-0
+00:00:50.089 --> 00:00:54.860
+<v Dymarczyk Maciej (EXT)>Jakby tutaj mamy po prostu dieta,
+sejm to jest ta,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/119-1
+00:00:54.860 --> 00:01:02.437
+<v Dymarczyk Maciej (EXT)>który chce sobie zrobić Francji unin ma
+do tego albo lama Factory we i albo lama</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/119-2
+00:01:02.437 --> 00:01:10.108
+<v Dymarczyk Maciej (EXT)>Factory bezpośredniej mamę konfiguruję
+sobie wszystko to triggeruje trening joby,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/119-3
+00:01:10.108 --> 00:01:10.669
+<v Dymarczyk Maciej (EXT)>który.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/126-0
+00:01:10.919 --> 00:01:14.399
+<v Dymarczyk Maciej (EXT)>Które się uruchamiają i rejestrują model
+jakby do.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/128-0
+00:01:15.519 --> 00:01:16.259
+<v Dymarczyk Maciej (EXT)>Noszą.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/137-0
+00:01:17.619 --> 00:01:24.919
+<v Dymarczyk Maciej (EXT)>Oraz zapisuję sobie go w historii żu to
+jest integrowane w pełni z.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/179-0
+00:01:25.719 --> 00:01:29.750
+<v Dymarczyk Maciej (EXT)>Wiele leman,
+ale Jestem kontrolą Stream lee do</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/179-1
+00:01:29.750 --> 00:01:33.610
+<v Dymarczyk Maciej (EXT)>testowania, którą posiadamy,
+a tak naprawdę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/179-2
+00:01:33.610 --> 00:01:40.299
+<v Dymarczyk Maciej (EXT)>gdy wszystko zostanie skomentowane,
+to tworzymy tak całość poprzez pipeline i</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/179-3
+00:01:40.299 --> 00:01:44.587
+<v Dymarczyk Maciej (EXT)>cd, bo mamy tutaj takie 2 opcje.
+To tak myślałem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/179-4
+00:01:44.587 --> 00:01:48.789
+<v Dymarczyk Maciej (EXT)>że to jest takie najprostsze,
+możliwe podejście.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/213-0
+00:01:50.269 --> 00:01:56.187
+<v Matusz Jakub (EXT)>Ale to zakładałeś jako mogę te pytania,
+czy wolisz tak przejść przez całość,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/195-0
+00:01:53.019 --> 00:01:54.449
+<v Dymarczyk Maciej (EXT)>Tak, tak, tak, tak, tak, tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/213-1
+00:01:56.187 --> 00:02:00.261
+<v Matusz Jakub (EXT)>bo ten zakładałeś ten jua i webowy jako
+alternatywę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/213-2
+00:02:00.261 --> 00:02:03.719
+<v Matusz Jakub (EXT)>czy jako ten jako inne etap procesu,
+bo tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/217-0
+00:02:03.539 --> 00:02:05.069
+<v Dymarczyk Maciej (EXT)>Jako inne etap procesu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/244-0
+00:02:05.909 --> 00:02:10.185
+<v Matusz Jakub (EXT)>A ten jua jak wystawimy,
+no bo teraz tak tych tej piosenki,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/244-1
+00:02:10.185 --> 00:02:15.601
+<v Matusz Jakub (EXT)>listów potencjalnym mamy na przykład 200
+z różnych więź z różnych obszarów,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/244-2
+00:02:15.601 --> 00:02:18.879
+<v Matusz Jakub (EXT)>to jak wy serwujemy ten fillm tą ten
+wlepiła.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/256-0
+00:02:19.629 --> 00:02:24.579
+<v Matusz Jakub (EXT)>To ta to jak on się tam zachował wtedy
+jak będzie jej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/288-0
+00:02:23.649 --> 00:02:28.559
+<v Dymarczyk Maciej (EXT)>Jedna instancja perełek w space,
+brak natywnego multi terence jakby tak</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/288-1
+00:02:28.559 --> 00:02:34.082
+<v Dymarczyk Maciej (EXT)>jak tutaj napisałem i równoległe sesje
+utrzymują osobne i zadań tak jak myślałem</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/288-2
+00:02:34.082 --> 00:02:35.309
+<v Dymarczyk Maciej (EXT)>tak naprawdę więc.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/293-0
+00:02:34.649 --> 00:02:38.999
+<v Matusz Jakub (EXT)>Aha, czyli teraz jak jak tam?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/310-0
+00:02:39.319 --> 00:02:44.597
+<v Matusz Jakub (EXT)>Tak stuknę w ten w ten adres to za każdym
+razem jakby co to taka sesja się tworzy</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/310-1
+00:02:44.597 --> 00:02:45.819
+<v Matusz Jakub (EXT)>czy jak jak to ten.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/312-0
+00:02:44.789 --> 00:02:46.399
+<v Dymarczyk Maciej (EXT)>Tak, tak dokładnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/316-0
+00:02:47.799 --> 00:02:50.259
+<v Matusz Jakub (EXT)>Aha, dobra, okej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/340-0
+00:02:50.899 --> 00:02:53.879
+<v Matusz Jakub (EXT)>A no to tak,
+no to to ciekawe czyli teraz a</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/340-1
+00:02:53.879 --> 00:02:59.433
+<v Matusz Jakub (EXT)>podjedziesz tam wyżej jak ten a bo tutaj
+jest chyba ten rzeczywiście pokazany ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/340-2
+00:02:59.433 --> 00:03:02.819
+<v Matusz Jakub (EXT)>juvit to wtedy ja rozumiem,
+że tam trzeba byłoby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/352-0
+00:03:03.269 --> 00:03:07.606
+<v Matusz Jakub (EXT)>Zmodyfikować to lama Factory? Tak,
+bo one teraz nie triggeruje żadnych</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/352-1
+00:03:07.606 --> 00:03:08.339
+<v Matusz Jakub (EXT)>dziobów nie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/370-0
+00:03:08.749 --> 00:03:14.373
+<v Dymarczyk Maciej (EXT)>Nie, nie, nie, nie, nie, nie, nie,
+to właśnie tutaj jest w tej dokumentacji</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/362-0
+00:03:09.069 --> 00:03:11.379
+<v Matusz Jakub (EXT)>Tylko odpala.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/370-1
+00:03:14.373 --> 00:03:15.779
+<v Dymarczyk Maciej (EXT)>niskopoziomowe, ej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/372-0
+00:03:16.249 --> 00:03:16.789
+<v Matusz Jakub (EXT)>No.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/407-0
+00:03:17.629 --> 00:03:23.803
+<v Dymarczyk Maciej (EXT)>Ja pokazałem w jaki sposób to można
+zrealizować tak, żeby to lama Factory,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/407-1
+00:03:23.803 --> 00:03:28.495
+<v Dymarczyk Maciej (EXT)>trigger, ował,
+joby i tak naprawdę było odpowiedzialne i</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/407-2
+00:03:28.495 --> 00:03:34.668
+<v Dymarczyk Maciej (EXT)>idę potem znaczy jakby tylko za ten fajny
+tuning i tutaj jest odniesienie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/407-3
+00:03:34.668 --> 00:03:38.289
+<v Dymarczyk Maciej (EXT)>że musielibyśmy na przykład świrować
+sobie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/458-0
+00:03:39.499 --> 00:03:46.392
+<v Dymarczyk Maciej (EXT)>Nfs stories wiele mem to wtedy to było
+możliwe i umieścić to jakby w całym flow</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/458-1
+00:03:46.392 --> 00:03:52.595
+<v Dymarczyk Maciej (EXT)>i w całym procesie bezpośrednio na tej
+zasadzie, że mamy awans faktory,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/458-2
+00:03:52.595 --> 00:03:56.472
+<v Dymarczyk Maciej (EXT)>które odnosi się do ML flow i serwerowi
+lem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/458-3
+00:03:56.472 --> 00:04:02.589
+<v Dymarczyk Maciej (EXT)>bo wtedy mamy to skalowalne GULAM jest po
+prostu zewnętrzną usługą, a.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/473-0
+00:04:02.839 --> 00:04:06.947
+<v Dymarczyk Maciej (EXT)>Nie zarządzamy sobie w ramach lama
+faktory tym,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/473-1
+00:04:06.947 --> 00:04:11.739
+<v Dymarczyk Maciej (EXT)>a lama faktory odpowiada bezpośrednio za
+trening jakby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/484-0
+00:04:08.409 --> 00:04:09.259
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/492-0
+00:04:12.269 --> 00:04:20.296
+<v Dymarczyk Maciej (EXT)>Adaptera i modelu oraz konfiguracyjne we
+i łamane na jable tylko że w przypadku</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/492-1
+00:04:20.296 --> 00:04:21.199
+<v Dymarczyk Maciej (EXT)>jam mili.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/516-0
+00:04:22.609 --> 00:04:26.563
+<v Dymarczyk Maciej (EXT)>To działa na tej zasadzie nie wiem czy ja
+to mam tutaj opisane,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/516-1
+00:04:26.563 --> 00:04:29.651
+<v Dymarczyk Maciej (EXT)>czy to jeszcze robiłem to działa na tej
+zasadzie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/516-2
+00:04:29.651 --> 00:04:32.739
+<v Dymarczyk Maciej (EXT)>że ktoś musiałby to trigger ować sobie
+bez pośle.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/525-0
+00:04:32.879 --> 00:04:35.919
+<v Dymarczyk Maciej (EXT)>Już na kubernetes się i to jest takie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/538-0
+00:04:36.499 --> 00:04:40.419
+<v Matusz Jakub (EXT)>A czemu wiesz co?
+Bo ja to zaraz ci mogę powiedzieć,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/538-1
+00:04:40.419 --> 00:04:42.859
+<v Matusz Jakub (EXT)>jakby to mogło działać tam z tym.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/551-0
+00:04:42.939 --> 00:04:47.519
+<v Dymarczyk Maciej (EXT)>W sensie, bo to jest takie domyślne,
+ale pewnie da się jakoś inaczej jakby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/555-0
+00:04:46.969 --> 00:04:49.349
+<v Matusz Jakub (EXT)>Dobra to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/554-0
+00:04:48.289 --> 00:04:48.979
+<v Dymarczyk Maciej (EXT)>Na.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/559-0
+00:04:50.429 --> 00:04:50.939
+<v Dymarczyk Maciej (EXT)>Jasne.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/558-0
+00:04:50.489 --> 00:04:50.979
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/590-0
+00:04:51.809 --> 00:04:56.953
+<v Dymarczyk Maciej (EXT)>My jeszcze tutaj mamy jakby zależności
+wszystkiego od wszystkiego innego,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/568-0
+00:04:52.229 --> 00:04:53.569
+<v Matusz Jakub (EXT)>Opowiedz o.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/590-1
+00:04:56.953 --> 00:05:00.915
+<v Dymarczyk Maciej (EXT)>czyli tak naprawdę,
+że tutaj mamy ten potencjalny obraz.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/590-2
+00:05:00.915 --> 00:05:04.599
+<v Dymarczyk Maciej (EXT)>Ja tutaj już bazowałem na tych wersjach,
+które mamy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/592-0
+00:05:03.139 --> 00:05:05.499
+<v Matusz Jakub (EXT)>Halo, nie tylko urwała oczy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/595-0
+00:05:06.029 --> 00:05:06.649
+<v Dymarczyk Maciej (EXT)>Halo.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/597-0
+00:05:09.349 --> 00:05:09.989
+<v Dymarczyk Maciej (EXT)>Halo.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/602-0
+00:05:11.459 --> 00:05:12.729
+<v Marchewka Maciej>Ja Maciek słyszę jak coś.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/604-0
+00:05:13.139 --> 00:05:13.709
+<v Dymarczyk Maciej (EXT)>O k.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/606-0
+00:05:16.449 --> 00:05:16.989
+<v Marchewka Maciej>Kła.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/612-0
+00:05:19.529 --> 00:05:21.049
+<v Marchewka Maciej>Czyli kuba chyba urwało.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/634-0
+00:05:29.889 --> 00:05:33.887
+<v Dymarczyk Maciej (EXT)>Chodziło mi o to,
+że to jeszcze tak dodam za nią jak nie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/634-1
+00:05:33.887 --> 00:05:37.323
+<v Dymarczyk Maciej (EXT)>wróci,
+że ja tu już bazowałem na tych imionach i</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/634-2
+00:05:37.323 --> 00:05:40.619
+<v Dymarczyk Maciej (EXT)>wersjach,
+które mamy bezpośrednio na przykład.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/638-0
+00:05:42.169 --> 00:05:43.959
+<v Dymarczyk Maciej (EXT)>Bez imidż.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/645-0
+00:05:45.199 --> 00:05:47.829
+<v Dymarczyk Maciej (EXT)>Czyli, że tam widziałem,
+że najnowsza wersja.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/651-0
+00:05:51.359 --> 00:05:52.709
+<v Dymarczyk Maciej (EXT)>Nie wiem czy teraz mój internet.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/657-0
+00:05:54.299 --> 00:05:55.839
+<v Dymarczyk Maciej (EXT)>A nie wtedy sobie taki chleba.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/660-0
+00:06:07.869 --> 00:06:08.349
+<v Dymarczyk Maciej (EXT)>Halo.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/665-0
+00:06:12.729 --> 00:06:14.729
+<v Marchewka Maciej>Jest w porządku kuby dalej nie słychać.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/698-0
+00:06:26.089 --> 00:06:29.142
+<v Dymarczyk Maciej (EXT)>No ja bazowałem na tym obrazie tym
+najnowszym tylko,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/698-1
+00:06:29.142 --> 00:06:32.426
+<v Dymarczyk Maciej (EXT)>że nie wiem czy to jest najnowszy,
+bo to jest najnowszy,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/698-2
+00:06:32.426 --> 00:06:36.170
+<v Dymarczyk Maciej (EXT)>do którego ja mam dostęp,
+ale nie wiem czy mamy jeszcze dodam na</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/698-3
+00:06:36.170 --> 00:06:38.819
+<v Dymarczyk Maciej (EXT)>dwunastkę czy mamy tego jedenastkę i 3 10
+14.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/713-0
+00:06:44.799 --> 00:06:48.238
+<v Marchewka Maciej>Mamy zebrane na konferencję,
+które są najnowsze te obrazy bazowe,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/713-1
+00:06:48.238 --> 00:06:49.279
+<v Marchewka Maciej>zaraz podeśle linka.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/722-0
+00:06:48.279 --> 00:06:51.449
+<v Dymarczyk Maciej (EXT)>A to też tam miałem. Mam to gdzieś nawet.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/738-0
+00:06:50.839 --> 00:06:54.762
+<v Marchewka Maciej>Masz to tak, no to tam są te w zasadzie,
+które są takie pobłogosławione i tam są</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/734-0
+00:06:52.939 --> 00:06:56.219
+<v Matusz Jakub (EXT)>Tak też.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/738-1
+00:06:54.762 --> 00:06:56.941
+<v Marchewka Maciej>te najnowsze,
+nie jeśli tam jest jedenastka,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/738-2
+00:06:56.941 --> 00:06:57.619
+<v Marchewka Maciej>to jedenastka.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/742-0
+00:06:58.199 --> 00:06:58.929
+<v Dymarczyk Maciej (EXT)>Niejasne.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/751-0
+00:06:58.279 --> 00:07:02.679
+<v Matusz Jakub (EXT)>Wywaliło mnie z wypierana w ogóle wrednie
+akurat na tym spotkaniu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/768-0
+00:07:04.119 --> 00:07:07.566
+<v Matusz Jakub (EXT)>Tak więc zdam się,
+zgubiłem w którymś momencie co</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/757-0
+00:07:04.379 --> 00:07:05.119
+<v Dymarczyk Maciej (EXT)>O k.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/768-1
+00:07:07.566 --> 00:07:08.669
+<v Matusz Jakub (EXT)>pokazywałeś ten.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/778-0
+00:07:08.509 --> 00:07:13.599
+<v Dymarczyk Maciej (EXT)>A bo ja pokazywałem jeszcze te zależności,
+że tak naprawdę to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/797-0
+00:07:14.029 --> 00:07:19.085
+<v Dymarczyk Maciej (EXT)>Jest relatywnie niezależne bazowałem
+prawda na tych obrazach z Hitlera jest</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/797-1
+00:07:19.085 --> 00:07:22.809
+<v Dymarczyk Maciej (EXT)>widzę, że tutaj są wykazie nowsze,
+więc to to poprawię.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/808-0
+00:07:23.389 --> 00:07:28.085
+<v Matusz Jakub (EXT)>W ogóle tak takie też jest info,
+że ta jest takie zalecenie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/808-1
+00:07:28.085 --> 00:07:30.009
+<v Matusz Jakub (EXT)>żeby się migrować na ten.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/825-0
+00:07:30.919 --> 00:07:34.654
+<v Matusz Jakub (EXT)>Na ubi,
+yy ten obrazy z debiana debiana ostatnio</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/825-1
+00:07:34.654 --> 00:07:38.389
+<v Matusz Jakub (EXT)>ma coraz więcej problemów takich Security
+i ten.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/869-0
+00:07:39.029 --> 00:07:43.259
+<v Matusz Jakub (EXT)>I nawet w tej chwili jest jakby
+zblokowane ris nowego obrazu,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/869-1
+00:07:43.259 --> 00:07:46.943
+<v Matusz Jakub (EXT)>a końcu chyba wyszedł,
+bo tam widziałem ten, ale ten,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/869-2
+00:07:46.943 --> 00:07:52.332
+<v Matusz Jakub (EXT)>ale no na razie dece betam zblokowało i
+pod jakimś tam warunkami dopuściło ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/869-3
+00:07:52.332 --> 00:07:55.606
+<v Matusz Jakub (EXT)>obraz,
+co też narzuca jakieś obowiązki na tego,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/869-4
+00:07:55.606 --> 00:07:57.789
+<v Matusz Jakub (EXT)>kto tam używa tego obrazu, więc.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/874-0
+00:07:59.329 --> 00:08:00.869
+<v Dymarczyk Maciej (EXT)>Ok, to zapamiętam.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/891-0
+00:07:59.569 --> 00:08:04.335
+<v Matusz Jakub (EXT)>Więc może to nas czeka w najbliższym
+czasie, więc to tak podrzucam.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/891-1
+00:08:04.335 --> 00:08:07.489
+<v Matusz Jakub (EXT)>Przy okazji sprawdza taki diss traktor,
+ale.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/897-0
+00:08:08.589 --> 00:08:10.299
+<v Dymarczyk Maciej (EXT)>Nie, to nie jest jakiś problem.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/906-0
+00:08:13.309 --> 00:08:15.339
+<v Dymarczyk Maciej (EXT)>Tak i jakby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/922-0
+00:08:13.929 --> 00:08:17.821
+<v Matusz Jakub (EXT)>No to brawa,
+a poczekaj ja ten film nie zrozumiałem</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/922-1
+00:08:17.821 --> 00:08:23.059
+<v Matusz Jakub (EXT)>jeszcze poczekaj tak czyli jest jest
+konsola i ta konsola triggeruje.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/936-0
+00:08:24.019 --> 00:08:29.134
+<v Matusz Jakub (EXT)>Drob kubernetes sowy,
+dla którego pewnie mamy jakiś zbudowany</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/936-1
+00:08:29.134 --> 00:08:32.269
+<v Matusz Jakub (EXT)>już gotowy obraz, tak taki generyczny.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/938-0
+00:08:33.749 --> 00:08:34.189
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/946-0
+00:08:35.719 --> 00:08:40.149
+<v Matusz Jakub (EXT)>I ten job kubernetes sowy to tak naprawdę.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/970-0
+00:08:40.599 --> 00:08:47.052
+<v Matusz Jakub (EXT)>Co co on tam robi to jest to jest tylko
+tak, jakby to środowiska lama faktury,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/970-1
+00:08:47.052 --> 00:08:50.319
+<v Matusz Jakub (EXT)>to które ten czy czy coś więcej jeszcze.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/976-0
+00:08:49.349 --> 00:08:52.499
+<v Dymarczyk Maciej (EXT)>No tak, ja chciałem zrobić to,
+żeby to było tylko taką.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-0
+00:08:53.939 --> 00:08:56.861
+<v Dymarczyk Maciej (EXT)>Pilotką nie wiem jak to nazwać
+bezpośrednio,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-1
+00:08:56.861 --> 00:09:01.602
+<v Dymarczyk Maciej (EXT)>że jakby ona tylko tak naprawdę jest
+odpowiedzialny za kierowanie innych</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-2
+00:09:01.602 --> 00:09:06.731
+<v Dymarczyk Maciej (EXT)>aspektów byli chcielibyśmy na przykład
+odpali żona faktury razem z williamem w</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-3
+00:09:06.731 --> 00:09:10.822
+<v Dymarczyk Maciej (EXT)>ramach jednego obrazu to było dość
+problematyczne tego powodu,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-4
+00:09:10.822 --> 00:09:15.692
+<v Dymarczyk Maciej (EXT)>że tak naprawdę musimy to utrzymywać.
+Plus później to jest nie skalowalne,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-5
+00:09:15.692 --> 00:09:20.172
+<v Dymarczyk Maciej (EXT)>jeżeli mamy tam x użytkowników,
+to oczywiście nie jest to, co mówię,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1038-6
+00:09:20.172 --> 00:09:23.029
+<v Dymarczyk Maciej (EXT)>jakby i co jest tutaj rozrysowane nie
+jest.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1053-0
+00:09:23.979 --> 00:09:27.523
+<v Dymarczyk Maciej (EXT)>Zdefiniowany bezpośrednio w ramy efektora,
+że tak się powinno robić,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1053-1
+00:09:27.523 --> 00:09:30.707
+<v Dymarczyk Maciej (EXT)>bo dla który je tak,
+jak już mówiliśmy ostatnio jest bardziej</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1053-2
+00:09:30.707 --> 00:09:31.579
+<v Dymarczyk Maciej (EXT)>przystosowane do.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1067-0
+00:09:34.459 --> 00:09:38.186
+<v Dymarczyk Maciej (EXT)>Użycia przez pojedyncze osoby,
+a nie Enterprise.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1067-1
+00:09:38.186 --> 00:09:43.889
+<v Dymarczyk Maciej (EXT)>Generalnie wszystkie narzędzia są do tego
+przystosowane, jakby ten sposób.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1086-0
+00:09:45.639 --> 00:09:50.378
+<v Matusz Jakub (EXT)>A gdybyśmy mieli ten na przykład
+zrzucenia tego konfigu tak żeby go</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1086-1
+00:09:50.378 --> 00:09:54.072
+<v Matusz Jakub (EXT)>zaserwować,
+którym kroku w tym w tym takim wariancie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1086-2
+00:09:54.072 --> 00:09:56.859
+<v Matusz Jakub (EXT)>gdzie zui, a tam jakby to trigger ujemy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1112-0
+00:09:57.159 --> 00:10:01.652
+<v Dymarczyk Maciej (EXT)>To w jandzie,
+gdzie ja tak naprawdę to mielibyśmy to na</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1112-1
+00:10:01.652 --> 00:10:07.830
+<v Dymarczyk Maciej (EXT)>etapie tych wirowania jakby trenowania.
+Ale jeżeli chodzi o cały temat, ten,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1112-2
+00:10:07.830 --> 00:10:11.039
+<v Dymarczyk Maciej (EXT)>który poruszaliśmy dzisiaj na spotkaniu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1115-0
+00:10:11.419 --> 00:10:13.339
+<v Dymarczyk Maciej (EXT)>Ee czyli temat.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1140-0
+00:10:14.579 --> 00:10:20.355
+<v Dymarczyk Maciej (EXT)>Wali dowolności tego środowiska,
+to ja na tym przesiadłem jeszcze troszkę</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1140-1
+00:10:20.355 --> 00:10:23.945
+<v Dymarczyk Maciej (EXT)>tylko,
+że jeszcze tego nie opisałem i tam tak</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1140-2
+00:10:23.945 --> 00:10:28.159
+<v Dymarczyk Maciej (EXT)>naprawdę powinniśmy zrobić to na takiej
+zasadzie, że.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1157-0
+00:10:28.359 --> 00:10:35.251
+<v Dymarczyk Maciej (EXT)>Całość powinniśmy to już jest opisane,
+to śledzić jakby w w m slow przed</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1157-1
+00:10:35.251 --> 00:10:37.799
+<v Dymarczyk Maciej (EXT)>treningiem powinniśmy mieć.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1169-0
+00:10:37.869 --> 00:10:45.949
+<v Dymarczyk Maciej (EXT)>Jakby wszystkie wartości tego data setu i
+zapisywać podczas treningu tre.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1191-0
+00:10:46.019 --> 00:10:50.322
+<v Dymarczyk Maciej (EXT)>Klaus wrzucamy do msz o los także
+leningradzie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1191-1
+00:10:50.322 --> 00:10:56.149
+<v Dymarczyk Maciej (EXT)>Czek pointy do NFSA po treningu.
+Tak naprawdę jakieś benchmarki.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1201-0
+00:10:58.799 --> 00:11:03.156
+<v Dymarczyk Maciej (EXT)>Nie Jestem jeszcze pewien,
+gdzie powinniśmy trzymać,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1201-1
+00:11:03.156 --> 00:11:05.129
+<v Dymarczyk Maciej (EXT)>jeżeli chodzi o kwestie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1213-0
+00:11:06.739 --> 00:11:11.599
+<v Dymarczyk Maciej (EXT)>Rozszerzenia o tą walidację to tak
+naprawdę powinniśmy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1207-0
+00:11:06.779 --> 00:11:07.659
+<v Matusz Jakub (EXT)>Ale i.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1254-0
+00:11:11.959 --> 00:11:17.914
+<v Dymarczyk Maciej (EXT)>W ramach yy jest tak naprawdę job ma tam
+parametr raportu i tam rozszerzamy wtedy</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1254-1
+00:11:17.914 --> 00:11:23.722
+<v Dymarczyk Maciej (EXT)>sobie, żeby to raportowała do ML flow,
+więc głównie tam prawdopodobnie byśmy tu</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1254-2
+00:11:23.722 --> 00:11:27.934
+<v Dymarczyk Maciej (EXT)>przechowywali,
+ale tak naprawdę tutaj jeszcze wejdzie to,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1254-3
+00:11:27.934 --> 00:11:31.709
+<v Dymarczyk Maciej (EXT)>o czym wspominaliśmy dzisiaj,
+czyli jakby me triki.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1300-0
+00:11:33.279 --> 00:11:38.925
+<v Dymarczyk Maciej (EXT)>No i tego będzie bardzo bardzo dużo,
+bo o ile ml flow automatycznie loguje tam</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1300-1
+00:11:38.925 --> 00:11:42.999
+<v Dymarczyk Maciej (EXT)>los learning rate,
+podstawową wiedzę mówiłem to później,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1300-2
+00:11:42.999 --> 00:11:47.001
+<v Dymarczyk Maciej (EXT)>jeżeli chcemy to rozszerzyć,
+to o jakieś kastom metrix,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1300-3
+00:11:47.001 --> 00:11:52.003
+<v Dymarczyk Maciej (EXT)>to musimy jakby sobie bezpośrednio do
+konfigurować na zasadę nie wiem</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1300-4
+00:11:52.003 --> 00:11:56.219
+<v Dymarczyk Maciej (EXT)>definiowania trening dziobów i dopiero
+wtedy ich używania.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1307-0
+00:11:59.729 --> 00:12:03.619
+<v Matusz Jakub (EXT)>Dobra, to czekaj,
+bo tak próbuję jeszcze tak robi.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1377-0
+00:12:03.689 --> 00:12:08.699
+<v Matusz Jakub (EXT)>Łapkować po kolei to zaraz do tego mam
+flow, a jeszcze wrócę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1377-1
+00:12:08.699 --> 00:12:15.000
+<v Matusz Jakub (EXT)>ale tak to ta konsola tam masz taki ten
+ten ekran takich parametrów tam gdzie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1377-2
+00:12:15.000 --> 00:12:20.252
+<v Matusz Jakub (EXT)>sabotujesz jakby zadanie nie.
+No to ja rozumiem, że to jest tak,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1342-0
+00:12:15.769 --> 00:12:17.519
+<v Dymarczyk Maciej (EXT)>Tak łeb i dokładnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1377-3
+00:12:20.252 --> 00:12:26.311
+<v Matusz Jakub (EXT)>że że wtedy tam tworzy się jakaś konflikt,
+mapa do tego joba tak zleca się</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1358-0
+00:12:24.389 --> 00:12:24.829
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1377-4
+00:12:26.311 --> 00:12:30.189
+<v Matusz Jakub (EXT)>kubernetes owe mapy job tak z tego z tego
+joya.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1373-0
+00:12:28.899 --> 00:12:29.229
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1387-0
+00:12:31.219 --> 00:12:33.039
+<v Matusz Jakub (EXT)>A dobra no właśnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1408-0
+00:12:31.259 --> 00:12:36.034
+<v Dymarczyk Maciej (EXT)>Tylko jeszcze ten musi mieć dostęp do
+modeli, który mamy i tutaj pytanie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1408-1
+00:12:36.034 --> 00:12:41.259
+<v Dymarczyk Maciej (EXT)>gdzie my przechowujemy do modelu w tym
+momencie, czy wszystkie są jakby tam w w.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1406-0
+00:12:39.059 --> 00:12:40.089
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1411-0
+00:12:42.579 --> 00:12:43.049
+<v Matusz Jakub (EXT)>Show.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1417-0
+00:12:43.219 --> 00:12:45.599
+<v Dymarczyk Maciej (EXT)>W emel flow, czy mamy też jakieś?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1429-0
+00:12:46.919 --> 00:12:51.479
+<v Dymarczyk Maciej (EXT)>Bezpośrednio nie wiem na jakimś stoisku
+czy jeszcze gdzieś i tak dalej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1440-0
+00:12:51.959 --> 00:12:56.759
+<v Matusz Jakub (EXT)>To teraz tak, jeśli chodzi o modele,
+to dobra, to to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1475-0
+00:12:57.989 --> 00:13:01.191
+<v Matusz Jakub (EXT)>Poczekać,
+bo to to ten miła i potrzebuję dostępu do</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1475-1
+00:13:01.191 --> 00:13:05.440
+<v Matusz Jakub (EXT)>tych modeli, czy chyba nie,
+bo on tylko ma tylko taki gdzie jest tam</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1453-0
+00:13:02.559 --> 00:13:03.099
+<v Dymarczyk Maciej (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1475-2
+00:13:05.440 --> 00:13:09.749
+<v Matusz Jakub (EXT)>z joomla któregoś taką listę,
+taki Słownik tak za które można wybrać.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1483-0
+00:13:08.879 --> 00:13:11.519
+<v Dymarczyk Maciej (EXT)>Na, ale fajnie by było,
+żeby ten Słownik był brany dynamicznie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1491-0
+00:13:11.989 --> 00:13:14.379
+<v Matusz Jakub (EXT)>A no to tak to zaraz może do tego jeszcze.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1498-0
+00:13:16.309 --> 00:13:18.149
+<v Matusz Jakub (EXT)>Ania dobra, to możemy teraz po.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1511-0
+00:13:18.829 --> 00:13:23.048
+<v Matusz Jakub (EXT)>Yy pogadać, no to tak,
+to ten Słownik teraz modeli skąd go wziąć,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1511-1
+00:13:23.048 --> 00:13:23.239
+<v Matusz Jakub (EXT)>bo.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1513-0
+00:13:24.329 --> 00:13:26.599
+<v Matusz Jakub (EXT)>Ee no.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1538-0
+00:13:27.399 --> 00:13:32.944
+<v Matusz Jakub (EXT)>I takiej bezpośredniej integracji dobrej
+z hanging fejsem nie mamy w tej chwili</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1538-1
+00:13:32.944 --> 00:13:37.311
+<v Matusz Jakub (EXT)>dzisiaj pod ten miałam takie chwile
+przecięcie z tym zespołem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1538-2
+00:13:37.311 --> 00:13:38.419
+<v Matusz Jakub (EXT)>tam mój Cards i.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-0
+00:13:39.429 --> 00:13:44.504
+<v Matusz Jakub (EXT)>I tam rozmawialiśmy o tym,
+to znaczy oni trochę podniesie taki temat,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-1
+00:13:44.504 --> 00:13:50.594
+<v Matusz Jakub (EXT)>który wydaje mi się, że trzeba pocisnąć,
+żeby wypracować takie rozwiązanie w banku,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-2
+00:13:50.594 --> 00:13:56.104
+<v Matusz Jakub (EXT)>żeby móc tam jakby artie factor czy nie
+wiem takie zrobić proxy do harding,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1576-0
+00:13:55.719 --> 00:13:56.319
+<v Dymarczyk Maciej (EXT)>K.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-3
+00:13:56.104 --> 00:14:00.092
+<v Matusz Jakub (EXT)>fejsa prawdziwe,
+a nie takie jak teraz jest w w partii</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-4
+00:14:00.092 --> 00:14:04.007
+<v Matusz Jakub (EXT)>factor tak,
+żeby to nie był tęgi ten sejf tylko l fes</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1591-5
+00:14:04.007 --> 00:14:04.949
+<v Matusz Jakub (EXT)>ten tylko ta.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1593-0
+00:14:05.309 --> 00:14:06.939
+<v Matusz Jakub (EXT)>Tylko.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1624-0
+00:14:07.109 --> 00:14:10.387
+<v Matusz Jakub (EXT)>Normalnie,
+żeby można było w tych bibliotekach aging</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1624-1
+00:14:10.387 --> 00:14:13.417
+<v Matusz Jakub (EXT)>face owych,
+żeby ich używać wskazać jako proksy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1624-2
+00:14:13.417 --> 00:14:17.745
+<v Matusz Jakub (EXT)>Pewnie arti faktur mi się wydaje,
+że tam z tego co pamiętam jest taka</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1624-3
+00:14:17.745 --> 00:14:19.909
+<v Matusz Jakub (EXT)>możliwość ustawienia jakby serwera.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1626-0
+00:14:18.429 --> 00:14:20.869
+<v Dymarczyk Maciej (EXT)>To może nie przejść polityk
+bezpieczeństwa?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1637-0
+00:14:21.729 --> 00:14:25.839
+<v Matusz Jakub (EXT)>Taki ten no to to by wiesz wtedy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1641-0
+00:14:24.839 --> 00:14:27.339
+<v Dymarczyk Maciej (EXT)>Bo tak naprawdę wtedy mamy otwarty dostęp.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1658-0
+00:14:28.759 --> 00:14:32.077
+<v Matusz Jakub (EXT)>Tak,
+ale tam jest Jeszcze raz skanowanie i</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1658-1
+00:14:32.077 --> 00:14:35.779
+<v Matusz Jakub (EXT)>xtreem tak to teraz tak jest spi tonem
+tak tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1670-0
+00:14:34.949 --> 00:14:39.195
+<v Dymarczyk Maciej (EXT)>A to jeżeli to przechodzi tam u nas już w
+tym momencie to spoko,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1670-1
+00:14:39.195 --> 00:14:41.089
+<v Dymarczyk Maciej (EXT)>to idealne flow tak naprawdę.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1688-0
+00:14:41.319 --> 00:14:44.959
+<v Matusz Jakub (EXT)>To, ale to jest taka opcja,
+która nie wiem czy się wydarzy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1688-1
+00:14:44.959 --> 00:14:48.779
+<v Matusz Jakub (EXT)>I tak druga druga rzecz,
+co się dzieje z tymi modelami? No to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1738-0
+00:14:50.129 --> 00:14:55.709
+<v Matusz Jakub (EXT)>Jakby my jakby nie bierzemy bezpośrednio
+z internetu do siebie tego modelu,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1738-1
+00:14:55.709 --> 00:15:01.361
+<v Matusz Jakub (EXT)>tylko właśnie tak jakby ciągniemy tą
+ścieżką obecną przez arti Factory i tam</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1738-2
+00:15:01.361 --> 00:15:03.049
+<v Matusz Jakub (EXT)>się ten model crashuje.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1743-0
+00:15:02.049 --> 00:15:04.229
+<v Dymarczyk Maciej (EXT)>Gdzieś widziałem,
+tam jest trup się tak czytałem.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-0
+00:15:03.979 --> 00:15:07.738
+<v Matusz Jakub (EXT)>Tak tak,
+no to jest to jest to i koniec końców to</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-1
+00:15:07.738 --> 00:15:11.496
+<v Matusz Jakub (EXT)>to też jest mało użyteczne.
+Trochę tam ta wersja,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-2
+00:15:11.496 --> 00:15:17.660
+<v Matusz Jakub (EXT)>bo ten no i jest rejestrujemy te modele w
+ml flow moglibyśmy zrobić taką bazę też</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-3
+00:15:17.660 --> 00:15:22.546
+<v Matusz Jakub (EXT)>tych modeli takich bazowych,
+które obsługujemy i dopuszczamy je.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-4
+00:15:22.546 --> 00:15:25.929
+<v Matusz Jakub (EXT)>Nie wiem na ile to będzie byłoby te
+wygodne.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-5
+00:15:25.929 --> 00:15:30.740
+<v Matusz Jakub (EXT)>Powiedzmy na start można byłoby jakąś
+predefiniowane, są listę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-6
+00:15:30.740 --> 00:15:36.377
+<v Matusz Jakub (EXT)>tylko wiesz obsłużyć i wtedy też w
+pierwszej iteracji na przykład mieć coś</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1808-0
+00:15:33.279 --> 00:15:33.849
+<v Dymarczyk Maciej (EXT)>O k.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1816-7
+00:15:36.377 --> 00:15:37.279
+<v Matusz Jakub (EXT)>takiego, że.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1839-0
+00:15:37.529 --> 00:15:40.724
+<v Matusz Jakub (EXT)>Ok, to tam,
+żeby się już nie bawić z tą dynamikę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1839-1
+00:15:40.724 --> 00:15:44.237
+<v Matusz Jakub (EXT)>to to ta dynamika jak najbardziej
+docelowo do obsługi,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1839-2
+00:15:44.237 --> 00:15:46.089
+<v Matusz Jakub (EXT)>ale na przykład zrobić także.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1851-0
+00:15:47.299 --> 00:15:52.131
+<v Matusz Jakub (EXT)>Że to mamy,
+nie wiem jakiś tam gdzieś konflikt mapie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1851-1
+00:15:52.131 --> 00:15:54.189
+<v Matusz Jakub (EXT)>wiesz tą listę i ten i.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1867-0
+00:15:54.919 --> 00:15:58.660
+<v Matusz Jakub (EXT)>No i po prostu stawiamy,
+dodajemy nowy model,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1867-1
+00:15:58.660 --> 00:16:01.669
+<v Matusz Jakub (EXT)>to tam gdzieś info leci tak, że jest.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1883-0
+00:16:01.109 --> 00:16:05.813
+<v Dymarczyk Maciej (EXT)>Określiłeś temat,
+konflikt mapy to ja od razu chciałem</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1883-1
+00:16:05.813 --> 00:16:11.287
+<v Dymarczyk Maciej (EXT)>zapytać, Przepraszam,
+że tak jadę w ramach konflikt mapy to tak</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1883-2
+00:16:11.287 --> 00:16:12.569
+<v Dymarczyk Maciej (EXT)>naprawdę który?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1892-0
+00:16:12.639 --> 00:16:15.919
+<v Dymarczyk Maciej (EXT)>To jest repozytorium, czy to jest to,
+co ci wysłałem? Co nie mam dostępu?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1894-0
+00:16:17.379 --> 00:16:18.379
+<v Matusz Jakub (EXT)>Wiesz co?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1902-0
+00:16:19.789 --> 00:16:21.959
+<v Dymarczyk Maciej (EXT)>Bo zakładam, że będę musiał stworzyć nowe.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1900-0
+00:16:19.799 --> 00:16:20.549
+<v Matusz Jakub (EXT)>To.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1914-0
+00:16:23.899 --> 00:16:28.639
+<v Matusz Jakub (EXT)>No to to wiesz co to zależy na czym w
+sumie stanie jak tam.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-0
+00:16:28.919 --> 00:16:34.349
+<v Matusz Jakub (EXT)>Przyjdziemy to całość, jak tam zrozumiem,
+to ci będę mógł powiedzieć gdzie co za</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1922-0
+00:16:30.659 --> 00:16:31.629
+<v Dymarczyk Maciej (EXT)>O k dobra.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-1
+00:16:34.349 --> 00:16:37.901
+<v Matusz Jakub (EXT)>komentować.
+Teraz mi trochę ciężko jest jakby mówić,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-2
+00:16:37.901 --> 00:16:43.264
+<v Matusz Jakub (EXT)>ale ten to jest. To jest jedna rzecz,
+teraz dobra to zlecimy ten job kubernetes</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-3
+00:16:43.264 --> 00:16:48.693
+<v Matusz Jakub (EXT)>owy tak a bo tu jest dałeś monitoring
+postępu właśnie ona tym się zastanawiałam,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-4
+00:16:48.693 --> 00:16:53.921
+<v Matusz Jakub (EXT)>no bo ta konsola lama Factory ma ten taki
+raportowanie tego losa i generalnie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-5
+00:16:53.921 --> 00:16:59.149
+<v Matusz Jakub (EXT)>jakieś te procenty tam się pokazują tak i
+właśnie też się zastanawiałem w tej</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1990-6
+00:16:59.149 --> 00:16:59.819
+<v Matusz Jakub (EXT)>koncepcji.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/1999-0
+00:17:00.239 --> 00:17:04.469
+<v Matusz Jakub (EXT)>Czy my to będziemy w stanie zrobić?
+Będziemy w stanie to w ogóle?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2007-0
+00:17:05.169 --> 00:17:08.519
+<v Matusz Jakub (EXT)>Zrobić w takim tym w takim w takim modelu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2040-0
+00:17:09.329 --> 00:17:15.011
+<v Dymarczyk Maciej (EXT)>W teorii tak, bo są jakby tam parametry,
+które odczytują jakby i zwracają jakby</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2040-1
+00:17:15.011 --> 00:17:18.846
+<v Dymarczyk Maciej (EXT)>odpowiednie wartości,
+ale czy to w praktyce zadziała?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2040-2
+00:17:18.846 --> 00:17:24.172
+<v Dymarczyk Maciej (EXT)>No właśnie dlatego pytałem jakby gdzie
+można by było już tu gdzieś testowo</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2040-3
+00:17:24.172 --> 00:17:24.669
+<v Dymarczyk Maciej (EXT)>puścić.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2056-0
+00:17:25.609 --> 00:17:31.643
+<v Matusz Jakub (EXT)>Mhm, czy to jest taka hipoteza,
+że moglibyśmy odpytywać tego joba o ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2059-0
+00:17:31.339 --> 00:17:34.559
+<v Dymarczyk Maciej (EXT)>Widziałem jakieś Posty na medium ludzi.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2056-1
+00:17:31.643 --> 00:17:32.229
+<v Matusz Jakub (EXT)>status?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2066-0
+00:17:34.699 --> 00:17:37.049
+<v Dymarczyk Maciej (EXT)>To opisywali,
+że tak realizują to w ten sposób.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2090-0
+00:17:38.229 --> 00:17:43.454
+<v Matusz Jakub (EXT)>Bo ja właśnie tutaj tego z tego powodu to
+trochę się zastanawiałem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2079-0
+00:17:38.329 --> 00:17:40.219
+<v Dymarczyk Maciej (EXT)>Ale jakby nie ufam posta.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2090-1
+00:17:43.454 --> 00:17:45.759
+<v Matusz Jakub (EXT)>na ile ten łeb biła i w ogóle.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2126-0
+00:17:47.209 --> 00:17:53.215
+<v Matusz Jakub (EXT)>Min no bo potencjalnie to może się okazać,
+że że to będzie tylko formule,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2126-1
+00:17:53.215 --> 00:17:59.057
+<v Matusz Jakub (EXT)>zostaw mitu parametrów i potem już
+stracimy kontakt z bazą i poleciało.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2126-2
+00:17:59.057 --> 00:18:01.329
+<v Matusz Jakub (EXT)>I wiesz i koniec użycia nie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2132-0
+00:17:59.749 --> 00:18:01.654
+<v Dymarczyk Maciej (EXT)>Nie,
+teoretycznie jest nam możliwość</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2132-1
+00:18:01.654 --> 00:18:03.609
+<v Dymarczyk Maciej (EXT)>komunikacji, jakby w sensie śledzenia.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2131-0
+00:18:02.649 --> 00:18:03.169
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2162-0
+00:18:04.039 --> 00:18:08.169
+<v Matusz Jakub (EXT)>Dobra, to to jest ten, to,
+to już tego pomysł na tego you,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2162-1
+00:18:08.169 --> 00:18:12.649
+<v Matusz Jakub (EXT)>a ja trochę rozumiem,
+to ja ci jeszcze powiem alternatywnie jak</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2162-2
+00:18:12.649 --> 00:18:16.359
+<v Matusz Jakub (EXT)>to sobie wyobrażałem z tym z tym fluorem,
+ten drugi,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2162-3
+00:18:16.359 --> 00:18:19.999
+<v Matusz Jakub (EXT)>który pokazywałeś ten dalszy etap,
+że jest jan tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2165-0
+00:18:20.679 --> 00:18:21.519
+<v Dymarczyk Maciej (EXT)>Tak, tak, tak, tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2183-0
+00:18:22.429 --> 00:18:26.056
+<v Matusz Jakub (EXT)>To aha, bo tutaj. A rozumiem,
+że to ta konfiguracja,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2183-1
+00:18:26.056 --> 00:18:29.339
+<v Matusz Jakub (EXT)>która byłaby w jammu to byłaby z eksportu,
+tak?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2185-0
+00:18:29.409 --> 00:18:30.249
+<v Dymarczyk Maciej (EXT)>Dokładnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2187-0
+00:18:30.689 --> 00:18:31.279
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2189-0
+00:18:32.689 --> 00:18:33.379
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2191-0
+00:18:38.669 --> 00:18:39.879
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2218-0
+00:18:41.969 --> 00:18:46.564
+<v Matusz Jakub (EXT)>Tylko się zastanawiam czy ta druga
+ścieżka jest rzeczywiście jakby czy to</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2218-1
+00:18:46.564 --> 00:18:49.979
+<v Matusz Jakub (EXT)>nie jest tak,
+że powinien powinna być jedna albo druga</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2218-2
+00:18:49.979 --> 00:18:53.579
+<v Matusz Jakub (EXT)>to znaczy albo to,
+że jest sterowane tak jakby konfitura.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2224-0
+00:18:54.309 --> 00:18:55.259
+<v Dymarczyk Maciej (EXT)>Wydaje mi się, że obie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2225-0
+00:18:54.549 --> 00:18:55.569
+<v Matusz Jakub (EXT)>Albo że jest.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-0
+00:18:57.259 --> 00:19:01.303
+<v Matusz Jakub (EXT)>Bo ja powiem czy jak tą drugą ścieżkę
+sobie wyobrażałem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-1
+00:19:01.303 --> 00:19:06.482
+<v Matusz Jakub (EXT)>to tą drugą ścieżkę wyobrażałem sobie tak,
+jakbyś tam podjechał do góry,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-2
+00:19:06.482 --> 00:19:12.015
+<v Matusz Jakub (EXT)>bo to podobne rysunek jest, nie, że tutaj.
+Na przykład data scientist w takim</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-3
+00:19:12.015 --> 00:19:16.201
+<v Matusz Jakub (EXT)>przeznaczonym do tego miejscu w gicie
+gdzieś kompromituje.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-4
+00:19:16.201 --> 00:19:21.308
+<v Matusz Jakub (EXT)>Tak kompromituje tą konfigurację taką w
+postaci jamala, tak zakładając,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2288-0
+00:19:21.019 --> 00:19:24.529
+<v Dymarczyk Maciej (EXT)>No to to to to tutaj jest jako forma
+Anglii dla bowa tak dokładnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2281-5
+00:19:21.308 --> 00:19:22.159
+<v Matusz Jakub (EXT)>że nie wiem.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-0
+00:19:24.139 --> 00:19:30.002
+<v Matusz Jakub (EXT)>No i teraz tak i to przy takim założeniu,
+że na przykład albo ten web biuro i nie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-1
+00:19:30.002 --> 00:19:34.149
+<v Matusz Jakub (EXT)>umiemy zrobić,
+albo że robimy to w kolejnej iteracji, to,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-2
+00:19:34.149 --> 00:19:37.295
+<v Matusz Jakub (EXT)>że na przykład zaczynamy od czegoś
+takiego,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-3
+00:19:37.295 --> 00:19:43.086
+<v Matusz Jakub (EXT)>że można tą konfigurację zrobić w Realu i
+teraz co się dzieje w tym ten po takim</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-4
+00:19:43.086 --> 00:19:46.661
+<v Matusz Jakub (EXT)>komitecie,
+tak jak ja sobie to wyobrażałem trochę</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2338-5
+00:19:46.661 --> 00:19:49.949
+<v Matusz Jakub (EXT)>trochę inaczej niż u ciebie,
+bo u mnie jakby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-0
+00:19:51.239 --> 00:19:55.681
+<v Matusz Jakub (EXT)>Nie myślałem o tym,
+żeby coś budować tamten dedykowanego,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-1
+00:19:55.681 --> 00:19:59.434
+<v Matusz Jakub (EXT)>tylko,
+że mamy już takie jakby we flow stworzony</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-2
+00:19:59.434 --> 00:20:03.416
+<v Matusz Jakub (EXT)>taki dak,
+który już nam realizuje ten taki schemat.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-3
+00:20:03.416 --> 00:20:09.007
+<v Matusz Jakub (EXT)>Fin treningu, czyli na przykład,
+jeżeli mamy walidację konfiguracji albo</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-4
+00:20:09.007 --> 00:20:12.836
+<v Matusz Jakub (EXT)>jej odłożenie,
+to jest taki krok w tym dragu ten,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-5
+00:20:12.836 --> 00:20:18.810
+<v Matusz Jakub (EXT)>bo tak ten dzięki co by robił dzięki zeby
+się odpalał i tą konfigurację jakby</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2403-6
+00:20:18.810 --> 00:20:22.409
+<v Matusz Jakub (EXT)>przekazywał jem jako parametry daga i
+trigger.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2426-0
+00:20:22.879 --> 00:20:28.070
+<v Matusz Jakub (EXT)>Który już tam leży,
+jakby ten w w wer flow do tan i które</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2426-1
+00:20:28.070 --> 00:20:34.602
+<v Matusz Jakub (EXT)>były obsługiwał cały ten pipeline
+trenujący tak no i wtedy wtedy co mamy</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2426-2
+00:20:34.602 --> 00:20:35.049
+<v Matusz Jakub (EXT)>mamy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-0
+00:20:36.959 --> 00:20:39.969
+<v Matusz Jakub (EXT)>Mamy jakieś możemy dodać takie kroki pre
+takie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-1
+00:20:39.969 --> 00:20:42.727
+<v Matusz Jakub (EXT)>które coś tam na przykład właśnie
+wrzucają,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-2
+00:20:42.727 --> 00:20:47.617
+<v Matusz Jakub (EXT)>gdzieś odkładają jakieś tam informacje,
+czy na przykład tą tą o tych danych w</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-3
+00:20:47.617 --> 00:20:51.566
+<v Matusz Jakub (EXT)>zasadzie to też mamy w tym już za
+komentowane w tym git lubię,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-4
+00:20:51.566 --> 00:20:56.268
+<v Matusz Jakub (EXT)>więc nie wiem czy to jest potrzebne,
+no i możemy steiger ować taki ten ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-5
+00:20:56.268 --> 00:20:59.277
+<v Matusz Jakub (EXT)>treningowy job,
+który nie musiałby być dziobem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-6
+00:20:59.277 --> 00:21:04.354
+<v Matusz Jakub (EXT)>bo w tej chwili mamy tam na przykład jako
+powody tam ten kubernetes pod operator</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2509-7
+00:21:04.354 --> 00:21:07.739
+<v Matusz Jakub (EXT)>czy tam jest taki customowy jeszcze tam u
+nas dodany.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-0
+00:21:08.149 --> 00:21:12.792
+<v Matusz Jakub (EXT)>Które które ta odpakowuje,
+no i to byłoby to trenowanie w zasadzie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-1
+00:21:12.792 --> 00:21:18.266
+<v Matusz Jakub (EXT)>widoczność trochę byłaby już słabsza,
+bo bo musiałbyś albo zaglądać do tego do</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-2
+00:21:18.266 --> 00:21:24.087
+<v Matusz Jakub (EXT)>m flower albo tam patrzeć w logi airflow,
+czy tak jakby airflow by ci mówił wtedy o</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-3
+00:21:24.087 --> 00:21:27.760
+<v Matusz Jakub (EXT)>statusie. Tak,
+to alternatywnie taka trochę bardziej</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-4
+00:21:27.760 --> 00:21:31.016
+<v Matusz Jakub (EXT)>wersja,
+że tak powiem mniej humanistyczna taka</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2556-5
+00:21:31.016 --> 00:21:32.679
+<v Matusz Jakub (EXT)>teraz przedstawiam, nie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2560-0
+00:21:32.979 --> 00:21:34.089
+<v Dymarczyk Maciej (EXT)>No wiem o co chodzi.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2567-0
+00:21:34.489 --> 00:21:37.629
+<v Matusz Jakub (EXT)>I i to mniej więcej tak by wtedy działało.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2581-0
+00:21:38.619 --> 00:21:42.070
+<v Matusz Jakub (EXT)>No pytanie teraz,
+bo tak jak zaprezentowałeś to stym we</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2581-1
+00:21:42.070 --> 00:21:43.979
+<v Matusz Jakub (EXT)>była i to w zasadzie jest taka.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2591-0
+00:21:45.569 --> 00:21:48.601
+<v Matusz Jakub (EXT)>Powiedział,
+wygodniejsze opcja jakby się to jeszcze</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2591-1
+00:21:48.601 --> 00:21:49.999
+<v Matusz Jakub (EXT)>udało, ten nieład i tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2631-0
+00:21:51.259 --> 00:21:54.867
+<v Matusz Jakub (EXT)>Zintegrować,
+że on by na przykład pociągnął też ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2631-1
+00:21:54.867 --> 00:21:59.238
+<v Matusz Jakub (EXT)>monitoring statusu. Tak,
+no to nie trzeba byłoby mieć podglądu</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2631-2
+00:21:59.238 --> 00:22:03.192
+<v Matusz Jakub (EXT)>gdzieś tam indziej. Tak.
+No też w drugiej strony kurczę,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2631-3
+00:22:03.192 --> 00:22:06.869
+<v Matusz Jakub (EXT)>ten finding może trwać tam ileś dni.
+To pytanie jak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2641-0
+00:22:07.509 --> 00:22:11.699
+<v Matusz Jakub (EXT)>Jak na przykład mogę sprawdzić jutro co
+dzisiaj włączyłem? Nie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2648-0
+00:22:14.559 --> 00:22:16.439
+<v Matusz Jakub (EXT)>Czy trudno?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2660-0
+00:22:14.659 --> 00:22:19.159
+<v Dymarczyk Maciej (EXT)>Zadajesz pytania,
+na które nawet nie chcę myśleć,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2660-1
+00:22:19.159 --> 00:22:21.679
+<v Dymarczyk Maciej (EXT)>dlatego odpowiedzią jeszcze.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2686-0
+00:22:21.969 --> 00:22:26.711
+<v Matusz Jakub (EXT)>Bo we flow mogę to zrobić,
+w sensie to będzie tam słabo wyglądało.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2686-1
+00:22:26.711 --> 00:22:30.319
+<v Matusz Jakub (EXT)>Będę miał logi, spada,
+ale będę sobie tam patrzył.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2700-0
+00:22:27.469 --> 00:22:30.624
+<v Dymarczyk Maciej (EXT)>Tak w tym twoim podejściu jakby jak
+najbardziej, bo tak,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2700-1
+00:22:30.624 --> 00:22:34.829
+<v Dymarczyk Maciej (EXT)>bo masz zapisanego możesz sobie zapisać w
+rela do zakładek, o co ci chodzi?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2697-0
+00:22:33.629 --> 00:22:33.999
+<v Matusz Jakub (EXT)>Tak.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2719-0
+00:22:37.379 --> 00:22:44.849
+<v Matusz Jakub (EXT)>No ale te Góral on ma jakiś identyfikator
+sesji czy coś?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2709-0
+00:22:37.389 --> 00:22:39.939
+<v Dymarczyk Maciej (EXT)>Możesz napisać ue a do zakładek o co ci
+chodzi?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2733-0
+00:22:45.249 --> 00:22:50.229
+<v Dymarczyk Maciej (EXT)>Tak, ale nie pamiętam,
+czy to szło w papie czy nie czasem herze.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2742-0
+00:22:51.199 --> 00:22:54.349
+<v Matusz Jakub (EXT)>No i teraz wiesz, to też trochę pytanie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2747-0
+00:22:55.489 --> 00:22:58.169
+<v Matusz Jakub (EXT)>No dobra, to tam powiedzmy zakłada.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2753-0
+00:22:58.239 --> 00:23:01.219
+<v Matusz Jakub (EXT)>Mamy, że te różne identyfikatory.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2792-0
+00:23:02.159 --> 00:23:05.475
+<v Matusz Jakub (EXT)>Sesji to są w ramach tek w ramach jednej
+instancji,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2792-1
+00:23:05.475 --> 00:23:09.238
+<v Matusz Jakub (EXT)>gdzie tam jest autoryzacja wspólna na
+jakimś tam poziomie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2792-2
+00:23:09.238 --> 00:23:14.339
+<v Matusz Jakub (EXT)>No bo teraz pytanie wiesz jak ja sobie
+tworzę twój i tam, a to zatrzymujemy ci,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2792-3
+00:23:14.339 --> 00:23:17.910
+<v Matusz Jakub (EXT)>zobaczymy tu Maciek powie,
+jak mu zabije tuning. Wiesz,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2792-4
+00:23:17.910 --> 00:23:19.249
+<v Matusz Jakub (EXT)>no takie się pojawia.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2808-0
+00:23:18.049 --> 00:23:21.773
+<v Dymarczyk Maciej (EXT)>To narzędzia nie ma obsługi takich
+ścieżek,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2808-1
+00:23:21.773 --> 00:23:26.089
+<v Dymarczyk Maciej (EXT)>to wszystko to wszystko trzeba robić
+samemu jakby.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2804-0
+00:23:22.679 --> 00:23:24.679
+<v Matusz Jakub (EXT)>Takich szczelny no.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2823-0
+00:23:26.279 --> 00:23:30.084
+<v Matusz Jakub (EXT)>No więc to mnie trochę tam powiedzmy
+martwi, ale nie tak bardzo,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2823-1
+00:23:30.084 --> 00:23:32.659
+<v Matusz Jakub (EXT)>bo bo pewnie można wyobrażam sobie,
+że ten.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2829-0
+00:23:33.229 --> 00:23:36.819
+<v Matusz Jakub (EXT)>Że można byłoby to mm?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-0
+00:23:37.929 --> 00:23:43.100
+<v Matusz Jakub (EXT)>To jakoś tam uzasadnić i tak ten w sensie,
+że jeżeli to jest w ramach jednego</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-1
+00:23:43.100 --> 00:23:48.138
+<v Matusz Jakub (EXT)>tennanta my teraz też dajemy na przykład
+w notebookach jest taka możliwość,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-2
+00:23:48.138 --> 00:23:52.116
+<v Matusz Jakub (EXT)>że jeden data scientist,
+a drugiemu może wyłączyć notebook.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-3
+00:23:52.116 --> 00:23:57.353
+<v Matusz Jakub (EXT)>No jakoś nikt tego nie oprotestował do
+tej pory i nam jest tak wygodniej i ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2877-0
+00:23:55.419 --> 00:23:58.159
+<v Dymarczyk Maciej (EXT)>Wszyscy jesteśmy dorośli teoretycznie
+więc.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-4
+00:23:57.353 --> 00:24:00.800
+<v Matusz Jakub (EXT)>tak tak,
+no nikt tam takich rzeczy raczej nie robi,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-5
+00:24:00.800 --> 00:24:05.042
+<v Matusz Jakub (EXT)>chociaż już się zdarzają.
+Chyba też przez przypadek coś tam się</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2895-6
+00:24:05.042 --> 00:24:06.699
+<v Matusz Jakub (EXT)>ręką skryło, ale ten ale.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2927-0
+00:24:07.829 --> 00:24:12.683
+<v Matusz Jakub (EXT)>No ale tutaj to raczej tutaj nie widzę
+takiego dużego potencjału ataku,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2927-1
+00:24:12.683 --> 00:24:16.120
+<v Matusz Jakub (EXT)>jeżeli założymy,
+że jakby zespół swoi czytam w tym</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2927-2
+00:24:16.120 --> 00:24:21.243
+<v Matusz Jakub (EXT)>workspace każdy może wszystko tak jakby
+ten to to wtedy w ten sposób możemy</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2927-3
+00:24:21.243 --> 00:24:22.119
+<v Matusz Jakub (EXT)>obronić taki.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2961-0
+00:24:22.759 --> 00:24:27.692
+<v Matusz Jakub (EXT)>Ta te identyfikatory sesji,
+więc to jeżeli da się wrócić do</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2961-1
+00:24:27.692 --> 00:24:31.966
+<v Matusz Jakub (EXT)>konkretnej sesji,
+no to pewnie to jest o k jak nie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2961-2
+00:24:31.966 --> 00:24:35.912
+<v Matusz Jakub (EXT)>no to trochę jest to pod znakiem
+zapytania tak,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2961-3
+00:24:35.912 --> 00:24:38.789
+<v Matusz Jakub (EXT)>no bo mi wtedy się urwie jakby kon.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2975-0
+00:24:38.859 --> 00:24:42.299
+<v Matusz Jakub (EXT)>Kontakt z tym moim dziobem tak i nie będę
+w stanie dotrzeć.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/2976-0
+00:24:41.109 --> 00:24:42.759
+<v Dymarczyk Maciej (EXT)>Nie ma kontaktu z bazą.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3018-0
+00:24:42.969 --> 00:24:47.072
+<v Matusz Jakub (EXT)>Tak i wiesz,
+no już tam poleciała sądach i leci sobie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3018-1
+00:24:47.072 --> 00:24:52.771
+<v Matusz Jakub (EXT)>i nie wiadomo co się z nią stało.
+Ten webinar flow pod tym zobaczę lub nie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3018-2
+00:24:52.771 --> 00:24:58.241
+<v Matusz Jakub (EXT)>finalny efekt tak overflow bym mógł ten
+tutaj powiedzmy plus tego flow,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3018-3
+00:24:58.241 --> 00:25:02.420
+<v Matusz Jakub (EXT)>a jest taki,
+że on jeszcze daje taki podgląd tych tych</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3018-4
+00:25:02.420 --> 00:25:02.799
+<v Matusz Jakub (EXT)>wież.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3036-0
+00:25:03.479 --> 00:25:08.221
+<v Matusz Jakub (EXT)>Logów i tak dalej można zobaczyć co się
+tam dzieje nie w tym zadaniu,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3036-1
+00:25:08.221 --> 00:25:11.539
+<v Matusz Jakub (EXT)>natomiast interfejs dużo słabsze.
+Tak no to tam.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3041-0
+00:25:12.579 --> 00:25:14.449
+<v Matusz Jakub (EXT)>Sama faktor jest taki ludzki.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3078-0
+00:25:15.089 --> 00:25:20.083
+<v Dymarczyk Maciej (EXT)>Tak, pamiętajmy,
+że jakby ta lama Factory jest napisane w</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3048-0
+00:25:15.139 --> 00:25:16.069
+<v Matusz Jakub (EXT)>Więc to myślę to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3078-1
+00:25:20.083 --> 00:25:23.957
+<v Dymarczyk Maciej (EXT)>radio,
+jakby więc to jest w ogóle jest spoko</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3078-2
+00:25:23.957 --> 00:25:27.917
+<v Dymarczyk Maciej (EXT)>narzędzie,
+to jest taki interfejs pit nowy do</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3078-3
+00:25:27.917 --> 00:25:33.599
+<v Dymarczyk Maciej (EXT)>pisania web, a ja to nie jest Stream lit,
+ale to także można edy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3111-0
+00:25:34.039 --> 00:25:38.042
+<v Dymarczyk Maciej (EXT)>Bezpośrednie jakby nie albo dodawać tam
+jakieś funkcjonalności,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3111-1
+00:25:38.042 --> 00:25:41.169
+<v Dymarczyk Maciej (EXT)>bo to po prostu działa.
+Na tej zasadzie nie wiem,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3111-2
+00:25:41.169 --> 00:25:44.796
+<v Dymarczyk Maciej (EXT)>czy tutaj można zobaczyć jakąś część
+dobra progress bara.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3111-3
+00:25:44.796 --> 00:25:49.549
+<v Dymarczyk Maciej (EXT)>Na przykład mamy piszemy sobie taki
+kodzik wpaja tonowy i on renderuje nam.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3119-0
+00:25:50.789 --> 00:25:55.679
+<v Dymarczyk Maciej (EXT)>Progress bara radio po prostu to prawda,
+więc tutaj to można rozszerzać.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3140-0
+00:25:57.509 --> 00:26:02.043
+<v Matusz Jakub (EXT)>Będę musiał za 2 minuty się przełączyć na
+pół godziny. Następne spotkanie,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3140-1
+00:26:02.043 --> 00:26:05.729
+<v Matusz Jakub (EXT)>chyba że zrobimy dogrywka za pół godziny
+jeszcze spróbujemy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3153-0
+00:26:07.349 --> 00:26:10.647
+<v Matusz Jakub (EXT)>Też chciałbym,
+żeby chłopaki potem się wypowiedzieli na</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3153-1
+00:26:10.647 --> 00:26:12.589
+<v Matusz Jakub (EXT)>koniec, co myślę o tym wszystkim?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3178-0
+00:26:13.389 --> 00:26:17.225
+<v Matusz Jakub (EXT)>I ja jeszcze mam wątpliwość co do tego
+wiele lema,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3178-1
+00:26:17.225 --> 00:26:22.790
+<v Matusz Jakub (EXT)>czy on tutaj jest w dobrym miejscu tam
+gdzie powinien być i to jest takie</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3178-2
+00:26:22.790 --> 00:26:24.519
+<v Matusz Jakub (EXT)>pytanie, czy ten velen.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3214-0
+00:26:23.519 --> 00:26:29.127
+<v Dymarczyk Maciej (EXT)>A to ja miałem to zapisane nawet w pewnym
+tam jak zobaczysz tam jest a DR,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3214-1
+00:26:29.127 --> 00:26:34.959
+<v Dymarczyk Maciej (EXT)>bo ja sobie stworzyłem architekt decyzji
+Records i tak naprawdę tam w ramach.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3214-2
+00:26:34.959 --> 00:26:39.520
+<v Dymarczyk Maciej (EXT)>A DA miałem stworzony,
+a DR czy wiele m powinien być osobny,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3214-3
+00:26:39.520 --> 00:26:42.809
+<v Dymarczyk Maciej (EXT)>czy powinien być jako obraz i tak
+naprawdę.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3225-0
+00:26:43.949 --> 00:26:49.669
+<v Dymarczyk Maciej (EXT)>Ja na razie założyłem,
+że willem jako zewnętrzny jest czymś.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3244-0
+00:26:50.969 --> 00:26:53.767
+<v Dymarczyk Maciej (EXT)>Łatwiej czymś lepszym,
+nawet nie tyle łatwiejszym,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3244-1
+00:26:53.767 --> 00:26:57.169
+<v Dymarczyk Maciej (EXT)>bardziej skomplikowanym,
+ale tak naprawdę jest czymś lepszym.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3244-2
+00:26:57.169 --> 00:26:58.869
+<v Dymarczyk Maciej (EXT)>Z tego powodu, że tak naprawdę.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3263-0
+00:27:00.359 --> 00:27:06.220
+<v Dymarczyk Maciej (EXT)>Mamy lepszą izolację, mamy GU,
+ale na przykład i to jest bardziej.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3263-1
+00:27:06.220 --> 00:27:09.719
+<v Dymarczyk Maciej (EXT)>On jest statyczne, ale na przykład mamy.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3286-0
+00:27:10.229 --> 00:27:16.059
+<v Dymarczyk Maciej (EXT)>Problem z taką atencją delikatną pomiędzy
+no ten sam pi c wtedy był na przykład</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3286-1
+00:27:16.059 --> 00:27:18.609
+<v Dymarczyk Maciej (EXT)>wewnętrznym, a na zewnętrznym mnie.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3280-0
+00:27:16.669 --> 00:27:17.079
+<v Matusz Jakub (EXT)>Ale.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3326-0
+00:27:18.379 --> 00:27:22.466
+<v Matusz Jakub (EXT)>Ja jednak jedną jednak,
+że jedną rzecz czy on tylko potwierdzić,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3326-1
+00:27:22.466 --> 00:27:26.489
+<v Matusz Jakub (EXT)>czy ten wiele lem jest tylko do tego,
+żeby go sobie potestować?</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3326-2
+00:27:26.489 --> 00:27:30.889
+<v Matusz Jakub (EXT)>Tam później już tej ten ten,
+jak jest to zakładka do tego czatowania,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3326-3
+00:27:30.889 --> 00:27:34.409
+<v Matusz Jakub (EXT)>czy to jest potrzebne do farmingu na
+bieżąco, że że te.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3325-0
+00:27:33.499 --> 00:27:34.459
+<v Dymarczyk Maciej (EXT)>Do fain tuningu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3328-0
+00:27:35.289 --> 00:27:38.639
+<v Matusz Jakub (EXT)>No to.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3353-0
+00:27:41.509 --> 00:27:46.514
+<v Matusz Jakub (EXT)>A jak to jest normalnie w lama faktury to
+normalnie w tym podzie się odpala ten</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3353-1
+00:27:46.514 --> 00:27:51.519
+<v Matusz Jakub (EXT)>model to w ogóle jest sens zewnętrzny,
+wiele, żeby w ogóle wiele lamie to olać.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3355-0
+00:27:50.319 --> 00:27:52.369
+<v Dymarczyk Maciej (EXT)>No ale wtedy tego nie wyskakujesz.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3357-0
+00:27:53.869 --> 00:27:54.859
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3366-0
+00:27:59.639 --> 00:28:03.549
+<v Matusz Jakub (EXT)>To znaczy, wiesz co? Zakładam,
+że to chyba powinno.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3401-0
+00:28:04.849 --> 00:28:08.397
+<v Matusz Jakub (EXT)>No to co z tym skalowaniem?
+Wróćmy do tego tematu.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3401-1
+00:28:08.397 --> 00:28:13.754
+<v Matusz Jakub (EXT)>Tak tak to może zróbmy sobie nagrywkę
+dobra azo ten za jakieś pół godziny na</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3376-0
+00:28:09.029 --> 00:28:09.489
+<v Dymarczyk Maciej (EXT)>A.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3401-2
+00:28:13.754 --> 00:28:18.276
+<v Matusz Jakub (EXT)>temat tego tam niestety ten jeszcze potem
+mam znowu kolejne ten,</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3401-3
+00:28:18.276 --> 00:28:20.919
+<v Matusz Jakub (EXT)>ale może ten w te pół godziny też coś.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3403-0
+00:28:22.839 --> 00:28:23.389
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3415-0
+00:28:25.509 --> 00:28:28.299
+<v Matusz Jakub (EXT)>To ja się przełączam do zobaczenia za pół
+godziny.</v>
+
+b3e482b0-2e54-43a7-9ee9-1ef7228deb34/3421-0
+00:28:27.869 --> 00:28:30.569
+<v Dymarczyk Maciej (EXT)>No to za usłyszenia na tym samym polu za
+pół godziny.</v>
+
+WEBVTT
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/8-0
+00:00:03.416 --> 00:00:04.336
+<v Matusz Jakub (EXT)>Wiele lemie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/17-0
+00:00:06.876 --> 00:00:11.176
+<v Matusz Jakub (EXT)>I skalowanie tak, bo ja rozumiem,
+że tam jakby.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/31-0
+00:00:12.646 --> 00:00:16.906
+<v Matusz Jakub (EXT)>Gdybyśmy zostawili to tak,
+powiedzmy sam ten to środowisko,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/31-1
+00:00:16.906 --> 00:00:19.746
+<v Matusz Jakub (EXT)>takie lama Factory, które jest budowane.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/37-0
+00:00:21.586 --> 00:00:23.316
+<v Matusz Jakub (EXT)>To ten to mamy?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/51-0
+00:00:26.056 --> 00:00:31.086
+<v Matusz Jakub (EXT)>To jakby to nie wyskakuje nam się na
+wiele maszyn. Tak to miałaś na myśli.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/55-0
+00:00:31.056 --> 00:00:32.336
+<v Dymarczyk Maciej (EXT)>Tak, tak, tak, tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/74-0
+00:00:35.316 --> 00:00:39.226
+<v Matusz Jakub (EXT)>O k pytanie,
+czy na przykład w tym tuningu to tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/74-1
+00:00:39.226 --> 00:00:44.386
+<v Matusz Jakub (EXT)>naprawdę to kluczowe jest to serwowanie,
+czy tam są to tam chyba.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/108-0
+00:00:45.236 --> 00:00:48.547
+<v Matusz Jakub (EXT)>To nie PU,
+trochę innej charakterystyce jest</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/108-1
+00:00:48.547 --> 00:00:52.225
+<v Matusz Jakub (EXT)>wykorzystywane mi się wydaje,
+że to nie nie wiem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/108-2
+00:00:52.225 --> 00:00:57.228
+<v Matusz Jakub (EXT)>Właśnie trochę mam takie poczucie,
+że ten wl mnie byłby odpowiednią</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/108-3
+00:00:57.228 --> 00:01:02.157
+<v Matusz Jakub (EXT)>technologią do tego do tego zadania,
+no bo to też jest taka wiesz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/108-4
+00:01:02.157 --> 00:01:03.186
+<v Matusz Jakub (EXT)>interferencja.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/148-0
+00:01:04.296 --> 00:01:08.015
+<v Matusz Jakub (EXT)>Nie wiem, ale tak głośno myślę,
+że tam jakby domyślam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/148-1
+00:01:08.015 --> 00:01:11.125
+<v Matusz Jakub (EXT)>że to raczej wydaje mi się,
+że to taka wiesz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/148-2
+00:01:11.125 --> 00:01:16.060
+<v Matusz Jakub (EXT)>jeśli już infekcja jakaś idzie,
+to taka bacza owa tak i że na przykład w</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/148-3
+00:01:16.060 --> 00:01:21.536
+<v Matusz Jakub (EXT)>tym gp u się dzieją inne obliczenia niż
+tylko związane z in. Ferenc ją tak i że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/157-0
+00:01:21.736 --> 00:01:26.216
+<v Dymarczyk Maciej (EXT)>Tak też te trenował trenujące
+bezpośrednio tam na gorze, na przykład.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/172-0
+00:01:25.826 --> 00:01:31.721
+<v Matusz Jakub (EXT)>No i właśnie się zastanawiam czy tego
+jednak nie uprościć i założyć,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/172-1
+00:01:31.721 --> 00:01:34.796
+<v Matusz Jakub (EXT)>że na razie mamy ten taki powiedzmy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/195-0
+00:01:35.596 --> 00:01:39.473
+<v Matusz Jakub (EXT)>Job, który się mści na jednej maszynie,
+może nawet bardzo dużej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/195-1
+00:01:39.473 --> 00:01:43.706
+<v Matusz Jakub (EXT)>Nie przykład nie wiem tam chyba 200 jakiś
+czy coś takiego z 8 kartami?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/225-0
+00:01:44.456 --> 00:01:50.320
+<v Matusz Jakub (EXT)>Eee ten tego, ale ten,
+ale jeżeli ta kuratora jakoś nam przytnie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/202-0
+00:01:47.226 --> 00:01:47.886
+<v Dymarczyk Maciej (EXT)>Możemy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/225-1
+00:01:50.320 --> 00:01:55.914
+<v Matusz Jakub (EXT)>to do do granicy innego nuda,
+tak co co myślisz o tym Maciek,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/219-0
+00:01:54.876 --> 00:01:55.426
+<v Dymarczyk Maciej (EXT)>Na.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/225-2
+00:01:55.914 --> 00:01:56.996
+<v Matusz Jakub (EXT)>że na start?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/226-0
+00:01:56.296 --> 00:01:57.616
+<v Dymarczyk Maciej (EXT)>Możemy jak najbardziej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/244-0
+00:01:58.836 --> 00:02:03.600
+<v Matusz Jakub (EXT)>Bo tak z tym wiele element to coś czuję,
+że będzie trochę skomplikowana i coś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/244-1
+00:02:03.600 --> 00:02:06.531
+<v Matusz Jakub (EXT)>czuję,
+że to chyba nie za adresuje w pełni tego</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/244-2
+00:02:06.531 --> 00:02:07.386
+<v Matusz Jakub (EXT)>problemu, nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/247-0
+00:02:08.146 --> 00:02:09.136
+<v Dymarczyk Maciej (EXT)>Należy mieć rację.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/256-0
+00:02:10.316 --> 00:02:12.686
+<v Matusz Jakub (EXT)>A pokażesz jeszcze ten to to to diagramy?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/262-0
+00:02:19.416 --> 00:02:21.336
+<v Dymarczyk Maciej (EXT)>Ścięła mi przeglądarkę, dzień dobry.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/268-0
+00:02:25.026 --> 00:02:25.846
+<v Matusz Jakub (EXT)>Dobra czy?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/272-0
+00:02:25.066 --> 00:02:26.956
+<v Dymarczyk Maciej (EXT)>One są na konfliktu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/274-0
+00:02:27.406 --> 00:02:27.906
+<v Matusz Jakub (EXT)>Aha.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/278-0
+00:02:28.426 --> 00:02:29.326
+<v Dymarczyk Maciej (EXT)>Bo nie wiem czy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/285-0
+00:02:32.036 --> 00:02:33.686
+<v Matusz Jakub (EXT)>Czy ci odświeży?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/290-0
+00:02:34.406 --> 00:02:35.226
+<v Matusz Jakub (EXT)>Chyba, że ta.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/294-0
+00:02:34.546 --> 00:02:36.616
+<v Dymarczyk Maciej (EXT)>Na ogół nie chciało przeglądarkę całą.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/296-0
+00:02:36.866 --> 00:02:37.406
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/298-0
+00:02:40.366 --> 00:02:40.996
+<v Matusz Jakub (EXT)>Pta.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/306-0
+00:02:49.026 --> 00:02:51.366
+<v Dymarczyk Maciej (EXT)>Ostatnio wymagało to restart kompa.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/314-0
+00:02:54.036 --> 00:02:56.556
+<v Matusz Jakub (EXT)>To jest dokumentacja wdrożeniowa dobra ja
+mam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/318-0
+00:02:56.896 --> 00:02:57.556
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/329-0
+00:02:57.636 --> 00:03:01.428
+<v Matusz Jakub (EXT)>To sobie pojadę, potem,
+że możesz na likować,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/329-1
+00:03:01.428 --> 00:03:03.736
+<v Matusz Jakub (EXT)>który to jest tylko okienko.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/338-0
+00:03:05.506 --> 00:03:10.056
+<v Matusz Jakub (EXT)>Dobra,
+to chyba nie to chyba to dobra jest.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/350-0
+00:03:10.506 --> 00:03:13.826
+<v Dymarczyk Maciej (EXT)>Ja się czuje się jeszcze od reszty ludzi
+to to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/365-0
+00:03:11.266 --> 00:03:21.478
+<v Matusz Jakub (EXT)>K tak dobra, to tak czy ja rozumiem,
+że tutaj chyba ten NFS czy on nam jest</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/365-1
+00:03:21.478 --> 00:03:24.836
+<v Matusz Jakub (EXT)>potrzebny do tego ten do.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/377-0
+00:03:24.916 --> 00:03:28.136
+<v Matusz Jakub (EXT)>W takim w takim wariancie jak mamy ten
+job?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/395-0
+00:03:27.476 --> 00:03:30.381
+<v Dymarczyk Maciej (EXT)>Na teoretycznie nie,
+ale gdzie wtedy będziemy serwować ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/395-1
+00:03:30.381 --> 00:03:32.794
+<v Dymarczyk Maciej (EXT)>model?
+Czy to rzucamy po prostu już bezpośrednio</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/395-2
+00:03:32.794 --> 00:03:33.286
+<v Dymarczyk Maciej (EXT)>na wezwał?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-0
+00:03:34.136 --> 00:03:38.450
+<v Matusz Jakub (EXT)>No to teraz tak to ja ci powiem jak sobie
+wyobrażałem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-1
+00:03:38.450 --> 00:03:44.489
+<v Matusz Jakub (EXT)>ale oczywiście strzelam trujcie tak ten,
+że rejestrujemy ten model w m flow,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-2
+00:03:44.489 --> 00:03:50.684
+<v Matusz Jakub (EXT)>to znaczy o ile to rzeczywiście da się
+tak skonfigurować tego tego całego lama</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-3
+00:03:50.684 --> 00:03:55.782
+<v Matusz Jakub (EXT)>Factory, tak, żeby ten,
+żeby i te metryki trafiały ten tutaj ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-4
+00:03:55.782 --> 00:04:01.350
+<v Matusz Jakub (EXT)>tracking jakby do tego dm flower i żeby
+model się tutaj zarejestrował,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/452-5
+00:04:01.350 --> 00:04:02.526
+<v Matusz Jakub (EXT)>ten gotowy nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-0
+00:04:03.016 --> 00:04:09.778
+<v Matusz Jakub (EXT)>I teraz jak mamy ten ten model gotowy wml
+flow, no to robimy ten taki pipeline,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-1
+00:04:09.778 --> 00:04:15.103
+<v Matusz Jakub (EXT)>jakby gdzieś tam automatyzuje.
+My taki wystawiający ten model,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-2
+00:04:15.103 --> 00:04:21.188
+<v Matusz Jakub (EXT)>w tym w tym w tym naszym frameworku,
+tak jak teraz, tylko że ten fillm,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-3
+00:04:21.188 --> 00:04:25.921
+<v Matusz Jakub (EXT)>czyli ten sam pin,
+który teraz używamy pewnie z jakimiś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-4
+00:04:25.921 --> 00:04:30.316
+<v Matusz Jakub (EXT)>modyfikacjami,
+no bo to pewnie tak musi tamto multi</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/507-5
+00:04:30.316 --> 00:04:32.936
+<v Matusz Jakub (EXT)>teraz i trzeba będzie obsłużyć.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/520-0
+00:04:33.706 --> 00:04:39.478
+<v Matusz Jakub (EXT)>Trzeba będzie tam automatycznie też
+zarejestrować w tym strapping tak ten ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/520-1
+00:04:39.478 --> 00:04:39.996
+<v Matusz Jakub (EXT)>serwer.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/522-0
+00:04:41.716 --> 00:04:42.256
+<v Matusz Jakub (EXT)>No.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/534-0
+00:04:43.746 --> 00:04:47.340
+<v Matusz Jakub (EXT)>I tam pewnie jakieś dostosowania po
+stronie tego właśnie tej części,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/534-1
+00:04:47.340 --> 00:04:48.746
+<v Matusz Jakub (EXT)>co tam Jestem gateway cały.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/550-0
+00:04:49.476 --> 00:04:55.908
+<v Matusz Jakub (EXT)>Ee, ten będą musiały być zrobione tak,
+żeby oni w tej konsoli w tym nie wiem czy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/550-1
+00:04:55.908 --> 00:04:57.496
+<v Matusz Jakub (EXT)>to gdzie tu jest to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/555-0
+00:04:58.396 --> 00:05:00.746
+<v Dymarczyk Maciej (EXT)>Mam jeszcze drugie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/562-0
+00:05:00.536 --> 00:05:02.116
+<v Matusz Jakub (EXT)>A osoby ja to Jestem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/577-0
+00:05:01.276 --> 00:05:06.102
+<v Dymarczyk Maciej (EXT)>To to to jest drugim w architektura lama
+Factory tym dokumencie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/574-0
+00:05:05.246 --> 00:05:07.276
+<v Matusz Jakub (EXT)>Aha, tu mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/577-1
+00:05:06.102 --> 00:05:08.626
+<v Dymarczyk Maciej (EXT)>bo ten drugi jest bardziej ogólny.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/615-0
+00:05:08.886 --> 00:05:11.983
+<v Matusz Jakub (EXT)>Mhm,
+a tutaj to ta konsola Stream link co jest</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/615-1
+00:05:11.983 --> 00:05:16.397
+<v Matusz Jakub (EXT)>ten zespół właśnie od gateway a tak
+wystawia czyli to to zakładam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/615-2
+00:05:16.397 --> 00:05:21.206
+<v Matusz Jakub (EXT)>że to by się coś takiego w którymś
+momencie taki proces ja i cd odpalił,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/615-3
+00:05:21.206 --> 00:05:23.446
+<v Matusz Jakub (EXT)>który by tam wdrożył ten model na.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/632-0
+00:05:24.076 --> 00:05:28.595
+<v Matusz Jakub (EXT)>Nasze rodowisko to znaczy pan,
+bo już tam leżał w m flow,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/632-1
+00:05:28.595 --> 00:05:33.346
+<v Matusz Jakub (EXT)>więc tam kwestia jest,
+żeby się utworzyła konfiguracja. Mod.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/641-0
+00:05:33.416 --> 00:05:37.682
+<v Matusz Jakub (EXT)>Celu,
+w tym w no to tych tych repozytoriach</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/641-1
+00:05:37.682 --> 00:05:38.166
+<v Matusz Jakub (EXT)>argo.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/650-0
+00:05:40.206 --> 00:05:43.566
+<v Matusz Jakub (EXT)>Kurcze jakiś poszedł i żeby to tam
+wystartowało, tak?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/655-0
+00:05:44.446 --> 00:05:45.086
+<v Dymarczyk Maciej (EXT)>Jasne.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/654-0
+00:05:44.466 --> 00:05:45.116
+<v Matusz Jakub (EXT)>Co tak?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/659-0
+00:05:45.926 --> 00:05:46.876
+<v Matusz Jakub (EXT)>Nie wiem czy to się.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/665-0
+00:05:47.776 --> 00:05:48.876
+<v Matusz Jakub (EXT)>Jakoś tam spinę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/675-0
+00:05:47.856 --> 00:05:51.301
+<v Dymarczyk Maciej (EXT)>No to jest jasne i trochę trochę jakby
+zgodne,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/675-1
+00:05:51.301 --> 00:05:53.866
+<v Dymarczyk Maciej (EXT)>więc jak najbardziej Jestem na tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/698-0
+00:05:54.856 --> 00:05:59.477
+<v Matusz Jakub (EXT)>Dobra, to tamto, teraz pytanie,
+czy tam z tego z tym flow jakoś się w</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/698-1
+00:05:59.477 --> 00:06:04.956
+<v Matusz Jakub (EXT)>miarę łatwo pożenili my bo tam częściowo
+to jest chyba budowane tak ta integracja.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/705-0
+00:06:07.236 --> 00:06:10.976
+<v Dymarczyk Maciej (EXT)>No nie powiedziałbym, no ale może nimi.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/735-0
+00:06:11.546 --> 00:06:15.884
+<v Matusz Jakub (EXT)>Bo tam wiesz co tak jak widziałem chyba w
+lama Factory tam do tej,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/735-1
+00:06:15.884 --> 00:06:20.868
+<v Matusz Jakub (EXT)>jak też na wesele n baya system były
+takie zmienne, które się tam ustawiały.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/735-2
+00:06:20.868 --> 00:06:22.486
+<v Matusz Jakub (EXT)>To do m flow ania ma tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/753-0
+00:06:21.246 --> 00:06:25.586
+<v Dymarczyk Maciej (EXT)>Stanie się eksportu m flow tak,
+to jeżeli o to chodzi to tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/744-0
+00:06:23.856 --> 00:06:24.426
+<v Matusz Jakub (EXT)>No.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/753-1
+00:06:25.586 --> 00:06:28.386
+<v Dymarczyk Maciej (EXT)>ale to jakby by było na tyle w zasadzie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-0
+00:06:30.796 --> 00:06:35.293
+<v Matusz Jakub (EXT)>Jeszcze się zastanawiam ten jak tu ograć,
+ale to są takie kwestie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-1
+00:06:35.293 --> 00:06:40.124
+<v Matusz Jakub (EXT)>które możemy doprecyzowywać,
+jak to już wystawimy. Chyba to znaczy tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-2
+00:06:40.124 --> 00:06:44.889
+<v Matusz Jakub (EXT)>no to to mnie poprawiajcie,
+ale na przykład te tak jest na przody tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-3
+00:06:44.889 --> 00:06:50.056
+<v Matusz Jakub (EXT)>żeby tam gdzieś były bardziej trwałe,
+no bo one chyba mają sens tylko po to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-4
+00:06:50.056 --> 00:06:55.089
+<v Matusz Jakub (EXT)>że jak tam to nam padnie tak to,
+żeby można było jakoś chyba wrócić tak od</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/809-5
+00:06:55.089 --> 00:06:57.236
+<v Matusz Jakub (EXT)>tego momentu, czy czy źle myślę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/810-0
+00:06:56.686 --> 00:06:57.866
+<v Dymarczyk Maciej (EXT)>Tak, tak, tak, tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/827-0
+00:06:58.456 --> 00:07:04.260
+<v Matusz Jakub (EXT)>To jak to będzie na takim efemeryczny tym
+zasobie to to to jakby traci sens ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/827-1
+00:07:04.260 --> 00:07:07.016
+<v Matusz Jakub (EXT)>utrzymywanie tego snap przodu nie ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/843-0
+00:07:07.666 --> 00:07:11.506
+<v Matusz Jakub (EXT)>Więc to musiałoby być właśnie trochę tak
+w takiej architekturze jak ty,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/843-1
+00:07:11.506 --> 00:07:13.586
+<v Matusz Jakub (EXT)>tam gdzieś rysowałeś tak, że to gdzieś.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/844-0
+00:07:12.776 --> 00:07:13.766
+<v Dymarczyk Maciej (EXT)>Tak dokładnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/847-0
+00:07:15.636 --> 00:07:18.846
+<v Matusz Jakub (EXT)>Mhm, mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/857-0
+00:07:23.366 --> 00:07:28.096
+<v Matusz Jakub (EXT)>Dobra to jednej rzeczy tutaj jeszcze
+trochę nie zrozumiałem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/888-0
+00:07:29.646 --> 00:07:37.597
+<v Matusz Jakub (EXT)>Ee ten czy ta jakby na czym by polegało
+to, że tutaj mamy tą ścieżkę z iem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/888-1
+00:07:37.597 --> 00:07:41.886
+<v Matusz Jakub (EXT)>a tutaj z tym git labem nie to tak jakby.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/911-0
+00:07:40.866 --> 00:07:45.528
+<v Dymarczyk Maciej (EXT)>No że jedna jest taka bardziej do testów
+i wtedy musi nie musimy jakby nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/911-1
+00:07:45.528 --> 00:07:50.189
+<v Dymarczyk Maciej (EXT)>w zasadzie musimy tak czy tak rejestrować,
+a druga jest taka bardziej śle dalna,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/911-2
+00:07:50.189 --> 00:07:53.296
+<v Dymarczyk Maciej (EXT)>czyli że taki defekt to jest trochę o to
+mi chodziło.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/929-0
+00:07:53.946 --> 00:08:00.015
+<v Matusz Jakub (EXT)>Mhm, to może tutaj zrobić taką wiesz,
+w sensie to to pożenić jakoś tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/929-1
+00:08:00.015 --> 00:08:01.616
+<v Matusz Jakub (EXT)>że wiesz, że tutaj.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/932-0
+00:08:03.206 --> 00:08:04.026
+<v Matusz Jakub (EXT)>W ramach.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-0
+00:08:05.036 --> 00:08:10.089
+<v Matusz Jakub (EXT)>Gdzieś tu w zintegrować ten krok,
+taki wiesz, ten taki co ja myślałem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-1
+00:08:10.089 --> 00:08:15.639
+<v Matusz Jakub (EXT)>że w tym planie flow mógłby być tak,
+że żeby na przykład nie wiem odłożyć ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-2
+00:08:15.639 --> 00:08:19.837
+<v Matusz Jakub (EXT)>ten jamil cały tak,
+bo nie wiem czy ta konsola coś takiego</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-3
+00:08:19.837 --> 00:08:23.395
+<v Matusz Jakub (EXT)>wysyła,
+albo że na przykład właśnie zarejestrować</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-4
+00:08:23.395 --> 00:08:28.732
+<v Matusz Jakub (EXT)>te parametry ewentualnie jest wali dować
+jakiś tam dałoby się to gdzieś tu</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/988-5
+00:08:28.732 --> 00:08:30.226
+<v Matusz Jakub (EXT)>wstrzyknąć ten w ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/992-0
+00:08:29.476 --> 00:08:31.686
+<v Dymarczyk Maciej (EXT)>Wydaje mi się,
+że właśnie to jest idealne miejsce.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1009-0
+00:08:36.046 --> 00:08:40.797
+<v Matusz Jakub (EXT)>Tylko pewnie to tylko pytanie,
+czy to trzeba byłoby chyba jakiś jeszcze</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1009-1
+00:08:40.797 --> 00:08:44.096
+<v Matusz Jakub (EXT)>backend wystawić dodatkowy,
+żeby to obsłużyć czy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1028-0
+00:08:46.096 --> 00:08:50.715
+<v Matusz Jakub (EXT)>No to moglibyśmy albo takim monolityczny
+ten klocek zrobić,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1028-1
+00:08:50.715 --> 00:08:53.486
+<v Matusz Jakub (EXT)>który by to w tym samym biegiem tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1033-0
+00:08:52.526 --> 00:08:54.876
+<v Dymarczyk Maciej (EXT)>Albo rozszerzyć po prostu skrypty, to nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1066-0
+00:08:56.246 --> 00:08:59.944
+<v Matusz Jakub (EXT)>A że po prostu tak jakby ten zmodyfikować
+tą lama faktury,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1066-1
+00:08:59.944 --> 00:09:04.895
+<v Matusz Jakub (EXT)>tak żeby ona zanim zasadni czuję tego
+joya to tam zrobiła jakąś ten też pewnie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1048-0
+00:09:00.276 --> 00:09:01.256
+<v Dymarczyk Maciej (EXT)>Tak dokładnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1066-2
+00:09:04.895 --> 00:09:08.906
+<v Matusz Jakub (EXT)>zaraz się nadzieję my na to,
+a jak jest błąd to jak się pokażę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1075-0
+00:09:10.426 --> 00:09:13.757
+<v Matusz Jakub (EXT)>Ten czy tam wiesz,
+są jakieś propagację błędów tam w tym</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1076-0
+00:09:13.146 --> 00:09:14.496
+<v Dymarczyk Maciej (EXT)>Pewnie tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1075-1
+00:09:13.757 --> 00:09:14.166
+<v Matusz Jakub (EXT)>miałem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-0
+00:09:15.266 --> 00:09:18.900
+<v Matusz Jakub (EXT)>No ale no dobra,
+no to jest trochę takich tych tych</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-1
+00:09:18.900 --> 00:09:21.974
+<v Matusz Jakub (EXT)>punktów, tak sierpem urodziło dobra,
+a ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1088-0
+00:09:19.996 --> 00:09:20.406
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-2
+00:09:21.974 --> 00:09:25.957
+<v Matusz Jakub (EXT)>bo tak artifact register to od razu się
+odniosę do tego,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-3
+00:09:25.957 --> 00:09:30.289
+<v Matusz Jakub (EXT)>że u nas tak jakby w banku w tej chwili
+jest takie założenie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-4
+00:09:30.289 --> 00:09:33.503
+<v Matusz Jakub (EXT)>że Single source of true to jest art
+Factory,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-5
+00:09:33.503 --> 00:09:38.673
+<v Matusz Jakub (EXT)>to znaczy tam powiedzmy to takich
+artefaktów tak, czyli ten regis Street,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1128-0
+00:09:35.186 --> 00:09:36.216
+<v Dymarczyk Maciej (EXT)>Zabijałem, pamiętam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1144-6
+00:09:38.673 --> 00:09:42.166
+<v Matusz Jakub (EXT)>to jest bardziej taki lokalny cash g
+seplenienie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1147-0
+00:09:42.756 --> 00:09:43.346
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1152-0
+00:09:43.056 --> 00:09:46.526
+<v Matusz Jakub (EXT)>Więc, yy, jak coś ten budujemy?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1154-0
+00:09:49.776 --> 00:09:50.506
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-0
+00:09:53.656 --> 00:09:59.239
+<v Matusz Jakub (EXT)>Tu jeszcze się zastanawiam,
+to taki jak mechanizm, który moglibyśmy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-1
+00:09:59.239 --> 00:10:04.984
+<v Matusz Jakub (EXT)>bo takiego nfs owego tego mechanizmu to
+nie mamy w tej chwili w ogóle,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-2
+00:10:04.984 --> 00:10:10.243
+<v Matusz Jakub (EXT)>że żadnego ten, który który kojarzę,
+natomiast tam się pojawiła,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-3
+00:10:10.243 --> 00:10:14.450
+<v Matusz Jakub (EXT)>taka taka opcja,
+z której mężczyźnie korzystaliśmy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-4
+00:10:14.450 --> 00:10:18.010
+<v Matusz Jakub (EXT)>żeby mapować ten fus.
+Ten fs taki nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1208-5
+00:10:18.010 --> 00:10:23.026
+<v Matusz Jakub (EXT)>czy kojarzysz z taki full system,
+który umożliwia tam filler.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-0
+00:10:23.076 --> 00:10:28.066
+<v Matusz Jakub (EXT)>Do postfixa tam zrzucę tak jakby do za
+symulowanie tam na tych bankietach i tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-1
+00:10:28.066 --> 00:10:32.744
+<v Matusz Jakub (EXT)>dalej nie i to co do kiedyś zrobiło
+obsługę do tego tylko nigdy z tego nie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-2
+00:10:32.744 --> 00:10:37.235
+<v Matusz Jakub (EXT)>skorzystaliśmy, a nie poczekajcie,
+chyba próbowaliśmy z tego skorzystać</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-3
+00:10:37.235 --> 00:10:40.915
+<v Matusz Jakub (EXT)>tylko tylko się okazało,
+że tak chyba średnio to działało.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-4
+00:10:40.915 --> 00:10:45.157
+<v Matusz Jakub (EXT)>No ale można byłoby nie wiem jeżeli tu
+potrzebujemy czegoś takiego,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1261-5
+00:10:45.157 --> 00:10:47.776
+<v Matusz Jakub (EXT)>może na ten na przykład snapshoty czy coś.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1264-0
+00:10:48.756 --> 00:10:50.006
+<v Matusz Jakub (EXT)>To ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1279-0
+00:10:51.776 --> 00:10:56.367
+<v Matusz Jakub (EXT)>To może to by było jakimś rozwiązaniem,
+chociaż chyba w tej chwili tak nie nie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1279-1
+00:10:56.367 --> 00:10:59.466
+<v Matusz Jakub (EXT)>nie byśmy nie umieli obsłużyć tych snap
+schodów, nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1281-0
+00:11:00.056 --> 00:11:00.726
+<v Dymarczyk Maciej (EXT)>Prawda?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1306-0
+00:11:01.476 --> 00:11:07.109
+<v Matusz Jakub (EXT)>Bo jak tak jak nam spadnie ten serwer to
+to nie będziemy wiedzieli komu powiedzieć.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1306-1
+00:11:07.109 --> 00:11:11.936
+<v Matusz Jakub (EXT)>Tu jest naprzod łużnej to chyba to jest
+kolejny taki punkt do dalszego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1300-0
+00:11:08.946 --> 00:11:09.366
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1308-0
+00:11:12.926 --> 00:11:14.196
+<v Matusz Jakub (EXT)>Zaadresowania nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1310-0
+00:11:15.396 --> 00:11:15.876
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1314-0
+00:11:17.456 --> 00:11:18.536
+<v Matusz Jakub (EXT)>Dobra, to tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1316-0
+00:11:19.376 --> 00:11:20.986
+<v Matusz Jakub (EXT)>Bo podsumowując.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1330-0
+00:11:21.226 --> 00:11:27.479
+<v Matusz Jakub (EXT)>To teraz tak jakby my mamy chyba do
+wystawienia w takim uproszczonym ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1330-1
+00:11:27.479 --> 00:11:29.676
+<v Matusz Jakub (EXT)>jeśli dobrze tam rozumiem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1344-0
+00:11:29.746 --> 00:11:35.079
+<v Matusz Jakub (EXT)>Ten na razie to multi te nas i to sobie
+zaczniemy pewnie adresować w kolejnej</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1344-1
+00:11:35.079 --> 00:11:36.036
+<v Matusz Jakub (EXT)>iteracji może.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1381-0
+00:11:36.956 --> 00:11:41.749
+<v Matusz Jakub (EXT)>Ten no to można sobie wyobrażać tak jak
+te powiedziałeś nie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1381-1
+00:11:41.749 --> 00:11:48.192
+<v Matusz Jakub (EXT)>czyli że ten najprostsza ta wersja jest,
+że osobne ta workspace i że tam każdy ma</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1381-2
+00:11:48.192 --> 00:11:53.456
+<v Matusz Jakub (EXT)>tą swoją każdy tenant czy tam workspace
+ma swoją ten swój ten naj.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1414-0
+00:11:53.536 --> 00:11:59.860
+<v Matusz Jakub (EXT)>Space kubernetes sowy i swoje instancje,
+że tu jakoś tam częściowo możemy jakoś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1414-1
+00:11:59.860 --> 00:12:05.551
+<v Matusz Jakub (EXT)>wtedy wybronić jakieś niedoskonałości
+tego narzędzia to wtedy tak czyli</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1414-2
+00:12:05.551 --> 00:12:09.266
+<v Matusz Jakub (EXT)>wystawiamy łeb i taki,
+który będziemy musieli.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1427-0
+00:12:09.986 --> 00:12:14.625
+<v Matusz Jakub (EXT)>Z spasować tak,
+żeby tam na przykład robił te jakieś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1427-1
+00:12:14.625 --> 00:12:17.776
+<v Matusz Jakub (EXT)>ewentualne walidację zapisywanie ty.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1431-0
+00:12:17.846 --> 00:12:20.996
+<v Matusz Jakub (EXT)>Tych parametrów tam gdzieś tam do.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1435-0
+00:12:21.216 --> 00:12:22.776
+<v Matusz Jakub (EXT)>Odpowiednim jakimś miejscu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1445-0
+00:12:24.026 --> 00:12:29.706
+<v Matusz Jakub (EXT)>Mm i musimy zrobić ten obraz,
+taki środowiska trenowania, tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1447-0
+00:12:29.986 --> 00:12:30.736
+<v Dymarczyk Maciej (EXT)>Dokładnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1460-0
+00:12:33.226 --> 00:12:37.300
+<v Matusz Jakub (EXT)>I to są 2 komponenty,
+które trzeba tam zaimplementowane</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1460-1
+00:12:37.300 --> 00:12:39.336
+<v Matusz Jakub (EXT)>wystawić nowe, dobrze mówię.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1463-0
+00:12:39.856 --> 00:12:40.346
+<v Dymarczyk Maciej (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1464-0
+00:12:40.076 --> 00:12:40.496
+<v Matusz Jakub (EXT)>2.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1498-0
+00:12:41.576 --> 00:12:46.622
+<v Matusz Jakub (EXT)>Bo na razie też jakby serwowanie tego
+modelu to możemy ten też dalszą.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1498-1
+00:12:46.622 --> 00:12:50.530
+<v Matusz Jakub (EXT)>Ten w sensie możemy te wszystkie tematy
+zacząć cisnąć,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1498-2
+00:12:50.530 --> 00:12:55.789
+<v Matusz Jakub (EXT)>jakby zacząć z równoległość tak,
+czyli na przykład poprawić automatyzację</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1498-3
+00:12:55.789 --> 00:12:57.636
+<v Matusz Jakub (EXT)>wystawiania tych serwisów.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1501-0
+00:12:58.416 --> 00:12:59.396
+<v Matusz Jakub (EXT)>Ee ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1503-0
+00:13:04.536 --> 00:13:05.186
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1531-0
+00:13:06.046 --> 00:13:09.732
+<v Matusz Jakub (EXT)>A to teraz widzę tak to jeszcze takie
+otwarte rzeczy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1531-1
+00:13:09.732 --> 00:13:14.372
+<v Matusz Jakub (EXT)>których nie wiemy do końca,
+to tak to mi się wydaje tak po pierwsze</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1531-2
+00:13:14.372 --> 00:13:16.146
+<v Matusz Jakub (EXT)>skąd będą te modele brane?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1547-0
+00:13:18.066 --> 00:13:24.174
+<v Matusz Jakub (EXT)>Na przykład ten trening job to sobie nie
+wiem czy tam będziemy ten czy tam jest</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1547-1
+00:13:24.174 --> 00:13:25.166
+<v Matusz Jakub (EXT)>sens w ogóle.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1553-0
+00:13:26.716 --> 00:13:31.566
+<v Matusz Jakub (EXT)>Poczekaj czy z czy można tam jakoś łat?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1563-0
+00:13:31.636 --> 00:13:34.966
+<v Matusz Jakub (EXT)>Bo zrobić tak,
+żeby on wziął na przykład za marszała ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1563-1
+00:13:34.966 --> 00:13:35.316
+<v Matusz Jakub (EXT)>model.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1567-0
+00:13:36.756 --> 00:13:38.066
+<v Matusz Jakub (EXT)>Nie shaking fejsa.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1569-0
+00:13:39.096 --> 00:13:40.296
+<v Dymarczyk Maciej (EXT)>Pewnie tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1581-0
+00:13:41.166 --> 00:13:44.696
+<v Matusz Jakub (EXT)>To jest kolejne tam,
+jak każdy do zrobienia.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1585-0
+00:13:43.796 --> 00:13:46.916
+<v Dymarczyk Maciej (EXT)>Takie miałem założenie jakby, ale wiesz.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1588-0
+00:13:47.696 --> 00:13:48.446
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1612-0
+00:13:50.656 --> 00:13:54.160
+<v Matusz Jakub (EXT)>I wtedy,
+no bo gdzie byśmy mogli wystawić takie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1612-1
+00:13:54.160 --> 00:13:58.466
+<v Matusz Jakub (EXT)>takie właśnie te modele,
+które obsługujemy te bazowe? Nie?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1612-2
+00:13:58.466 --> 00:14:02.626
+<v Matusz Jakub (EXT)>No bo to pytanie tak z art. Factory,
+no to w tej chwili.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1625-0
+00:14:05.246 --> 00:14:11.306
+<v Matusz Jakub (EXT)>To byłaby trochę taka sieczka,
+żeby chyba tam obsługiwać ten taki cały.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1632-0
+00:14:12.236 --> 00:14:15.036
+<v Matusz Jakub (EXT)>Też moglibyśmy sobie wyobrazić, kurczę,
+że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1651-0
+00:14:15.656 --> 00:14:20.270
+<v Matusz Jakub (EXT)>Że wskazujemy jakiś model z changing face
+i cały ten Plan taki,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1651-1
+00:14:20.270 --> 00:14:23.586
+<v Matusz Jakub (EXT)>łącznie z tym skrzyżowaniem beer Factory
+się.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1656-0
+00:14:24.396 --> 00:14:27.216
+<v Matusz Jakub (EXT)>Odpala w tle tylko.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1658-0
+00:14:29.006 --> 00:14:29.856
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1668-0
+00:14:31.006 --> 00:14:36.106
+<v Matusz Jakub (EXT)>I rejestracja wewnętrzną wydaje się
+trochę karkołomne. To ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1674-0
+00:14:37.206 --> 00:14:39.786
+<v Matusz Jakub (EXT)>Taki proces, nie wiem to co myślicie,
+no bo.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1689-0
+00:14:41.406 --> 00:14:45.711
+<v Matusz Jakub (EXT)>Ja się waham między czymś takim,
+że mamy taki lokalny zestaw iluś tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1689-1
+00:14:45.711 --> 00:14:48.786
+<v Matusz Jakub (EXT)>modeli takich predefiniowanych co co
+obsługujemy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1711-0
+00:14:50.016 --> 00:14:52.991
+<v Matusz Jakub (EXT)>A czymś takim,
+że jest to bardziej dynamiczne i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1711-1
+00:14:52.991 --> 00:14:57.577
+<v Matusz Jakub (EXT)>rzeczywiście to wtedy nie wiem,
+ktoś chce w tym miła ju wybierze taki tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1711-2
+00:14:57.577 --> 00:14:58.506
+<v Matusz Jakub (EXT)>powiedzmy mode.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1723-0
+00:14:58.576 --> 00:15:04.178
+<v Matusz Jakub (EXT)>W jej to mu się tam pobierze,
+zarejestruje i i tam udostępni w jakiś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1723-1
+00:15:04.178 --> 00:15:04.746
+<v Matusz Jakub (EXT)>sposób.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-0
+00:15:19.226 --> 00:15:22.864
+<v Matusz Jakub (EXT)>Słyszę ciszę,
+więc ja bym chyba powiedział, że ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-1
+00:15:22.864 --> 00:15:28.461
+<v Matusz Jakub (EXT)>że chyba można byłoby dla uproszczenia,
+no bo tam od czegoś takiego sensownego,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-2
+00:15:28.461 --> 00:15:33.637
+<v Matusz Jakub (EXT)>ale prostego chyba musimy zacząć.
+Tak mi się wydaje i że na przykład mamy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1760-0
+00:15:29.736 --> 00:15:31.526
+<v Dymarczyk Maciej (EXT)>No zdecydowanie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-3
+00:15:33.637 --> 00:15:39.374
+<v Matusz Jakub (EXT)>mamy nie wiem 3 jakieś modele najpierw
+tam wiesz, wrzucamy tak na przykład gdzie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-4
+00:15:39.374 --> 00:15:43.781
+<v Matusz Jakub (EXT)>p też pewnie nie daje możliwości
+trenowania zbyt wielu modeli,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-5
+00:15:43.781 --> 00:15:49.237
+<v Matusz Jakub (EXT)>bo pewnie ci pt jakiś tam drugi czy
+trzeci ten pewnie można ten tam to znaczy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1800-6
+00:15:49.237 --> 00:15:50.426
+<v Matusz Jakub (EXT)>openly tam chyba.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1841-0
+00:15:52.036 --> 00:15:55.695
+<v Matusz Jakub (EXT)>Podejrzewają,
+że tam nie ma za dużo modeli do wyboru</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1841-1
+00:15:55.695 --> 00:16:00.664
+<v Matusz Jakub (EXT)>takich, no więc więc zakładam,
+że wtedy na na pierwszej iteracji mógłby</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1841-2
+00:16:00.664 --> 00:16:06.117
+<v Matusz Jakub (EXT)>być ten taki trochę ręcznie sterowany
+Słownik i od razu punkt jest kolejny tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1841-3
+00:16:06.117 --> 00:16:11.500
+<v Matusz Jakub (EXT)>na rozwój, że trzeba coś z tym zrobić,
+żeby żeby to było bardziej dynamiczne,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1841-4
+00:16:11.500 --> 00:16:11.776
+<v Matusz Jakub (EXT)>tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1862-0
+00:16:14.786 --> 00:16:18.245
+<v Matusz Jakub (EXT)>To pierwsze i wtedy trzeba byłoby zrobić
+tą obsługę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1862-1
+00:16:18.245 --> 00:16:22.356
+<v Matusz Jakub (EXT)>że to to czyta z mel flow zapisuje te
+eksperymenty do ml flow.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1876-0
+00:16:24.346 --> 00:16:28.996
+<v Matusz Jakub (EXT)>No ten news tak żeby trigger ował joby
+trochę jest tych tych rzeczy do.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1904-0
+00:16:29.736 --> 00:16:34.776
+<v Dymarczyk Maciej (EXT)>Dużo i dlatego ja nie wiem gdzie zacząć,
+w sensie nie wiem gdzie zacząć to znaczy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1904-1
+00:16:34.776 --> 00:16:39.385
+<v Dymarczyk Maciej (EXT)>nie wiem na przykład gdzie mamy jakiś
+opis jak to wystawić? W sensie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1904-2
+00:16:39.385 --> 00:16:41.536
+<v Dymarczyk Maciej (EXT)>ale jakby nie wiem jak to wystawić.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1903-0
+00:16:40.676 --> 00:16:41.186
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1906-0
+00:16:42.266 --> 00:16:42.896
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1921-0
+00:16:46.296 --> 00:16:52.376
+<v Matusz Jakub (EXT)>To tak to się wydaje,
+że trzeba byłoby spisać te wszystkie ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1921-1
+00:16:52.376 --> 00:16:54.306
+<v Matusz Jakub (EXT)>po pierwsze, tak to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1937-0
+00:16:55.486 --> 00:16:59.836
+<v Dymarczyk Maciej (EXT)>To ja to po okolu zrobię to i jakby
+jeszcze te metric.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1966-0
+00:16:59.046 --> 00:17:02.558
+<v Matusz Jakub (EXT)>Żeby uprościć to tak,
+no to taką w sensie te te te co ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1944-0
+00:17:00.856 --> 00:17:01.556
+<v Dymarczyk Maciej (EXT)>Tak porzadnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1966-1
+00:17:02.558 --> 00:17:06.492
+<v Matusz Jakub (EXT)>narysowałeś to kurczę,
+też fajnie byłoby gdzieś mieć w archiwum.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1966-2
+00:17:06.492 --> 00:17:09.216
+<v Matusz Jakub (EXT)>Kurczę tak jakby się napracowałeś dużo
+tych.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1977-0
+00:17:10.396 --> 00:17:16.346
+<v Matusz Jakub (EXT)>Fajnie to wygląda profesjonalny końcu te
+też rysuje takie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1983-0
+00:17:16.996 --> 00:17:19.136
+<v Dymarczyk Maciej (EXT)>A to planujemy jest jakby.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1989-0
+00:17:20.646 --> 00:17:23.986
+<v Matusz Jakub (EXT)>Nie, ale to wtedy też pokazuje ten fillm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/1995-0
+00:17:24.816 --> 00:17:29.316
+<v Matusz Jakub (EXT)>Jak ten no sensie jest ułatwia.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2001-0
+00:17:29.386 --> 00:17:31.796
+<v Matusz Jakub (EXT)>Rozumienia wszystkiego jak to tam wygląda.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2010-0
+00:17:31.476 --> 00:17:34.416
+<v Dymarczyk Maciej (EXT)>Mi prościej zrozumieć jak nawet sobie sam
+narysuje.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2007-0
+00:17:33.026 --> 00:17:33.516
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2067-0
+00:17:34.656 --> 00:17:40.667
+<v Matusz Jakub (EXT)>Bo nawet wytłumaczyć nie to tam, to dobra,
+to jedno można uporządkować. Druga rzecz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2020-0
+00:17:37.626 --> 00:17:38.366
+<v Dymarczyk Maciej (EXT)>Dokładnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2067-1
+00:17:40.667 --> 00:17:45.900
+<v Matusz Jakub (EXT)>to trzeba byłoby to fazowanie takie
+rozpisać w sensie od czego zaczynamy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2067-2
+00:17:45.900 --> 00:17:51.345
+<v Matusz Jakub (EXT)>co jest z tym kolorem i potem, że tak,
+że no trzeba zrobić z tą integrację z</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2067-3
+00:17:51.345 --> 00:17:54.810
+<v Matusz Jakub (EXT)>dema flower jako rejestrowanie.
+Tak druga rzecz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2067-4
+00:17:54.810 --> 00:17:57.426
+<v Matusz Jakub (EXT)>to trzeba zrobić ten czytanie modelu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2095-0
+00:17:55.976 --> 00:17:58.965
+<v Dymarczyk Maciej (EXT)>No trzeba zrobić obraz podstawowy na
+przykład,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2095-1
+00:17:58.965 --> 00:18:02.527
+<v Dymarczyk Maciej (EXT)>a potem trzeba go uruchomić jakby w jakim
+repozytorium.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2074-0
+00:18:00.556 --> 00:18:01.206
+<v Matusz Jakub (EXT)>Tak, tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2095-2
+00:18:02.527 --> 00:18:07.424
+<v Dymarczyk Maciej (EXT)>Czy to ma być pozornym repozytorium?
+To ma być w ramach jednego repozytorium</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2095-3
+00:18:07.424 --> 00:18:11.366
+<v Dymarczyk Maciej (EXT)>wszystko jakby, bo nie do końca.
+Tutaj Jestem jeszcze pewien.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2110-0
+00:18:11.276 --> 00:18:14.590
+<v Matusz Jakub (EXT)>Mhm, dobra,
+to my tak tak jak teraz robimy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2110-1
+00:18:14.590 --> 00:18:20.089
+<v Matusz Jakub (EXT)>możemy sobie grupę ewentualnie zrobić
+repozytoriów może to by było takie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2110-2
+00:18:20.089 --> 00:18:20.766
+<v Matusz Jakub (EXT)>bardziej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2113-0
+00:18:21.436 --> 00:18:22.276
+<v Dymarczyk Maciej (EXT)>Chyba idealne.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2117-0
+00:18:22.436 --> 00:18:24.926
+<v Matusz Jakub (EXT)>Wtedy bardziej takie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2136-0
+00:18:26.486 --> 00:18:30.882
+<v Matusz Jakub (EXT)>Zgodne z tym,
+jak jak działamy może nie do końca tak no</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2136-1
+00:18:30.882 --> 00:18:34.806
+<v Matusz Jakub (EXT)>bo w tej chwili tak mamy te grupy trochę
+w innym.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2140-0
+00:18:35.346 --> 00:18:38.026
+<v Matusz Jakub (EXT)>Ten celu tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2185-0
+00:18:38.256 --> 00:18:41.878
+<v Matusz Jakub (EXT)>Że stosujemy,
+ale to chyba nawet dla fischer stara,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2185-1
+00:18:41.878 --> 00:18:45.152
+<v Matusz Jakub (EXT)>a nie dobre test co innego.
+W każdym razie to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2185-2
+00:18:45.152 --> 00:18:48.634
+<v Matusz Jakub (EXT)>bo moglibyśmy tak tak o jest jest Report
+fakturę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2185-3
+00:18:48.634 --> 00:18:54.206
+<v Matusz Jakub (EXT)>więc to pewnie taka grupa by się przydała
+i chlebowa i w środku na przykład dla</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2185-4
+00:18:54.206 --> 00:18:56.016
+<v Matusz Jakub (EXT)>każdego obrazu osobne ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2222-0
+00:18:56.776 --> 00:19:02.614
+<v Matusz Jakub (EXT)>Osobne repozytorium to to to będzie
+najłatwiejsze do położenia z naszymi tymi</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2222-1
+00:19:02.614 --> 00:19:06.731
+<v Matusz Jakub (EXT)>procesami cd,
+bo one w tej chwili przynajmniej tak jak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2222-2
+00:19:06.731 --> 00:19:11.746
+<v Matusz Jakub (EXT)>ja to kojarzę. No to tak,
+no to to zwykle mają za zadanie zbudować</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2222-3
+00:19:11.746 --> 00:19:13.766
+<v Matusz Jakub (EXT)>jeden obraz do krowy, więc.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-0
+00:19:15.826 --> 00:19:21.130
+<v Matusz Jakub (EXT)>Więc wtedy można zbudować takiego obraz
+joba i też go niezależny wersję nowa to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-1
+00:19:21.130 --> 00:19:25.373
+<v Matusz Jakub (EXT)>też jest fajne, tak,
+no bo potem oczywiście możemy na przykład,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-2
+00:19:25.373 --> 00:19:29.616
+<v Matusz Jakub (EXT)>a ja nie ruszać przez ten,
+jak to sobie dobrze z komponujemy to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-3
+00:19:29.616 --> 00:19:34.985
+<v Matusz Jakub (EXT)>jakoś niespecjalnie rusza ten miła i na
+przykład poprawiać job tak i na przykład</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-4
+00:19:34.985 --> 00:19:38.234
+<v Matusz Jakub (EXT)>go realizować.
+Niezależnie więc to chyba takie 2</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2283-5
+00:19:38.234 --> 00:19:40.156
+<v Matusz Jakub (EXT)>komponenty są do wystawienia.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2300-0
+00:19:41.386 --> 00:19:43.740
+<v Matusz Jakub (EXT)>Yy,
+przy czym ten jest bardziej taki</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2300-1
+00:19:43.740 --> 00:19:46.856
+<v Matusz Jakub (EXT)>standardowy?
+No bo to jest jakiś tam deployment.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2313-0
+00:19:45.756 --> 00:19:52.085
+<v Dymarczyk Maciej (EXT)>A gdzie mamy jakiś przykład właśnie
+jakiegoś klubu myli czy tam mów i jakby</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2313-1
+00:19:52.085 --> 00:19:54.666
+<v Dymarczyk Maciej (EXT)>tego jak ktoś odpala najlepiej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2316-0
+00:19:56.336 --> 00:19:57.836
+<v Matusz Jakub (EXT)>Dobra, to tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2345-0
+00:19:58.726 --> 00:20:03.845
+<v Matusz Jakub (EXT)>Mamy te 2 2 podejścia,
+też trochę przechodzimy do tendo.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2345-1
+00:20:03.845 --> 00:20:08.245
+<v Matusz Jakub (EXT)>Wiesz co to może tak,
+bo to jest już temat taki,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2345-2
+00:20:08.245 --> 00:20:14.889
+<v Matusz Jakub (EXT)>który który jest bardziej część osób
+chyba wie. Mam nadzieję tak jak tam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2345-3
+00:20:14.889 --> 00:20:16.146
+<v Matusz Jakub (EXT)>jak się z tym.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2374-0
+00:20:16.216 --> 00:20:20.956
+<v Matusz Jakub (EXT)>Ten posługiwać jeszcze tak, chciałem ten,
+zanim do tego przejdziemy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2374-1
+00:20:20.956 --> 00:20:25.352
+<v Matusz Jakub (EXT)>to ten to to zapytać,
+czy tam tutaj chłopaki nie mają jakiś tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2374-2
+00:20:25.352 --> 00:20:29.816
+<v Matusz Jakub (EXT)>komentarzy sobie we 2 to te skupujemy
+odnoście tego rozwiązania.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2379-0
+00:20:33.566 --> 00:20:35.686
+<v Matusz Jakub (EXT)>Roz stronę iść albo ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2392-0
+00:20:44.246 --> 00:20:47.238
+<v Matusz Jakub (EXT)>Coś coś takiego,
+co wam się rzuciło w oczy i byście</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2392-1
+00:20:47.238 --> 00:20:49.136
+<v Matusz Jakub (EXT)>chcieli. Nie wiem to na przykład.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2405-0
+00:20:50.246 --> 00:20:55.310
+<v Matusz Jakub (EXT)>Podbić, że no to był dobry pomysł,
+albo tutaj nie jesteście pewni,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2405-1
+00:20:55.310 --> 00:20:56.746
+<v Matusz Jakub (EXT)>albo że zły pomysł.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2409-0
+00:21:02.826 --> 00:21:03.886
+<v Dymarczyk Maciej (EXT)>Ktoś nie żyje.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2411-0
+00:21:07.406 --> 00:21:08.016
+<v Matusz Jakub (EXT)>Umarli.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2416-0
+00:21:10.946 --> 00:21:13.806
+<v Kunicki Karol (EXT)>Ładne wykresy, podoba mi się.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2420-0
+00:21:15.586 --> 00:21:16.886
+<v Kunicki Karol (EXT)>Fajnie fajnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2428-0
+00:21:19.716 --> 00:21:23.366
+<v Matusz Jakub (EXT)>Potem chłopaki będziecie musieli z tym
+pracować i żyć latami.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2439-0
+00:21:24.916 --> 00:21:32.486
+<v Matusz Jakub (EXT)>Realizować zgłoszenia i nie będzie już
+można mówić, że to takie zrąbane czy te.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2441-0
+00:21:33.346 --> 00:21:34.066
+<v Matusz Jakub (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-0
+00:21:35.596 --> 00:21:38.800
+<v Matusz Jakub (EXT)>No dobra,
+to przejdźmy do tego do do morze tej</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-1
+00:21:38.800 --> 00:21:43.230
+<v Matusz Jakub (EXT)>organizacji repozytoriów, jak to było,
+jak to byśmy mogli ukryć,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-2
+00:21:43.230 --> 00:21:48.206
+<v Matusz Jakub (EXT)>bo teraz tak mamy taki filmik co
+wysyłałem z tym generatorem deploy erem</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-3
+00:21:48.206 --> 00:21:52.568
+<v Matusz Jakub (EXT)>mamy 2 sposoby dyplomowania aplikacji
+starą i nową to ja myślę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-4
+00:21:52.568 --> 00:21:56.181
+<v Matusz Jakub (EXT)>że to już powinniśmy celować w to argo
+zdecydowanie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2499-5
+00:21:56.181 --> 00:22:00.406
+<v Matusz Jakub (EXT)>bo bo chcemy przejść w ogóle 100
+procentach na na na argos d.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2510-0
+00:22:01.246 --> 00:22:09.216
+<v Matusz Jakub (EXT)>Ee natomiast tak już dla ten ten stary
+sposób to był taki, że generalnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2541-0
+00:22:10.986 --> 00:22:16.730
+<v Matusz Jakub (EXT)>To ten filmik taki co podsyłam tam
+generator i deploy to jest ta to o tym</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2541-1
+00:22:16.730 --> 00:22:20.300
+<v Matusz Jakub (EXT)>mówi,
+no ale tak tylko w 2 słowach przypomnę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2541-2
+00:22:20.300 --> 00:22:26.586
+<v Matusz Jakub (EXT)>w zasadzie było ten taka aplikacja miała
+swoje Report tak gdzie na przykład były</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2541-3
+00:22:26.586 --> 00:22:26.896
+<v Matusz Jakub (EXT)>tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2558-0
+00:22:27.096 --> 00:22:31.184
+<v Matusz Jakub (EXT)>No kody do tego,
+żeby zbudować obraz do pokerowy między</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2558-1
+00:22:31.184 --> 00:22:35.126
+<v Matusz Jakub (EXT)>innymi doker fail i tu zwykle robiła coś
+takiego, że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2599-0
+00:22:36.556 --> 00:22:41.249
+<v Matusz Jakub (EXT)>Importowała stan biblioteki takiej obce
+do do carp pipeline w zasadzie tutaj</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2599-1
+00:22:41.249 --> 00:22:45.088
+<v Matusz Jakub (EXT)>większość rzeczy jest nadmiarowych,
+bo to po prostu obsługuje,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2599-2
+00:22:45.088 --> 00:22:49.719
+<v Matusz Jakub (EXT)>jakby też automatycznie deployment
+pobijcie tak to po to te wszystkie pola.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2599-3
+00:22:49.719 --> 00:22:54.776
+<v Matusz Jakub (EXT)>No tutaj też jest sprowadza zasadzie to
+tylko tego imitacja tylko trzeba podać no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2617-0
+00:22:54.846 --> 00:23:00.645
+<v Matusz Jakub (EXT)>I generalnie w tym podejściu takim z
+generatorem deploy erem mieliśmy jeszcze</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2617-1
+00:23:00.645 --> 00:23:03.916
+<v Matusz Jakub (EXT)>czaty, ten Hel, mowę po to,
+żeby generować.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2645-0
+00:23:04.866 --> 00:23:12.183
+<v Matusz Jakub (EXT)>Manifesty te kubernetes owe czyli tam
+deployment tam Service wirtual Service</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2645-1
+00:23:12.183 --> 00:23:19.690
+<v Matusz Jakub (EXT)>ten polityki autoryzacyjne konflikt mapy
+i tego typu rzeczy tak to było tak do</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2645-2
+00:23:19.690 --> 00:23:23.396
+<v Matusz Jakub (EXT)>pewnego momentu działaliśmy i to potem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2651-0
+00:23:26.346 --> 00:23:29.006
+<v Matusz Jakub (EXT)>Tak naprawdę przez te repozytoria takie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2670-0
+00:23:30.486 --> 00:23:36.067
+<v Matusz Jakub (EXT)>Typu na przykład tak jak tu mamy na ml
+planes tak no to była taka konfiguracja</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2670-1
+00:23:36.067 --> 00:23:39.386
+<v Matusz Jakub (EXT)>jak wejściowa do tej,
+żeby te żarty jakby tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2700-0
+00:23:40.686 --> 00:23:48.368
+<v Matusz Jakub (EXT)>Figurowa czystego się generowały już
+takie zwykłe te manifesty no kubernetes</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2700-1
+00:23:48.368 --> 00:23:54.454
+<v Matusz Jakub (EXT)>sowe i tam jakby 2 2 2 pliki w dzięki
+lisie jeden generator,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2700-2
+00:23:54.454 --> 00:23:57.446
+<v Matusz Jakub (EXT)>który generował tą część taką.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2707-0
+00:23:58.666 --> 00:24:01.296
+<v Matusz Jakub (EXT)>Z tych wariantów,
+które są w tym samym repo, ale.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-0
+00:24:02.286 --> 00:24:08.306
+<v Matusz Jakub (EXT)>Tych pod katalogach generował już tam
+docelowe te obiekty kubernetes owe i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-1
+00:24:08.306 --> 00:24:12.479
+<v Matusz Jakub (EXT)>drugi taki Plan,
+który już tutaj tam na przykład to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-2
+00:24:12.479 --> 00:24:16.893
+<v Matusz Jakub (EXT)>wdrażaną tak,
+czyli robił w uproszczeniu dużym kiepski</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-3
+00:24:16.893 --> 00:24:22.672
+<v Matusz Jakub (EXT)>i TLA plany o tych katalogach.
+Tak to jest też tam gdzieś z ten w jakiś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-4
+00:24:22.672 --> 00:24:26.926
+<v Matusz Jakub (EXT)>tam wszedł Libia,
+tam zamknięte no i tak do tej pory</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2764-5
+00:24:26.926 --> 00:24:33.346
+<v Matusz Jakub (EXT)>działaliśmy teraz nowy sposób działania,
+to jest to, co stosujemy dla tych, no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2779-0
+00:24:34.136 --> 00:24:39.701
+<v Matusz Jakub (EXT)>Yy naszych tych modelach Service to
+repozytoria argon,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2779-1
+00:24:39.701 --> 00:24:44.456
+<v Matusz Jakub (EXT)>czyli tutaj mam mamy takie repozytorium
+które.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2781-0
+00:24:50.146 --> 00:24:51.176
+<v Matusz Jakub (EXT)>Tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2815-0
+00:24:52.746 --> 00:24:59.738
+<v Matusz Jakub (EXT)>Tutaj tutaj jakby ten to wszystko co do
+plujemy jest deploy owane tym przez argo</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2815-1
+00:24:59.738 --> 00:25:06.298
+<v Matusz Jakub (EXT)>city tak i przygotowujemy jakby jakieś
+tam halowcy do do chartów filmowych,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2815-2
+00:25:06.298 --> 00:25:12.426
+<v Matusz Jakub (EXT)>gdzie tu mamy ten tak naprawdę określony.
+Zresztą też szczerze mówiąc.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2817-0
+00:25:13.856 --> 00:25:15.186
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2824-0
+00:25:16.936 --> 00:25:21.696
+<v Matusz Jakub (EXT)>Tu mamy to korzystamy z takich.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2860-0
+00:25:22.946 --> 00:25:29.826
+<v Matusz Jakub (EXT)>Żartów od od cb o ogólnych ten,
+które tam obsługują różne różne typy tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2860-1
+00:25:29.826 --> 00:25:34.538
+<v Matusz Jakub (EXT)>obiektów,
+to do tego ci podeślę ten link gdzie to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2860-2
+00:25:34.538 --> 00:25:39.251
+<v Matusz Jakub (EXT)>jest opisane,
+pewnie tam część osób może nie mieć</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2860-3
+00:25:39.251 --> 00:25:42.266
+<v Matusz Jakub (EXT)>wjazdu, bo to jest takie Report.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2878-0
+00:25:45.066 --> 00:25:50.013
+<v Matusz Jakub (EXT)>Jeszcze inny konfliktu,
+tam trzeci z takich co co głównie używamy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2878-1
+00:25:50.013 --> 00:25:52.966
+<v Matusz Jakub (EXT)>ale to najwyżej zrzucę do jakiegoś tego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-0
+00:25:54.946 --> 00:26:00.343
+<v Matusz Jakub (EXT)>Do jakiegoś pliku i podeszla tak także
+generalnie tutaj w sumie wystawienie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-1
+00:26:00.343 --> 00:26:05.455
+<v Matusz Jakub (EXT)>takiego jakiegoś tam nie wiem modelu to w
+zasadzie się odbywa przez to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-2
+00:26:05.455 --> 00:26:11.207
+<v Matusz Jakub (EXT)>że robi się taką sekcję tak jak tutaj.
+Tak to jest kombinacja iluś tam alusów to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-3
+00:26:11.207 --> 00:26:16.533
+<v Matusz Jakub (EXT)>ostatnio robiliśmy taki refactoring,
+bo wcześniej co do zasady jakby każdy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-4
+00:26:16.533 --> 00:26:20.296
+<v Matusz Jakub (EXT)>każdy model to miał tam jeden taki plik z
+haluksami,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-5
+00:26:20.296 --> 00:26:24.840
+<v Matusz Jakub (EXT)>natomiast tych plikach się w kółko
+powstawały te same wartości,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2950-6
+00:26:24.840 --> 00:26:25.976
+<v Matusz Jakub (EXT)>więc kilka tych.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2964-0
+00:26:27.126 --> 00:26:32.713
+<v Matusz Jakub (EXT)>Po wynosili śmy je do takiej do jakiejś
+tam komorowych takich plików,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2964-1
+00:26:32.713 --> 00:26:35.186
+<v Matusz Jakub (EXT)>które potem można jakby zaimki.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2972-0
+00:26:35.286 --> 00:26:39.296
+<v Matusz Jakub (EXT)>Gotować w ramach definiowania takiego
+takiego serwisu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2989-0
+00:26:40.876 --> 00:26:44.002
+<v Matusz Jakub (EXT)>To też na to jest.
+Ten to jest dokumentacja.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/2989-1
+00:26:44.002 --> 00:26:48.586
+<v Matusz Jakub (EXT)>No to ostatnio Karol ją przygotował,
+wie co też tam pod podrzucę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3001-0
+00:26:49.316 --> 00:26:53.756
+<v Matusz Jakub (EXT)>Jak są te włosy tam zorganizowane w tych
+repozytoriach tam tenant.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3003-0
+00:26:55.056 --> 00:26:55.756
+<v Matusz Jakub (EXT)>Yy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3010-0
+00:26:56.506 --> 00:27:00.846
+<v Matusz Jakub (EXT)>No i chyba tyle to w zasadzie jest tak,
+że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3035-0
+00:27:03.256 --> 00:27:06.358
+<v Matusz Jakub (EXT)>Szczególnoci,
+tak jak potrzebujemy najem space,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3035-1
+00:27:06.358 --> 00:27:10.106
+<v Matusz Jakub (EXT)>to to jest coś,
+co zgłaszamy do tego do cloud devops tego</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3035-2
+00:27:10.106 --> 00:27:13.466
+<v Matusz Jakub (EXT)>zespołu,
+więc teraz jakbyśmy chcieli coś tam sobie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3038-0
+00:27:12.306 --> 00:27:14.516
+<v Dymarczyk Maciej (EXT)>Ale to już chyba zgłosiłeś,
+to nie czy nie?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3067-0
+00:27:14.476 --> 00:27:18.334
+<v Matusz Jakub (EXT)>Wiesz co ja zgłosiłem,
+ale to taki zgłosiłem bardziej taki</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3067-1
+00:27:18.334 --> 00:27:23.563
+<v Matusz Jakub (EXT)>lawowy namespace i tam szczerze mówiąc,
+nie obserwowałem co tam się dalej z tym</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3067-2
+00:27:23.563 --> 00:27:26.440
+<v Matusz Jakub (EXT)>działo.
+Tutaj byśmy musieli się zastanowić,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3067-3
+00:27:26.440 --> 00:27:29.316
+<v Matusz Jakub (EXT)>czy na tym środowisku wspólnym,
+gdzieś tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3081-0
+00:27:31.486 --> 00:27:34.040
+<v Matusz Jakub (EXT)>Wiesz co, muszę zerknąć do tego najlepiej.
+Space,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3081-1
+00:27:34.040 --> 00:27:36.286
+<v Matusz Jakub (EXT)>czy tutaj na przykład na razie roboczo
+nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3096-0
+00:27:37.516 --> 00:27:40.967
+<v Matusz Jakub (EXT)>Nie zadziałać tak,
+że tam powiedzmy pod jakiś już na nim</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3096-1
+00:27:40.967 --> 00:27:42.056
+<v Matusz Jakub (EXT)>space podpiąć nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3098-0
+00:27:43.756 --> 00:27:44.326
+<v Dymarczyk Maciej (EXT)>Jasne.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3110-0
+00:27:46.036 --> 00:27:50.296
+<v Matusz Jakub (EXT)>Dobra, jedyne ten jedyny problem,
+który tutaj widzę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3110-1
+00:27:50.296 --> 00:27:52.546
+<v Matusz Jakub (EXT)>to jest jeszcze postawienie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3122-0
+00:27:52.686 --> 00:27:59.976
+<v Matusz Jakub (EXT)>Tak wystawienie jakby takiej tego joya po
+poza klaster tak no bo.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-0
+00:28:01.496 --> 00:28:04.766
+<v Matusz Jakub (EXT)>To wymaga tam setupu paru tam takich
+rzeczy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-1
+00:28:04.766 --> 00:28:10.725
+<v Matusz Jakub (EXT)>który ten tam dns jakiś tam muszą zostać
+zostawta powane jakiś tam certyfikaty po</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-2
+00:28:10.725 --> 00:28:14.431
+<v Matusz Jakub (EXT)>generowane do tego gdzieś tam na tym load
+balance,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-3
+00:28:14.431 --> 00:28:20.171
+<v Matusz Jakub (EXT)>że bankowy nawet w piątce musi być tam
+wirtual serwis założony więc tam trochę</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-4
+00:28:20.171 --> 00:28:23.950
+<v Matusz Jakub (EXT)>takiej roboty z innymi zespołami to muszę
+wiesz co,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-5
+00:28:23.950 --> 00:28:29.545
+<v Matusz Jakub (EXT)>muszę to trochę sobie teraz przetrawić
+jak już teraz wszystko rozumiem mniej</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3189-6
+00:28:29.545 --> 00:28:31.216
+<v Matusz Jakub (EXT)>więcej do czego dążymy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3191-0
+00:28:32.386 --> 00:28:33.626
+<v Matusz Jakub (EXT)>I.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3206-0
+00:28:35.026 --> 00:28:38.844
+<v Matusz Jakub (EXT)>I to jakoś tam zaproponuję coś,
+jak to można.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3206-1
+00:28:38.844 --> 00:28:42.496
+<v Matusz Jakub (EXT)>Wiesz jak teraz można to zacząć robić,
+tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3245-0
+00:28:43.906 --> 00:28:47.313
+<v Matusz Jakub (EXT)>To rzeczywiście jest kilka tych punktów,
+tak, to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3213-0
+00:28:44.526 --> 00:28:45.036
+<v Dymarczyk Maciej (EXT)>Super.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3245-1
+00:28:47.313 --> 00:28:52.286
+<v Matusz Jakub (EXT)>to ty możesz ten to możesz właśnie w
+oparciu o to, co tam rozmawialiśmy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3245-2
+00:28:52.286 --> 00:28:57.464
+<v Matusz Jakub (EXT)>uporządkować tą tą tą architekturę,
+tak żebyśmy mieli trochę tam ją zgodnie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3245-3
+00:28:57.464 --> 00:29:02.846
+<v Matusz Jakub (EXT)>już z tym z tym takim inicjalny m jakby
+pomysłem. Tak, no pierwsze literackie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3253-0
+00:29:03.886 --> 00:29:06.696
+<v Matusz Jakub (EXT)>I to wtedy byśmy mogli też pokazać tam
+grześ ką.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3285-0
+00:29:08.456 --> 00:29:16.160
+<v Matusz Jakub (EXT)>I jak chcemy do tego podejść wstępnie,
+a ja się w międzyczasie tam pochyla nad</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3285-1
+00:29:16.160 --> 00:29:21.719
+<v Matusz Jakub (EXT)>tym, jak to tam,
+gdzie co tam zrobić i też jakie tam nam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3285-2
+00:29:21.719 --> 00:29:24.156
+<v Matusz Jakub (EXT)>wyszły. Te zadanka na na.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3287-0
+00:29:24.916 --> 00:29:26.356
+<v Matusz Jakub (EXT)>Ma za.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3297-0
+00:29:26.696 --> 00:29:30.486
+<v Matusz Jakub (EXT)>Notowanie tych takich specyficznych
+rzeczy, nie które tam się pojawiła.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3299-0
+00:29:30.986 --> 00:29:31.566
+<v Dymarczyk Maciej (EXT)>Jasne.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3302-0
+00:29:32.336 --> 00:29:32.896
+<v Matusz Jakub (EXT)>Na obra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3313-0
+00:29:33.506 --> 00:29:37.206
+<v Zalewski Dominik (EXT)>A propos tych tylko dns ów system, kuba,
+wspomniałeś to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3332-0
+00:29:37.996 --> 00:29:42.468
+<v Zalewski Dominik (EXT)>Nie wiem czy według mnie to moglibyśmy
+skorzystać już z tych istniejących tak i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3332-1
+00:29:42.468 --> 00:29:44.256
+<v Zalewski Dominik (EXT)>po prostu wystawić na jakiś tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3338-0
+00:29:44.606 --> 00:29:47.926
+<v Matusz Jakub (EXT)>Na msp są na przykład Tomasz.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3340-0
+00:29:47.796 --> 00:29:48.676
+<v Zalewski Dominik (EXT)>Dla ml flow.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3353-0
+00:29:49.246 --> 00:29:53.996
+<v Matusz Jakub (EXT)>A tylko byśmy musieli wtedy bez chyba bez
+autoryzacji, tak czy czy nie poczekaj.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3358-0
+00:29:54.836 --> 00:29:57.306
+<v Matusz Jakub (EXT)>A jak to teraz będzie? No bo tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3360-0
+00:29:59.006 --> 00:30:00.586
+<v Matusz Jakub (EXT)>Yy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3378-0
+00:30:02.016 --> 00:30:07.432
+<v Matusz Jakub (EXT)>No no właśnie, bo ten,
+bo bo na czym byśmy mogli to wystawić</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3378-1
+00:30:07.432 --> 00:30:09.296
+<v Matusz Jakub (EXT)>Dominik, jak myślisz?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3390-0
+00:30:12.746 --> 00:30:13.306
+<v Matusz Jakub (EXT)>No.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3441-0
+00:30:36.096 --> 00:30:36.566
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3466-0
+00:30:36.626 --> 00:30:40.333
+<v Zalewski Dominik (EXT)>Boju i też rozumiem,
+że ten jui to jest też pod znakiem</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3466-1
+00:30:40.333 --> 00:30:43.709
+<v Zalewski Dominik (EXT)>zapytania,
+czy to w ogóle będzie tak tak naprawdę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3466-2
+00:30:43.709 --> 00:30:47.814
+<v Zalewski Dominik (EXT)>bo jest ten wariant zui,
+albo też jest po prostu wariant sam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3466-3
+00:30:47.814 --> 00:30:48.806
+<v Zalewski Dominik (EXT)>że tylko przez.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3473-0
+00:30:49.796 --> 00:30:52.586
+<v Zalewski Dominik (EXT)>Gita tak i i bez jakby ją, a ja nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3489-0
+00:30:54.416 --> 00:30:57.603
+<v Matusz Jakub (EXT)>Tak,
+bo to nawet ten tutaj ten airflow w tym w</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3489-1
+00:30:57.603 --> 00:31:00.246
+<v Matusz Jakub (EXT)>tym kontekście, co powiedziałeś tamten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3513-0
+00:31:01.736 --> 00:31:06.051
+<v Matusz Jakub (EXT)>Maciek to w zasadzie nie wiem,
+czy byłby wtedy potrzebny tak jakby ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3513-1
+00:31:06.051 --> 00:31:09.346
+<v Matusz Jakub (EXT)>bo to jenkins mógłby już tam stringer
+ować tę chorobę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3545-0
+00:31:11.436 --> 00:31:14.974
+<v Matusz Jakub (EXT)>No chyba żebyś no nie wiem,
+no to też już nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3522-0
+00:31:11.976 --> 00:31:12.906
+<v Dymarczyk Maciej (EXT)>No naprawdę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3545-1
+00:31:14.974 --> 00:31:19.056
+<v Matusz Jakub (EXT)>to do przemyślenia,
+ale w każdym razie rzeczywiście jeszcze</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3545-2
+00:31:19.056 --> 00:31:24.226
+<v Matusz Jakub (EXT)>taka opcja moim zdaniem. No ta siła jem,
+chyba jest fajniejsza, tak to tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3547-0
+00:31:25.676 --> 00:31:26.566
+<v Matusz Jakub (EXT)>Natomiast.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3574-0
+00:31:27.486 --> 00:31:31.768
+<v Matusz Jakub (EXT)>Dla mnie taka wersja,
+no to może nad tym się jeszcze pochylmy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3574-1
+00:31:31.768 --> 00:31:35.566
+<v Matusz Jakub (EXT)>czy czy idziemy od razu wyłazi?
+A czy na przykład ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3574-2
+00:31:35.566 --> 00:31:39.916
+<v Matusz Jakub (EXT)>czy może w taki pipeline gdzie jakby z
+tego jamala startujemy?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3580-0
+00:31:40.706 --> 00:31:42.466
+<v Matusz Jakub (EXT)>To może być prostsze do obsługi.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-0
+00:31:44.516 --> 00:31:49.375
+<v Zalewski Dominik (EXT)>Według mnie jest prostszy do obsługi,
+jak nie ma dodatkowego komponentu,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-1
+00:31:49.375 --> 00:31:53.835
+<v Zalewski Dominik (EXT)>tak który potem też nawet jakby był,
+trzeba byłoby utrzymywać tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-2
+00:31:53.835 --> 00:31:57.562
+<v Zalewski Dominik (EXT)>a w ogóle tak jeszcze myślałem o tym jak
+byłby ten uai.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-3
+00:31:57.562 --> 00:32:02.887
+<v Zalewski Dominik (EXT)>No to znaczy ogólnie to pewnie fajnie
+byłoby wiedzieć co tam dokładnie jest tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-4
+00:32:02.887 --> 00:32:06.016
+<v Zalewski Dominik (EXT)>w tym mikołaju,
+jakie tam daje nam możliwości,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-5
+00:32:06.016 --> 00:32:11.341
+<v Zalewski Dominik (EXT)>ale tak jak sobie myślałem na szybko
+podczas spotkania, no to tak stwierdziłem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3632-6
+00:32:11.341 --> 00:32:11.806
+<v Zalewski Dominik (EXT)>że jak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-0
+00:32:11.876 --> 00:32:17.443
+<v Zalewski Dominik (EXT)>Jak wiecie jak jest taki junaid w którym
+tam można sobie jakby coś tam wyklikać i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-1
+00:32:17.443 --> 00:32:23.146
+<v Zalewski Dominik (EXT)>te i po prostu coś tam od razu puścić tak
+ten jakiś proces fajne treningu to według</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-2
+00:32:23.146 --> 00:32:27.288
+<v Zalewski Dominik (EXT)>mnie nie wiem jak to też ma tak biznesowo
+bardziej wyglądać,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-3
+00:32:27.288 --> 00:32:31.293
+<v Zalewski Dominik (EXT)>ale według mnie to jest jakby taki
+zasobożerny tak proces,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-4
+00:32:31.293 --> 00:32:35.570
+<v Zalewski Dominik (EXT)>który raczej ja bym powiedział,
+że takie rzeczy powinny jednak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-5
+00:32:35.570 --> 00:32:41.069
+<v Zalewski Dominik (EXT)>przechodzić przez ścieżkę właśnie jakąś
+litrową tak gdzie jest jakiś tam MRI tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3698-6
+00:32:41.069 --> 00:32:44.056
+<v Zalewski Dominik (EXT)>dalej tak gdzie ktoś to musi nawet
+klepnąć.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-0
+00:32:44.436 --> 00:32:48.884
+<v Zalewski Dominik (EXT)>Yy i w ten sposób niż jakby mieć
+powiedzmy takie środowisko gdzie klikam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-1
+00:32:48.884 --> 00:32:53.819
+<v Zalewski Dominik (EXT)>tak i i jakby odpalam tam nie wiem 100
+procesów tak na tych najdroższych kartach</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-2
+00:32:53.819 --> 00:32:58.511
+<v Zalewski Dominik (EXT)>i nikt w ogóle tego nie kontroluje.
+Nie jakby to bardziej takim sensie o tym</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-3
+00:32:58.511 --> 00:33:01.740
+<v Zalewski Dominik (EXT)>myślałem. Nie,
+ale oczywiście jakby nie upieram się,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-4
+00:33:01.740 --> 00:33:06.126
+<v Zalewski Dominik (EXT)>że ten iua jest niepotrzebny.
+No ja bym na pewno chciał zobaczyć co tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3739-0
+00:33:01.856 --> 00:33:02.566
+<v Matusz Jakub (EXT)>A to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3761-5
+00:33:06.126 --> 00:33:09.416
+<v Zalewski Dominik (EXT)>dokładnie jest mikołaju,
+nie jakie tam są możliwości.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3765-0
+00:33:11.276 --> 00:33:12.526
+<v Matusz Jakub (EXT)>No to tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-0
+00:33:14.766 --> 00:33:18.052
+<v Matusz Jakub (EXT)>Myślę,
+że to moglibyśmy zrobić sobie takie tata</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-1
+00:33:18.052 --> 00:33:21.338
+<v Matusz Jakub (EXT)>też taki szybki pokaz.
+Ja trochę tam widziałem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-2
+00:33:21.338 --> 00:33:26.609
+<v Matusz Jakub (EXT)>bo to w internecie można zobaczyć takie
+takie filmiki w zasadzie tak w kilku</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3790-0
+00:33:23.626 --> 00:33:24.496
+<v Zalewski Dominik (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-3
+00:33:26.609 --> 00:33:31.606
+<v Matusz Jakub (EXT)>krokach to bym powiedział tak,
+że tam masz taką w ogóle taki panel duży,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-4
+00:33:31.606 --> 00:33:37.150
+<v Matusz Jakub (EXT)>na którym są parametry wszystkie takie,
+które jakby alternatywnie możesz podać w</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-5
+00:33:37.150 --> 00:33:40.162
+<v Matusz Jakub (EXT)>jamą.
+Tak w zasadzie ten jam jest w postaci</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-6
+00:33:40.162 --> 00:33:44.201
+<v Matusz Jakub (EXT)>formularza i prostu w wybierasz sobie
+jakieś tam techniki,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3832-7
+00:33:44.201 --> 00:33:46.596
+<v Matusz Jakub (EXT)>parametry tych technik i tak dalej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-0
+00:33:46.856 --> 00:33:50.798
+<v Matusz Jakub (EXT)>To są często takie,
+no no trzeba się znać na tym tym fin</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-1
+00:33:50.798 --> 00:33:55.639
+<v Matusz Jakub (EXT)>treningu, żeby wiedzieć co tam wybrać,
+bo tam jest jakiś liczba epok,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-2
+00:33:55.639 --> 00:33:59.166
+<v Matusz Jakub (EXT)>jakaś tam nie wiem,
+jakiś tam rank jakiś macierzy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-3
+00:33:59.166 --> 00:34:04.421
+<v Matusz Jakub (EXT)>to ile tam jakiś macierzy tam jest
+budowanych tam jakaś rodzaj kwantyzacji,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-4
+00:34:04.421 --> 00:34:07.672
+<v Matusz Jakub (EXT)>którą wybierasz,
+jakieś tam inne przełączniki,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-5
+00:34:07.672 --> 00:34:12.581
+<v Matusz Jakub (EXT)>które rodzaj wag tam chcesz,
+chcesz tam ruszać i tak dalej i tego typu</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3894-6
+00:34:12.581 --> 00:34:17.076
+<v Matusz Jakub (EXT)>rzeczy, i to jest ten pierwszy ekran,
+tam masz przycisk osadnik.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3949-0
+00:34:17.466 --> 00:34:22.810
+<v Matusz Jakub (EXT)>I generalnie jak to tam klikniesz ten
+przycisk submit to ci tam idzie taki</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3949-1
+00:34:22.810 --> 00:34:28.581
+<v Matusz Jakub (EXT)>pasek postępu już nie pamiętam na ile on
+jest graficzny jej ten i druga rzecz co</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3949-2
+00:34:28.581 --> 00:34:34.494
+<v Matusz Jakub (EXT)>co masz to generuje się tak jak wykres na
+bieżąco funkcji straty tam jakby ten ten</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3949-3
+00:34:34.494 --> 00:34:39.410
+<v Matusz Jakub (EXT)>się odświeża no i ten i masz co jeszcze
+masz zakładkę taką do czata,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3949-4
+00:34:39.410 --> 00:34:45.466
+<v Matusz Jakub (EXT)>że jak już tam sobie wytrenować to możesz
+sobie ten ten ten model sobie po próbować.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3951-0
+00:34:45.856 --> 00:34:46.266
+<v Zalewski Dominik (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3962-0
+00:34:48.006 --> 00:34:51.846
+<v Matusz Jakub (EXT)>Jeszcze jakiś taki,
+żeby go tam gdzieś wyeksportować chyba.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3973-0
+00:34:54.686 --> 00:34:56.306
+<v Matusz Jakub (EXT)>Lesznie pamiętam taki.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3990-0
+00:34:54.686 --> 00:34:57.877
+<v Zalewski Dominik (EXT)>No dobra,
+to ja tam sobie ten sobie samemu jeszcze</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3979-0
+00:34:57.686 --> 00:34:58.236
+<v Matusz Jakub (EXT)>No no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3990-1
+00:34:57.877 --> 00:35:00.816
+<v Zalewski Dominik (EXT)>z ciekawości popatrzę co tam jest.
+Właśnie no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4013-0
+00:34:58.836 --> 00:35:04.059
+<v Matusz Jakub (EXT)>Tam w githubie jest taki też krótki
+filmik na ten jak ten tam z minutę paten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/3996-0
+00:35:02.026 --> 00:35:02.506
+<v Zalewski Dominik (EXT)>Dobra.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4013-1
+00:35:04.059 --> 00:35:08.946
+<v Matusz Jakub (EXT)>ale tam no można wybaczyć są takie
+przykłady jak ktoś tam fajnie tonuje.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4047-0
+00:35:09.756 --> 00:35:13.266
+<v Matusz Jakub (EXT)>Tam no mogę nawet podesłać jakiś sobie
+oglądałem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4047-1
+00:35:13.266 --> 00:35:19.022
+<v Matusz Jakub (EXT)>sprawdzę taki dosyć długi jest ten film,
+ale on jest tak łopatologicznie wszystko</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4047-2
+00:35:19.022 --> 00:35:24.146
+<v Matusz Jakub (EXT)>pokazane tak jak koleś używa tego
+narzędzia ten to to mogę też podesłać,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4047-3
+00:35:24.146 --> 00:35:27.866
+<v Matusz Jakub (EXT)>więc ten Mikołaj, no to rzeczywiście,
+no to to może.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4058-0
+00:35:29.046 --> 00:35:33.985
+<v Matusz Jakub (EXT)>Tutaj podrzuciłaś Dominik, ważną rzecz,
+której ja na przykład zapomniałem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4058-1
+00:35:33.985 --> 00:35:34.906
+<v Matusz Jakub (EXT)>że część tych.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4093-0
+00:35:36.156 --> 00:35:39.554
+<v Matusz Jakub (EXT)>Jest na przykład możliwości obcięliśmy
+przez to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4093-1
+00:35:39.554 --> 00:35:43.854
+<v Matusz Jakub (EXT)>że nie było audytor wolności ten,
+czyli na przykład widzicie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4093-2
+00:35:43.854 --> 00:35:47.113
+<v Matusz Jakub (EXT)>to wiemy kto tam kompromituje w dzięki
+liście,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4093-3
+00:35:47.113 --> 00:35:52.730
+<v Matusz Jakub (EXT)>kto puszcza pipeline i tak dalej nie,
+ale na przykład w jak mamy jua ja takiego,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4093-4
+00:35:52.730 --> 00:35:54.116
+<v Matusz Jakub (EXT)>który nie obsługuje.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4114-0
+00:35:55.116 --> 00:36:00.743
+<v Matusz Jakub (EXT)>Dla tych wewnątrz tutaj autoryzacji to
+trochę tracimy informacje, jak to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4114-1
+00:36:00.743 --> 00:36:04.620
+<v Matusz Jakub (EXT)>co zrobił,
+jakby ten powiązanie tego użytkownika z</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4114-2
+00:36:04.620 --> 00:36:05.076
+<v Matusz Jakub (EXT)>tym z.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4120-0
+00:36:06.686 --> 00:36:08.946
+<v Matusz Jakub (EXT)>Z tą akcją, która się wykonała, nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4125-0
+00:36:10.326 --> 00:36:11.986
+<v Matusz Jakub (EXT)>Więc no może.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4132-0
+00:36:13.396 --> 00:36:15.786
+<v Matusz Jakub (EXT)>Nie wiem co tu Maciek myślisz na ten
+temat?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4138-0
+00:36:18.146 --> 00:36:20.096
+<v Dymarczyk Maciej (EXT)>No myślę, że bez UE jest prościej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-0
+00:36:21.386 --> 00:36:26.968
+<v Matusz Jakub (EXT)>No to możemy zacząć bez joya ja też też
+ja to też pamiętam z poprzedniej w pracy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-1
+00:36:26.968 --> 00:36:30.689
+<v Matusz Jakub (EXT)>gdzie mieliśmy taki plik,
+owy interfejs do narzędzia,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-2
+00:36:30.689 --> 00:36:36.202
+<v Matusz Jakub (EXT)>jakiś taki metalowej platformy i wszyscy
+oczywiście ci dyrektorzy od klienta to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-3
+00:36:36.202 --> 00:36:39.854
+<v Matusz Jakub (EXT)>zawsze mówiło.
+Jejku jak w tym można pracować to tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-4
+00:36:39.854 --> 00:36:45.298
+<v Matusz Jakub (EXT)>lata siedemdziesiąte coś tam wiesz tak,
+ale ci co w tym pracowali to to woleli</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-5
+00:36:45.298 --> 00:36:48.674
+<v Matusz Jakub (EXT)>był nas szukać,
+nie trzeba było żadnych strzałek</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4193-6
+00:36:48.674 --> 00:36:51.706
+<v Matusz Jakub (EXT)>przeciągać między tabelkami co na
+przykład.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-0
+00:36:51.776 --> 00:36:56.037
+<v Matusz Jakub (EXT)>Byśmy moja sis 10000 tabel to z
+replikowanie to 10 tam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-1
+00:36:56.037 --> 00:37:00.982
+<v Matusz Jakub (EXT)>1000 razy ileś tam strzałek czy wciągał.
+No szybko pisałeś dość,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-2
+00:37:00.982 --> 00:37:05.623
+<v Matusz Jakub (EXT)>wiesz deklaratywny,
+jakiś tam ten pipeline, w tym tekstowym,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-3
+00:37:05.623 --> 00:37:11.404
+<v Matusz Jakub (EXT)>takim bardziej formacie i wiesz,
+ludzie sobie generatory jakieś pisali tam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-4
+00:37:11.404 --> 00:37:14.980
+<v Matusz Jakub (EXT)>wiesz,
+kopiowali w gicie to tam trzymali i tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-5
+00:37:14.980 --> 00:37:18.708
+<v Matusz Jakub (EXT)>dalej,
+więc więc to nie ja nie Jestem jakby taki</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4253-6
+00:37:18.708 --> 00:37:19.316
+<v Matusz Jakub (EXT)>całkiem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4258-0
+00:37:19.746 --> 00:37:21.216
+<v Matusz Jakub (EXT)>By wrogiem na jakiś takich.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4282-0
+00:37:23.776 --> 00:37:28.428
+<v Matusz Jakub (EXT)>Takich formatów ten tekstowych,
+a przy chociaż przyznaję,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4282-1
+00:37:28.428 --> 00:37:34.602
+<v Matusz Jakub (EXT)>że ładniej wszystko wygląda i może być
+takie takie przyjemniejsze do użycia,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4282-2
+00:37:34.602 --> 00:37:36.366
+<v Matusz Jakub (EXT)>jak jest wizualne nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4319-0
+00:37:38.366 --> 00:37:43.894
+<v Matusz Jakub (EXT)>Natomiast no to może by właśnie ułatwiało
+wtedy, byśmy mieli tak tam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4319-1
+00:37:43.894 --> 00:37:49.816
+<v Matusz Jakub (EXT)>czyli tutaj ta scientist aby komentował
+taki ten ten jamil tak z tą z tymi</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4319-2
+00:37:49.816 --> 00:37:54.949
+<v Matusz Jakub (EXT)>wszystkimi parametrami by się odpalał
+jakiś proces dzięki lisie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4319-3
+00:37:54.949 --> 00:37:57.396
+<v Matusz Jakub (EXT)>który by tutaj już byśmy mogli.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4342-0
+00:37:58.266 --> 00:38:03.321
+<v Matusz Jakub (EXT)>Przez zastanowić może w tym może
+rzeczywiście taki dak można byłoby na a,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4342-1
+00:38:03.321 --> 00:38:09.126
+<v Matusz Jakub (EXT)>bo nie mamy tego podglądu co się dzieje z
+procesem, tak byśmy musieli w tym airflow.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4350-0
+00:38:10.516 --> 00:38:13.096
+<v Matusz Jakub (EXT)>To to to nam trochę odpada.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4365-0
+00:38:15.016 --> 00:38:19.836
+<v Matusz Jakub (EXT)>I na przykład nie podejrzymy sobie tak
+live tej funkcji straty, ale to możemy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4369-0
+00:38:21.016 --> 00:38:22.866
+<v Matusz Jakub (EXT)>Ja wiem od tego zacząć.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4376-0
+00:38:24.376 --> 00:38:26.806
+<v Matusz Jakub (EXT)>Potem się zastanowić nad tym miła,
+wiem może.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4387-0
+00:38:27.836 --> 00:38:29.786
+<v Zalewski Dominik (EXT)>Znaczy co to tych? No no no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4386-0
+00:38:27.936 --> 00:38:29.746
+<v Matusz Jakub (EXT)>Bo tutaj wtedy no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4416-0
+00:38:31.176 --> 00:38:35.055
+<v Matusz Jakub (EXT)>Ja to sobie tak trochę.
+No ja może Jestem trochę skrzywiony przez</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4416-1
+00:38:35.055 --> 00:38:39.756
+<v Matusz Jakub (EXT)>to co mamy w tych procesach Pedro i tak
+trochę może kombinuje w tą samą stronę,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4416-2
+00:38:39.756 --> 00:38:40.226
+<v Matusz Jakub (EXT)>ale ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4455-0
+00:38:41.806 --> 00:38:46.499
+<v Matusz Jakub (EXT)>No tak, ja sobie wyobrażałem właśnie,
+że tutaj mamy już taki dak gotowy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4455-1
+00:38:46.499 --> 00:38:51.640
+<v Matusz Jakub (EXT)>który zawiera taki cały ten pipeline.
+Trenujący z użyciem lama factor nie i źle</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4455-2
+00:38:51.640 --> 00:38:55.626
+<v Matusz Jakub (EXT)>jakby metry triggeruje.
+My tylko poczekajcie jak tego daga to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4455-3
+00:38:55.626 --> 00:38:58.646
+<v Matusz Jakub (EXT)>właśnie jest trochę problem chyba
+overflow że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4478-0
+00:38:59.856 --> 00:39:02.805
+<v Matusz Jakub (EXT)>Jakbyśmy tam równolegle odpalali ten sam
+dark,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4478-1
+00:39:02.805 --> 00:39:06.380
+<v Matusz Jakub (EXT)>to też tu nie pamiętam jak to airflow do
+tego podejdzie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4478-2
+00:39:06.380 --> 00:39:10.896
+<v Matusz Jakub (EXT)>bo on tam dla niego jest ważna.
+Tam data przetwarzania i tak dalej nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4484-0
+00:39:11.656 --> 00:39:14.356
+<v Matusz Jakub (EXT)>Chyba tak nie niekoniecznie dobrze działa,
+więc.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4486-0
+00:39:15.556 --> 00:39:16.906
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4505-0
+00:39:18.036 --> 00:39:22.434
+<v Matusz Jakub (EXT)>Ranking to tak mi się trochę mamy jakieś
+takie opory,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4505-1
+00:39:22.434 --> 00:39:27.726
+<v Matusz Jakub (EXT)>żeby dzięki nim uznać jako taki orkiestra
+ator tego procesu ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4513-0
+00:39:29.146 --> 00:39:31.386
+<v Matusz Jakub (EXT)>Który miałby się działać w tym?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4515-0
+00:39:32.066 --> 00:39:34.546
+<v Matusz Jakub (EXT)>Yy na.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4530-0
+00:39:35.406 --> 00:39:38.364
+<v Matusz Jakub (EXT)>No już jakby na klas,
+że tak jakby przetwarzania danych</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4530-1
+00:39:38.364 --> 00:39:42.166
+<v Matusz Jakub (EXT)>bardziej jako takie cd jako tutaj jeszcze
+odpalenie tego flow to spoko.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4563-0
+00:39:43.266 --> 00:39:47.332
+<v Matusz Jakub (EXT)>No ale to w zasadzie to trenował.
+Tutaj planowaliśmy jeden job,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4563-1
+00:39:47.332 --> 00:39:50.444
+<v Matusz Jakub (EXT)>tak tutaj jakoś funkcjonalność,
+ty miła ją taką,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4563-2
+00:39:50.444 --> 00:39:55.209
+<v Matusz Jakub (EXT)>która by nam tam coś zrealizowało.
+Odłożyła więc tu moglibyśmy z jenkinsa,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4563-3
+00:39:55.209 --> 00:39:57.876
+<v Matusz Jakub (EXT)>to już mamy odłożone. Tak więc w zasadzie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4584-0
+00:39:59.326 --> 00:40:02.763
+<v Matusz Jakub (EXT)>Nie wiem czy tutaj,
+no moglibyśmy rozrobić walidacji,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4584-1
+00:40:02.763 --> 00:40:07.537
+<v Matusz Jakub (EXT)>ale walidacja mogłaby też być chyba w
+dzięki lisie czy tam w kit lubię tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4584-2
+00:40:07.537 --> 00:40:08.746
+<v Matusz Jakub (EXT)>kitla psy jaju nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4601-0
+00:40:10.906 --> 00:40:14.979
+<v Matusz Jakub (EXT)>Yy, tego w sensie,
+no bo co tu jeszcze więcej ten byśmy</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4601-1
+00:40:14.979 --> 00:40:17.596
+<v Matusz Jakub (EXT)>mieli odłożony ten pipeline w gicie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4614-0
+00:40:18.726 --> 00:40:27.150
+<v Matusz Jakub (EXT)>I byśmy ten wystartowali taką ten,
+to to zadanie trenowania z parametrami</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4614-1
+00:40:27.150 --> 00:40:27.946
+<v Matusz Jakub (EXT)>takimi.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4661-0
+00:40:30.306 --> 00:40:34.839
+<v Matusz Jakub (EXT)>Zasadzie nie wiem czy ten rafatus a nie
+dobra air flow jest byłby potrzebny,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4661-1
+00:40:34.839 --> 00:40:38.783
+<v Matusz Jakub (EXT)>żeby jakkolwiek móc zajrzeć,
+co się dzieje z tym procesem. Tak no,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4661-2
+00:40:38.783 --> 00:40:41.609
+<v Matusz Jakub (EXT)>bo dzięki się no nie będziemy jenkinsa
+trzymać,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4661-3
+00:40:41.609 --> 00:40:45.317
+<v Matusz Jakub (EXT)>żeby czekał do końca fair tuningu.
+Mi się przynajmniej wydaje,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4661-4
+00:40:45.317 --> 00:40:47.436
+<v Matusz Jakub (EXT)>że to powinno być taki sam mit, tak?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4666-0
+00:40:48.016 --> 00:40:49.236
+<v Matusz Jakub (EXT)>Że tutaj byłby.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4701-0
+00:40:48.226 --> 00:40:51.592
+<v Zalewski Dominik (EXT)>A co dokładnie musimy oglądać w tym
+procesie?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4701-1
+00:40:51.592 --> 00:40:57.298
+<v Zalewski Dominik (EXT)>Jakby poza takim właśnie metry kami jak
+te metryki tam co do straty i w ogóle</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4701-2
+00:40:57.298 --> 00:41:02.346
+<v Zalewski Dominik (EXT)>takie charakterystyczne metryki,
+tak dla jakby treningu tego modelu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4713-0
+00:41:04.606 --> 00:41:08.576
+<v Matusz Jakub (EXT)>Czy to w ogóle działa,
+czy się nie wywaliło jakieś takie?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-0
+00:41:07.616 --> 00:41:11.866
+<v Zalewski Dominik (EXT)>Pochodzi mi o to, czy czy wiesz,
+czy to przypadkiem rzeczywiście się nie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-1
+00:41:11.866 --> 00:41:15.825
+<v Zalewski Dominik (EXT)>skupia tylko do obserwacji jakby metryki,
+czy po prostu działa tak?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-2
+00:41:15.825 --> 00:41:20.016
+<v Zalewski Dominik (EXT)>No bo czy działa? No to wiadomo,
+że to po statusie tego tak joba widać.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-3
+00:41:20.016 --> 00:41:24.907
+<v Zalewski Dominik (EXT)>A jeżeli chodzi o metryki no to obstawiam,
+że to pewnie w real time jakoś tam mniej</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-4
+00:41:24.907 --> 00:41:29.447
+<v Zalewski Dominik (EXT)>więcej ml flow jest też w stanie to
+pokazywać tak jak się to zmienia wszystko</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4777-5
+00:41:29.447 --> 00:41:30.786
+<v Zalewski Dominik (EXT)>w trakcie eksperymentu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4831-0
+00:41:34.886 --> 00:41:38.385
+<v Matusz Jakub (EXT)>No w zasadzie to tam tam też nie masz
+takiego. Wiesz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4831-1
+00:41:38.385 --> 00:41:43.697
+<v Matusz Jakub (EXT)>ty możesz obserwować okiem, wiesz zmiany,
+że ta krzywa się wygina w którąś stronę</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4831-2
+00:41:43.697 --> 00:41:47.778
+<v Matusz Jakub (EXT)>czy coś takiego tak,
+ale to widzisz dany obraz danego momentu,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4831-3
+00:41:47.778 --> 00:41:52.119
+<v Matusz Jakub (EXT)>nie masz jakby ten wenflon.
+Obyśmy mogli robić takie snapshoty tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4831-4
+00:41:52.119 --> 00:41:52.896
+<v Matusz Jakub (EXT)>tych metryk.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4847-0
+00:41:53.556 --> 00:42:02.259
+<v Matusz Jakub (EXT)>I na przykład tam potem sobie odpalać tym
+konsoli mlf lowej jakby widoczność tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4847-1
+00:42:02.259 --> 00:42:03.226
+<v Matusz Jakub (EXT)>tego ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4845-0
+00:42:02.396 --> 00:42:02.796
+<v Zalewski Dominik (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4867-0
+00:42:04.526 --> 00:42:08.569
+<v Matusz Jakub (EXT)>No to w zasadzie,
+ale tak odpowiadając na twoje pytanie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4867-1
+00:42:08.569 --> 00:42:13.888
+<v Matusz Jakub (EXT)>do czego to się sprowadza to tak do tych
+2 rzeczy chyba się sprowadza tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4867-2
+00:42:13.888 --> 00:42:14.526
+<v Matusz Jakub (EXT)>czyli że.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4877-0
+00:42:15.906 --> 00:42:20.616
+<v Matusz Jakub (EXT)>Monitorowania postępu,
+to znaczy na przykład ten, no to w tym r.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4908-0
+00:42:20.766 --> 00:42:25.588
+<v Matusz Jakub (EXT)>To na przykład można byłoby no,
+bo to też trochę byłoby już to chyba za</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4908-1
+00:42:25.588 --> 00:42:29.875
+<v Matusz Jakub (EXT)>grubo, trochę, żeby tam,
+żeby nie wiem kubernetes sowy joop tam</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4908-2
+00:42:29.875 --> 00:42:34.696
+<v Matusz Jakub (EXT)>czytać logi w loc explorerze to chyba to
+mnie się wydaje, że takie byt.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4924-0
+00:42:35.366 --> 00:42:38.703
+<v Matusz Jakub (EXT)>Zbyt duże uproszczenie, chyba,
+że to proponujecie jakąś na jakąś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4924-1
+00:42:38.703 --> 00:42:41.166
+<v Matusz Jakub (EXT)>pierwszą iterację bez orkiestra,
+ktora takiego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4926-0
+00:42:42.616 --> 00:42:43.516
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4934-0
+00:42:46.106 --> 00:42:49.356
+<v Matusz Jakub (EXT)>Ale no, może fajnie byłoby mieć coś.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4944-0
+00:42:52.436 --> 00:42:57.016
+<v Matusz Jakub (EXT)>Jakiś łatwy dostęp do na przykład
+przeglądania takich logów i ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4957-0
+00:42:58.086 --> 00:43:03.416
+<v Matusz Jakub (EXT)>No takie orkiestra tor by się przydał.
+Myślę, że mógłby to być ten flow, nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4962-0
+00:43:09.936 --> 00:43:12.176
+<v Matusz Jakub (EXT)>I on wtedy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4992-0
+00:43:12.396 --> 00:43:17.700
+<v Matusz Jakub (EXT)>Wtedy warknął na przykład można było
+przechwytywać takie tak jak teraz.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4992-1
+00:43:17.700 --> 00:43:21.162
+<v Matusz Jakub (EXT)>Mamy ten to te te po dyrkę drodze są
+odpalane.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4992-2
+00:43:21.162 --> 00:43:26.465
+<v Matusz Jakub (EXT)>No to są zbierane logi we flow je widać
+tak, co tam, co tam się dzieje,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4992-3
+00:43:26.465 --> 00:43:28.306
+<v Matusz Jakub (EXT)>tak jakby w tym procesie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/4994-0
+00:43:29.616 --> 00:43:30.456
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5007-0
+00:43:36.546 --> 00:43:43.816
+<v Matusz Jakub (EXT)>Trochę tutaj na przykład już potem dla
+mnie nie jest jakiś ten model wytrenuje.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5045-0
+00:43:44.506 --> 00:43:48.689
+<v Matusz Jakub (EXT)>To gdzieś tutaj się przerywa ten flow tak
+jakby no,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5045-1
+00:43:48.689 --> 00:43:55.284
+<v Matusz Jakub (EXT)>bo ten jak go wystawić w tym wiele lamie
+tak no bo to tak jakby to już raczej nie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5045-2
+00:43:55.284 --> 00:44:00.432
+<v Matusz Jakub (EXT)>floł powinien ten model wystawiać tylko
+jak już coś to tam itp.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5045-3
+00:44:00.432 --> 00:44:03.086
+<v Matusz Jakub (EXT)>Dzięki tak to powinien w tym ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5050-0
+00:44:03.156 --> 00:44:05.846
+<v Matusz Jakub (EXT)>Bardziej by pasowało to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5060-0
+00:44:06.746 --> 00:44:10.376
+<v Matusz Jakub (EXT)>W ten sposób zrobić tak także to mam taki
+trochę wątpliwość.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5090-0
+00:44:11.386 --> 00:44:16.844
+<v Matusz Jakub (EXT)>Jakby co powinno być tym orkiestra torem
+tego całego procesu nie, czyli właśnie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5090-1
+00:44:16.844 --> 00:44:21.965
+<v Matusz Jakub (EXT)>bo tak z jednej strony dzięki to to
+wydaje mi się tak trochę byłoby dziwne,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5090-2
+00:44:21.965 --> 00:44:25.266
+<v Matusz Jakub (EXT)>gdyby on tam czuwał przez ten cały fajny
+tuning.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5120-0
+00:44:26.936 --> 00:44:32.571
+<v Matusz Jakub (EXT)>Mm tam i byśmy slot tam nadżerki się a
+lokowali no bo to też potem nam się</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5120-1
+00:44:32.571 --> 00:44:38.655
+<v Matusz Jakub (EXT)>skończył te te te te nie wiem jak to się
+tam slajdy czy coś tam na pięknisie tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5120-2
+00:44:38.655 --> 00:44:42.336
+<v Matusz Jakub (EXT)>jak ten jak tam odpalimy tam dużo tych
+nierobów.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5144-0
+00:44:43.326 --> 00:44:45.847
+<v Matusz Jakub (EXT)>Tak,
+no bo on będzie wtedy musiał do końca</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5144-1
+00:44:45.847 --> 00:44:50.418
+<v Matusz Jakub (EXT)>zostać, albo tu tu robimy tylko submit,
+to to wtedy tu leci airflow i tam się</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5144-2
+00:44:50.418 --> 00:44:52.176
+<v Matusz Jakub (EXT)>model trenuje i teraz pytanie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5158-0
+00:44:52.996 --> 00:44:57.030
+<v Matusz Jakub (EXT)>Ee, jak teraz wrócić do czegoś takiego,
+że model się wytrenował,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5158-1
+00:44:57.030 --> 00:44:58.146
+<v Matusz Jakub (EXT)>żeby się wystawił?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5167-0
+00:44:59.966 --> 00:45:04.416
+<v Matusz Jakub (EXT)>Człowiekowi tak jakby musiałby ten aferą
+co z powrotem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5177-0
+00:45:05.246 --> 00:45:10.019
+<v Matusz Jakub (EXT)>Dzięki lisa jakoś tam wzbudzić, chyba,
+że coś bez i tam odpalił jakieś paplanie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5177-1
+00:45:10.019 --> 00:45:10.496
+<v Matusz Jakub (EXT)>kolejny.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5180-0
+00:45:17.886 --> 00:45:18.596
+<v Matusz Jakub (EXT)>To ja.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-0
+00:45:20.156 --> 00:45:23.841
+<v Zalewski Dominik (EXT)>Bo co? Bo chcemy,
+żeby to było takie jakby automat, tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-1
+00:45:23.841 --> 00:45:27.783
+<v Zalewski Dominik (EXT)>że od razu się wystawia po tuningu,
+tak nie, nie, raczej co,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-2
+00:45:27.783 --> 00:45:32.308
+<v Zalewski Dominik (EXT)>nie nie moglibyśmy na razie przynajmniej
+zrobić tak, że ktoś tam o k.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-3
+00:45:32.308 --> 00:45:35.152
+<v Zalewski Dominik (EXT)>Jak zrobił film,
+no to proces się skończył.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5208-0
+00:45:32.476 --> 00:45:32.966
+<v Matusz Jakub (EXT)>No to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-4
+00:45:35.152 --> 00:45:38.836
+<v Zalewski Dominik (EXT)>No to teraz kliknę,
+że sobie wystawię ten model także go</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5223-5
+00:45:38.836 --> 00:45:39.676
+<v Zalewski Dominik (EXT)>przetestować.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5259-0
+00:45:40.496 --> 00:45:44.288
+<v Matusz Jakub (EXT)>W zasadzie można i masz rację,
+że tak by mogło działać,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5259-1
+00:45:44.288 --> 00:45:49.094
+<v Matusz Jakub (EXT)>może to i dałoby się uzasadnić w ten
+sposób, że po co wystawiać model,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5259-2
+00:45:49.094 --> 00:45:52.547
+<v Matusz Jakub (EXT)>jeżeli nie wiem,
+słaby metryki wyszły na przykład,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5297-0
+00:45:52.276 --> 00:45:54.799
+<v Zalewski Dominik (EXT)>No albo w ogóle nawet wiesz,
+ten fakt tuning,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5259-3
+00:45:52.547 --> 00:45:53.156
+<v Matusz Jakub (EXT)>albowiem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5297-1
+00:45:54.799 --> 00:45:58.145
+<v Zalewski Dominik (EXT)>pewnie on tam będzie się mielić i się
+skończy w środku nocy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5297-2
+00:45:58.145 --> 00:46:02.368
+<v Zalewski Dominik (EXT)>No to po co tam w środku nocy model
+wystawiasz tak to dopiero wystawia model</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5289-0
+00:46:00.706 --> 00:46:02.256
+<v Matusz Jakub (EXT)>Nasze rację no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5297-3
+00:46:02.368 --> 00:46:04.506
+<v Zalewski Dominik (EXT)>jak chcę zacząć z niego korzystać, nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5313-0
+00:46:05.456 --> 00:46:10.238
+<v Matusz Jakub (EXT)>Dokładnie powinien to to to wyjście,
+to masz dużą rację,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5313-1
+00:46:10.238 --> 00:46:14.096
+<v Matusz Jakub (EXT)>że że to powinniśmy tak pomyśleć,
+żeby to to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5338-0
+00:46:14.166 --> 00:46:19.551
+<v Matusz Jakub (EXT)>Też jakoś nie było długo tak,
+no bo to są zasoby jakieś tam gp u i tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5338-1
+00:46:19.551 --> 00:46:25.087
+<v Matusz Jakub (EXT)>dalej jeszcze ktoś jakieś je butle,
+model sobie tam wytrenuje i co potem</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5338-2
+00:46:25.087 --> 00:46:26.376
+<v Matusz Jakub (EXT)>będzie grzał tam?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5361-0
+00:46:27.696 --> 00:46:33.164
+<v Matusz Jakub (EXT)>W 4 kasetki tam przestępstwa przez
+miesiąc to jeszcze musimy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5361-1
+00:46:33.164 --> 00:46:38.456
+<v Matusz Jakub (EXT)>Nie będzie chciał tam czegoś,
+to powinniśmy tak skrócić to,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5361-2
+00:46:38.456 --> 00:46:40.396
+<v Matusz Jakub (EXT)>że dobry ten to to to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5395-0
+00:46:40.786 --> 00:46:45.519
+<v Zalewski Dominik (EXT)>No od razu w ogóle też tak jak teraz o
+tych zasobach i takich ten przypalaniu to</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5395-1
+00:46:45.519 --> 00:46:48.498
+<v Zalewski Dominik (EXT)>też pomyślałem.
+To też właśnie ciekawe bardzo może</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5395-2
+00:46:48.498 --> 00:46:51.478
+<v Zalewski Dominik (EXT)>sprawdzić czy w tej lamie też są takie
+mechanizmy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5395-3
+00:46:51.478 --> 00:46:55.743
+<v Zalewski Dominik (EXT)>które pozwalają na na przykład
+automatycznie w ogóle przerwanie treningu</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5395-4
+00:46:55.743 --> 00:46:55.976
+<v Zalewski Dominik (EXT)>nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-0
+00:46:57.256 --> 00:47:01.158
+<v Zalewski Dominik (EXT)>Jak na przykład tam nie wiem ta,
+bo to po tych funkcjach znaczy po tych no</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-1
+00:47:01.158 --> 00:47:04.020
+<v Zalewski Dominik (EXT)>metryka k tak ta pewnie można takie
+wnioski wyciągnąć,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-2
+00:47:04.020 --> 00:47:06.621
+<v Zalewski Dominik (EXT)>że ten model jest już kompletnie jakby
+bez sensu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-3
+00:47:06.621 --> 00:47:09.899
+<v Zalewski Dominik (EXT)>Ten trening idzie dalej i w sumie po co
+ma się dalej trenować?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-4
+00:47:09.899 --> 00:47:12.552
+<v Zalewski Dominik (EXT)>Nie jak to można właśnie takim automatem
+przerwać,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-5
+00:47:12.552 --> 00:47:16.871
+<v Zalewski Dominik (EXT)>ale tylko tak podrzucam jakie takie też
+takie pewne dodatkowe może do sprawdzania,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5439-0
+00:47:13.546 --> 00:47:14.106
+<v Matusz Jakub (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5451-6
+00:47:16.871 --> 00:47:20.096
+<v Zalewski Dominik (EXT)>bo to myślę też jest dość takie,
+pewnie obstawiam, ważne nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5512-0
+00:47:22.006 --> 00:47:29.117
+<v Matusz Jakub (EXT)>Elek tam jak jest w tym w overflow ten
+kojarzysz Dominik tam jak na przykład się</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5512-1
+00:47:29.117 --> 00:47:35.876
+<v Matusz Jakub (EXT)>ubije ten bo tam on ubija potem jeżeli
+tam ustawie ten ustawię, że nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5512-2
+00:47:35.876 --> 00:47:37.456
+<v Matusz Jakub (EXT)>że sfaulować daga.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5545-0
+00:47:38.396 --> 00:47:42.207
+<v Zalewski Dominik (EXT)>Yy, tak tak, tak,
+on on chyba ubija tego poda z tego co</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5521-0
+00:47:39.076 --> 00:47:42.356
+<v Matusz Jakub (EXT)>Łącznie dokręcić do końca,
+czy on go z kieruje?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5545-1
+00:47:42.207 --> 00:47:45.269
+<v Zalewski Dominik (EXT)>kojarzę.
+Jeżeli tam klikniesz tak powiedzmy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5545-2
+00:47:45.269 --> 00:47:50.236
+<v Zalewski Dominik (EXT)>że tam fajny ten task to powinien pod się
+z tego co kojarze ubić raczej.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5567-0
+00:47:49.366 --> 00:47:55.397
+<v Matusz Jakub (EXT)>O to to było dobre jedno jedna rzecz
+tylko mi nie pasuje we flow,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5567-1
+00:47:55.397 --> 00:48:02.706
+<v Matusz Jakub (EXT)>ale to może zaraz dojdziemy co z tym
+takim, bo airflow jest taki trochę kurczę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5581-0
+00:48:04.016 --> 00:48:07.996
+<v Matusz Jakub (EXT)>Z myślą o tych takich przeliczeniach
+jakby czasowych, tak,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5581-1
+00:48:07.996 --> 00:48:10.356
+<v Matusz Jakub (EXT)>że na przykład za datę tak i potem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5606-0
+00:48:12.296 --> 00:48:18.643
+<v Matusz Jakub (EXT)>Przynajmniej tak ja sobie wyobrażam,
+że tam trochę pytanie jakbyśmy mieli.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5606-1
+00:48:18.643 --> 00:48:24.566
+<v Matusz Jakub (EXT)>Nie wiem jeden dag tak i teraz go
+odpalali tam z różnymi parametrami.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5612-0
+00:48:25.966 --> 00:48:28.676
+<v Matusz Jakub (EXT)>To czytam nam się jakoś tam nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5622-0
+00:48:29.576 --> 00:48:33.526
+<v Matusz Jakub (EXT)>Jakoś się nie będą na nakładać te te
+wykonania tak jako.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5624-0
+00:48:36.396 --> 00:48:37.026
+<v Matusz Jakub (EXT)>Mm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5642-0
+00:48:38.996 --> 00:48:43.366
+<v Matusz Jakub (EXT)>Że że jakby tam coś będzie blokował nam
+nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5642-1
+00:48:43.366 --> 00:48:46.686
+<v Matusz Jakub (EXT)>może ja takich gdzieś za brnąłem w to.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5645-0
+00:48:46.756 --> 00:48:48.036
+<v Matusz Jakub (EXT)>Dominika, co mi chodzi?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5657-0
+00:48:49.216 --> 00:48:53.446
+<v Zalewski Dominik (EXT)>Czy szczerze to nie nie do końca?
+No jakby, no no no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5671-0
+00:48:51.926 --> 00:48:57.308
+<v Matusz Jakub (EXT)>Może jako jak na przykład nie wiem,
+czy osoby w tym samym czasie odpalał tego</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5668-0
+00:48:56.856 --> 00:48:57.256
+<v Zalewski Dominik (EXT)>Mhm.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5671-1
+00:48:57.308 --> 00:48:58.136
+<v Matusz Jakub (EXT)>samego daga.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5689-0
+00:48:59.086 --> 00:49:02.460
+<v Matusz Jakub (EXT)>To co się stanie,
+no bo tam normalnie w historii masz na</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5689-1
+00:49:02.460 --> 00:49:05.656
+<v Matusz Jakub (EXT)>przykład przetworzenie za określoną datę
+danych, tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5705-0
+00:49:06.716 --> 00:49:10.716
+<v Matusz Jakub (EXT)>Tak tak przynajmniej reflow pokazuje w
+tych takich słupkach,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5705-1
+00:49:10.716 --> 00:49:12.486
+<v Matusz Jakub (EXT)>tak to ten to zaraz pokażę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5710-0
+00:49:15.126 --> 00:49:16.236
+<v Matusz Jakub (EXT)>Będzie to pytałem.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5742-0
+00:49:18.276 --> 00:49:23.418
+<v Matusz Jakub (EXT)>Będzie to nie wiem czy to jest jakieś coś,
+co w ogóle było przetwarzane,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5742-1
+00:49:23.418 --> 00:49:28.631
+<v Matusz Jakub (EXT)>jakoś częściej coś jakieś lipne,
+o na przykład tutaj mamy tak jest jakieś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5742-2
+00:49:28.631 --> 00:49:32.364
+<v Matusz Jakub (EXT)>pipeline,
+no i tutaj mamy przetworzenia za ten film,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5742-3
+00:49:32.364 --> 00:49:34.406
+<v Matusz Jakub (EXT)>ten jest jakiś tam powiedzmy.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5744-0
+00:49:35.286 --> 00:49:36.256
+<v Matusz Jakub (EXT)>Tą.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5763-0
+00:49:37.446 --> 00:49:40.227
+<v Matusz Jakub (EXT)>Czekajcie,
+to było jak za pierwszym daje czy ta</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5763-1
+00:49:40.227 --> 00:49:42.776
+<v Matusz Jakub (EXT)>chyba egzotyki owszem daje,
+ale to mamy te.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5768-0
+00:49:46.126 --> 00:49:48.356
+<v Matusz Jakub (EXT)>A może chyba, że w zasadzie?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5791-0
+00:49:56.086 --> 00:49:59.061
+<v Matusz Jakub (EXT)>Zastanawiam się jeszcze nad tym,
+czy to ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5791-1
+00:49:59.061 --> 00:50:02.102
+<v Matusz Jakub (EXT)>czy to będzie jakby wygodne dla
+użytkowników,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5791-2
+00:50:02.102 --> 00:50:06.596
+<v Matusz Jakub (EXT)>że na przykład pod jednym tagiem będą
+widzieli wszystkie przebiegi.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5801-0
+00:50:07.926 --> 00:50:11.686
+<v Matusz Jakub (EXT)>Najlepiej to by było, gdyby ten,
+gdyby na przykład jakiś taki.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-0
+00:50:13.566 --> 00:50:17.743
+<v Matusz Jakub (EXT)>Móc to trigger ować jako tam jako różne
+dagi nie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-1
+00:50:17.743 --> 00:50:24.009
+<v Matusz Jakub (EXT)>ale to możemy to później zmienić.
+Możemy na razie zapisać jakiś taki dam i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-2
+00:50:24.009 --> 00:50:29.940
+<v Matusz Jakub (EXT)>dak tak, który by tam powiedzmy, nie wiem,
+reprezentował tym pipeline,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-3
+00:50:29.940 --> 00:50:35.286
+<v Matusz Jakub (EXT)>no bo wtedy na przykład tutaj pokażę
+akurat jakiś task kadrowy,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-4
+00:50:35.286 --> 00:50:39.714
+<v Matusz Jakub (EXT)>tam poczekajcie, nie,
+no to na przykład to to są te,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-5
+00:50:39.714 --> 00:50:43.890
+<v Matusz Jakub (EXT)>to są te rzeczy,
+które są jako pody tam odpalane,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5860-6
+00:50:43.890 --> 00:50:44.976
+<v Matusz Jakub (EXT)>albo się nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5863-0
+00:50:45.176 --> 00:50:45.896
+<v Matusz Jakub (EXT)>No tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5889-0
+00:50:46.826 --> 00:50:50.323
+<v Matusz Jakub (EXT)>I tutaj na przykład vlogach,
+no to zakładam,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5889-1
+00:50:50.323 --> 00:50:56.773
+<v Matusz Jakub (EXT)>że z takiej no tutaj to nie za dużo mamy
+ciekawych rzeczy, ale ten, ale normalnie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5889-2
+00:50:56.773 --> 00:51:00.736
+<v Matusz Jakub (EXT)>że to będą te takie logii z taką z tego
+poda tego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5897-0
+00:51:01.466 --> 00:51:02.486
+<v Zalewski Dominik (EXT)>No tak, tak tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-0
+00:51:01.766 --> 00:51:07.738
+<v Matusz Jakub (EXT)>Mama faktor i tam będziemy mieli napisane,
+że które to epoka się teraz przetwarza i</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5913-0
+00:51:06.926 --> 00:51:07.586
+<v Zalewski Dominik (EXT)>Dokładny.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-1
+00:51:07.738 --> 00:51:12.359
+<v Matusz Jakub (EXT)>co tam się dzieje dla takich dajta
+scientist to myślę, że spoko,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-2
+00:51:12.359 --> 00:51:17.833
+<v Matusz Jakub (EXT)>spoko temu to nie no i ta logi mamy
+odłożone tam powiedzmy w jakiś pakietach</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-3
+00:51:17.833 --> 00:51:22.525
+<v Matusz Jakub (EXT)>leżą więc już ten audytowy wolność tak
+budujemy tak, czyli wiesz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-4
+00:51:22.525 --> 00:51:27.145
+<v Matusz Jakub (EXT)>można je podejrzeć w tym w tym mikołaju
+tak tam jaki był status,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5973-5
+00:51:27.145 --> 00:51:31.126
+<v Matusz Jakub (EXT)>kiedy to znaczy kto uruchomił,
+no to tam trzeba będzie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5989-0
+00:51:33.016 --> 00:51:37.007
+<v Matusz Jakub (EXT)>To jest takie trochę oszukane,
+bo tam w wdzięki msze trzeba byłoby tego</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5989-1
+00:51:37.007 --> 00:51:39.446
+<v Matusz Jakub (EXT)>szukać,
+aż dzięki msze się kasuje historia.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/5993-0
+00:51:40.506 --> 00:51:42.146
+<v Matusz Jakub (EXT)>Natomiast no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6015-0
+00:51:51.396 --> 00:51:55.682
+<v Matusz Jakub (EXT)>Jakoś ta ścieżka mogłaby tam zatrybić nie
+wiem co co myślisz, Maciek,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6015-1
+00:51:55.682 --> 00:52:00.579
+<v Matusz Jakub (EXT)>nie wiem czy czy się trochę zgubiłeś,
+bo my trochę skręciliśmy w stronę takich,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6015-2
+00:52:00.579 --> 00:52:00.946
+<v Matusz Jakub (EXT)>wiesz.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6019-0
+00:52:01.036 --> 00:52:03.236
+<v Dymarczyk Maciej (EXT)>Słucham, analizuję, myślę.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6047-0
+00:52:04.536 --> 00:52:09.774
+<v Matusz Jakub (EXT)>No tak, bo to wtedy byśmy mogli mieć.
+Nie wiem czy w ten Plan będzie miał</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6047-1
+00:52:09.774 --> 00:52:14.375
+<v Matusz Jakub (EXT)>więcej kroków niż jeden.
+Może na razie będzie miał jeden, czyli,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6047-2
+00:52:14.375 --> 00:52:16.286
+<v Matusz Jakub (EXT)>czyli fin ten model, wiesz?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-0
+00:52:17.386 --> 00:52:22.850
+<v Matusz Jakub (EXT)>Natomiast wtedy zakładam,
+że byśmy mieli takiego daga napisanego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-1
+00:52:22.850 --> 00:52:26.823
+<v Matusz Jakub (EXT)>Wiesz,
+na razie moglibyśmy sobie wyjść od tego,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-2
+00:52:26.823 --> 00:52:33.445
+<v Matusz Jakub (EXT)>że jest jeden i zobaczyć co się stanie.
+No tutaj akurat jest jakiś filler te te</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-3
+00:52:33.445 --> 00:52:38.991
+<v Matusz Jakub (EXT)>dawki, które tutaj mamy,
+to one się generują z tych tych projektów</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-4
+00:52:38.991 --> 00:52:44.454
+<v Matusz Jakub (EXT)>w kadru tak, które ten,
+które tworzymy tam też się kadrowy sposób</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6096-5
+00:52:44.454 --> 00:52:46.026
+<v Matusz Jakub (EXT)>definiuje pipeline.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6098-0
+00:52:47.746 --> 00:52:49.036
+<v Matusz Jakub (EXT)>I.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-0
+00:52:50.646 --> 00:52:55.108
+<v Matusz Jakub (EXT)>I potem z tego się generuje taki dach dla
+każdego projektu z osobna,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-1
+00:52:55.108 --> 00:52:59.828
+<v Matusz Jakub (EXT)>natomiast tutaj to tam zakładam,
+że ten schemat fajne treningu to będzie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-2
+00:52:59.828 --> 00:53:04.871
+<v Matusz Jakub (EXT)>jeden tak, to to to bez sensu jest,
+żebyśmy ten byśmy tworzyli taki kot wiele</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-3
+00:53:04.871 --> 00:53:08.880
+<v Matusz Jakub (EXT)>razy to byśmy raz go napisali tak i on by
+zawierał taki krok,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-4
+00:53:08.880 --> 00:53:13.730
+<v Matusz Jakub (EXT)>na przykład odpalenie tego tego,
+na przykład poda z tym z lama Factory tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-5
+00:53:13.730 --> 00:53:16.704
+<v Matusz Jakub (EXT)>trochę taka analogicznie jak tutaj.
+Nie wiem,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-6
+00:53:16.704 --> 00:53:20.066
+<v Matusz Jakub (EXT)>czy powinniśmy do końca te same operatory
+stosować,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6169-7
+00:53:20.066 --> 00:53:23.816
+<v Matusz Jakub (EXT)>bo one tam one są trochę podkładu,
+tam te nasze pipeline.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6179-0
+00:53:23.936 --> 00:53:28.456
+<v Matusz Jakub (EXT)>Są kastą mowe, bo to widać,
+że to jest ten kubernetes pod operator.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6213-0
+00:53:29.836 --> 00:53:34.938
+<v Matusz Jakub (EXT)>A a to jest jakaś tam,
+powiedzmy taka klasyka dołożona ten narod</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6213-1
+00:53:34.938 --> 00:53:40.668
+<v Matusz Jakub (EXT)>poto operator tak ale można byłoby w
+zasadzie tego bazowego też użyć tak</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6213-2
+00:53:40.668 --> 00:53:44.356
+<v Matusz Jakub (EXT)>którego tam jest,
+jest tego zerwał providerów.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6225-0
+00:53:52.356 --> 00:53:55.965
+<v Matusz Jakub (EXT)>Na przykład,
+jakbyśmy musieli na przykład jakieś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6225-1
+00:53:55.965 --> 00:53:56.996
+<v Matusz Jakub (EXT)>zrobić ten ta.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-0
+00:53:57.476 --> 00:54:03.061
+<v Matusz Jakub (EXT)>Do tego, żeby wypełnić te audyty,
+wolność na przykład odłożyć dane gdzieś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-1
+00:54:03.061 --> 00:54:07.362
+<v Matusz Jakub (EXT)>tam oznaczyć. No to robimy taki operator,
+że odłóż dane.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-2
+00:54:07.362 --> 00:54:12.871
+<v Matusz Jakub (EXT)>Tam nie wiem do jakiegoś bankietu.
+Archiwum tak na przykład z tego fajny</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-3
+00:54:12.871 --> 00:54:19.134
+<v Matusz Jakub (EXT)>treningu i bach to się odkłada. Nie wiem.
+Zarejestruj we flow na przykład ten taki</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-4
+00:54:19.134 --> 00:54:24.794
+<v Matusz Jakub (EXT)>tu możemy nawet zrobić coś takiego,
+że jakbyś chciał tak jakby ob rapować,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6283-5
+00:54:24.794 --> 00:54:28.416
+<v Matusz Jakub (EXT)>tak jak ten dekorator zrobić ten taki ten
+tego.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-0
+00:54:28.506 --> 00:54:32.422
+<v Matusz Jakub (EXT)>Szkoła tego treningu lama Factory,
+no to tutaj i możemy sobie</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-1
+00:54:32.422 --> 00:54:37.159
+<v Matusz Jakub (EXT)>zaimplementować dowolne kroki takie w tym
+procesie takie dodatkowe, takie,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-2
+00:54:37.159 --> 00:54:41.454
+<v Matusz Jakub (EXT)>które byśmy chcieli mieć tak,
+że na przykład na starcie coś tam się</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-3
+00:54:41.454 --> 00:54:46.064
+<v Matusz Jakub (EXT)>rejestruje, potem tam nie wiem,
+gdzieś się kopiuje do jakiegoś archiwum.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-4
+00:54:46.064 --> 00:54:49.222
+<v Matusz Jakub (EXT)>Ja wiem,
+gdzie się ustawia jakaś ścieżka ten i na</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6335-5
+00:54:49.222 --> 00:54:52.506
+<v Matusz Jakub (EXT)>koniec też coś tam się dzieje zaznacza.
+I ten więc.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6357-0
+00:54:53.446 --> 00:54:59.263
+<v Matusz Jakub (EXT)>We start to podejście takie dago vote to
+tutaj w tym w tym airflow byłby</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6357-1
+00:54:59.263 --> 00:55:04.203
+<v Matusz Jakub (EXT)>zaimplementowany pipeline,
+który by się uruchamiał po zasadni</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6357-2
+00:55:04.203 --> 00:55:05.716
+<v Matusz Jakub (EXT)>powaniu takiego no.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6369-0
+00:55:07.396 --> 00:55:10.546
+<v Matusz Jakub (EXT)>Para tego,
+jak ktoś się nazywa pliku z tą</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6369-1
+00:55:10.546 --> 00:55:12.646
+<v Matusz Jakub (EXT)>konfiguracją fajne treningu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6392-0
+00:55:15.736 --> 00:55:18.653
+<v Matusz Jakub (EXT)>Czy dzięki jest by tak,
+jakby tego sprowadzał?</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6392-1
+00:55:18.653 --> 00:55:23.307
+<v Matusz Jakub (EXT)>Się sprowadzało się ze strony jenkinsa,
+to żeby tam kopnął tego daga tam z</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6392-2
+00:55:23.307 --> 00:55:26.596
+<v Matusz Jakub (EXT)>jakimiś tam zestawem parametrów na
+przykład właśnie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6400-0
+00:55:27.636 --> 00:55:31.406
+<v Matusz Jakub (EXT)>Z tym jej parametrami,
+które tam zostały w tym jamu określone.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6404-0
+00:55:39.906 --> 00:55:41.666
+<v Matusz Jakub (EXT)>Muszę się przełączyć znowu.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6411-0
+00:55:46.716 --> 00:55:48.746
+<v Dymarczyk Maciej (EXT)>No mi musk troszkę paruje, więc.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6418-0
+00:55:52.306 --> 00:55:55.096
+<v Matusz Jakub (EXT)>Przepraw my sobie to najwyżej się jeszcze
+ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6440-0
+00:55:55.896 --> 00:56:00.279
+<v Matusz Jakub (EXT)>Ja tu jeszcze jakby Jestem w stanie jakoś
+tam bez przelewu,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6440-1
+00:56:00.279 --> 00:56:06.414
+<v Matusz Jakub (EXT)>tam jutro tam na tym statusie pokazać to
+to byłbym w stanie to jakoś tam narysować,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6440-2
+00:56:06.414 --> 00:56:06.706
+<v Matusz Jakub (EXT)>tak.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6478-0
+00:56:07.536 --> 00:56:11.912
+<v Matusz Jakub (EXT)>Ale to możemy sobie jeszcze jakąś
+dogrywkę rano zrobić tak przed tym</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6478-1
+00:56:11.912 --> 00:56:15.843
+<v Matusz Jakub (EXT)>statusem, jak ten,
+jeżeli potrzebujemy tam, żeby sobie teraz,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6463-0
+00:56:15.436 --> 00:56:16.116
+<v Dymarczyk Maciej (EXT)>Można.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6478-2
+00:56:15.843 --> 00:56:19.140
+<v Matusz Jakub (EXT)>że teraz przełączę na to drugie spotkanie,
+ale ten,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6478-3
+00:56:19.140 --> 00:56:23.198
+<v Matusz Jakub (EXT)>ale możemy sobie zbierać jakieś takie
+wątpliwości, niejasności,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6478-4
+00:56:23.198 --> 00:56:24.466
+<v Matusz Jakub (EXT)>tak dalej sobie ten.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6498-0
+00:56:25.326 --> 00:56:30.056
+<v Matusz Jakub (EXT)>Wyjaśnić to też ja też też nie
+podchodziłbym tak w ten sposób,</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6498-1
+00:56:30.056 --> 00:56:35.386
+<v Matusz Jakub (EXT)>że no tam trochę są takie znienacka
+narzucone jakieś tam ramy czasowe.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6519-0
+00:56:36.046 --> 00:56:39.063
+<v Matusz Jakub (EXT)>Yy,
+to możemy się starać tam w nie jakoś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6519-1
+00:56:39.063 --> 00:56:45.169
+<v Matusz Jakub (EXT)>wpasowywać jak dajemy radę, ale to ważne,
+żebyśmy dobrze to wymyślili a a ten szpa</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6519-2
+00:56:45.169 --> 00:56:46.566
+<v Matusz Jakub (EXT)>licho z tym co tam.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6522-0
+00:56:47.236 --> 00:56:48.536
+<v Matusz Jakub (EXT)>Kto oczekuje nie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6525-0
+00:56:49.696 --> 00:56:50.276
+<v Dymarczyk Maciej (EXT)>Spk.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6538-0
+00:56:51.966 --> 00:56:55.051
+<v Matusz Jakub (EXT)>Więc to tak trochę tam nie,
+no bo to na lata będzie jakieś</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6538-1
+00:56:55.051 --> 00:56:57.716
+<v Matusz Jakub (EXT)>rozwiązanie. Tak więc to dobrze byłoby,
+żeby było.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6550-0
+00:56:58.866 --> 00:57:02.621
+<v Matusz Jakub (EXT)>Sensownie wymyślone dobra ja się muszę
+przełączyć.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6550-1
+00:57:02.621 --> 00:57:04.976
+<v Matusz Jakub (EXT)>To dzięki wam ciekawe omówienie.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6558-0
+00:57:05.676 --> 00:57:08.696
+<v Matusz Jakub (EXT)>Także też się włączyłeś Dominik tak ta.</v>
+
+b27c5807-0c60-4e31-89a1-78ea7fbddf06/6560-0
+00:57:10.186 --> 00:57:10.766
+<v Matusz Jakub (EXT)>Bra.</v>
