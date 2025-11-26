@@ -1,24 +1,49 @@
 @startuml adr001-options
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
 
-title ADR-001: Trzy opcje Model Registry
-
-rectangle "LLaMA-Factory" as llama #LightBlue
-
-package "Opcja 1: NFS/PVC" as opt1 {
-    storage "NFS\n/storage/models/merged\nReadWriteMany" as nfs #LightCoral
+skinparam rectangle {
+    BackgroundColor<<source>> #E3F2FD
+    BorderColor<<source>> #1976D2
+    BackgroundColor<<target>> #F5F5F5
+    BorderColor<<target>> #9E9E9E
 }
 
-package "Opcja 2: Object Storage" as opt2 {
-    cloud "GCS/S3\ngs://models/" as gcs #LightYellow
+skinparam storage {
+    BackgroundColor #FFCDD2
+    BorderColor #E53935
 }
 
-package "Opcja 3: MLflow" as opt3 {
-    database "MLflow Registry\nmodels:/merged/Production" as mlflow #LightGreen
+skinparam cloud {
+    BackgroundColor #FFF9C4
+    BorderColor #FBC02D
 }
 
-rectangle "vLLM" as vllm #LightGray
+skinparam database {
+    BackgroundColor #C8E6C9
+    BorderColor #43A047
+}
+
+title ADR-001: Model Registry Options
+
+rectangle "LLaMA-Factory" <<source>> as llama
+
+package "Option 1: NFS" {
+    storage "NFS\n/storage/models/merged" as nfs
+}
+
+package "Option 2: Object Storage" {
+    cloud "GCS / S3\ngs://models/" as gcs
+}
+
+package "Option 3: MLflow" {
+    database "MLflow Registry\nmodels:/merged/prod" as mlflow
+}
+
+rectangle "vLLM" <<target>> as vllm
 
 llama --> nfs
 llama --> gcs
@@ -28,22 +53,22 @@ nfs --> vllm
 gcs --> vllm
 mlflow --> vllm
 
-note right of nfs
-  + Proste, natychmiastowe
-  - Brak wersjonowania
-  - Tylko lokalny klaster
+note bottom of nfs
+  Simple, instant
+  No versioning
+  Local cluster only
 end note
 
-note right of gcs
-  + Multi-cluster
-  + Object versioning
-  - Latencja download
+note bottom of gcs
+  Multi-cluster
+  Object versioning
+  Download latency
 end note
 
-note right of mlflow
-  + Pełne wersjonowanie
-  + Audyt, lineage
-  - Złożoność setup
+note bottom of mlflow
+  Full versioning
+  Audit, lineage
+  Complex setup
 end note
 
 @enduml

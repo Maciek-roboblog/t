@@ -1,0 +1,88 @@
+# LLaMA-Factory WebUI (LlamaBoard)
+#
+# Interfejs graficzny do:
+# - Konfiguracji fine-tuningu
+# - Monitorowania treningu w czasie rzeczywistym
+# - Podglądu metryk (loss, learning rate)
+# - Chat z modelem (inference)
+#
+# TRACKING:
+# - Wbudowany monitor w WebUI
+# - Opcjonalnie: MLflow, TensorBoard, W&B
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-webui
+  namespace: llm-basic
+  labels:
+    app: llama-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama-webui
+  template:
+    metadata:
+      labels:
+        app: llama-webui
+    spec:
+      containers:
+      - name: webui
+        image: ghcr.io/hiyouga/llamafactory:latest
+        command: ["llamafactory-cli"]
+        args: ["webui", "--host", "0.0.0.0", "--port", "7860"]
+        ports:
+        - containerPort: 7860
+          name: http
+
+        envFrom:
+        - configMapRef:
+            name: llm-config
+
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+
+        resources:
+          requests:
+            cpu: "2"
+            memory: "8Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "4"
+            memory: "16Gi"
+            nvidia.com/gpu: "1"
+
+        # Health checks
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 7860
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 7860
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llm-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llama-webui
+  namespace: llm-basic
+spec:
+  type: ClusterIP
+  selector:
+    app: llama-webui
+  ports:
+  - port: 7860
+    targetPort: 7860
+    name: http

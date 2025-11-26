@@ -1,0 +1,50 @@
+@startuml workflow
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam ArrowColor #424242
+
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    DiamondBackgroundColor #FFF3E0
+    DiamondBorderColor #F57C00
+}
+
+title Fine-tuning Workflow
+
+|User|
+start
+:Prepare model & dataset;
+note right: /data/llm-storage/models/\n/data/llm-storage/data/
+
+|k3s|
+:Deploy WebUI;
+note right: ./scripts/deploy.sh all
+
+|User|
+:Configure training\nin LlamaBoard;
+note right: localhost:7860
+
+|GPU|
+:Train (LoRA/QLoRA);
+note right
+  Metrics -> MLflow
+  Output -> /output/lora-adapter
+end note
+
+:Merge LoRA + Base;
+note right: -> /models/merged-model
+
+|k3s|
+:Deploy vLLM;
+note right: ./scripts/deploy.sh vllm
+
+|User|
+:Use API;
+note right: localhost:8000/v1/chat/completions
+
+stop
+
+@enduml

@@ -1,0 +1,153 @@
+# Training Job Template
+#
+# Użyj tego jako szablonu do batch training (zamiast WebUI)
+# Każdy job to osobna sesja treningu z własnymi parametrami
+#
+# UŻYCIE:
+# 1. Skopiuj i dostosuj parametry
+# 2. kubectl apply -f 06-training-job.yaml
+# 3. Monitoruj: kubectl logs -f job/training-job-xxx
+#
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: training-job-001
+  namespace: llm-basic
+  labels:
+    app: training
+    job-type: finetune
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 86400  # Usuń po 24h
+  template:
+    metadata:
+      labels:
+        app: training
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: trainer
+        image: ghcr.io/hiyouga/llamafactory:latest
+        command: ["llamafactory-cli"]
+        args:
+        - "train"
+        - "--stage"
+        - "sft"
+        - "--model_name_or_path"
+        - "$(BASE_MODEL_PATH)"
+        - "--dataset"
+        - "custom_dataset"
+        - "--dataset_dir"
+        - "$(DATASET_PATH)"
+        - "--template"
+        - "$(TEMPLATE)"
+        - "--finetuning_type"
+        - "$(FINETUNING_TYPE)"
+        - "--lora_rank"
+        - "$(LORA_RANK)"
+        - "--lora_alpha"
+        - "$(LORA_ALPHA)"
+        - "--output_dir"
+        - "$(LORA_OUTPUT_PATH)"
+        - "--per_device_train_batch_size"
+        - "$(BATCH_SIZE)"
+        - "--gradient_accumulation_steps"
+        - "$(GRADIENT_ACCUMULATION)"
+        - "--learning_rate"
+        - "$(LEARNING_RATE)"
+        - "--num_train_epochs"
+        - "$(NUM_EPOCHS)"
+        - "--cutoff_len"
+        - "$(CUTOFF_LEN)"
+        - "--fp16"
+        - "--logging_steps"
+        - "10"
+        - "--save_steps"
+        - "100"
+        # MLflow tracking (opcjonalne)
+        # - "--report_to"
+        # - "mlflow"
+
+        envFrom:
+        - configMapRef:
+            name: llm-config
+
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+
+        resources:
+          requests:
+            cpu: "4"
+            memory: "16Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "8"
+            memory: "32Gi"
+            nvidia.com/gpu: "1"
+
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llm-storage
+---
+# Merge Job - łączy LoRA adapter z modelem bazowym
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: merge-job-001
+  namespace: llm-basic
+  labels:
+    app: merge
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app: merge
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: merger
+        image: ghcr.io/hiyouga/llamafactory:latest
+        command: ["llamafactory-cli"]
+        args:
+        - "export"
+        - "--model_name_or_path"
+        - "$(BASE_MODEL_PATH)"
+        - "--adapter_name_or_path"
+        - "$(LORA_OUTPUT_PATH)"
+        - "--template"
+        - "$(TEMPLATE)"
+        - "--finetuning_type"
+        - "lora"
+        - "--export_dir"
+        - "$(MERGED_MODEL_PATH)"
+        - "--export_size"
+        - "2"
+        - "--export_legacy_format"
+        - "false"
+
+        envFrom:
+        - configMapRef:
+            name: llm-config
+
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+
+        resources:
+          requests:
+            cpu: "4"
+            memory: "16Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "8"
+            memory: "32Gi"
+            nvidia.com/gpu: "1"
+
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llm-storage

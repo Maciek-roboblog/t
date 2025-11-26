@@ -1,73 +1,52 @@
 @startuml workflow
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
 
-title LLaMA-Factory - Workflow Treningu
-
-' Aktorzy
-actor "ML Engineer" as user
-
-' Zewnętrzne usługi
-cloud "Zewnętrzne Usługi" {
-    database "MLflow" as mlflow
-    storage "NFS Storage" as nfs
-    rectangle "vLLM Server\n(zewnętrzny)" as vllm #LightGreen
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
 }
 
-' Kubernetes
-rectangle "Kubernetes Cluster (GPU)" {
+title Fine-tuning Workflow
 
-    rectangle "1. Przygotowanie" as prep #LightYellow {
-        file "Model bazowy\n(już na NFS)" as base_model
-        file "Dataset\n(już na NFS)" as dataset
-        file "ConfigMap" as config
-    }
+start
 
-    rectangle "2. Trening" as train_phase #LightBlue {
-        [WebUI\nport: 7860] as webui
-        [Training Job\n(GPU)] as train_job
-    }
-
-    rectangle "3. Merge LoRA" as merge_phase #LightCoral {
-        [Merge Job\n(GPU)] as merge_job
-    }
+partition "Setup" {
+    :Deploy base resources;
+    note right: ./deploy.sh base
 }
 
-' Flow
-user --> config : 1. konfiguruje
-user --> webui : 2. uruchamia trening\n(lub Job)
+partition "Training" {
+    :Open WebUI or submit Job;
+    note right: ./ui.sh webui\nor kubectl apply
 
-base_model --> train_job : odczyt
-dataset --> train_job : odczyt
-config --> train_job : parametry
-train_job --> nfs : zapis\nLoRA adapter
-train_job --> mlflow : metryki
+    :Configure training params;
 
-nfs --> merge_job : model + LoRA
-merge_job --> nfs : merged model
+    :Run training (GPU);
+    note right
+      Output: /storage/output/lora-adapter
+      Metrics: MLflow
+    end note
+}
 
-nfs --> vllm : 4. vLLM czyta model\n(zewnętrzna usługa)
+partition "Merge" {
+    :Merge LoRA + base model;
+    note right: kubectl apply -f merge-job.yaml
 
-note right of prep
-  Modele i dane są już na NFS
-  NIE pobieramy z HuggingFace
-end note
+    :Output merged model;
+    note right: /storage/models/merged-model
+}
 
-note right of train_phase
-  Trening przez WebUI lub Job
-  Wyniki logowane do MLflow
-  LoRA adaptery na NFS
-end note
+partition "Inference" {
+    :vLLM loads model;
+    note right
+      External service
+      Reads from NFS
+    end note
+}
 
-note right of merge_phase
-  Merge LoRA z modelem bazowym
-  Wynik: pełny model na NFS
-end note
-
-note right of vllm
-  vLLM jest zewnętrzną usługą
-  Nie wdrażamy go z tego repo
-  Ma dostęp do tego samego NFS
-end note
+stop
 
 @enduml

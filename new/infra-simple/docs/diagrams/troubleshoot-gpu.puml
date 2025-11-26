@@ -1,43 +1,53 @@
 @startuml troubleshoot-gpu
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
 
-title Troubleshooting: Brak GPU
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    DiamondBackgroundColor #FFF3E0
+    DiamondBorderColor #F57C00
+}
+
+title Troubleshooting: No GPU
 
 start
-:Pod nie startuje\n"Insufficient nvidia.com/gpu";
+:Pod fails to start\n"Insufficient nvidia.com/gpu";
 
-:Sprawdź GPU nodes;
+:Check GPU nodes;
+note right: kubectl get nodes -l nvidia.com/gpu
+
+if (GPU nodes exist?) then (no)
+    :Add GPU node pool;
+    note right: gcloud container node-pools create...
+    stop
+else (yes)
+endif
+
+:Check NVIDIA plugin;
 note right
-  kubectl get nodes
-  -l nvidia.com/gpu
+  kubectl get pods -n kube-system
+  -l name=nvidia-device-plugin
 end note
 
-if (Są GPU nodes?) then (nie)
-  :Dodaj GPU node pool;
-  note right
-    gcloud container
-    node-pools create...
-  end note
-else (tak)
-  :Sprawdź NVIDIA plugin;
-  note right
-    kubectl get pods
-    -n kube-system
-    -l name=nvidia-device-plugin
-  end note
-
-  if (Plugin działa?) then (nie)
-    :Zainstaluj plugin;
-  else (tak)
-    :Sprawdź tolerations w podzie;
-    note right
-      tolerations:
-      - key: "nvidia.com/gpu"
-        operator: "Exists"
-    end note
-  endif
+if (Plugin running?) then (no)
+    :Install device plugin;
+    note right: kubectl apply -f nvidia-device-plugin.yml
+    stop
+else (yes)
 endif
+
+:Check pod tolerations;
+note right
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Exists
+end note
+
+:Verify GPU allocatable;
+note right: kubectl describe node | grep -A5 Allocatable
 
 stop
 

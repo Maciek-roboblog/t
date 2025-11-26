@@ -1,0 +1,62 @@
+# ConfigMap - konfiguracja ścieżek i parametrów
+#
+# Zawiera konfigurację dla:
+# - LLaMA-Factory (training)
+# - vLLM (inference)
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: llm-config
+  namespace: llm-basic
+data:
+  # ==========================================
+  # ŚCIEŻKI W STORAGE
+  # ==========================================
+
+  # Model bazowy (do pobrania lub wgrania)
+  BASE_MODEL_PATH: "/storage/models/base-model"
+
+  # Output treningu (LoRA adaptery)
+  LORA_OUTPUT_PATH: "/storage/output/lora-adapter"
+
+  # Model po merge (dla vLLM)
+  MERGED_MODEL_PATH: "/storage/models/merged-model"
+
+  # Datasety treningowe
+  DATASET_PATH: "/storage/data"
+
+  # ==========================================
+  # KONFIGURACJA TRENINGU (LLaMA-Factory)
+  # ==========================================
+
+  FINETUNING_TYPE: "lora"
+  LORA_RANK: "8"
+  LORA_ALPHA: "16"
+  TEMPLATE: "llama3"
+  CUTOFF_LEN: "2048"
+
+  # Hiperparametry (dla QLoRA na małym GPU)
+  BATCH_SIZE: "1"
+  GRADIENT_ACCUMULATION: "8"
+  LEARNING_RATE: "1.0e-4"
+  NUM_EPOCHS: "3"
+
+  # ==========================================
+  # KONFIGURACJA vLLM
+  # ==========================================
+
+  SERVED_MODEL_NAME: "llama-finetuned"
+  MAX_MODEL_LEN: "4096"
+  TENSOR_PARALLEL_SIZE: "1"
+  GPU_MEMORY_UTILIZATION: "0.8"
+
+  # ==========================================
+  # MLflow (opcjonalne)
+  # ==========================================
+
+  # Jeśli MLflow jest uruchomiony w klastrze:
+  MLFLOW_TRACKING_URI: "http://mlflow:5000"
+
+  # Lub zewnętrzny MLflow:
+  # MLFLOW_TRACKING_URI: "http://your-mlflow-server:5000"

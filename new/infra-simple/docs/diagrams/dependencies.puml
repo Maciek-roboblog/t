@@ -1,83 +1,76 @@
 @startuml dependencies
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
 
-title LLaMA-Factory - Zależności Usług
-
-' Definicja komponentów
-package "Zewnętrzne Usługi (już istnieją)" as external {
-    database "MLflow\nTracking Server" as mlflow #LightGray
-    storage "NFS Storage\n(ReadWriteMany)" as nfs #LightGray
-    cloud "GCR\neu.gcr.io/PROJECT_ID" as gcr #LightGray
-    rectangle "vLLM Server\n(inference)" as vllm_ext #LightGreen
+skinparam package {
+    BackgroundColor #FAFAFA
+    BorderColor #BDBDBD
 }
 
-package "Docker Images" as images {
-    artifact "llama-factory-train\n(Debian 11 + Python 3.10.14)" as img_train #LightBlue {
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+
+skinparam database {
+    BackgroundColor #E8F5E9
+    BorderColor #388E3C
+}
+
+skinparam artifact {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+}
+
+title Service Dependencies
+
+package "External" {
+    database "MLflow" as mlflow
+    database "NFS" as nfs
+    cloud "GCR" as gcr
+    component "vLLM" as vllm #E8F5E9
+}
+
+package "Docker" {
+    artifact "llama-factory-train" as image {
         component "LLaMA-Factory 0.9.3"
-        component "PyTorch 2.1.2+cu118"
-        component "MLflow 2.10.0"
-        component "peft, datasets"
+        component "PyTorch 2.1.2"
+        component "MLflow client"
     }
 }
 
-package "Kubernetes Resources" as k8s {
-    rectangle "Namespace: llm-training" {
-
-        file "Secret\nmlflow-config" as secret
-        file "ConfigMap\nllm-config" as configmap
-        file "PVC\nllama-storage" as pvc
-
-        rectangle "Deployment\nllama-webui" as webui #LightBlue
-        rectangle "Job\ntraining-job" as train_job #LightBlue
-        rectangle "Job\nmerge-lora" as merge_job #LightBlue
-    }
+package "Kubernetes" {
+    component "WebUI" as webui
+    component "Training Job" as train
+    component "Merge Job" as merge
+    database "PVC" as pvc
+    file "ConfigMap" as config
+    file "Secret" as secret
 }
 
-' Zależności obrazów
-img_train --> gcr : push
-
-' Zależności K8s
-webui --> img_train : uses
-train_job --> img_train : uses
-merge_job --> img_train : uses
-
-' Storage
-webui --> pvc : mount /storage
-train_job --> pvc : mount /storage
-merge_job --> pvc : mount /storage
-pvc --> nfs : NFS backend
+' Image flow
+image --> gcr : push
+gcr --> webui : pull
+gcr --> train : pull
+gcr --> merge : pull
 
 ' Config
-webui --> configmap : envFrom
-train_job --> configmap : envFrom
-merge_job --> configmap : envFrom
+config --> webui
+config --> train
+config --> merge
+secret --> train : MLFLOW_URI
 
-' Secrets
-train_job --> secret : envFrom
-secret --> mlflow : MLFLOW_TRACKING_URI
+' Storage
+pvc --> nfs : backend
+pvc --> webui
+pvc --> train
+pvc --> merge
 
-' vLLM (zewnętrzny)
-nfs --> vllm_ext : czyta modele\nz /storage/models/merged
-
-' Legenda
-legend right
-  |= Kolor |= Znaczenie |
-  | <#LightGray> | Zewnętrzna usługa |
-  | <#LightBlue> | LLaMA-Factory (trening) |
-  | <#LightGreen> | vLLM (zewnętrzny) |
-endlegend
-
-note bottom of vllm_ext
-  vLLM jest zewnętrzną usługą
-  NIE zarządzamy nim w tym repo
-
-  Opcje model registry:
-  - NFS (obecna)
-  - Object Storage (GCS/S3)
-  - MLflow Registry
-
-  Zobacz: docs/adr/001-model-registry.md
-end note
+' External
+train ..> mlflow : metrics
+nfs --> vllm : /models/merged
 
 @enduml

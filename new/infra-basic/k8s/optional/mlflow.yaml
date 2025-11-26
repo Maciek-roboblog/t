@@ -1,0 +1,86 @@
+# MLflow Server (opcjonalny)
+#
+# Serwer do trackowania eksperymentów fine-tuningu
+# Pozwala na:
+# - Śledzenie metryk (loss, accuracy)
+# - Porównywanie eksperymentów
+# - Przechowywanie artefaktów
+# - Rejestr modeli
+#
+# UŻYCIE:
+# kubectl apply -f k8s/optional/mlflow.yaml
+# kubectl port-forward svc/mlflow 5000:5000 -n llm-basic
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  namespace: llm-basic
+  labels:
+    app: mlflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mlflow
+        image: ghcr.io/mlflow/mlflow:v2.17.0
+        command: ["mlflow"]
+        args:
+        - "server"
+        - "--host"
+        - "0.0.0.0"
+        - "--port"
+        - "5000"
+        - "--backend-store-uri"
+        - "sqlite:///storage/mlflow/mlflow.db"
+        - "--default-artifact-root"
+        - "/storage/mlflow/artifacts"
+
+        ports:
+        - containerPort: 5000
+          name: http
+
+        volumeMounts:
+        - name: storage
+          mountPath: /storage
+
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: llm-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow
+  namespace: llm-basic
+spec:
+  type: ClusterIP
+  selector:
+    app: mlflow
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: http

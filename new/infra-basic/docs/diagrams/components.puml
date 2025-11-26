@@ -1,0 +1,56 @@
+@startuml components
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
+
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+
+skinparam database {
+    BackgroundColor #E8F5E9
+    BorderColor #388E3C
+}
+
+skinparam file {
+    BackgroundColor #FFF8E1
+    BorderColor #FFA000
+}
+
+title K8s Components
+
+package "Namespace: llm-basic" {
+
+    file "ConfigMap\nllm-config" as config
+
+    database "PVC\nllm-storage" as pvc
+
+    component "Deployment\nllama-webui" as webui
+
+    component "Deployment\nvllm" as vllm
+
+    component "Job\ntraining-job" as job
+
+    database "MLflow\n(optional)" as mlflow
+}
+
+config --> webui
+config --> vllm
+config --> job
+
+pvc --> webui : /storage
+pvc --> vllm : /storage (ro)
+pvc --> job : /storage
+
+webui ..> mlflow : metrics
+job ..> mlflow : metrics
+
+note bottom
+  Storage: hostPath @ /data/llm-storage
+  GPU: time-sliced (replicas: 2)
+end note
+
+@enduml

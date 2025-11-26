@@ -1,78 +1,63 @@
 @startuml architecture
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
 
-title LLaMA-Factory - Architektura Systemu
-
-' Zewnętrzne usługi
-cloud "Zewnętrzne Usługi (już istnieją)" as external {
-    database "MLflow" as mlflow {
-        [Tracking Server]
-        [Model Registry]
-    }
-    rectangle "vLLM Server" as vllm_ext #LightGreen {
-        [OpenAI API\nport: 8000]
-    }
+skinparam rectangle {
+    BackgroundColor<<external>> #F3E5F5
+    BorderColor<<external>> #7B1FA2
+    BackgroundColor<<k8s>> #E3F2FD
+    BorderColor<<k8s>> #1976D2
+    BackgroundColor<<storage>> #E8F5E9
+    BorderColor<<storage>> #388E3C
 }
 
-' Storage
-storage "NFS Storage\n(ReadWriteMany)" as nfs {
-    folder "/storage/models/base-model" as base_model
-    folder "/storage/models/merged-model" as merged_model
-    folder "/storage/output/lora-adapter" as lora
-    folder "/storage/data" as data
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #616161
 }
 
-' Kubernetes Cluster
-rectangle "Kubernetes Cluster (GPU)" {
+title LLaMA-Factory - System Architecture
 
-    ' Namespace
-    rectangle "Namespace: llm-training" {
+rectangle "External Services" <<external>> {
+    database "MLflow" as mlflow
+    component "vLLM Server\n:8000" as vllm
+}
 
-        ' ConfigMap i Secret
-        rectangle "Konfiguracja" {
-            file "ConfigMap\nllm-config" as config
-            file "Secret\nmlflow-config" as secret
-        }
+rectangle "NFS Storage (ReadWriteMany)" <<storage>> {
+    storage "/models/base" as base
+    storage "/models/merged" as merged
+    storage "/output/lora" as lora
+    storage "/data" as data
+}
 
-        ' Training service
-        rectangle "llama-factory-train" as train_svc #LightBlue {
-            [WebUI\nport: 7860] as webui
-            [Training Job] as train_job
-            [Merge Job] as merge_job
-        }
+rectangle "Kubernetes (GPU Nodes)" <<k8s>> {
+    package "llm-training" {
+        component "WebUI\n:7860" as webui
+        component "Training Job" as train
+        component "Merge Job" as merge
     }
 }
 
-' Relacje - Config
-secret --> mlflow : MLFLOW_TRACKING_URI
-config --> train_svc
+' Training flow
+base --> train : read
+data --> train : dataset
+train --> lora : LoRA adapter
+train ..> mlflow : metrics
 
-' Relacje - Training
-base_model --> train_job : odczyt
-data --> train_job : dataset
-train_job --> lora : zapis adaptera
-train_job --> mlflow : metryki
+' Merge flow
+base --> merge : read
+lora --> merge : read
+merge --> merged : write
 
-' Relacje - Merge
-base_model --> merge_job : odczyt
-lora --> merge_job : odczyt
-merge_job --> merged_model : zapis
+' Inference
+merged --> vllm : read model
 
-' Relacje - Inference (zewnętrzny vLLM)
-merged_model --> vllm_ext : odczyt modelu
-
-note right of vllm_ext
-  vLLM jest ZEWNĘTRZNĄ usługą
-  Nie zarządzamy nim w tym repo
-  Czyta modele z NFS
-end note
-
-note bottom of train_svc
-  LLaMA-Factory odpowiada za:
-  - Trening (LoRA/QLoRA/Full)
-  - Merge adaptera z modelem
-  - WebUI do konfiguracji
+note right of vllm
+  External service
+  Reads from NFS
 end note
 
 @enduml

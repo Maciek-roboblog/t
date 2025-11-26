@@ -1,0 +1,48 @@
+@startuml gpu-sharing
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
+
+skinparam rectangle {
+    BackgroundColor<<physical>> #FFECB3
+    BorderColor<<physical>> #FF8F00
+    BackgroundColor<<logical>> #E1F5FE
+    BorderColor<<logical>> #0288D1
+    BackgroundColor<<pod>> #E8F5E9
+    BorderColor<<pod>> #43A047
+}
+
+title GPU Time-Slicing
+
+rectangle "Physical GPU" <<physical>> {
+    rectangle "Logical GPU 0" <<logical>> as gpu0
+    rectangle "Logical GPU 1" <<logical>> as gpu1
+}
+
+rectangle "Pods" {
+    rectangle "llama-webui" <<pod>> as webui {
+        component "Training" as train
+    }
+    rectangle "vllm" <<pod>> as vllm {
+        component "Inference" as infer
+    }
+}
+
+gpu0 --> webui : nvidia.com/gpu: 1
+gpu1 --> vllm : nvidia.com/gpu: 1
+
+note bottom of gpu0
+  Time-slicing config:
+  replicas: 2
+
+  No memory isolation!
+end note
+
+note right of webui
+  Use QLoRA for
+  small models (<=7B)
+end note
+
+@enduml

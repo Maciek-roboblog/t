@@ -1,0 +1,60 @@
+@startuml scaling
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
+
+skinparam rectangle {
+    BackgroundColor<<level0>> #FFECB3
+    BorderColor<<level0>> #FF8F00
+    BackgroundColor<<level1>> #C8E6C9
+    BorderColor<<level1>> #43A047
+    BackgroundColor<<level2>> #BBDEFB
+    BorderColor<<level2>> #1976D2
+}
+
+title Scaling Levels
+
+rectangle "Level 0: Single GPU" <<level0>> {
+    component "1x GPU" as gpu0
+    component "time-slice\n(2 logical)" as ts
+    gpu0 --> ts
+}
+
+rectangle "Level 1: Multi-GPU" <<level1>> {
+    component "GPU 0-1" as gpu1a
+    component "GPU 2-3" as gpu1b
+    component "Training" as train1
+    component "vLLM (TP=2)" as vllm1
+    gpu1a --> train1
+    gpu1b --> vllm1
+}
+
+rectangle "Level 2: Multi-Node" <<level2>> {
+    node "Node 1\n(4x GPU)" as n1
+    node "Node 2\n(4x GPU)" as n2
+    node "Node 3\n(4x GPU)" as n3
+    component "Training" as train2
+    component "vLLM x2" as vllm2
+    n1 --> train2
+    n2 --> vllm2
+    n3 --> vllm2
+}
+
+note right of gpu0
+  QLoRA only
+  <=7B models
+end note
+
+note right of train1
+  Full LoRA
+  13B models
+end note
+
+note right of vllm2
+  Tensor parallel
+  70B+ models
+end note
+
+@enduml

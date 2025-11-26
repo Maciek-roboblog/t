@@ -1,0 +1,8 @@
+# Namespace dla LLM training/inference
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: llm-basic
+  labels:
+    app.kubernetes.io/name: llm-basic
+    app.kubernetes.io/component: namespace

@@ -1,0 +1,56 @@
+@startuml architecture
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam roundCorner 8
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor<<k8s>> #E3F2FD
+    BorderColor<<k8s>> #1976D2
+    BackgroundColor<<gpu>> #FFF3E0
+    BorderColor<<gpu>> #F57C00
+    BackgroundColor<<storage>> #E8F5E9
+    BorderColor<<storage>> #388E3C
+    BackgroundColor<<external>> #F3E5F5
+    BorderColor<<external>> #7B1FA2
+}
+
+title LLaMA-Factory + vLLM (Single GPU)
+
+rectangle "k3s / minikube" <<k8s>> {
+
+    rectangle "GPU Time-Slice" <<gpu>> {
+        component "LLaMA-Factory\nWebUI :7860" as webui
+        component "vLLM\nAPI :8000" as vllm
+    }
+
+    rectangle "Storage (hostPath)" <<storage>> {
+        storage "/models" as models
+        storage "/output" as output
+        storage "/data" as data
+    }
+
+    rectangle "Optional" <<external>> {
+        database "MLflow\n:5000" as mlflow
+    }
+}
+
+webui -down-> models : read base
+webui -down-> data : read dataset
+webui -down-> output : write LoRA
+webui ..> mlflow : metrics
+
+vllm -down-> models : read merged
+
+note right of webui
+  Training + Merge
+  LlamaBoard UI
+end note
+
+note right of vllm
+  OpenAI-compatible
+  /v1/chat/completions
+end note
+
+@enduml

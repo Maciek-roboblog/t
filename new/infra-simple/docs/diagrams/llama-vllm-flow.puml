@@ -1,25 +1,38 @@
 @startuml llama-vllm-flow
 !theme plain
-skinparam backgroundColor #FEFEFE
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
 
-title LLaMA-Factory → vLLM Flow
-
-rectangle "LLaMA-Factory\n(K8s)" as llama #LightBlue {
-    rectangle "1. Trening" as train
-    rectangle "2. Merge" as merge
+skinparam rectangle {
+    BackgroundColor<<llama>> #E3F2FD
+    BorderColor<<llama>> #1976D2
+    BackgroundColor<<storage>> #E8F5E9
+    BorderColor<<storage>> #388E3C
+    BackgroundColor<<vllm>> #F3E5F5
+    BorderColor<<vllm>> #7B1FA2
 }
 
-storage "NFS Storage" as nfs #LightYellow {
-    folder "LoRA adapter" as lora
-    folder "Merged model" as merged
+title LLaMA-Factory -> vLLM Flow
+
+rectangle "LLaMA-Factory (K8s)" <<llama>> {
+    component "1. Train" as train
+    component "2. Merge" as merge
 }
 
-rectangle "vLLM\n(zewnętrzny)" as vllm #LightGreen {
-    rectangle "3. Serve" as serve
+rectangle "NFS Storage" <<storage>> {
+    storage "LoRA adapter" as lora
+    storage "Merged model" as merged
 }
 
-train --> lora
-merge --> merged
-merged --> serve
+rectangle "vLLM (external)" <<vllm>> {
+    component "3. Serve" as serve
+}
+
+train -right-> lora
+lora -down-> merge
+merge -right-> merged
+merged -down-> serve
 
 @enduml

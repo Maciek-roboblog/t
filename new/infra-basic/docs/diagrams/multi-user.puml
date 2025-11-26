@@ -1,0 +1,61 @@
+@startuml multi-user
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Helvetica
+skinparam shadowing false
+skinparam roundCorner 8
+
+skinparam rectangle {
+    BackgroundColor<<user>> #E3F2FD
+    BorderColor<<user>> #1976D2
+    BackgroundColor<<storage>> #E8F5E9
+    BorderColor<<storage>> #388E3C
+    BackgroundColor<<mlflow>> #F3E5F5
+    BorderColor<<mlflow>> #7B1FA2
+}
+
+title Multi-User Architecture
+
+actor "User A" as userA
+actor "User B" as userB
+actor "User C" as userC
+
+rectangle "k3s (GPU time-sliced)" {
+
+    rectangle "WebUI A" <<user>> as webuiA
+    rectangle "WebUI B" <<user>> as webuiB
+    rectangle "Job Queue" <<user>> as queue
+
+    rectangle "Shared Storage" <<storage>> {
+        storage "/users/a/" as storageA
+        storage "/users/b/" as storageB
+        storage "/models/" as models
+    }
+
+    database "MLflow\n(shared)" <<mlflow>> as mlflow
+}
+
+userA --> webuiA
+userB --> webuiB
+userC --> queue : submit job
+
+webuiA --> storageA
+webuiB --> storageB
+queue --> models
+
+webuiA ..> mlflow
+webuiB ..> mlflow
+queue ..> mlflow
+
+note bottom of queue
+  For 3+ users:
+  use batch jobs
+  instead of WebUI
+end note
+
+note right of mlflow
+  All experiments
+  visible to all users
+end note
+
+@enduml
